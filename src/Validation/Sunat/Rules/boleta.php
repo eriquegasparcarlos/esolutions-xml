@@ -1,30 +1,15 @@
 <?php
 
-// GENERADO por tools/extract_rules.php desde ValidaExprRegFactura-2.0.1.xsl — NO EDITAR A MANO.
+// GENERADO por tools/extract_rules.php desde ValidaExprRegBoleta-2.0.1.xsl — NO EDITAR A MANO.
 
 return array (
-  'source' => 'ValidaExprRegFactura-2.0.1.xsl',
+  'source' => 'ValidaExprRegBoleta-2.0.1.xsl',
   'globals' => 
   array (
   ),
   'rules' => 
   array (
     0 => 
-    array (
-      'primitive' => 'isTrueExpresion',
-      'params' => 
-      array (
-        'errorCodeValidate' => '\'1034\'',
-        'node' => 'cac:AccountingSupplierParty/cac:Party/cac:PartyIdentification/cbc:ID',
-        'expresion' => '$numeroRuc != cac:AccountingSupplierParty/cac:Party/cac:PartyIdentification/cbc:ID',
-      ),
-      'context' => '/*',
-      'mode' => NULL,
-      'conditions' => 
-      array (
-      ),
-    ),
-    1 => 
     array (
       'primitive' => 'isTrueExpresion',
       'params' => 
@@ -39,7 +24,7 @@ return array (
       array (
       ),
     ),
-    2 => 
+    1 => 
     array (
       'primitive' => 'isTrueExpresion',
       'params' => 
@@ -54,30 +39,14 @@ return array (
       array (
       ),
     ),
-    3 => 
-    array (
-      'primitive' => 'existAndRegexpValidateElement',
-      'params' => 
-      array (
-        'errorCodeNotExist' => '\'2075\'',
-        'errorCodeValidate' => '\'2074\'',
-        'node' => 'cbc:UBLVersionID',
-        'regexp' => '\'^(2.1)$\'',
-      ),
-      'context' => '/*',
-      'mode' => NULL,
-      'conditions' => 
-      array (
-      ),
-    ),
-    4 => 
+    2 => 
     array (
       'primitive' => 'existAndRegexpValidateElement',
       'params' => 
       array (
         'errorCodeNotExist' => '\'2073\'',
         'errorCodeValidate' => '\'2072\'',
-        'node' => 'cbc:CustomizationID',
+        'node' => '$cbcCustomizationID',
         'regexp' => '\'^(2.0)$\'',
       ),
       'context' => '/*',
@@ -86,13 +55,13 @@ return array (
       array (
       ),
     ),
-    5 => 
+    3 => 
     array (
       'primitive' => 'regexpValidateElementIfExist',
       'params' => 
       array (
         'errorCodeValidate' => '\'4256\'',
-        'node' => 'cbc:CustomizationID/@schemeAgencyName',
+        'node' => '$cbcCustomizationID/@schemeAgencyName',
         'regexp' => '\'^(PE:SUNAT)$\'',
         'isError' => 'false()',
       ),
@@ -102,14 +71,14 @@ return array (
       array (
       ),
     ),
-    6 => 
+    4 => 
     array (
       'primitive' => 'regexpValidateElementIfExist',
       'params' => 
       array (
         'errorCodeValidate' => '\'1001\'',
         'node' => 'cbc:ID',
-        'regexp' => '\'^([F][A-Z0-9]{3}|[0-9]{4})-[0-9]{1,8}?$\'',
+        'regexp' => '\'^([B][A-Z0-9]{3}|[0-9]{4})-[0-9]{1,8}?$\'',
       ),
       'context' => '/*',
       'mode' => NULL,
@@ -117,7 +86,7 @@ return array (
       array (
       ),
     ),
-    7 => 
+    5 => 
     array (
       'primitive' => 'existAndRegexpValidateElement',
       'params' => 
@@ -125,7 +94,7 @@ return array (
         'errorCodeNotExist' => '\'1004\'',
         'errorCodeValidate' => '\'1003\'',
         'node' => 'cbc:InvoiceTypeCode',
-        'regexp' => '\'^01$\'',
+        'regexp' => '\'^03$\'',
       ),
       'context' => '/*',
       'mode' => NULL,
@@ -133,7 +102,7 @@ return array (
       array (
       ),
     ),
-    8 => 
+    6 => 
     array (
       'primitive' => 'regexpValidateElementIfExist',
       'params' => 
@@ -149,7 +118,7 @@ return array (
       array (
       ),
     ),
-    9 => 
+    7 => 
     array (
       'primitive' => 'regexpValidateElementIfExist',
       'params' => 
@@ -165,7 +134,7 @@ return array (
       array (
       ),
     ),
-    10 => 
+    8 => 
     array (
       'primitive' => 'regexpValidateElementIfExist',
       'params' => 
@@ -181,7 +150,7 @@ return array (
       array (
       ),
     ),
-    11 => 
+    9 => 
     array (
       'primitive' => 'existElement',
       'params' => 
@@ -195,7 +164,7 @@ return array (
       array (
       ),
     ),
-    12 => 
+    10 => 
     array (
       'primitive' => 'findElementInCatalog',
       'params' => 
@@ -210,14 +179,14 @@ return array (
       array (
       ),
     ),
-    13 => 
+    11 => 
     array (
       'primitive' => 'isTrueExpresion',
       'params' => 
       array (
         'errorCodeValidate' => '\'2071\'',
         'node' => 'descendant::*[@currencyID != $monedaComprobante and not(ancestor-or-self::cac:AllowanceCharge[cbc:AllowanceChargeReasonCode = \'51\' or cbc:AllowanceChargeReasonCode = \'52\' or cbc:AllowanceChargeReasonCode = \'53\']) and not(ancestor-or-self::cac:PaymentTerms/cbc:Amount) and not(ancestor-or-self::cac:DeliveryTerms/cbc:Amount) and not(ancestor-or-self::cbc:DeclaredForCarriageValueAmount)]/@currencyID',
-        'expresion' => 'descendant::*[@currencyID != $monedaComprobante and not(ancestor-or-self::cac:AllowanceCharge[cbc:AllowanceChargeReasonCode = \'51\' or cbc:AllowanceChargeReasonCode = \'52\' or cbc:AllowanceChargeReasonCode = \'53\']) and not (ancestor-or-self::cac:PaymentTerms/cbc:Amount) and not(ancestor-or-self::cac:DeliveryTerms/cbc:Amount) and not(ancestor-or-self::cbc:DeclaredForCarriageValueAmount)]',
+        'expresion' => 'descendant::*[@currencyID != $monedaComprobante and not(ancestor-or-self::cac:AllowanceCharge[cbc:AllowanceChargeReasonCode = \'51\' or cbc:AllowanceChargeReasonCode = \'52\' or cbc:AllowanceChargeReasonCode = \'53\']) and not(ancestor-or-self::cac:PaymentTerms/cbc:Amount) and not(ancestor-or-self::cac:DeliveryTerms/cbc:Amount) and not(ancestor-or-self::cbc:DeclaredForCarriageValueAmount)]',
       ),
       'context' => '/*',
       'mode' => NULL,
@@ -225,7 +194,7 @@ return array (
       array (
       ),
     ),
-    14 => 
+    12 => 
     array (
       'primitive' => 'regexpValidateElementIfExist',
       'params' => 
@@ -241,7 +210,7 @@ return array (
       array (
       ),
     ),
-    15 => 
+    13 => 
     array (
       'primitive' => 'regexpValidateElementIfExist',
       'params' => 
@@ -257,7 +226,7 @@ return array (
       array (
       ),
     ),
-    16 => 
+    14 => 
     array (
       'primitive' => 'regexpValidateElementIfExist',
       'params' => 
@@ -273,23 +242,7 @@ return array (
       array (
       ),
     ),
-    17 => 
-    array (
-      'primitive' => 'isTrueExpresion',
-      'params' => 
-      array (
-        'errorCodeValidate' => '\'3181\'',
-        'node' => 'cac:InvoiceLine/cac:Item/cac:CommodityClassification/cbc:ItemClassificationCode[text() != \'84121901\' and text() != \'80131501\']',
-        'expresion' => 'count(cac:InvoiceLine/cac:Item/cac:CommodityClassification/cbc:ItemClassificationCode[text() = \'84121901\' or text() = \'80131501\']) = 0',
-      ),
-      'context' => '/*',
-      'mode' => NULL,
-      'conditions' => 
-      array (
-        0 => '$tipoOperacion = \'0112\' ',
-      ),
-    ),
-    18 => 
+    15 => 
     array (
       'primitive' => 'isTrueExpresion',
       'params' => 
@@ -297,7 +250,7 @@ return array (
         'errorCodeValidate' => '\'3241\'',
         'node' => 'cac:InvoiceLine/cac:Item/cac:AdditionalItemProperty/cbc:NameCode[text() = \'0000\']',
         'expresion' => 'count(cac:InvoiceLine[count(cac:Item/cac:AdditionalItemProperty/cbc:NameCode[text() = \'7004\' or text() = \'7005\' or text() = \'7012\']) = 3]) < 1',
-        'descripcion' => 'concat(\' cac:AdditionalItemProperty/cbc:NameCode \', cac:AdditionalItemProperty/cbc:NameCode)',
+        'descripcion' => 'concat(\'cac:AdditionalItemProperty/cbc:NameCode \' , cac:InvoiceLine/cac:Item/cac:AdditionalItemProperty/cbc:NameCode)',
       ),
       'context' => '/*',
       'mode' => NULL,
@@ -306,7 +259,7 @@ return array (
         0 => '$tipoOperacion = \'2100\' or $tipoOperacion = \'2101\' or $tipoOperacion = \'2102\'',
       ),
     ),
-    19 => 
+    16 => 
     array (
       'primitive' => 'isTrueExpresion',
       'params' => 
@@ -314,7 +267,7 @@ return array (
         'errorCodeValidate' => '\'3242\'',
         'node' => 'cac:InvoiceLine/cac:Item/cac:AdditionalItemProperty/cbc:NameCode[text() = \'0000\']',
         'expresion' => 'count(cac:InvoiceLine[count(cac:Item/cac:AdditionalItemProperty/cbc:NameCode[text() = \'7015\']) = 1]) < 1',
-        'descripcion' => 'concat(\' cac:AdditionalItemProperty/cbc:NameCode \', cac:AdditionalItemProperty/cbc:NameCode)',
+        'descripcion' => 'concat(\'cac:AdditionalItemProperty/cbc:NameCode \' , cac:AdditionalItemProperty/cbc:NameCode)',
       ),
       'context' => '/*',
       'mode' => NULL,
@@ -323,7 +276,7 @@ return array (
         0 => '$tipoOperacion = \'2104\'',
       ),
     ),
-    20 => 
+    17 => 
     array (
       'primitive' => 'validateValueTwoDecimalIfExist',
       'params' => 
@@ -338,7 +291,7 @@ return array (
       array (
       ),
     ),
-    21 => 
+    18 => 
     array (
       'primitive' => 'validateValueTwoDecimalIfExist',
       'params' => 
@@ -353,7 +306,7 @@ return array (
       array (
       ),
     ),
-    22 => 
+    19 => 
     array (
       'primitive' => 'existAndValidateValueTwoDecimal',
       'params' => 
@@ -369,7 +322,7 @@ return array (
       array (
       ),
     ),
-    23 => 
+    20 => 
     array (
       'primitive' => 'existElementNoVacio',
       'params' => 
@@ -384,7 +337,7 @@ return array (
       array (
       ),
     ),
-    24 => 
+    21 => 
     array (
       'primitive' => 'validateValueTwoDecimalIfExist',
       'params' => 
@@ -399,7 +352,7 @@ return array (
       array (
       ),
     ),
-    25 => 
+    22 => 
     array (
       'primitive' => 'validateValueTwoDecimalIfExist',
       'params' => 
@@ -414,7 +367,7 @@ return array (
       array (
       ),
     ),
-    26 => 
+    23 => 
     array (
       'primitive' => 'isTrueExpresion',
       'params' => 
@@ -430,7 +383,7 @@ return array (
       array (
       ),
     ),
-    27 => 
+    24 => 
     array (
       'primitive' => 'isTrueExpresion',
       'params' => 
@@ -445,13 +398,14 @@ return array (
       array (
       ),
     ),
-    28 => 
+    25 => 
     array (
-      'primitive' => 'existElement',
+      'primitive' => 'isTrueExpresion',
       'params' => 
       array (
-        'errorCodeNotExist' => '\'2956\'',
+        'errorCodeValidate' => '\'2956\'',
         'node' => 'cac:TaxTotal',
+        'expresion' => 'not(cac:TaxTotal)',
       ),
       'context' => '/*',
       'mode' => NULL,
@@ -459,7 +413,7 @@ return array (
       array (
       ),
     ),
-    29 => 
+    26 => 
     array (
       'primitive' => 'isTrueExpresion',
       'params' => 
@@ -474,7 +428,7 @@ return array (
       array (
       ),
     ),
-    30 => 
+    27 => 
     array (
       'primitive' => 'isTrueExpresion',
       'params' => 
@@ -490,13 +444,14 @@ return array (
         0 => '$tipoOperacion =\'2001\'',
       ),
     ),
-    31 => 
+    28 => 
     array (
       'primitive' => 'isTrueExpresionEmptyNode',
       'params' => 
       array (
         'errorCodeValidate' => '\'3462\'',
         'expresion' => '(($igv10 > 0) and ($igv18 > 0)) or (($igv10 = 0) and ($igv18 = 0)) or ($igvX > 0)',
+        'isError' => 'true()',
       ),
       'context' => '/*',
       'mode' => NULL,
@@ -505,7 +460,7 @@ return array (
         0 => '($sumatoriaIndicador1 > 0) or ($sumatoriaIndicador2 > 0)',
       ),
     ),
-    32 => 
+    29 => 
     array (
       'primitive' => 'isTrueExpresion',
       'params' => 
@@ -522,39 +477,43 @@ return array (
         0 => 'cac:TaxTotal/cac:TaxSubtotal[cac:TaxCategory/cac:TaxScheme/cbc:ID[text() = \'7152\']]',
       ),
     ),
-    33 => 
+    30 => 
     array (
       'primitive' => 'isTrueExpresion',
       'params' => 
       array (
-        'errorCodeValidate' => '\'3291\'',
+        'errorCodeValidate' => '\'4290\'',
         'node' => 'cac:TaxTotal/cac:TaxSubtotal[cac:TaxCategory/cac:TaxScheme/cbc:ID[text() = \'1000\']]/cbc:TaxAmount',
-        'expresion' => 'not($indicadorError18 > 0 and $indicadorError10 = 0) and not($indicadorError18 = 0 and $indicadorError10 > 0) and not($indicadorError18 = 0 and $indicadorError10 = 0)',
+        'expresion' => '($SumatoriaIGV + 1 ) < $SumatoriaIGVCalculado or ($SumatoriaIGV - 1) > $SumatoriaIGVCalculado',
+        'isError' => 'false()',
+      ),
+      'context' => '/*',
+      'mode' => NULL,
+      'conditions' => 
+      array (
+        0 => '$tipoOperacion =\'0113\'',
+        1 => 'cac:TaxTotal/cac:TaxSubtotal[cac:TaxCategory/cac:TaxScheme/cbc:ID[text() = \'1000\']] and cac:TaxTotal/cac:TaxSubtotal[cac:TaxCategory/cac:TaxScheme/cbc:ID[text() = \'1000\']]/cbc:TaxAmount > 0',
+      ),
+    ),
+    31 => 
+    array (
+      'primitive' => 'isTrueExpresion',
+      'params' => 
+      array (
+        'errorCodeValidate' => '\'4290\'',
+        'node' => 'cac:TaxTotal/cac:TaxSubtotal[cac:TaxCategory/cac:TaxScheme/cbc:ID[text() = \'1000\']]/cbc:TaxAmount',
+        'expresion' => '$validacionIndicadores =\'true\'',
+        'isError' => 'false()',
       ),
       'context' => '/*',
       'mode' => NULL,
       'conditions' => 
       array (
         0 => 'cac:TaxTotal/cac:TaxSubtotal[cac:TaxCategory/cac:TaxScheme/cbc:ID[text() = \'1000\']]',
+        1 => '$validacionIndicadores =\'true\'',
       ),
     ),
-    34 => 
-    array (
-      'primitive' => 'isTrueExpresion',
-      'params' => 
-      array (
-        'errorCodeValidate' => '\'3291\'',
-        'node' => 'cac:TaxTotal/cac:TaxSubtotal[cac:TaxCategory/cac:TaxScheme/cbc:ID[text() = \'1000\']]/cbc:TaxAmount',
-        'expresion' => '($SumatoriaIGV + 1 ) < $sumatoriaFinal or ($SumatoriaIGV - 1) > $sumatoriaFinal',
-      ),
-      'context' => '/*',
-      'mode' => NULL,
-      'conditions' => 
-      array (
-        0 => 'cac:TaxTotal/cac:TaxSubtotal[cac:TaxCategory/cac:TaxScheme/cbc:ID[text() = \'1000\']]',
-      ),
-    ),
-    35 => 
+    32 => 
     array (
       'primitive' => 'isTrueExpresion',
       'params' => 
@@ -571,7 +530,7 @@ return array (
         0 => 'cac:TaxTotal/cac:TaxSubtotal[cac:TaxCategory/cac:TaxScheme/cbc:ID[text() = \'1016\']]',
       ),
     ),
-    36 => 
+    33 => 
     array (
       'primitive' => 'isTrueExpresion',
       'params' => 
@@ -587,7 +546,7 @@ return array (
       array (
       ),
     ),
-    37 => 
+    34 => 
     array (
       'primitive' => 'isTrueExpresion',
       'params' => 
@@ -603,7 +562,7 @@ return array (
       array (
       ),
     ),
-    38 => 
+    35 => 
     array (
       'primitive' => 'isTrueExpresion',
       'params' => 
@@ -619,7 +578,7 @@ return array (
       array (
       ),
     ),
-    39 => 
+    36 => 
     array (
       'primitive' => 'isTrueExpresion',
       'params' => 
@@ -635,47 +594,51 @@ return array (
       array (
       ),
     ),
-    40 => 
+    37 => 
     array (
       'primitive' => 'isTrueExpresion',
       'params' => 
       array (
-        'errorCodeValidate' => '\'3279\'',
+        'errorCodeValidate' => '\'4310\'',
         'node' => 'cac:LegalMonetaryTotal/cbc:TaxInclusiveAmount',
         'expresion' => '($totalPrecioVenta + 1 ) < $totalPrecioVentaCalculadoIVAP or ($totalPrecioVenta - 1) > $totalPrecioVentaCalculadoIVAP',
+        'isError' => 'false()',
       ),
       'context' => '/*',
       'mode' => NULL,
       'conditions' => 
       array (
-        0 => 'cac:LegalMonetaryTotal/cbc:TaxInclusiveAmount',
-        1 => '$MontoBaseIVAPLinea > 0',
+        0 => '$tipoOperacion != \'0113\'',
+        1 => 'cac:LegalMonetaryTotal/cbc:TaxInclusiveAmount',
+        2 => '$MontoBaseIVAPLinea > 0',
       ),
     ),
-    41 => 
+    38 => 
     array (
       'primitive' => 'isTrueExpresion',
       'params' => 
       array (
-        'errorCodeValidate' => '\'3279\'',
+        'errorCodeValidate' => '\'4310\'',
         'node' => 'cac:LegalMonetaryTotal/cbc:TaxInclusiveAmount',
-        'expresion' => '($totalPrecioVenta + 1 ) < $totalPrecioVentaCalculadoIGV or ($totalPrecioVenta - 1) > $totalPrecioVentaCalculadoIGV',
+        'expresion' => 'not($indicadorPrecioVentaError18 > 0 and $indicadorPrecioVentaError10 = 0) and not($indicadorPrecioVentaError18 = 0 and $indicadorPrecioVentaError10 > 0) and not($indicadorPrecioVentaError18 = 0 and $indicadorPrecioVentaError10 = 0)',
+        'isError' => 'false()',
       ),
       'context' => '/*',
       'mode' => NULL,
       'conditions' => 
       array (
-        0 => 'cac:LegalMonetaryTotal/cbc:TaxInclusiveAmount',
+        0 => '$tipoOperacion != \'0113\'',
+        1 => 'cac:LegalMonetaryTotal/cbc:TaxInclusiveAmount',
       ),
     ),
-    42 => 
+    39 => 
     array (
       'primitive' => 'isTrueExpresion',
       'params' => 
       array (
         'errorCodeValidate' => '\'2509\'',
-        'node' => 'cac:PrepaidPayment/cbc:PaidAmount',
-        'expresion' => 'cac:LegalMonetaryTotal/cbc:PrepaidAmount > 0 and (round(sum(cac:PrepaidPayment/cbc:PaidAmount)* 100) div 100)  != number(cac:LegalMonetaryTotal/cbc:PrepaidAmount)',
+        'node' => 'cac:PrepaidPayment[cbc:ID/@schemeID=\'02\']/cbc:PaidAmount',
+        'expresion' => 'cac:LegalMonetaryTotal/cbc:PrepaidAmount > 0 and (round(sum(cac:PrepaidPayment/cbc:PaidAmount)* 100) div 100) != number(cac:LegalMonetaryTotal/cbc:PrepaidAmount)',
       ),
       'context' => '/*',
       'mode' => NULL,
@@ -683,7 +646,7 @@ return array (
       array (
       ),
     ),
-    43 => 
+    40 => 
     array (
       'primitive' => 'isTrueExpresion',
       'params' => 
@@ -699,7 +662,7 @@ return array (
       array (
       ),
     ),
-    44 => 
+    41 => 
     array (
       'primitive' => 'isTrueExpresion',
       'params' => 
@@ -715,7 +678,7 @@ return array (
       array (
       ),
     ),
-    45 => 
+    42 => 
     array (
       'primitive' => 'isTrueExpresion',
       'params' => 
@@ -732,14 +695,14 @@ return array (
         0 => '$tipoOperacion =\'1001\' or $tipoOperacion =\'1002\' or $tipoOperacion =\'1003\' or $tipoOperacion =\'1004\'',
       ),
     ),
-    46 => 
+    43 => 
     array (
       'primitive' => 'isTrueExpresion',
       'params' => 
       array (
         'errorCodeValidate' => '\'3014\'',
         'node' => 'cbc:ID',
-        'expresion' => 'count(cbc:Note[@languageLocaleID=\'1000\']) > 1 or             count(cbc:Note[@languageLocaleID=\'1002\']) > 1 or             count(cbc:Note[@languageLocaleID=\'2000\']) > 1 or             count(cbc:Note[@languageLocaleID=\'2001\']) > 1 or             count(cbc:Note[@languageLocaleID=\'2002\']) > 1 or             count(cbc:Note[@languageLocaleID=\'2003\']) > 1 or             count(cbc:Note[@languageLocaleID=\'2004\']) > 1 or             count(cbc:Note[@languageLocaleID=\'2005\']) > 1 or             count(cbc:Note[@languageLocaleID=\'2006\']) > 1 or             count(cbc:Note[@languageLocaleID=\'2007\']) > 1 or             count(cbc:Note[@languageLocaleID=\'2008\']) > 1 or             count(cbc:Note[@languageLocaleID=\'2009\']) > 1 ',
+        'expresion' => 'count(cbc:Note[@languageLocaleID=\'1000\']) > 1 or              count(cbc:Note[@languageLocaleID=\'1002\']) > 1 or              count(cbc:Note[@languageLocaleID=\'2000\']) > 1 or              count(cbc:Note[@languageLocaleID=\'2001\']) > 1 or              count(cbc:Note[@languageLocaleID=\'2002\']) > 1 or              count(cbc:Note[@languageLocaleID=\'2003\']) > 1 or             count(cbc:Note[@languageLocaleID=\'2004\']) > 1 or             count(cbc:Note[@languageLocaleID=\'2005\']) > 1 or             count(cbc:Note[@languageLocaleID=\'2006\']) > 1 or             count(cbc:Note[@languageLocaleID=\'2007\']) > 1 or             count(cbc:Note[@languageLocaleID=\'2008\']) > 1 or             count(cbc:Note[@languageLocaleID=\'2009\']) > 1 ',
       ),
       'context' => '/*',
       'mode' => NULL,
@@ -747,7 +710,7 @@ return array (
       array (
       ),
     ),
-    47 => 
+    44 => 
     array (
       'primitive' => 'existElement',
       'params' => 
@@ -761,7 +724,7 @@ return array (
       array (
       ),
     ),
-    48 => 
+    45 => 
     array (
       'primitive' => 'regexpValidateElementIfExist',
       'params' => 
@@ -777,7 +740,7 @@ return array (
       array (
       ),
     ),
-    49 => 
+    46 => 
     array (
       'primitive' => 'regexpValidateElementIfExist',
       'params' => 
@@ -793,41 +756,7 @@ return array (
       array (
       ),
     ),
-    50 => 
-    array (
-      'primitive' => 'isTrueExpresion',
-      'params' => 
-      array (
-        'errorCodeValidate' => '\'4233\'',
-        'node' => 'cac:OrderReference/cbc:ID',
-        'expresion' => 'true()',
-        'isError' => 'false()',
-        'descripcion' => 'concat(\' cbc:Line \', cbc:Line)',
-      ),
-      'context' => '/*',
-      'mode' => NULL,
-      'conditions' => 
-      array (
-        0 => 'cac:OrderReference/cbc:ID and (string-length(cac:OrderReference/cbc:ID) > 20)',
-      ),
-    ),
-    51 => 
-    array (
-      'primitive' => 'regexpValidateElementIfExist',
-      'params' => 
-      array (
-        'errorCodeValidate' => '\'4233\'',
-        'node' => 'cac:OrderReference/cbc:ID',
-        'regexp' => '\'^[0-9a-zA-Z]{1,}$\'',
-        'isError' => 'false()',
-      ),
-      'context' => '/*',
-      'mode' => NULL,
-      'conditions' => 
-      array (
-      ),
-    ),
-    52 => 
+    47 => 
     array (
       'primitive' => 'existElement',
       'params' => 
@@ -842,40 +771,7 @@ return array (
         0 => '$tipoOperacion = \'0303\'',
       ),
     ),
-    53 => 
-    array (
-      'primitive' => 'isTrueExpresion',
-      'params' => 
-      array (
-        'errorCodeValidate' => '\'3244\'',
-        'node' => 'cac:PaymentTerms/cbc:ID',
-        'expresion' => 'count(cac:PaymentTerms/cbc:ID[text() = \'FormaPago\']) < 1',
-        'isError' => 'boolean(number(0))',
-      ),
-      'context' => '/*',
-      'mode' => NULL,
-      'conditions' => 
-      array (
-      ),
-    ),
-    54 => 
-    array (
-      'primitive' => 'isTrueExpresion',
-      'params' => 
-      array (
-        'errorCodeValidate' => '\'3247\'',
-        'node' => 'cac:PaymentTerms/cbc:ID',
-        'expresion' => 'count(cac:PaymentTerms[cbc:ID[text() = \'FormaPago\'] and cbc:PaymentMeansID[text() = \'Contado\']]) > 0 and                                                   count(cac:PaymentTerms[cbc:ID[text() = \'FormaPago\'] and cbc:PaymentMeansID[text() = \'Credito\']]) > 0',
-        'isError' => 'boolean(number(0))',
-      ),
-      'context' => '/*',
-      'mode' => NULL,
-      'conditions' => 
-      array (
-        0 => 'cac:PaymentTerms/cbc:ID/text() = \'FormaPago\'',
-      ),
-    ),
-    55 => 
+    48 => 
     array (
       'primitive' => 'existElement',
       'params' => 
@@ -890,7 +786,23 @@ return array (
         0 => '$tipoOperacion =\'1001\' or $tipoOperacion =\'1002\' or $tipoOperacion =\'1003\' or $tipoOperacion =\'1004\'',
       ),
     ),
-    56 => 
+    49 => 
+    array (
+      'primitive' => 'isTrueExpresion',
+      'params' => 
+      array (
+        'errorCodeValidate' => '\'3128\'',
+        'node' => 'cac:PaymentTerms/cbc:PaymentMeansID',
+        'expresion' => 'cac:PaymentTerms/cbc:PaymentMeansID',
+      ),
+      'context' => '/*',
+      'mode' => NULL,
+      'conditions' => 
+      array (
+        0 => '$tipoOperacion !=\'1001\' and $tipoOperacion !=\'1002\' and $tipoOperacion !=\'1003\' and $tipoOperacion !=\'1004\'',
+      ),
+    ),
+    50 => 
     array (
       'primitive' => 'existElement',
       'params' => 
@@ -905,7 +817,7 @@ return array (
         0 => '$tipoOperacion = \'0302\'',
       ),
     ),
-    57 => 
+    51 => 
     array (
       'primitive' => 'findElementInCatalog',
       'params' => 
@@ -921,7 +833,7 @@ return array (
         0 => '@languageLocaleID',
       ),
     ),
-    58 => 
+    52 => 
     array (
       'primitive' => 'existAndRegexpValidateElement',
       'params' => 
@@ -938,7 +850,7 @@ return array (
       array (
       ),
     ),
-    59 => 
+    53 => 
     array (
       'primitive' => 'isTrueExpresion',
       'params' => 
@@ -953,7 +865,7 @@ return array (
       array (
       ),
     ),
-    60 => 
+    54 => 
     array (
       'primitive' => 'existAndRegexpValidateElement',
       'params' => 
@@ -969,7 +881,7 @@ return array (
       array (
       ),
     ),
-    61 => 
+    55 => 
     array (
       'primitive' => 'regexpValidateElementIfExist',
       'params' => 
@@ -985,7 +897,7 @@ return array (
       array (
       ),
     ),
-    62 => 
+    56 => 
     array (
       'primitive' => 'regexpValidateElementIfExist',
       'params' => 
@@ -1001,7 +913,7 @@ return array (
       array (
       ),
     ),
-    63 => 
+    57 => 
     array (
       'primitive' => 'regexpValidateElementIfExist',
       'params' => 
@@ -1017,30 +929,14 @@ return array (
       array (
       ),
     ),
-    64 => 
-    array (
-      'primitive' => 'isTrueExpresion',
-      'params' => 
-      array (
-        'errorCodeValidate' => '\'4092\'',
-        'node' => 'cac:Party/cac:PartyName/cbc:Name',
-        'expresion' => 'string-length(cac:Party/cac:PartyName/cbc:Name) > 1500',
-        'isError' => 'false()',
-      ),
-      'context' => 'cac:AccountingSupplierParty',
-      'mode' => NULL,
-      'conditions' => 
-      array (
-      ),
-    ),
-    65 => 
+    58 => 
     array (
       'primitive' => 'regexpValidateElementIfExist',
       'params' => 
       array (
         'errorCodeValidate' => '\'4092\'',
         'node' => 'cac:Party/cac:PartyName/cbc:Name',
-        'regexp' => '\'^(?!\\s*$)[^\\s].{2,}$\'',
+        'regexp' => '\'^(?!\\s*$)[^\\s].{0,1499}$\'',
         'isError' => 'false()',
       ),
       'context' => 'cac:AccountingSupplierParty',
@@ -1049,7 +945,7 @@ return array (
       array (
       ),
     ),
-    66 => 
+    59 => 
     array (
       'primitive' => 'existElement',
       'params' => 
@@ -1063,7 +959,7 @@ return array (
       array (
       ),
     ),
-    67 => 
+    60 => 
     array (
       'primitive' => 'regexpValidateElementIfExist',
       'params' => 
@@ -1079,7 +975,7 @@ return array (
       array (
       ),
     ),
-    68 => 
+    61 => 
     array (
       'primitive' => 'isTrueExpresion',
       'params' => 
@@ -1096,32 +992,14 @@ return array (
       array (
       ),
     ),
-    69 => 
-    array (
-      'primitive' => 'isTrueExpresion',
-      'params' => 
-      array (
-        'errorCodeValidate' => '\'4094\'',
-        'node' => 'cac:Party/cac:PartyLegalEntity/cac:RegistrationAddress/cac:AddressLine/cbc:Line',
-        'expresion' => 'true()',
-        'isError' => 'false()',
-        'descripcion' => 'concat(\' cbc:Line \', cbc:Line)',
-      ),
-      'context' => 'cac:AccountingSupplierParty',
-      'mode' => NULL,
-      'conditions' => 
-      array (
-        0 => 'cac:Party/cac:PartyLegalEntity/cac:RegistrationAddress/cac:AddressLine/cbc:Line and (string-length(cac:Party/cac:PartyLegalEntity/cac:RegistrationAddress/cac:AddressLine/cbc:Line) > 200)',
-      ),
-    ),
-    70 => 
+    62 => 
     array (
       'primitive' => 'regexpValidateElementIfExist',
       'params' => 
       array (
         'errorCodeValidate' => '\'4094\'',
         'node' => 'cac:Party/cac:PartyLegalEntity/cac:RegistrationAddress/cac:AddressLine/cbc:Line',
-        'regexp' => '\'^(?!\\s*$)[^\\s].{2,}$\'',
+        'regexp' => '\'^(?!\\s*$)[^\\s].{2,199}$\'',
         'isError' => 'false()',
       ),
       'context' => 'cac:AccountingSupplierParty',
@@ -1130,14 +1008,14 @@ return array (
       array (
       ),
     ),
-    71 => 
+    63 => 
     array (
       'primitive' => 'regexpValidateElementIfExist',
       'params' => 
       array (
         'errorCodeValidate' => '\'4095\'',
         'node' => 'cac:Party/cac:PartyLegalEntity/cac:RegistrationAddress/cbc:CitySubdivisionName',
-        'regexp' => '\'^(?!\\s*$)[^\\n]{0,}$\'',
+        'regexp' => '\'^(?!\\s*$)[^\\s].{0,24}$\'',
         'isError' => 'false()',
       ),
       'context' => 'cac:AccountingSupplierParty',
@@ -1146,51 +1024,15 @@ return array (
       array (
       ),
     ),
-    72 => 
-    array (
-      'primitive' => 'isTrueExpresion',
-      'params' => 
-      array (
-        'errorCodeValidate' => '\'4095\'',
-        'node' => 'cac:Party/cac:PartyLegalEntity/cac:RegistrationAddress/cbc:CitySubdivisionName',
-        'expresion' => 'string-length(cac:Party/cac:PartyLegalEntity/cac:RegistrationAddress/cbc:CitySubdivisionName) > 25',
-        'isError' => 'false()',
-        'descripcion' => 'concat(\' cbc:CitySubdivisionName \', cbc:CitySubdivisionName)',
-      ),
-      'context' => 'cac:AccountingSupplierParty',
-      'mode' => NULL,
-      'conditions' => 
-      array (
-      ),
-    ),
-    73 => 
+    64 => 
     array (
       'primitive' => 'regexpValidateElementIfExist',
       'params' => 
       array (
         'errorCodeValidate' => '\'4096\'',
         'node' => 'cac:Party/cac:PartyLegalEntity/cac:RegistrationAddress/cbc:CityName',
-        'regexp' => '\'^(?!\\s*$)[^\\s].{0,}$\'',
+        'regexp' => '\'^(?!\\s*$)[^\\s].{0,29}$\'',
         'isError' => 'false()',
-        'descripcion' => 'concat(\' cbc:CityName \', cbc:CityName)',
-      ),
-      'context' => 'cac:AccountingSupplierParty',
-      'mode' => NULL,
-      'conditions' => 
-      array (
-        0 => 'not(string-length(cac:Party/cac:PartyLegalEntity/cac:RegistrationAddress/cbc:CityName) > 30)',
-      ),
-    ),
-    74 => 
-    array (
-      'primitive' => 'isTrueExpresion',
-      'params' => 
-      array (
-        'errorCodeValidate' => '\'4096\'',
-        'node' => 'cac:Party/cac:PartyLegalEntity/cac:RegistrationAddress/cbc:CityName',
-        'expresion' => 'string-length(cac:Party/cac:PartyLegalEntity/cac:RegistrationAddress/cbc:CityName) > 30',
-        'isError' => 'false()',
-        'descripcion' => 'concat(\' cbc:CityName \', cbc:CityName)',
       ),
       'context' => 'cac:AccountingSupplierParty',
       'mode' => NULL,
@@ -1198,7 +1040,7 @@ return array (
       array (
       ),
     ),
-    75 => 
+    65 => 
     array (
       'primitive' => 'findElementInCatalog',
       'params' => 
@@ -1214,7 +1056,7 @@ return array (
       array (
       ),
     ),
-    76 => 
+    66 => 
     array (
       'primitive' => 'regexpValidateElementIfExist',
       'params' => 
@@ -1230,7 +1072,7 @@ return array (
       array (
       ),
     ),
-    77 => 
+    67 => 
     array (
       'primitive' => 'regexpValidateElementIfExist',
       'params' => 
@@ -1246,14 +1088,14 @@ return array (
       array (
       ),
     ),
-    78 => 
+    68 => 
     array (
       'primitive' => 'regexpValidateElementIfExist',
       'params' => 
       array (
         'errorCodeValidate' => '\'4097\'',
         'node' => 'cac:Party/cac:PartyLegalEntity/cac:RegistrationAddress/cbc:CountrySubentity',
-        'regexp' => '\'^(?!\\s*$)[^\\s].{0,}$\'',
+        'regexp' => '\'^(?!\\s*$)[^\\s].{1,29}$\'',
         'isError' => 'false()',
       ),
       'context' => 'cac:AccountingSupplierParty',
@@ -1262,31 +1104,14 @@ return array (
       array (
       ),
     ),
-    79 => 
-    array (
-      'primitive' => 'isTrueExpresion',
-      'params' => 
-      array (
-        'errorCodeValidate' => '\'4097\'',
-        'node' => 'cac:Party/cac:PartyLegalEntity/cac:RegistrationAddress/cbc:CountrySubentity',
-        'expresion' => 'string-length(cac:Party/cac:PartyLegalEntity/cac:RegistrationAddress/cbc:CountrySubentity) > 30',
-        'isError' => 'false()',
-        'descripcion' => 'concat(\' cbc:CountrySubentity \', cbc:CountrySubentity)',
-      ),
-      'context' => 'cac:AccountingSupplierParty',
-      'mode' => NULL,
-      'conditions' => 
-      array (
-      ),
-    ),
-    80 => 
+    69 => 
     array (
       'primitive' => 'regexpValidateElementIfExist',
       'params' => 
       array (
         'errorCodeValidate' => '\'4098\'',
         'node' => 'cac:Party/cac:PartyLegalEntity/cac:RegistrationAddress/cbc:District',
-        'regexp' => '\'^(?!\\s*$)[^\\s].{0,}$\'',
+        'regexp' => '\'^(?!\\s*$)[^\\s].{1,29}$\'',
         'isError' => 'false()',
       ),
       'context' => 'cac:AccountingSupplierParty',
@@ -1295,24 +1120,7 @@ return array (
       array (
       ),
     ),
-    81 => 
-    array (
-      'primitive' => 'isTrueExpresion',
-      'params' => 
-      array (
-        'errorCodeValidate' => '\'4098\'',
-        'node' => 'cac:Party/cac:PartyLegalEntity/cac:RegistrationAddress/cbc:District',
-        'expresion' => 'string-length(cac:Party/cac:PartyLegalEntity/cac:RegistrationAddress/cbc:District) > 30',
-        'isError' => 'false()',
-        'descripcion' => 'concat(\' cbc:District \', cbc:District)',
-      ),
-      'context' => 'cac:AccountingSupplierParty',
-      'mode' => NULL,
-      'conditions' => 
-      array (
-      ),
-    ),
-    82 => 
+    70 => 
     array (
       'primitive' => 'regexpValidateElementIfExist',
       'params' => 
@@ -1328,7 +1136,7 @@ return array (
       array (
       ),
     ),
-    83 => 
+    71 => 
     array (
       'primitive' => 'regexpValidateElementIfExist',
       'params' => 
@@ -1344,7 +1152,7 @@ return array (
       array (
       ),
     ),
-    84 => 
+    72 => 
     array (
       'primitive' => 'regexpValidateElementIfExist',
       'params' => 
@@ -1360,7 +1168,7 @@ return array (
       array (
       ),
     ),
-    85 => 
+    73 => 
     array (
       'primitive' => 'regexpValidateElementIfExist',
       'params' => 
@@ -1376,7 +1184,7 @@ return array (
       array (
       ),
     ),
-    86 => 
+    74 => 
     array (
       'primitive' => 'existElement',
       'params' => 
@@ -1389,57 +1197,9 @@ return array (
       'mode' => NULL,
       'conditions' => 
       array (
-        0 => 'substring($root/cbc:ID, 1, 1) = \'0\' or substring($root/cbc:ID, 1, 1) = \'1\' or substring($root/cbc:ID, 1, 1) = \'2\' or substring($root/cbc:ID, 1, 1) = \'3\' or substring($root/cbc:ID, 1, 1) = \'4\' or substring($root/cbc:ID, 1, 1) = \'5\' or substring($root/cbc:ID, 1, 1) = \'6\' or substring($root/cbc:ID, 1, 1) = \'7\' or substring($root/cbc:ID, 1, 1) = \'8\' or substring($root/cbc:ID, 1, 1) = \'9\'',
       ),
     ),
-    87 => 
-    array (
-      'primitive' => 'regexpValidateElementIfExist',
-      'params' => 
-      array (
-        'errorCodeValidate' => '\'4199\'',
-        'node' => 'cac:Party/cac:PartyLegalEntity/cac:RegistrationAddress/cbc:AddressTypeCode',
-        'regexp' => '\'^[0-9]{1,}$\'',
-        'isError' => 'false()',
-      ),
-      'context' => 'cac:AccountingSupplierParty',
-      'mode' => NULL,
-      'conditions' => 
-      array (
-        0 => 'substring($root/cbc:ID, 1, 1) = \'0\' or substring($root/cbc:ID, 1, 1) = \'1\' or substring($root/cbc:ID, 1, 1) = \'2\' or substring($root/cbc:ID, 1, 1) = \'3\' or substring($root/cbc:ID, 1, 1) = \'4\' or substring($root/cbc:ID, 1, 1) = \'5\' or substring($root/cbc:ID, 1, 1) = \'6\' or substring($root/cbc:ID, 1, 1) = \'7\' or substring($root/cbc:ID, 1, 1) = \'8\' or substring($root/cbc:ID, 1, 1) = \'9\'',
-        1 => 'cac:Party/cac:PartyLegalEntity/cac:RegistrationAddress/cbc:AddressTypeCode != \'\'',
-      ),
-    ),
-    88 => 
-    array (
-      'primitive' => 'existElement',
-      'params' => 
-      array (
-        'errorCodeNotExist' => '\'3030\'',
-        'node' => 'cac:Party/cac:PartyLegalEntity/cac:RegistrationAddress/cbc:AddressTypeCode',
-      ),
-      'context' => 'cac:AccountingSupplierParty',
-      'mode' => NULL,
-      'conditions' => 
-      array (
-      ),
-    ),
-    89 => 
-    array (
-      'primitive' => 'regexpValidateElementIfExist',
-      'params' => 
-      array (
-        'errorCodeValidate' => '\'3239\'',
-        'node' => 'cac:Party/cac:PartyLegalEntity/cac:RegistrationAddress/cbc:AddressTypeCode',
-        'regexp' => '\'^[0-9]{1,}$\'',
-      ),
-      'context' => 'cac:AccountingSupplierParty',
-      'mode' => NULL,
-      'conditions' => 
-      array (
-      ),
-    ),
-    90 => 
+    75 => 
     array (
       'primitive' => 'regexpValidateElementIfExist',
       'params' => 
@@ -1455,7 +1215,7 @@ return array (
       array (
       ),
     ),
-    91 => 
+    76 => 
     array (
       'primitive' => 'regexpValidateElementIfExist',
       'params' => 
@@ -1471,7 +1231,7 @@ return array (
       array (
       ),
     ),
-    92 => 
+    77 => 
     array (
       'primitive' => 'regexpValidateElementIfExist',
       'params' => 
@@ -1487,7 +1247,7 @@ return array (
       array (
       ),
     ),
-    93 => 
+    78 => 
     array (
       'primitive' => 'existElement',
       'params' => 
@@ -1502,7 +1262,7 @@ return array (
         0 => '$tipoOperacion = \'0302\'',
       ),
     ),
-    94 => 
+    79 => 
     array (
       'primitive' => 'existAndRegexpValidateElement',
       'params' => 
@@ -1519,7 +1279,7 @@ return array (
         0 => 'cac:Party/cac:AgentParty/cac:PartyIdentification/cbc:ID',
       ),
     ),
-    95 => 
+    80 => 
     array (
       'primitive' => 'regexpValidateElementIfExist',
       'params' => 
@@ -1536,7 +1296,7 @@ return array (
         0 => 'cac:Party/cac:AgentParty/cac:PartyIdentification/cbc:ID',
       ),
     ),
-    96 => 
+    81 => 
     array (
       'primitive' => 'regexpValidateElementIfExist',
       'params' => 
@@ -1553,7 +1313,7 @@ return array (
         0 => 'cac:Party/cac:AgentParty/cac:PartyIdentification/cbc:ID',
       ),
     ),
-    97 => 
+    82 => 
     array (
       'primitive' => 'regexpValidateElementIfExist',
       'params' => 
@@ -1570,34 +1330,15 @@ return array (
         0 => 'cac:Party/cac:AgentParty/cac:PartyIdentification/cbc:ID',
       ),
     ),
-    98 => 
-    array (
-      'primitive' => 'isTrueExpresionIfExist',
-      'params' => 
-      array (
-        'errorCodeValidate' => '\'4236\'',
-        'node' => 'cac:AddressLine/cbc:Line',
-        'expresion' => 'true()',
-        'isError' => 'false()',
-        'descripcion' => 'concat(\'Nodo padre:\', cac:Delivery/cac:DeliveryLocation/cac:Address)',
-      ),
-      'context' => 'cac:Delivery/cac:DeliveryLocation/cac:Address',
-      'mode' => NULL,
-      'conditions' => 
-      array (
-        0 => 'string-length(cac:AddressLine/cbc:Line) > 200 or string-length(cac:AddressLine/cbc:Line) < 3 ',
-      ),
-    ),
-    99 => 
+    83 => 
     array (
       'primitive' => 'regexpValidateElementIfExist',
       'params' => 
       array (
         'errorCodeValidate' => '\'4236\'',
         'node' => 'cac:AddressLine/cbc:Line',
-        'regexp' => '\'^(?!\\s*$)[^\\s].{2,}$\'',
+        'regexp' => '\'^(?!\\s*$)[^\\s].{2,199}$\'',
         'isError' => 'false()',
-        'descripcion' => 'concat(\'Nodo padre:\', cac:Delivery/cac:DeliveryLocation/cac:Address)',
       ),
       'context' => 'cac:Delivery/cac:DeliveryLocation/cac:Address',
       'mode' => NULL,
@@ -1605,34 +1346,15 @@ return array (
       array (
       ),
     ),
-    100 => 
-    array (
-      'primitive' => 'isTrueExpresionIfExist',
-      'params' => 
-      array (
-        'errorCodeValidate' => '\'4238\'',
-        'node' => 'cbc:CitySubdivisionName',
-        'expresion' => 'true()',
-        'isError' => 'false()',
-        'descripcion' => 'concat(\'Nodo padre:\', cac:Delivery/cac:DeliveryLocation/cac:Address)',
-      ),
-      'context' => 'cac:Delivery/cac:DeliveryLocation/cac:Address',
-      'mode' => NULL,
-      'conditions' => 
-      array (
-        0 => 'string-length(cbc:CitySubdivisionName) > 25 or string-length(cbc:CitySubdivisionName) < 1 ',
-      ),
-    ),
-    101 => 
+    84 => 
     array (
       'primitive' => 'regexpValidateElementIfExist',
       'params' => 
       array (
         'errorCodeValidate' => '\'4238\'',
         'node' => 'cbc:CitySubdivisionName',
-        'regexp' => '\'^(?!\\s*$)[^\\s].{0,}$\'',
+        'regexp' => '\'^(?!\\s*$)[^\\s].{1,25}$\'',
         'isError' => 'false()',
-        'descripcion' => 'concat(\'Nodo padre:\', cac:Delivery/cac:DeliveryLocation/cac:Address)',
       ),
       'context' => 'cac:Delivery/cac:DeliveryLocation/cac:Address',
       'mode' => NULL,
@@ -1640,34 +1362,15 @@ return array (
       array (
       ),
     ),
-    102 => 
-    array (
-      'primitive' => 'isTrueExpresionIfExist',
-      'params' => 
-      array (
-        'errorCodeValidate' => '\'4239\'',
-        'node' => 'cbc:CityName',
-        'expresion' => 'true()',
-        'isError' => 'false()',
-        'descripcion' => 'concat(\'Nodo padre:\', cac:Delivery/cac:DeliveryLocation/cac:Address)',
-      ),
-      'context' => 'cac:Delivery/cac:DeliveryLocation/cac:Address',
-      'mode' => NULL,
-      'conditions' => 
-      array (
-        0 => 'cbc:CityName and (string-length(cbc:CityName) > 30 or string-length(cbc:CityName) < 1 )',
-      ),
-    ),
-    103 => 
+    85 => 
     array (
       'primitive' => 'regexpValidateElementIfExist',
       'params' => 
       array (
         'errorCodeValidate' => '\'4239\'',
         'node' => 'cbc:CityName',
-        'regexp' => '\'^(?!\\s*$)[^\\s].{0,}$\'',
+        'regexp' => '\'^(?!\\s*$)[^\\s].{0,29}$\'',
         'isError' => 'false()',
-        'descripcion' => 'concat(\'Nodo padre:\', cac:Delivery/cac:DeliveryLocation/cac:Address)',
       ),
       'context' => 'cac:Delivery/cac:DeliveryLocation/cac:Address',
       'mode' => NULL,
@@ -1675,7 +1378,7 @@ return array (
       array (
       ),
     ),
-    104 => 
+    86 => 
     array (
       'primitive' => 'findElementInCatalog',
       'params' => 
@@ -1692,7 +1395,7 @@ return array (
         0 => 'cbc:ID',
       ),
     ),
-    105 => 
+    87 => 
     array (
       'primitive' => 'regexpValidateElementIfExist',
       'params' => 
@@ -1701,7 +1404,6 @@ return array (
         'node' => 'cbc:ID/@schemeAgencyName',
         'regexp' => '\'^(PE:INEI)$\'',
         'isError' => 'false()',
-        'descripcion' => 'concat(\'Nodo padre:\', cac:Delivery/cac:DeliveryLocation/cac:Address)',
       ),
       'context' => 'cac:Delivery/cac:DeliveryLocation/cac:Address',
       'mode' => NULL,
@@ -1709,7 +1411,7 @@ return array (
       array (
       ),
     ),
-    106 => 
+    88 => 
     array (
       'primitive' => 'regexpValidateElementIfExist',
       'params' => 
@@ -1718,7 +1420,6 @@ return array (
         'node' => 'cbc:ID/@schemeName',
         'regexp' => '\'^(Ubigeos)$\'',
         'isError' => 'false()',
-        'descripcion' => 'concat(\'Nodo padre:\', cac:Delivery/cac:DeliveryLocation/cac:Address)',
       ),
       'context' => 'cac:Delivery/cac:DeliveryLocation/cac:Address',
       'mode' => NULL,
@@ -1726,31 +1427,14 @@ return array (
       array (
       ),
     ),
-    107 => 
-    array (
-      'primitive' => 'isTrueExpresionIfExist',
-      'params' => 
-      array (
-        'errorCodeValidate' => '\'4240\'',
-        'node' => 'cbc:CountrySubentity',
-        'expresion' => 'true()',
-        'isError' => 'false()',
-      ),
-      'context' => 'cac:Delivery/cac:DeliveryLocation/cac:Address',
-      'mode' => NULL,
-      'conditions' => 
-      array (
-        0 => 'string-length(cbc:CountrySubentity) > 30 or string-length(cbc:CountrySubentity) < 1 ',
-      ),
-    ),
-    108 => 
+    89 => 
     array (
       'primitive' => 'regexpValidateElementIfExist',
       'params' => 
       array (
         'errorCodeValidate' => '\'4240\'',
         'node' => 'cbc:CountrySubentity',
-        'regexp' => '\'^(?!\\s*$)[^\\s].{0,}$\'',
+        'regexp' => '\'^(?!\\s*$)[^\\s].{0,29}$\'',
         'isError' => 'false()',
       ),
       'context' => 'cac:Delivery/cac:DeliveryLocation/cac:Address',
@@ -1759,31 +1443,14 @@ return array (
       array (
       ),
     ),
-    109 => 
-    array (
-      'primitive' => 'isTrueExpresionIfExist',
-      'params' => 
-      array (
-        'errorCodeValidate' => '\'4241\'',
-        'node' => 'cbc:District',
-        'expresion' => 'true()',
-        'isError' => 'false()',
-      ),
-      'context' => 'cac:Delivery/cac:DeliveryLocation/cac:Address',
-      'mode' => NULL,
-      'conditions' => 
-      array (
-        0 => 'string-length(cbc:District) > 30 or string-length(cbc:District) < 1 ',
-      ),
-    ),
-    110 => 
+    90 => 
     array (
       'primitive' => 'regexpValidateElementIfExist',
       'params' => 
       array (
         'errorCodeValidate' => '\'4241\'',
         'node' => 'cbc:District',
-        'regexp' => '\'^(?!\\s*$)[^\\s].{0,}$\'',
+        'regexp' => '\'^(?!\\s*$)[^\\s].{0,29}$\'',
         'isError' => 'false()',
       ),
       'context' => 'cac:Delivery/cac:DeliveryLocation/cac:Address',
@@ -1792,7 +1459,7 @@ return array (
       array (
       ),
     ),
-    111 => 
+    91 => 
     array (
       'primitive' => 'existElement',
       'params' => 
@@ -1807,7 +1474,7 @@ return array (
         0 => '$tipoOperacion =\'0201\' or $tipoOperacion =\'0208\'',
       ),
     ),
-    112 => 
+    92 => 
     array (
       'primitive' => 'findElementInCatalog',
       'params' => 
@@ -1823,7 +1490,7 @@ return array (
         0 => '$tipoOperacion =\'0201\' or $tipoOperacion =\'0208\'',
       ),
     ),
-    113 => 
+    93 => 
     array (
       'primitive' => 'isTrueExpresion',
       'params' => 
@@ -1839,7 +1506,7 @@ return array (
         0 => '$tipoOperacion =\'0201\' or $tipoOperacion =\'0208\'',
       ),
     ),
-    114 => 
+    94 => 
     array (
       'primitive' => 'regexpValidateElementIfExist',
       'params' => 
@@ -1855,7 +1522,7 @@ return array (
       array (
       ),
     ),
-    115 => 
+    95 => 
     array (
       'primitive' => 'regexpValidateElementIfExist',
       'params' => 
@@ -1871,7 +1538,7 @@ return array (
       array (
       ),
     ),
-    116 => 
+    96 => 
     array (
       'primitive' => 'regexpValidateElementIfExist',
       'params' => 
@@ -1887,7 +1554,7 @@ return array (
       array (
       ),
     ),
-    117 => 
+    97 => 
     array (
       'primitive' => 'regexpValidateElementIfExist',
       'params' => 
@@ -1903,7 +1570,7 @@ return array (
       array (
       ),
     ),
-    118 => 
+    98 => 
     array (
       'primitive' => 'isTrueExpresion',
       'params' => 
@@ -1918,7 +1585,7 @@ return array (
       array (
       ),
     ),
-    119 => 
+    99 => 
     array (
       'primitive' => 'existElementNoVacio',
       'params' => 
@@ -1932,7 +1599,7 @@ return array (
       array (
       ),
     ),
-    120 => 
+    100 => 
     array (
       'primitive' => 'regexpValidateElementIfExist',
       'params' => 
@@ -1949,14 +1616,15 @@ return array (
         1 => 'cac:Party/cac:PartyIdentification/cbc:ID/@schemeID =\'6\'',
       ),
     ),
-    121 => 
+    101 => 
     array (
       'primitive' => 'regexpValidateElementIfExist',
       'params' => 
       array (
-        'errorCodeValidate' => '\'2801\'',
+        'errorCodeValidate' => '\'4207\'',
         'node' => 'cac:Party/cac:PartyIdentification/cbc:ID',
         'regexp' => '\'^[\\d]{8}$\'',
+        'isError' => 'false()',
       ),
       'context' => 'cac:AccountingCustomerParty',
       'mode' => NULL,
@@ -1966,23 +1634,25 @@ return array (
         1 => 'cac:Party/cac:PartyIdentification/cbc:ID/@schemeID =\'1\'',
       ),
     ),
-    122 => 
+    102 => 
     array (
       'primitive' => 'regexpValidateElementIfExist',
       'params' => 
       array (
-        'errorCodeValidate' => '\'2802\'',
+        'errorCodeValidate' => '\'4208\'',
         'node' => 'cac:Party/cac:PartyIdentification/cbc:ID',
         'regexp' => '\'^(?!\\s*$)[^\\s]{1,15}$\'',
+        'isError' => 'false()',
       ),
       'context' => 'cac:AccountingCustomerParty',
       'mode' => NULL,
       'conditions' => 
       array (
         0 => 'cac:Party/cac:PartyIdentification/cbc:ID != \'-\'',
+        1 => '(cac:Party/cac:PartyIdentification/cbc:ID/@schemeID =\'4\') or (cac:Party/cac:PartyIdentification/cbc:ID/@schemeID =\'7\') or         (cac:Party/cac:PartyIdentification/cbc:ID/@schemeID =\'0\') or (cac:Party/cac:PartyIdentification/cbc:ID/@schemeID =\'A\') or          (cac:Party/cac:PartyIdentification/cbc:ID/@schemeID =\'B\') or (cac:Party/cac:PartyIdentification/cbc:ID/@schemeID =\'C\') or         (cac:Party/cac:PartyIdentification/cbc:ID/@schemeID =\'D\') or (cac:Party/cac:PartyIdentification/cbc:ID/@schemeID =\'E\')',
       ),
     ),
-    123 => 
+    103 => 
     array (
       'primitive' => 'existElementNoVacio',
       'params' => 
@@ -1996,7 +1666,7 @@ return array (
       array (
       ),
     ),
-    124 => 
+    104 => 
     array (
       'primitive' => 'isTrueExpresion',
       'params' => 
@@ -2009,58 +1679,10 @@ return array (
       'mode' => NULL,
       'conditions' => 
       array (
-        0 => '$tipoOperacion = \'0200\' or $tipoOperacion = \'0201\' or $tipoOperacion = \'0203\' or $tipoOperacion = \'0204\' or $tipoOperacion = \'0205\' or $tipoOperacion = \'0206\' or $tipoOperacion = \'0207\' or $tipoOperacion = \'0208\'',
+        0 => '$tipoOperacion = \'0200\' or $tipoOperacion = \'0201\' or $tipoOperacion = \'0203\' or $tipoOperacion = \'0204\' or $tipoOperacion = \'0205\' or $tipoOperacion = \'0205\' or $tipoOperacion = \'0206\' or $tipoOperacion = \'0207\' or $tipoOperacion = \'0208\' or $tipoOperacion = \'0401\'',
       ),
     ),
-    125 => 
-    array (
-      'primitive' => 'isTrueExpresion',
-      'params' => 
-      array (
-        'errorCodeValidate' => '\'2800\'',
-        'node' => 'cac:Party/cac:PartyIdentification/cbc:ID/@schemeID',
-        'expresion' => 'cac:Party/cac:PartyIdentification/cbc:ID/@schemeID != \'1\' and cac:Party/cac:PartyIdentification/cbc:ID/@schemeID != \'6\'',
-      ),
-      'context' => 'cac:AccountingCustomerParty',
-      'mode' => NULL,
-      'conditions' => 
-      array (
-        0 => '$tipoOperacion = \'0112\'',
-      ),
-    ),
-    126 => 
-    array (
-      'primitive' => 'findElementInCatalog',
-      'params' => 
-      array (
-        'errorCodeValidate' => '\'2800\'',
-        'idCatalogo' => 'cac:Party/cac:PartyIdentification/cbc:ID/@schemeID',
-        'catalogo' => '\'06\'',
-      ),
-      'context' => 'cac:AccountingCustomerParty',
-      'mode' => NULL,
-      'conditions' => 
-      array (
-        0 => '$tipoOperacion = \'0202\' or $tipoOperacion = \'0401\'',
-        1 => 'cac:Party/cac:PartyIdentification/cbc:ID/@schemeID != \'-\'',
-      ),
-    ),
-    127 => 
-    array (
-      'primitive' => 'isTrueExpresion',
-      'params' => 
-      array (
-        'errorCodeValidate' => '\'2800\'',
-        'node' => 'cac:Party/cac:PartyIdentification/cbc:ID/@schemeID',
-        'expresion' => 'cac:Party/cac:PartyIdentification/cbc:ID/@schemeID != \'6\'',
-      ),
-      'context' => 'cac:AccountingCustomerParty',
-      'mode' => NULL,
-      'conditions' => 
-      array (
-      ),
-    ),
-    128 => 
+    105 => 
     array (
       'primitive' => 'regexpValidateElementIfExist',
       'params' => 
@@ -2076,7 +1698,7 @@ return array (
       array (
       ),
     ),
-    129 => 
+    106 => 
     array (
       'primitive' => 'regexpValidateElementIfExist',
       'params' => 
@@ -2092,7 +1714,7 @@ return array (
       array (
       ),
     ),
-    130 => 
+    107 => 
     array (
       'primitive' => 'regexpValidateElementIfExist',
       'params' => 
@@ -2108,7 +1730,7 @@ return array (
       array (
       ),
     ),
-    131 => 
+    108 => 
     array (
       'primitive' => 'existAndRegexpValidateElement',
       'params' => 
@@ -2124,7 +1746,7 @@ return array (
       array (
       ),
     ),
-    132 => 
+    109 => 
     array (
       'primitive' => 'isTrueExpresion',
       'params' => 
@@ -2140,7 +1762,7 @@ return array (
       array (
       ),
     ),
-    133 => 
+    110 => 
     array (
       'primitive' => 'regexpValidateElementIfExist',
       'params' => 
@@ -2157,7 +1779,7 @@ return array (
       array (
       ),
     ),
-    134 => 
+    111 => 
     array (
       'primitive' => 'existAndRegexpValidateElement',
       'params' => 
@@ -2175,7 +1797,7 @@ return array (
       array (
       ),
     ),
-    135 => 
+    112 => 
     array (
       'primitive' => 'regexpValidateElementIfExist',
       'params' => 
@@ -2192,7 +1814,7 @@ return array (
       array (
       ),
     ),
-    136 => 
+    113 => 
     array (
       'primitive' => 'regexpValidateElementIfExist',
       'params' => 
@@ -2209,7 +1831,7 @@ return array (
       array (
       ),
     ),
-    137 => 
+    114 => 
     array (
       'primitive' => 'regexpValidateElementIfExist',
       'params' => 
@@ -2226,7 +1848,7 @@ return array (
       array (
       ),
     ),
-    138 => 
+    115 => 
     array (
       'primitive' => 'existElement',
       'params' => 
@@ -2242,7 +1864,7 @@ return array (
         0 => 'cbc:DocumentTypeCode = \'02\' or cbc:DocumentTypeCode = \'03\'',
       ),
     ),
-    139 => 
+    116 => 
     array (
       'primitive' => 'isTrueExpresion',
       'params' => 
@@ -2259,7 +1881,7 @@ return array (
         0 => 'cbc:DocumentTypeCode = \'02\' or cbc:DocumentTypeCode = \'03\'',
       ),
     ),
-    140 => 
+    117 => 
     array (
       'primitive' => 'isTrueExpresion',
       'params' => 
@@ -2276,7 +1898,7 @@ return array (
         0 => 'cbc:DocumentTypeCode = \'02\' or cbc:DocumentTypeCode = \'03\'',
       ),
     ),
-    141 => 
+    118 => 
     array (
       'primitive' => 'regexpValidateElementIfExist',
       'params' => 
@@ -2294,7 +1916,7 @@ return array (
         0 => 'cbc:DocumentTypeCode = \'02\' or cbc:DocumentTypeCode = \'03\'',
       ),
     ),
-    142 => 
+    119 => 
     array (
       'primitive' => 'regexpValidateElementIfExist',
       'params' => 
@@ -2312,7 +1934,7 @@ return array (
         0 => 'cbc:DocumentTypeCode = \'02\' or cbc:DocumentTypeCode = \'03\'',
       ),
     ),
-    143 => 
+    120 => 
     array (
       'primitive' => 'regexpValidateElementIfExist',
       'params' => 
@@ -2330,7 +1952,7 @@ return array (
         1 => 'cbc:DocumentTypeCode = \'02\'',
       ),
     ),
-    144 => 
+    121 => 
     array (
       'primitive' => 'regexpValidateElementIfExist',
       'params' => 
@@ -2348,7 +1970,7 @@ return array (
         1 => 'cbc:DocumentTypeCode = \'03\'',
       ),
     ),
-    145 => 
+    122 => 
     array (
       'primitive' => 'existAndRegexpValidateElement',
       'params' => 
@@ -2367,7 +1989,7 @@ return array (
         0 => 'cbc:DocumentTypeCode != \'02\' and cbc:DocumentTypeCode != \'03\'',
       ),
     ),
-    146 => 
+    123 => 
     array (
       'primitive' => 'existAndRegexpValidateElement',
       'params' => 
@@ -2386,11 +2008,12 @@ return array (
         0 => 'cbc:DocumentTypeCode != \'02\' and cbc:DocumentTypeCode != \'03\'',
       ),
     ),
-    147 => 
+    124 => 
     array (
       'primitive' => 'existAndRegexpValidateElement',
       'params' => 
       array (
+        'errorCodeNotExist' => '\'2505\'',
         'errorCodeValidate' => '\'2505\'',
         'node' => 'cbc:DocumentTypeCode',
         'regexp' => '\'^(02|03)$\'',
@@ -2403,16 +2026,13 @@ return array (
         0 => 'cbc:DocumentStatusCode',
       ),
     ),
-    148 => 
+    125 => 
     array (
-      'primitive' => 'existAndRegexpValidateElement',
+      'primitive' => 'existElement',
       'params' => 
       array (
         'errorCodeNotExist' => '\'3217\'',
-        'errorCodeValidate' => '\'3217\'',
         'node' => 'cac:IssuerParty/cac:PartyIdentification/cbc:ID',
-        'regexp' => '\'^[\\d]{11}$\'',
-        'descripcion' => 'concat(\'Documento Relacionado : \', cbc:DocumentTypeCode,\'-\',cbc:ID)',
       ),
       'context' => 'cac:AdditionalDocumentReference',
       'mode' => NULL,
@@ -2421,7 +2041,7 @@ return array (
         0 => 'cbc:DocumentStatusCode',
       ),
     ),
-    149 => 
+    126 => 
     array (
       'primitive' => 'regexpValidateElementIfExist',
       'params' => 
@@ -2438,7 +2058,7 @@ return array (
         0 => 'cbc:DocumentStatusCode',
       ),
     ),
-    150 => 
+    127 => 
     array (
       'primitive' => 'regexpValidateElementIfExist',
       'params' => 
@@ -2456,7 +2076,7 @@ return array (
         0 => 'cbc:DocumentStatusCode',
       ),
     ),
-    151 => 
+    128 => 
     array (
       'primitive' => 'regexpValidateElementIfExist',
       'params' => 
@@ -2474,7 +2094,7 @@ return array (
         0 => 'cbc:DocumentStatusCode',
       ),
     ),
-    152 => 
+    129 => 
     array (
       'primitive' => 'regexpValidateElementIfExist',
       'params' => 
@@ -2492,7 +2112,7 @@ return array (
         0 => 'cbc:DocumentStatusCode',
       ),
     ),
-    153 => 
+    130 => 
     array (
       'primitive' => 'isTrueExpresion',
       'params' => 
@@ -2508,7 +2128,7 @@ return array (
       array (
       ),
     ),
-    154 => 
+    131 => 
     array (
       'primitive' => 'regexpValidateElementIfExist',
       'params' => 
@@ -2525,7 +2145,7 @@ return array (
       array (
       ),
     ),
-    155 => 
+    132 => 
     array (
       'primitive' => 'regexpValidateElementIfExist',
       'params' => 
@@ -2542,7 +2162,7 @@ return array (
       array (
       ),
     ),
-    156 => 
+    133 => 
     array (
       'primitive' => 'regexpValidateElementIfExist',
       'params' => 
@@ -2559,7 +2179,7 @@ return array (
       array (
       ),
     ),
-    157 => 
+    134 => 
     array (
       'primitive' => 'existAndRegexpValidateElement',
       'params' => 
@@ -2576,7 +2196,7 @@ return array (
       array (
       ),
     ),
-    158 => 
+    135 => 
     array (
       'primitive' => 'isTrueExpresion',
       'params' => 
@@ -2592,7 +2212,7 @@ return array (
       array (
       ),
     ),
-    159 => 
+    136 => 
     array (
       'primitive' => 'existElement',
       'params' => 
@@ -2608,7 +2228,7 @@ return array (
         0 => 'cbc:InvoicedQuantity',
       ),
     ),
-    160 => 
+    137 => 
     array (
       'primitive' => 'regexpValidateElementIfExist',
       'params' => 
@@ -2625,7 +2245,7 @@ return array (
       array (
       ),
     ),
-    161 => 
+    138 => 
     array (
       'primitive' => 'regexpValidateElementIfExist',
       'params' => 
@@ -2642,7 +2262,7 @@ return array (
       array (
       ),
     ),
-    162 => 
+    139 => 
     array (
       'primitive' => 'existAndValidateValueTenDecimal',
       'params' => 
@@ -2659,7 +2279,7 @@ return array (
       array (
       ),
     ),
-    163 => 
+    140 => 
     array (
       'primitive' => 'isTrueExpresion',
       'params' => 
@@ -2675,14 +2295,14 @@ return array (
       array (
       ),
     ),
-    164 => 
+    141 => 
     array (
       'primitive' => 'regexpValidateElementIfExist',
       'params' => 
       array (
         'errorCodeValidate' => '\'4269\'',
         'node' => 'cac:Item/cac:SellersItemIdentification/cbc:ID',
-        'regexp' => '\'^((?!\\s*$)[\\s\\S]{0,29})$\'',
+        'regexp' => '\'^[0-9a-zA-Z]{1,30}$\'',
         'descripcion' => 'concat(\'Error en la linea: \', $nroLinea)',
         'isError' => 'false()',
       ),
@@ -2692,7 +2312,7 @@ return array (
       array (
       ),
     ),
-    165 => 
+    142 => 
     array (
       'primitive' => 'findElementInCatalog',
       'params' => 
@@ -2709,7 +2329,7 @@ return array (
       array (
       ),
     ),
-    166 => 
+    143 => 
     array (
       'primitive' => 'isTrueExpresion',
       'params' => 
@@ -2727,24 +2347,7 @@ return array (
         0 => 'cac:Item/cac:CommodityClassification/cbc:ItemClassificationCode and string-length(cac:Item/cac:CommodityClassification/cbc:ItemClassificationCode) = 8',
       ),
     ),
-    167 => 
-    array (
-      'primitive' => 'isTrueExpresion',
-      'params' => 
-      array (
-        'errorCodeValidate' => '\'3181\'',
-        'node' => 'cac:Item/cac:CommodityClassification/cbc:ItemClassificationCode',
-        'expresion' => 'cac:Item/cac:CommodityClassification/cbc:ItemClassificationCode != \'84121901\' and cac:Item/cac:CommodityClassification/cbc:ItemClassificationCode != \'80131501\'',
-        'descripcion' => 'concat(\'Error en la linea:\', position(), \'. \')',
-      ),
-      'context' => 'cac:InvoiceLine',
-      'mode' => NULL,
-      'conditions' => 
-      array (
-        0 => '$tipoOperacion = \'0112\' ',
-      ),
-    ),
-    168 => 
+    144 => 
     array (
       'primitive' => 'regexpValidateElementIfExist',
       'params' => 
@@ -2761,7 +2364,7 @@ return array (
       array (
       ),
     ),
-    169 => 
+    145 => 
     array (
       'primitive' => 'regexpValidateElementIfExist',
       'params' => 
@@ -2778,7 +2381,7 @@ return array (
       array (
       ),
     ),
-    170 => 
+    146 => 
     array (
       'primitive' => 'regexpValidateElementIfExist',
       'params' => 
@@ -2795,7 +2398,7 @@ return array (
       array (
       ),
     ),
-    171 => 
+    147 => 
     array (
       'primitive' => 'regexpValidateElementIfExist',
       'params' => 
@@ -2813,7 +2416,7 @@ return array (
         0 => 'cac:Item/cac:StandardItemIdentification/cbc:ID/@schemeID = \'GTIN-8\'',
       ),
     ),
-    172 => 
+    148 => 
     array (
       'primitive' => 'regexpValidateElementIfExist',
       'params' => 
@@ -2831,7 +2434,7 @@ return array (
         0 => 'cac:Item/cac:StandardItemIdentification/cbc:ID/@schemeID = \'GTIN-12\'',
       ),
     ),
-    173 => 
+    149 => 
     array (
       'primitive' => 'regexpValidateElementIfExist',
       'params' => 
@@ -2849,7 +2452,7 @@ return array (
         0 => 'cac:Item/cac:StandardItemIdentification/cbc:ID/@schemeID = \'GTIN-13\'',
       ),
     ),
-    174 => 
+    150 => 
     array (
       'primitive' => 'regexpValidateElementIfExist',
       'params' => 
@@ -2867,7 +2470,7 @@ return array (
         0 => 'cac:Item/cac:StandardItemIdentification/cbc:ID/@schemeID = \'GTIN-14\'',
       ),
     ),
-    175 => 
+    151 => 
     array (
       'primitive' => 'regexpValidateElementIfExist',
       'params' => 
@@ -2884,7 +2487,7 @@ return array (
       array (
       ),
     ),
-    176 => 
+    152 => 
     array (
       'primitive' => 'existElementNoVacio',
       'params' => 
@@ -2901,7 +2504,7 @@ return array (
         0 => 'cac:Item/cac:StandardItemIdentification/cbc:ID',
       ),
     ),
-    177 => 
+    153 => 
     array (
       'primitive' => 'existElement',
       'params' => 
@@ -2916,265 +2519,7 @@ return array (
       array (
       ),
     ),
-    178 => 
-    array (
-      'primitive' => 'isTrueExpresion',
-      'params' => 
-      array (
-        'errorCodeValidate' => '\'4280\'',
-        'node' => 'cac:Item/cac:AdditionalItemProperty/cbc:Value',
-        'expresion' => 'true()',
-        'descripcion' => 'concat(\'Error en la linea: \', $nroLinea, \' Concepto 3058 \', cbc:Value)',
-        'isError' => 'false()',
-      ),
-      'context' => 'cac:InvoiceLine',
-      'mode' => NULL,
-      'conditions' => 
-      array (
-        0 => 'cac:Item/cac:AdditionalItemProperty/cbc:NameCode[text() = \'3050\']',
-        1 => 'string-length(cac:Item/cac:AdditionalItemProperty/cbc:Value) > 20 or string-length(cac:Item/cac:AdditionalItemProperty/cbc:Value) < 1 ',
-      ),
-    ),
-    179 => 
-    array (
-      'primitive' => 'regexpValidateElementIfExist',
-      'params' => 
-      array (
-        'errorCodeValidate' => '\'4280\'',
-        'node' => 'cac:Item/cac:AdditionalItemProperty/cbc:Value',
-        'regexp' => '\'^(?!\\s*$)[^\\s].{1,}$\'',
-        'isError' => 'false()',
-        'descripcion' => 'concat(\'Error en la linea: \', $nroLinea, \' Concepto 3050 \', cbc:Value)',
-      ),
-      'context' => 'cac:InvoiceLine',
-      'mode' => NULL,
-      'conditions' => 
-      array (
-        0 => 'cac:Item/cac:AdditionalItemProperty/cbc:NameCode[text() = \'3050\']',
-      ),
-    ),
-    180 => 
-    array (
-      'primitive' => 'regexpValidateElementIfExist',
-      'params' => 
-      array (
-        'errorCodeValidate' => '\'4280\'',
-        'node' => 'cac:Item/cac:AdditionalItemProperty/cbc:Value',
-        'regexp' => 'true()',
-        'descripcion' => 'concat(\'Error en la linea: \', $nroLinea, \' Concepto 3051 \', cbc:Value)',
-        'isError' => 'false()',
-      ),
-      'context' => 'cac:InvoiceLine',
-      'mode' => NULL,
-      'conditions' => 
-      array (
-        0 => 'cac:Item/cac:AdditionalItemProperty/cbc:NameCode[text() = \'3051\']',
-        1 => 'string-length(cac:Item/cac:AdditionalItemProperty/cbc:Value) > 20 or string-length(cac:Item/cac:AdditionalItemProperty/cbc:Value) < 3 ',
-      ),
-    ),
-    181 => 
-    array (
-      'primitive' => 'regexpValidateElementIfExist',
-      'params' => 
-      array (
-        'errorCodeValidate' => '\'4280\'',
-        'node' => 'cac:Item/cac:AdditionalItemProperty/cbc:Value',
-        'regexp' => '\'^(?!\\s*$)[^\\s].{3,}$\'',
-        'isError' => 'false()',
-        'descripcion' => 'concat(\'Error en la linea: \', $nroLinea, \' Concepto 3051 \', cbc:Value)',
-      ),
-      'context' => 'cac:InvoiceLine',
-      'mode' => NULL,
-      'conditions' => 
-      array (
-        0 => 'cac:Item/cac:AdditionalItemProperty/cbc:NameCode[text() = \'3051\']',
-      ),
-    ),
-    182 => 
-    array (
-      'primitive' => 'regexpValidateElementIfExist',
-      'params' => 
-      array (
-        'errorCodeValidate' => '\'4280\'',
-        'node' => 'cac:Item/cac:AdditionalItemProperty/cbc:Value',
-        'regexp' => 'true()',
-        'descripcion' => 'concat(\'Error en la linea: \', $nroLinea, \' Concepto 3052 \', cbc:Value)',
-        'isError' => 'false()',
-      ),
-      'context' => 'cac:InvoiceLine',
-      'mode' => NULL,
-      'conditions' => 
-      array (
-        0 => 'cac:Item/cac:AdditionalItemProperty/cbc:NameCode[text() = \'3052\']',
-        1 => 'string-length(cac:Item/cac:AdditionalItemProperty/cbc:Value) > 15 or string-length(cac:Item/cac:AdditionalItemProperty/cbc:Value) < 3 ',
-      ),
-    ),
-    183 => 
-    array (
-      'primitive' => 'regexpValidateElementIfExist',
-      'params' => 
-      array (
-        'errorCodeValidate' => '\'4280\'',
-        'node' => 'cac:Item/cac:AdditionalItemProperty/cbc:Value',
-        'regexp' => '\'^(?!\\s*$)[^\\s].{2,}$\'',
-        'isError' => 'false()',
-        'descripcion' => 'concat(\'Error en la linea: \', $nroLinea, \' Concepto 3052 \', cbc:Value)',
-      ),
-      'context' => 'cac:InvoiceLine',
-      'mode' => NULL,
-      'conditions' => 
-      array (
-        0 => 'cac:Item/cac:AdditionalItemProperty/cbc:NameCode[text() = \'3052\']',
-      ),
-    ),
-    184 => 
-    array (
-      'primitive' => 'regexpValidateElementIfExist',
-      'params' => 
-      array (
-        'errorCodeValidate' => '\'4280\'',
-        'node' => 'cac:Item/cac:AdditionalItemProperty/cbc:Value',
-        'regexp' => 'true()',
-        'descripcion' => 'concat(\'Error en la linea: \', $nroLinea, \' Concepto 3054 \', cbc:Value)',
-        'isError' => 'false()',
-      ),
-      'context' => 'cac:InvoiceLine',
-      'mode' => NULL,
-      'conditions' => 
-      array (
-        0 => 'cac:Item/cac:AdditionalItemProperty/cbc:NameCode[text() = \'3054\']',
-        1 => 'string-length(cac:Item/cac:AdditionalItemProperty/cbc:Value) > 200 or string-length(cac:Item/cac:AdditionalItemProperty/cbc:Value) < 3 ',
-      ),
-    ),
-    185 => 
-    array (
-      'primitive' => 'regexpValidateElementIfExist',
-      'params' => 
-      array (
-        'errorCodeValidate' => '\'4280\'',
-        'node' => 'cac:Item/cac:AdditionalItemProperty/cbc:Value',
-        'regexp' => '\'^(?!\\s*$)[^\\n]{1,}$\'',
-        'isError' => 'false()',
-        'descripcion' => 'concat(\'Error en la linea: \', $nroLinea, \' Concepto 3054 \', cbc:Value)',
-      ),
-      'context' => 'cac:InvoiceLine',
-      'mode' => NULL,
-      'conditions' => 
-      array (
-        0 => 'cac:Item/cac:AdditionalItemProperty/cbc:NameCode[text() = \'3054\']',
-      ),
-    ),
-    186 => 
-    array (
-      'primitive' => 'findElementInCatalog',
-      'params' => 
-      array (
-        'catalogo' => '\'13\'',
-        'idCatalogo' => 'cac:Item/cac:AdditionalItemProperty/cbc:Value',
-        'errorCodeValidate' => '\'4280\'',
-        'descripcion' => 'concat(\'Error en la linea: \', $nroLinea, \' Concepto 3055 \', cbc:Value)',
-        'isError' => 'false()',
-      ),
-      'context' => 'cac:InvoiceLine',
-      'mode' => NULL,
-      'conditions' => 
-      array (
-        0 => 'cac:Item/cac:AdditionalItemProperty/cbc:NameCode[text() = \'3055\']',
-      ),
-    ),
-    187 => 
-    array (
-      'primitive' => 'regexpValidateElementIfExist',
-      'params' => 
-      array (
-        'errorCodeValidate' => '\'4280\'',
-        'node' => 'cac:Item/cac:AdditionalItemProperty/cbc:Value',
-        'regexp' => 'true()',
-        'descripcion' => 'concat(\'Error en la linea: \', $nroLinea, \' Concepto 3056 \', cbc:Value)',
-        'isError' => 'false()',
-      ),
-      'context' => 'cac:InvoiceLine',
-      'mode' => NULL,
-      'conditions' => 
-      array (
-        0 => 'cac:Item/cac:AdditionalItemProperty/cbc:NameCode[text() = \'3056\']',
-        1 => 'string-length(cac:Item/cac:AdditionalItemProperty/cbc:Value) > 200 or string-length(cac:Item/cac:AdditionalItemProperty/cbc:Value) < 3 ',
-      ),
-    ),
-    188 => 
-    array (
-      'primitive' => 'regexpValidateElementIfExist',
-      'params' => 
-      array (
-        'errorCodeValidate' => '\'4280\'',
-        'node' => 'cac:Item/cac:AdditionalItemProperty/cbc:Value',
-        'regexp' => '\'^(?!\\s*$)[^\\n]{1,}$\'',
-        'isError' => 'false()',
-        'descripcion' => 'concat(\'Error en la linea: \', $nroLinea, \' Concepto 3056 \', cbc:Value)',
-      ),
-      'context' => 'cac:InvoiceLine',
-      'mode' => NULL,
-      'conditions' => 
-      array (
-        0 => 'cac:Item/cac:AdditionalItemProperty/cbc:NameCode[text() = \'3056\']',
-      ),
-    ),
-    189 => 
-    array (
-      'primitive' => 'findElementInCatalog',
-      'params' => 
-      array (
-        'catalogo' => '\'13\'',
-        'idCatalogo' => 'cac:Item/cac:AdditionalItemProperty/cbc:Value',
-        'errorCodeValidate' => '\'4280\'',
-        'descripcion' => 'concat(\'Error en la linea: \', $nroLinea, \' Concepto 3057 \', cbc:Value)',
-        'isError' => 'false()',
-      ),
-      'context' => 'cac:InvoiceLine',
-      'mode' => NULL,
-      'conditions' => 
-      array (
-        0 => 'cac:Item/cac:AdditionalItemProperty/cbc:NameCode[text() = \'3057\']',
-      ),
-    ),
-    190 => 
-    array (
-      'primitive' => 'regexpValidateElementIfExist',
-      'params' => 
-      array (
-        'errorCodeValidate' => '\'4280\'',
-        'node' => 'cac:Item/cac:AdditionalItemProperty/cbc:Value',
-        'regexp' => 'true()',
-        'descripcion' => 'concat(\'Error en la linea: \', $nroLinea, \' Concepto 3058 \', cbc:Value)',
-        'isError' => 'false()',
-      ),
-      'context' => 'cac:InvoiceLine',
-      'mode' => NULL,
-      'conditions' => 
-      array (
-        0 => 'cac:Item/cac:AdditionalItemProperty/cbc:NameCode[text() = \'3058\']',
-        1 => 'string-length(cac:Item/cac:AdditionalItemProperty/cbc:Value) > 200 or string-length(cac:Item/cac:AdditionalItemProperty/cbc:Value) < 3 ',
-      ),
-    ),
-    191 => 
-    array (
-      'primitive' => 'regexpValidateElementIfExist',
-      'params' => 
-      array (
-        'errorCodeValidate' => '\'4280\'',
-        'node' => 'cac:Item/cac:AdditionalItemProperty/cbc:Value',
-        'regexp' => '\'^(?!\\s*$)[^\\s].{2,}$\'',
-        'isError' => 'false()',
-        'descripcion' => 'concat(\'Error en la linea: \', $nroLinea, \' Concepto 3058 \', cbc:Value)',
-      ),
-      'context' => 'cac:InvoiceLine',
-      'mode' => NULL,
-      'conditions' => 
-      array (
-        0 => 'cac:Item/cac:AdditionalItemProperty/cbc:NameCode[text() = \'3058\']',
-      ),
-    ),
-    192 => 
+    154 => 
     array (
       'primitive' => 'isTrueExpresion',
       'params' => 
@@ -3188,17 +2533,17 @@ return array (
       'mode' => NULL,
       'conditions' => 
       array (
-        0 => 'string-length(cac:Item/cbc:Description) > 500',
+        0 => 'string-length(cac:Item/cbc:Description) > 500 or string-length(cac:Item/cbc:Description) < 1 ',
       ),
     ),
-    193 => 
+    155 => 
     array (
       'primitive' => 'regexpValidateElementIfExist',
       'params' => 
       array (
         'errorCodeValidate' => '\'2027\'',
         'node' => 'cac:Item/cbc:Description',
-        'regexp' => '\'^(?!\\s*$)[\\s\\S].{0,}\'',
+        'regexp' => '\'^(?!\\s*$)[\\S\\s].{0,}\'',
         'descripcion' => 'concat(\'Error en la linea: \', $nroLinea)',
       ),
       'context' => 'cac:InvoiceLine',
@@ -3207,7 +2552,7 @@ return array (
       array (
       ),
     ),
-    194 => 
+    156 => 
     array (
       'primitive' => 'existAndValidateValueTenDecimal',
       'params' => 
@@ -3224,7 +2569,7 @@ return array (
       array (
       ),
     ),
-    195 => 
+    157 => 
     array (
       'primitive' => 'isTrueExpresion',
       'params' => 
@@ -3240,7 +2585,7 @@ return array (
       array (
       ),
     ),
-    196 => 
+    158 => 
     array (
       'primitive' => 'existElement',
       'params' => 
@@ -3255,11 +2600,12 @@ return array (
       array (
       ),
     ),
-    197 => 
+    159 => 
     array (
       'primitive' => 'existAndValidateValueTenDecimal',
       'params' => 
       array (
+        'errorCodeNotExist' => '\'2028\'',
         'errorCodeValidate' => '\'2367\'',
         'node' => 'cbc:PriceAmount',
         'isGreaterCero' => 'false()',
@@ -3271,7 +2617,7 @@ return array (
       array (
       ),
     ),
-    198 => 
+    160 => 
     array (
       'primitive' => 'existElement',
       'params' => 
@@ -3286,7 +2632,7 @@ return array (
       array (
       ),
     ),
-    199 => 
+    161 => 
     array (
       'primitive' => 'findElementInCatalog',
       'params' => 
@@ -3302,7 +2648,7 @@ return array (
       array (
       ),
     ),
-    200 => 
+    162 => 
     array (
       'primitive' => 'isTrueExpresion',
       'params' => 
@@ -3318,7 +2664,7 @@ return array (
       array (
       ),
     ),
-    201 => 
+    163 => 
     array (
       'primitive' => 'regexpValidateElementIfExist',
       'params' => 
@@ -3335,7 +2681,7 @@ return array (
       array (
       ),
     ),
-    202 => 
+    164 => 
     array (
       'primitive' => 'regexpValidateElementIfExist',
       'params' => 
@@ -3352,7 +2698,7 @@ return array (
       array (
       ),
     ),
-    203 => 
+    165 => 
     array (
       'primitive' => 'regexpValidateElementIfExist',
       'params' => 
@@ -3369,7 +2715,7 @@ return array (
       array (
       ),
     ),
-    204 => 
+    166 => 
     array (
       'primitive' => 'isTrueExpresion',
       'params' => 
@@ -3385,14 +2731,14 @@ return array (
       array (
       ),
     ),
-    205 => 
+    167 => 
     array (
       'primitive' => 'isTrueExpresion',
       'params' => 
       array (
         'errorCodeValidate' => '\'3224\'',
         'node' => 'cac:PricingReference/cac:AlternativeConditionPrice[cbc:PriceTypeCode = \'02\']/cbc:PriceAmount',
-        'expresion' => 'cac:PricingReference/cac:AlternativeConditionPrice[cbc:PriceTypeCode =\'02\']/cbc:PriceAmount > 0 and not(cac:TaxTotal/cac:TaxSubtotal[cac:TaxCategory/cac:TaxScheme/cbc:ID[text() = \'9996\'] and cbc:TaxableAmount > 0])',
+        'expresion' => 'cac:PricingReference/cac:AlternativeConditionPrice[cbc:PriceTypeCode =\'02\']/cbc:PriceAmount > 0 and not(cac:TaxTotal[cac:TaxSubtotal[cac:TaxCategory/cac:TaxScheme/cbc:ID[text() = \'9996\']]/cbc:TaxableAmount > 0])',
         'descripcion' => 'concat(\'Error en la linea: \', $nroLinea)',
       ),
       'context' => 'cac:InvoiceLine',
@@ -3401,7 +2747,7 @@ return array (
       array (
       ),
     ),
-    206 => 
+    168 => 
     array (
       'primitive' => 'isTrueExpresion',
       'params' => 
@@ -3417,7 +2763,7 @@ return array (
       array (
       ),
     ),
-    207 => 
+    169 => 
     array (
       'primitive' => 'isTrueExpresion',
       'params' => 
@@ -3433,7 +2779,7 @@ return array (
       array (
       ),
     ),
-    208 => 
+    170 => 
     array (
       'primitive' => 'isTrueExpresion',
       'params' => 
@@ -3449,7 +2795,7 @@ return array (
       array (
       ),
     ),
-    209 => 
+    171 => 
     array (
       'primitive' => 'existAndValidateValueTwoDecimal',
       'params' => 
@@ -3466,7 +2812,7 @@ return array (
       array (
       ),
     ),
-    210 => 
+    172 => 
     array (
       'primitive' => 'isTrueExpresion',
       'params' => 
@@ -3483,7 +2829,7 @@ return array (
       array (
       ),
     ),
-    211 => 
+    173 => 
     array (
       'primitive' => 'isTrueExpresion',
       'params' => 
@@ -3500,7 +2846,7 @@ return array (
       array (
       ),
     ),
-    212 => 
+    174 => 
     array (
       'primitive' => 'isTrueExpresion',
       'params' => 
@@ -3517,7 +2863,7 @@ return array (
       array (
       ),
     ),
-    213 => 
+    175 => 
     array (
       'primitive' => 'isTrueExpresion',
       'params' => 
@@ -3534,7 +2880,7 @@ return array (
         0 => '$codigoProducto = \'004\'',
       ),
     ),
-    214 => 
+    176 => 
     array (
       'primitive' => 'isTrueExpresion',
       'params' => 
@@ -3551,7 +2897,7 @@ return array (
         0 => '$codigoProducto = \'004\'',
       ),
     ),
-    215 => 
+    177 => 
     array (
       'primitive' => 'isTrueExpresion',
       'params' => 
@@ -3568,7 +2914,7 @@ return array (
         0 => '$codigoProducto = \'004\'',
       ),
     ),
-    216 => 
+    178 => 
     array (
       'primitive' => 'isTrueExpresion',
       'params' => 
@@ -3585,7 +2931,7 @@ return array (
         0 => '$codigoProducto = \'004\'',
       ),
     ),
-    217 => 
+    179 => 
     array (
       'primitive' => 'isTrueExpresion',
       'params' => 
@@ -3602,7 +2948,7 @@ return array (
         0 => '$codigoProducto = \'004\'',
       ),
     ),
-    218 => 
+    180 => 
     array (
       'primitive' => 'isTrueExpresion',
       'params' => 
@@ -3619,7 +2965,7 @@ return array (
         0 => '$codigoProducto = \'004\'',
       ),
     ),
-    219 => 
+    181 => 
     array (
       'primitive' => 'isTrueExpresion',
       'params' => 
@@ -3636,7 +2982,7 @@ return array (
         0 => '$tipoOperacion = \'0202\'',
       ),
     ),
-    220 => 
+    182 => 
     array (
       'primitive' => 'isTrueExpresion',
       'params' => 
@@ -3653,7 +2999,7 @@ return array (
         0 => '$tipoOperacion = \'0202\'',
       ),
     ),
-    221 => 
+    183 => 
     array (
       'primitive' => 'isTrueExpresion',
       'params' => 
@@ -3670,7 +3016,7 @@ return array (
         0 => '$tipoOperacion = \'0202\'',
       ),
     ),
-    222 => 
+    184 => 
     array (
       'primitive' => 'isTrueExpresion',
       'params' => 
@@ -3687,7 +3033,7 @@ return array (
         0 => '$tipoOperacion = \'0202\'',
       ),
     ),
-    223 => 
+    185 => 
     array (
       'primitive' => 'isTrueExpresion',
       'params' => 
@@ -3704,7 +3050,7 @@ return array (
         0 => '$tipoOperacion = \'0202\'',
       ),
     ),
-    224 => 
+    186 => 
     array (
       'primitive' => 'isTrueExpresion',
       'params' => 
@@ -3721,7 +3067,7 @@ return array (
         0 => '$tipoOperacion = \'0202\'',
       ),
     ),
-    225 => 
+    187 => 
     array (
       'primitive' => 'isTrueExpresion',
       'params' => 
@@ -3738,7 +3084,7 @@ return array (
         0 => '$tipoOperacion = \'0202\'',
       ),
     ),
-    226 => 
+    188 => 
     array (
       'primitive' => 'isTrueExpresion',
       'params' => 
@@ -3755,7 +3101,7 @@ return array (
         0 => '$tipoOperacion = \'0202\'',
       ),
     ),
-    227 => 
+    189 => 
     array (
       'primitive' => 'isTrueExpresion',
       'params' => 
@@ -3772,7 +3118,7 @@ return array (
         0 => '$tipoOperacion = \'0202\'',
       ),
     ),
-    228 => 
+    190 => 
     array (
       'primitive' => 'isTrueExpresion',
       'params' => 
@@ -3789,7 +3135,7 @@ return array (
         0 => '$tipoOperacion = \'0202\'',
       ),
     ),
-    229 => 
+    191 => 
     array (
       'primitive' => 'isTrueExpresion',
       'params' => 
@@ -3806,7 +3152,7 @@ return array (
         0 => '$tipoOperacion = \'0205\'',
       ),
     ),
-    230 => 
+    192 => 
     array (
       'primitive' => 'isTrueExpresion',
       'params' => 
@@ -3823,7 +3169,7 @@ return array (
         0 => '$tipoOperacion = \'0205\'',
       ),
     ),
-    231 => 
+    193 => 
     array (
       'primitive' => 'isTrueExpresion',
       'params' => 
@@ -3840,7 +3186,7 @@ return array (
         0 => '$tipoOperacion = \'0205\'',
       ),
     ),
-    232 => 
+    194 => 
     array (
       'primitive' => 'isTrueExpresion',
       'params' => 
@@ -3857,7 +3203,7 @@ return array (
         0 => '$tipoOperacion = \'0205\'',
       ),
     ),
-    233 => 
+    195 => 
     array (
       'primitive' => 'isTrueExpresion',
       'params' => 
@@ -3874,7 +3220,7 @@ return array (
         0 => '$tipoOperacion = \'0301\'',
       ),
     ),
-    234 => 
+    196 => 
     array (
       'primitive' => 'isTrueExpresion',
       'params' => 
@@ -3891,7 +3237,7 @@ return array (
         0 => '$tipoOperacion = \'0301\'',
       ),
     ),
-    235 => 
+    197 => 
     array (
       'primitive' => 'isTrueExpresion',
       'params' => 
@@ -3908,7 +3254,7 @@ return array (
         0 => '$tipoOperacion = \'0301\'',
       ),
     ),
-    236 => 
+    198 => 
     array (
       'primitive' => 'isTrueExpresion',
       'params' => 
@@ -3925,7 +3271,7 @@ return array (
         0 => '$tipoOperacion = \'0301\'',
       ),
     ),
-    237 => 
+    199 => 
     array (
       'primitive' => 'isTrueExpresion',
       'params' => 
@@ -3942,7 +3288,7 @@ return array (
         0 => '$tipoOperacion = \'0302\'',
       ),
     ),
-    238 => 
+    200 => 
     array (
       'primitive' => 'isTrueExpresion',
       'params' => 
@@ -3959,7 +3305,7 @@ return array (
         0 => '$tipoOperacion = \'0302\'',
       ),
     ),
-    239 => 
+    201 => 
     array (
       'primitive' => 'isTrueExpresion',
       'params' => 
@@ -3976,7 +3322,7 @@ return array (
         0 => '$tipoOperacion = \'0302\'',
       ),
     ),
-    240 => 
+    202 => 
     array (
       'primitive' => 'isTrueExpresion',
       'params' => 
@@ -3993,7 +3339,7 @@ return array (
         0 => '$tipoOperacion = \'0302\'',
       ),
     ),
-    241 => 
+    203 => 
     array (
       'primitive' => 'isTrueExpresion',
       'params' => 
@@ -4010,7 +3356,7 @@ return array (
         0 => '$tipoOperacion = \'0302\'',
       ),
     ),
-    242 => 
+    204 => 
     array (
       'primitive' => 'isTrueExpresion',
       'params' => 
@@ -4027,7 +3373,7 @@ return array (
         0 => '$tipoOperacion = \'0302\'',
       ),
     ),
-    243 => 
+    205 => 
     array (
       'primitive' => 'isTrueExpresion',
       'params' => 
@@ -4044,7 +3390,7 @@ return array (
         0 => '$tipoOperacion = \'0302\'',
       ),
     ),
-    244 => 
+    206 => 
     array (
       'primitive' => 'isTrueExpresion',
       'params' => 
@@ -4061,7 +3407,7 @@ return array (
         0 => '$tipoOperacion = \'0302\'',
       ),
     ),
-    245 => 
+    207 => 
     array (
       'primitive' => 'isTrueExpresion',
       'params' => 
@@ -4078,7 +3424,7 @@ return array (
         0 => '$tipoOperacion = \'0302\'',
       ),
     ),
-    246 => 
+    208 => 
     array (
       'primitive' => 'isTrueExpresion',
       'params' => 
@@ -4095,7 +3441,7 @@ return array (
         0 => '$tipoOperacion = \'0302\'',
       ),
     ),
-    247 => 
+    209 => 
     array (
       'primitive' => 'isTrueExpresion',
       'params' => 
@@ -4112,7 +3458,7 @@ return array (
         0 => '$tipoOperacion = \'0303\'',
       ),
     ),
-    248 => 
+    210 => 
     array (
       'primitive' => 'isTrueExpresion',
       'params' => 
@@ -4129,7 +3475,7 @@ return array (
         0 => '$tipoOperacion = \'0303\'',
       ),
     ),
-    249 => 
+    211 => 
     array (
       'primitive' => 'isTrueExpresion',
       'params' => 
@@ -4146,7 +3492,7 @@ return array (
         0 => '$tipoOperacion = \'0303\'',
       ),
     ),
-    250 => 
+    212 => 
     array (
       'primitive' => 'isTrueExpresion',
       'params' => 
@@ -4163,7 +3509,7 @@ return array (
         0 => '$tipoOperacion = \'0303\'',
       ),
     ),
-    251 => 
+    213 => 
     array (
       'primitive' => 'isTrueExpresion',
       'params' => 
@@ -4179,7 +3525,7 @@ return array (
       array (
       ),
     ),
-    252 => 
+    214 => 
     array (
       'primitive' => 'isTrueExpresion',
       'params' => 
@@ -4195,7 +3541,7 @@ return array (
       array (
       ),
     ),
-    253 => 
+    215 => 
     array (
       'primitive' => 'isTrueExpresion',
       'params' => 
@@ -4211,7 +3557,7 @@ return array (
       array (
       ),
     ),
-    254 => 
+    216 => 
     array (
       'primitive' => 'isTrueExpresion',
       'params' => 
@@ -4227,109 +3573,7 @@ return array (
       array (
       ),
     ),
-    255 => 
-    array (
-      'primitive' => 'isTrueExpresion',
-      'params' => 
-      array (
-        'errorCodeValidate' => '\'3150\'',
-        'node' => 'cac:Item/cac:AdditionalItemProperty/cbc:NameCode',
-        'expresion' => 'not(cac:Item/cac:AdditionalItemProperty/cbc:NameCode[text() = \'7001\'])',
-        'descripcion' => 'concat(\'Error en la linea: \', $nroLinea, \' Concepto: 7001\')',
-      ),
-      'context' => 'cac:InvoiceLine',
-      'mode' => NULL,
-      'conditions' => 
-      array (
-        0 => '$codigoSUNAT = \'84121901\'',
-      ),
-    ),
-    256 => 
-    array (
-      'primitive' => 'isTrueExpresion',
-      'params' => 
-      array (
-        'errorCodeValidate' => '\'3151\'',
-        'node' => 'cac:Item/cac:AdditionalItemProperty/cbc:NameCode',
-        'expresion' => 'not(cac:Item/cac:AdditionalItemProperty/cbc:NameCode[text() = \'7003\']) and $indPrimeraVivienda = \'3\'',
-        'descripcion' => 'concat(\'Error en la linea: \', $nroLinea, \' Concepto: 7003\')',
-      ),
-      'context' => 'cac:InvoiceLine',
-      'mode' => NULL,
-      'conditions' => 
-      array (
-        0 => '$codigoSUNAT = \'84121901\'',
-      ),
-    ),
-    257 => 
-    array (
-      'primitive' => 'isTrueExpresion',
-      'params' => 
-      array (
-        'errorCodeValidate' => '\'3152\'',
-        'node' => 'cac:Item/cac:AdditionalItemProperty/cbc:NameCode',
-        'expresion' => 'not(cac:Item/cac:AdditionalItemProperty/cbc:NameCode[text() = \'7004\'])',
-        'descripcion' => 'concat(\'Error en la linea: \', $nroLinea, \' Concepto: 7004\')',
-      ),
-      'context' => 'cac:InvoiceLine',
-      'mode' => NULL,
-      'conditions' => 
-      array (
-        0 => '$codigoSUNAT = \'84121901\'',
-      ),
-    ),
-    258 => 
-    array (
-      'primitive' => 'isTrueExpresion',
-      'params' => 
-      array (
-        'errorCodeValidate' => '\'3153\'',
-        'node' => 'cac:Item/cac:AdditionalItemProperty/cbc:NameCode',
-        'expresion' => 'not(cac:Item/cac:AdditionalItemProperty/cbc:NameCode[text() = \'7005\'])',
-        'descripcion' => 'concat(\'Error en la linea: \', $nroLinea, \' Concepto: 7005\')',
-      ),
-      'context' => 'cac:InvoiceLine',
-      'mode' => NULL,
-      'conditions' => 
-      array (
-        0 => '$codigoSUNAT = \'84121901\'',
-      ),
-    ),
-    259 => 
-    array (
-      'primitive' => 'isTrueExpresion',
-      'params' => 
-      array (
-        'errorCodeValidate' => '\'3154\'',
-        'node' => 'cac:Item/cac:AdditionalItemProperty/cbc:NameCode',
-        'expresion' => 'not(cac:Item/cac:AdditionalItemProperty/cbc:NameCode[text() = \'7006\']) and $indPrimeraVivienda = \'3\'',
-        'descripcion' => 'concat(\'Error en la linea: \', $nroLinea, \' Concepto: 7006\')',
-      ),
-      'context' => 'cac:InvoiceLine',
-      'mode' => NULL,
-      'conditions' => 
-      array (
-        0 => '$codigoSUNAT = \'84121901\'',
-      ),
-    ),
-    260 => 
-    array (
-      'primitive' => 'isTrueExpresion',
-      'params' => 
-      array (
-        'errorCodeValidate' => '\'3155\'',
-        'node' => 'cac:Item/cac:AdditionalItemProperty/cbc:NameCode',
-        'expresion' => 'not(cac:Item/cac:AdditionalItemProperty/cbc:NameCode[text() = \'7007\']) and $indPrimeraVivienda = \'3\'',
-        'descripcion' => 'concat(\'Error en la linea: \', $nroLinea, \' Concepto: 7007\')',
-      ),
-      'context' => 'cac:InvoiceLine',
-      'mode' => NULL,
-      'conditions' => 
-      array (
-        0 => '$codigoSUNAT = \'84121901\'',
-      ),
-    ),
-    261 => 
+    217 => 
     array (
       'primitive' => 'isTrueExpresion',
       'params' => 
@@ -4347,7 +3591,7 @@ return array (
         1 => 'cac:Item/cac:AdditionalItemProperty/cbc:NameCode[text() = \'7015\']',
       ),
     ),
-    262 => 
+    218 => 
     array (
       'primitive' => 'isTrueExpresion',
       'params' => 
@@ -4365,7 +3609,7 @@ return array (
         1 => 'cac:Item/cac:AdditionalItemProperty/cbc:NameCode[text() = \'7015\']',
       ),
     ),
-    263 => 
+    219 => 
     array (
       'primitive' => 'isTrueExpresion',
       'params' => 
@@ -4383,7 +3627,7 @@ return array (
         1 => 'cac:Item/cac:AdditionalItemProperty/cbc:NameCode[text() = \'7015\']',
       ),
     ),
-    264 => 
+    220 => 
     array (
       'primitive' => 'isTrueExpresion',
       'params' => 
@@ -4401,7 +3645,7 @@ return array (
         1 => 'cac:Item/cac:AdditionalItemProperty/cbc:NameCode[text() = \'7015\']',
       ),
     ),
-    265 => 
+    221 => 
     array (
       'primitive' => 'existElement',
       'params' => 
@@ -4417,7 +3661,7 @@ return array (
         0 => '$tipoOperacion = \'1004\'',
       ),
     ),
-    266 => 
+    222 => 
     array (
       'primitive' => 'existElement',
       'params' => 
@@ -4433,7 +3677,7 @@ return array (
         0 => '$tipoOperacion = \'1004\'',
       ),
     ),
-    267 => 
+    223 => 
     array (
       'primitive' => 'existElement',
       'params' => 
@@ -4449,9 +3693,9 @@ return array (
         0 => '$tipoOperacion = \'1004\'',
       ),
     ),
-    268 => 
+    224 => 
     array (
-      'primitive' => 'existElementNoVacio',
+      'primitive' => 'existElement',
       'params' => 
       array (
         'errorCodeNotExist' => '\'3119\'',
@@ -4465,7 +3709,7 @@ return array (
         0 => '$tipoOperacion = \'1004\'',
       ),
     ),
-    269 => 
+    225 => 
     array (
       'primitive' => 'existElement',
       'params' => 
@@ -4481,7 +3725,7 @@ return array (
         0 => '$tipoOperacion = \'1004\'',
       ),
     ),
-    270 => 
+    226 => 
     array (
       'primitive' => 'isTrueExpresion',
       'params' => 
@@ -4498,7 +3742,7 @@ return array (
         0 => '$tipoOperacion = \'1004\'',
       ),
     ),
-    271 => 
+    227 => 
     array (
       'primitive' => 'isTrueExpresion',
       'params' => 
@@ -4515,7 +3759,7 @@ return array (
         0 => '$tipoOperacion = \'1004\'',
       ),
     ),
-    272 => 
+    228 => 
     array (
       'primitive' => 'isTrueExpresion',
       'params' => 
@@ -4532,7 +3776,7 @@ return array (
         0 => '$tipoOperacion = \'1004\'',
       ),
     ),
-    273 => 
+    229 => 
     array (
       'primitive' => 'isTrueExpresion',
       'params' => 
@@ -4549,7 +3793,7 @@ return array (
         0 => '$tipoOperacion = \'1004\'',
       ),
     ),
-    274 => 
+    230 => 
     array (
       'primitive' => 'isTrueExpresion',
       'params' => 
@@ -4566,7 +3810,7 @@ return array (
         0 => '$tipoOperacion = \'1004\'',
       ),
     ),
-    275 => 
+    231 => 
     array (
       'primitive' => 'isTrueExpresion',
       'params' => 
@@ -4583,24 +3827,7 @@ return array (
         0 => '$tipoOperacion = \'1004\'',
       ),
     ),
-    276 => 
-    array (
-      'primitive' => 'existAndValidateValueTwoDecimal',
-      'params' => 
-      array (
-        'errorCodeValidate' => '\'3123\'',
-        'node' => 'cac:Delivery/cac:DeliveryTerms[cbc:ID[text() = \'01\' or text() = \'02\' or text() = \'03\']]/cbc:Amount',
-        'isGreaterCero' => 'false()',
-        'descripcion' => 'concat(\'Error en la linea: \', $nroLinea)',
-      ),
-      'context' => 'cac:InvoiceLine',
-      'mode' => NULL,
-      'conditions' => 
-      array (
-        0 => '$tipoOperacion = \'1004\'',
-      ),
-    ),
-    277 => 
+    232 => 
     array (
       'primitive' => 'findElementInCatalog',
       'params' => 
@@ -4616,9 +3843,10 @@ return array (
       'conditions' => 
       array (
         0 => '$tipoOperacion = \'1004\'',
+        1 => 'cac:Delivery/cac:Shipment/cac:Consignment/cac:PlannedPickupTransportEvent/cac:Location/cbc:ID',
       ),
     ),
-    278 => 
+    233 => 
     array (
       'primitive' => 'findElementInCatalog',
       'params' => 
@@ -4634,16 +3862,17 @@ return array (
       'conditions' => 
       array (
         0 => '$tipoOperacion = \'1004\'',
+        1 => 'cac:Delivery/cac:Shipment/cac:Consignment/cac:PlannedDeliveryTransportEvent/cac:Location/cbc:ID',
       ),
     ),
-    279 => 
+    234 => 
     array (
       'primitive' => 'regexpValidateElementIfExist',
       'params' => 
       array (
         'errorCodeValidate' => '\'4271\'',
         'node' => 'cac:Delivery/cac:Shipment/cac:Consignment/cbc:CarrierServiceInstructions',
-        'regexp' => '\'^(?!\\s*$)[^\\s].{2,99}$\'',
+        'regexp' => '\'^(?!\\s*$)[^\\s].{3,100}$\'',
         'isError' => 'false()',
         'descripcion' => 'concat(\'Error en la linea: \', $nroLinea)',
       ),
@@ -4654,7 +3883,7 @@ return array (
         0 => '$tipoOperacion = \'1004\'',
       ),
     ),
-    280 => 
+    235 => 
     array (
       'primitive' => 'existAndValidateValueTwoDecimal',
       'params' => 
@@ -4673,7 +3902,7 @@ return array (
         1 => 'cac:Delivery/cac:Shipment/cac:Consignment/cac:DeliveryTerms/cbc:Amount',
       ),
     ),
-    281 => 
+    236 => 
     array (
       'primitive' => 'regexpValidateElementIfExist',
       'params' => 
@@ -4691,13 +3920,13 @@ return array (
         0 => '$tipoOperacion = \'1004\'',
       ),
     ),
-    282 => 
+    237 => 
     array (
       'primitive' => 'isTrueExpresion',
       'params' => 
       array (
         'errorCodeValidate' => '\'4274\'',
-        'node' => 'cac:Delivery/cac:Shipment/cac:Consignment/cac:TransportHandlingUnit/cac:MeasurementDimension/cbc:AttributeID',
+        'node' => 'cac:Delivery/cac:Shipment/cac:Consignment/cac:TransportHandlingUnit/cac:MeasurementDimension/cbc:AttributeID[text() != \'01\' and text() != \'02\']',
         'expresion' => 'cac:Delivery/cac:Shipment/cac:Consignment/cac:TransportHandlingUnit/cac:MeasurementDimension/cbc:AttributeID and cac:Delivery/cac:Shipment/cac:Consignment/cac:TransportHandlingUnit/cac:MeasurementDimension/cbc:AttributeID[text() != \'01\' and text() != \'02\']',
         'descripcion' => 'concat(\'Error en la linea: \', $nroLinea)',
         'isError' => 'false()',
@@ -4709,7 +3938,7 @@ return array (
         0 => '$tipoOperacion = \'1004\'',
       ),
     ),
-    283 => 
+    238 => 
     array (
       'primitive' => 'existAndValidateValueTwoDecimal',
       'params' => 
@@ -4728,7 +3957,7 @@ return array (
         1 => 'cac:Delivery/cac:Shipment/cac:Consignment/cbc:DeclaredForCarriageValueAmount',
       ),
     ),
-    284 => 
+    239 => 
     array (
       'primitive' => 'findElementInCatalog',
       'params' => 
@@ -4745,7 +3974,7 @@ return array (
       array (
       ),
     ),
-    285 => 
+    240 => 
     array (
       'primitive' => 'regexpValidateElementIfExist',
       'params' => 
@@ -4762,7 +3991,7 @@ return array (
       array (
       ),
     ),
-    286 => 
+    241 => 
     array (
       'primitive' => 'regexpValidateElementIfExist',
       'params' => 
@@ -4779,34 +4008,16 @@ return array (
       array (
       ),
     ),
-    287 => 
-    array (
-      'primitive' => 'isTrueExpresionIfExist',
-      'params' => 
-      array (
-        'errorCodeValidate' => '\'4236\'',
-        'node' => 'cac:Despatch/cac:DespatchAddress/cac:AddressLine/cbc:Line',
-        'expresion' => 'true()',
-        'isError' => 'false()',
-        'descripcion' => 'concat(\'Error en la linea: \', $nroLinea, \', Nodo padre: cac:Delivery/cac:Despatch/cac:DespatchAddress\')',
-      ),
-      'context' => 'cac:Delivery',
-      'mode' => 'linea',
-      'conditions' => 
-      array (
-        0 => 'string-length(cac:Despatch/cac:DespatchAddress/cac:AddressLine/cbc:Line) > 200 or string-length(cac:Despatch/cac:DespatchAddress/cac:AddressLine/cbc:Line) < 3 ',
-      ),
-    ),
-    288 => 
+    242 => 
     array (
       'primitive' => 'regexpValidateElementIfExist',
       'params' => 
       array (
         'errorCodeValidate' => '\'4236\'',
         'node' => 'cac:Despatch/cac:DespatchAddress/cac:AddressLine/cbc:Line',
-        'regexp' => '\'^(?!\\s*$)[^\\s].{2,}$\'',
+        'regexp' => '\'^(?!\\s*$)[^\\s].{3,200}$\'',
         'isError' => 'false()',
-        'descripcion' => 'concat(\'Error en la linea: \', $nroLinea, \', Nodo padre: cac:Delivery/cac:Despatch/cac:DespatchAddress\')',
+        'descripcion' => 'concat(\'Error en la linea: \', $nroLinea)',
       ),
       'context' => 'cac:Delivery',
       'mode' => 'linea',
@@ -4814,7 +4025,7 @@ return array (
       array (
       ),
     ),
-    289 => 
+    243 => 
     array (
       'primitive' => 'findElementInCatalog',
       'params' => 
@@ -4831,7 +4042,7 @@ return array (
       array (
       ),
     ),
-    290 => 
+    244 => 
     array (
       'primitive' => 'regexpValidateElementIfExist',
       'params' => 
@@ -4848,7 +4059,7 @@ return array (
       array (
       ),
     ),
-    291 => 
+    245 => 
     array (
       'primitive' => 'regexpValidateElementIfExist',
       'params' => 
@@ -4865,67 +4076,14 @@ return array (
       array (
       ),
     ),
-    292 => 
-    array (
-      'primitive' => 'isTrueExpresionIfExist',
-      'params' => 
-      array (
-        'errorCodeValidate' => '\'4236\'',
-        'node' => 'cac:DeliveryLocation/cac:Address/cac:AddressLine/cbc:Line',
-        'expresion' => 'true()',
-        'descripcion' => 'concat(\'Error en la linea: \', $nroLinea, \', Nodo padre: cac:Delivery/cac:DeliveryLocation/cac:Address\')',
-        'isError' => 'false()',
-      ),
-      'context' => 'cac:Delivery',
-      'mode' => 'linea',
-      'conditions' => 
-      array (
-        0 => 'string-length(cac:DeliveryLocation/cac:Address/cac:AddressLine/cbc:Line) > 200 or string-length(cac:DeliveryLocation/cac:Address/cac:AddressLine/cbc:Line) < 3 ',
-      ),
-    ),
-    293 => 
+    246 => 
     array (
       'primitive' => 'regexpValidateElementIfExist',
       'params' => 
       array (
         'errorCodeValidate' => '\'4236\'',
         'node' => 'cac:DeliveryLocation/cac:Address/cac:AddressLine/cbc:Line',
-        'regexp' => '\'^(?!\\s*$)[^\\s].{2,}$\'',
-        'isError' => 'false()',
-        'descripcion' => 'concat(\'Error en la linea: \', $nroLinea, \', Nodo padre: cac:Delivery/cac:DeliveryLocation/cac:Address\')',
-      ),
-      'context' => 'cac:Delivery',
-      'mode' => 'linea',
-      'conditions' => 
-      array (
-      ),
-    ),
-    294 => 
-    array (
-      'primitive' => 'isTrueExpresionIfExist',
-      'params' => 
-      array (
-        'errorCodeValidate' => '\'4270\'',
-        'node' => 'cac:Despatch/cbc:Instructions',
-        'expresion' => 'true()',
-        'descripcion' => 'concat(\'Error en la linea: \', $nroLinea)',
-        'isError' => 'false()',
-      ),
-      'context' => 'cac:Delivery',
-      'mode' => 'linea',
-      'conditions' => 
-      array (
-        0 => 'string-length(cac:Despatch/cbc:Instructions) > 500 or string-length(cac:Despatch/cbc:Instructions) < 3 ',
-      ),
-    ),
-    295 => 
-    array (
-      'primitive' => 'regexpValidateElementIfExist',
-      'params' => 
-      array (
-        'errorCodeValidate' => '\'4270\'',
-        'node' => 'cac:Despatch/cbc:Instructions',
-        'regexp' => '\'^(?!\\s*$)[^\\r\\n]+$\'',
+        'regexp' => '\'^(?!\\s*$)[^\\s].{2,199}$\'',
         'isError' => 'false()',
         'descripcion' => 'concat(\'Error en la linea: \', $nroLinea)',
       ),
@@ -4935,7 +4093,24 @@ return array (
       array (
       ),
     ),
-    296 => 
+    247 => 
+    array (
+      'primitive' => 'regexpValidateElementIfExist',
+      'params' => 
+      array (
+        'errorCodeValidate' => '\'4270\'',
+        'node' => 'cac:Despatch/cbc:Instructions',
+        'regexp' => '\'^(?!\\s*$)[^\\s].{3,500}$\'',
+        'isError' => 'false()',
+        'descripcion' => 'concat(\'Error en la linea: \', $nroLinea)',
+      ),
+      'context' => 'cac:Delivery',
+      'mode' => 'linea',
+      'conditions' => 
+      array (
+      ),
+    ),
+    248 => 
     array (
       'primitive' => 'regexpValidateElementIfExist',
       'params' => 
@@ -4952,7 +4127,7 @@ return array (
       array (
       ),
     ),
-    297 => 
+    249 => 
     array (
       'primitive' => 'regexpValidateElementIfExist',
       'params' => 
@@ -4969,7 +4144,7 @@ return array (
       array (
       ),
     ),
-    298 => 
+    250 => 
     array (
       'primitive' => 'regexpValidateElementIfExist',
       'params' => 
@@ -4986,7 +4161,7 @@ return array (
       array (
       ),
     ),
-    299 => 
+    251 => 
     array (
       'primitive' => 'regexpValidateElementIfExist',
       'params' => 
@@ -5003,7 +4178,7 @@ return array (
       array (
       ),
     ),
-    300 => 
+    252 => 
     array (
       'primitive' => 'regexpValidateElementIfExist',
       'params' => 
@@ -5019,14 +4194,14 @@ return array (
       array (
       ),
     ),
-    301 => 
+    253 => 
     array (
       'primitive' => 'regexpValidateElementIfExist',
       'params' => 
       array (
         'errorCodeValidate' => '\'4252\'',
         'node' => 'cac:Shipment/cac:Consignment/cac:TransportHandlingUnit/cac:TransportEquipment/cbc:SizeTypeCode/@listName',
-        'regexp' => '\'^(Configuracion Veh�cular)$\'',
+        'regexp' => '\'^(Configuracion Vehícular)$\'',
         'isError' => 'false()',
         'descripcion' => 'concat(\'Error en la linea: \', $nroLinea)',
       ),
@@ -5036,7 +4211,7 @@ return array (
       array (
       ),
     ),
-    302 => 
+    254 => 
     array (
       'primitive' => 'regexpValidateElementIfExist',
       'params' => 
@@ -5053,7 +4228,7 @@ return array (
       array (
       ),
     ),
-    303 => 
+    255 => 
     array (
       'primitive' => 'regexpValidateElementIfExist',
       'params' => 
@@ -5069,7 +4244,7 @@ return array (
       array (
       ),
     ),
-    304 => 
+    256 => 
     array (
       'primitive' => 'regexpValidateElementIfExist',
       'params' => 
@@ -5085,14 +4260,14 @@ return array (
       array (
       ),
     ),
-    305 => 
+    257 => 
     array (
-      'primitive' => 'existAndValidateValueTwoDecimal',
+      'primitive' => 'isTrueExpresion',
       'params' => 
       array (
-        'errorCodeNotExist' => '\'4275\'',
-        'errorCodeValidate' => '\'4276\'',
+        'errorCodeValidate' => '\'4275\'',
         'node' => 'cbc:Measure',
+        'expresion' => 'not(cbc:Measure)',
         'descripcion' => 'concat(\'Error en la linea: \', $nroLinea, \' TipoCarga: \', cbc:AttributeID)',
         'isError' => 'false()',
       ),
@@ -5103,7 +4278,25 @@ return array (
         0 => 'cbc:AttributeID = \'01\' or cbc:AttributeID = \'02\'',
       ),
     ),
-    306 => 
+    258 => 
+    array (
+      'primitive' => 'existAndValidateValueTwoDecimal',
+      'params' => 
+      array (
+        'errorCodeValidate' => '\'4276\'',
+        'node' => 'cbc:Measure',
+        'descripcion' => 'concat(\'Error en la linea: \', $nroLinea, \' TipoCarga: \', cbc:AttributeID)',
+        'isError' => 'false()',
+      ),
+      'context' => 'cac:Delivery/cac:Shipment/cac:Consignment/cac:TransportHandlingUnit/cac:MeasurementDimension',
+      'mode' => 'linea',
+      'conditions' => 
+      array (
+        0 => 'cbc:AttributeID = \'01\' or cbc:AttributeID = \'02\'',
+        1 => 'cbc:Measure',
+      ),
+    ),
+    259 => 
     array (
       'primitive' => 'regexpValidateElementIfExist',
       'params' => 
@@ -5121,23 +4314,23 @@ return array (
         0 => 'cbc:AttributeID = \'01\' or cbc:AttributeID = \'02\'',
       ),
     ),
-    307 => 
+    260 => 
     array (
       'primitive' => 'existAndValidateValueTwoDecimal',
       'params' => 
       array (
-        'errorCodeNotExist' => '\'3122\'',
+        'errorCodeNotExist' => '\'3123\'',
         'errorCodeValidate' => '\'3123\'',
         'node' => 'cbc:Amount',
         'descripcion' => 'concat(\'Error en la linea: \', $nroLinea)',
       ),
-      'context' => 'cac:DeliveryTerms',
+      'context' => 'cac:Delivery/cac:DeliveryTerms',
       'mode' => 'linea',
       'conditions' => 
       array (
       ),
     ),
-    308 => 
+    261 => 
     array (
       'primitive' => 'regexpValidateElementIfExist',
       'params' => 
@@ -5147,13 +4340,13 @@ return array (
         'regexp' => '\'^(PEN)$\'',
         'descripcion' => 'concat(\'Error en la linea: \', $nroLinea)',
       ),
-      'context' => 'cac:DeliveryTerms',
+      'context' => 'cac:Delivery/cac:DeliveryTerms',
       'mode' => 'linea',
       'conditions' => 
       array (
       ),
     ),
-    309 => 
+    262 => 
     array (
       'primitive' => 'isTrueExpresion',
       'params' => 
@@ -5170,7 +4363,7 @@ return array (
         0 => '$codigoTributo = \'7152\'',
       ),
     ),
-    310 => 
+    263 => 
     array (
       'primitive' => 'isTrueExpresion',
       'params' => 
@@ -5189,7 +4382,7 @@ return array (
         1 => '$CantidadBolsa > 0',
       ),
     ),
-    311 => 
+    264 => 
     array (
       'primitive' => 'existElement',
       'params' => 
@@ -5205,7 +4398,7 @@ return array (
         0 => '$codigoTributo = \'7152\'',
       ),
     ),
-    312 => 
+    265 => 
     array (
       'primitive' => 'existAndRegexpValidateElement',
       'params' => 
@@ -5214,7 +4407,7 @@ return array (
         'errorCodeValidate' => '\'2892\'',
         'node' => 'cbc:BaseUnitMeasure',
         'regexp' => '\'^([0-9]{1,5})?$\'',
-        'descripcion' => 'concat(\'Error en la linea:\', $nroLinea, \'. \')',
+        'descripcion' => 'concat(\'Error en la linea:\', position(), \'. \')',
       ),
       'context' => 'cac:TaxSubtotal',
       'mode' => 'linea',
@@ -5223,7 +4416,7 @@ return array (
         0 => '$codigoTributo = \'7152\'',
       ),
     ),
-    313 => 
+    266 => 
     array (
       'primitive' => 'isTrueExpresion',
       'params' => 
@@ -5241,7 +4434,7 @@ return array (
         0 => '$codigoTributo = \'7152\'',
       ),
     ),
-    314 => 
+    267 => 
     array (
       'primitive' => 'isTrueExpresion',
       'params' => 
@@ -5259,7 +4452,7 @@ return array (
         1 => '$CantidadBolsa > 0',
       ),
     ),
-    315 => 
+    268 => 
     array (
       'primitive' => 'regexpValidateElementIfExist',
       'params' => 
@@ -5276,7 +4469,7 @@ return array (
         0 => '$codigoTributo = \'7152\'',
       ),
     ),
-    316 => 
+    269 => 
     array (
       'primitive' => 'isTrueExpresion',
       'params' => 
@@ -5284,7 +4477,7 @@ return array (
         'errorCodeValidate' => '\'3238\'',
         'node' => 'cac:TaxCategory/cbc:PerUnitAmount',
         'expresion' => '(round(cac:TaxCategory/cbc:PerUnitAmount * 100000) div 100000) = 0 ',
-        'descripcion' => 'concat(\'Error en la linea: \', $nroLinea, \' Tributo: \', $codigoTributo,\' Tasa::\',(round(cac:TaxCategory/cbc:PerUnitAmount * 100) div 100))',
+        'descripcion' => 'concat(\'Error en la linea: \', $nroLinea, \' Tributo: \', $codigoTributo)',
       ),
       'context' => 'cac:TaxSubtotal',
       'mode' => 'linea',
@@ -5294,7 +4487,7 @@ return array (
         1 => 'cbc:BaseUnitMeasure > 0',
       ),
     ),
-    317 => 
+    270 => 
     array (
       'primitive' => 'validateValueTwoDecimalIfExist',
       'params' => 
@@ -5312,7 +4505,7 @@ return array (
         0 => '$codigoTributo != \'7152\'',
       ),
     ),
-    318 => 
+    271 => 
     array (
       'primitive' => 'existElement',
       'params' => 
@@ -5327,7 +4520,7 @@ return array (
       array (
       ),
     ),
-    319 => 
+    272 => 
     array (
       'primitive' => 'findElementInCatalog',
       'params' => 
@@ -5343,24 +4536,7 @@ return array (
       array (
       ),
     ),
-    320 => 
-    array (
-      'primitive' => 'isTrueExpresion',
-      'params' => 
-      array (
-        'errorCodeValidate' => '\'3103\'',
-        'node' => 'cbc:TaxAmount',
-        'expresion' => '($MontoTributo + 1 ) < $MontoTributoCalculado or ($MontoTributo - 1) > $MontoTributoCalculado',
-        'descripcion' => 'concat(\'Error en la linea: \', $nroLinea, \' Tributo: \', $codigoTributo, \', MontoTributoCalculado: \', $MontoTributoCalculado, \', MontoTributo: \', $MontoTributo, \', BaseImponible: \', $BaseImponible, \', Tasa: \', $Tasa)',
-      ),
-      'context' => 'cac:TaxSubtotal',
-      'mode' => 'linea',
-      'conditions' => 
-      array (
-        0 => 'cac:TaxCategory/cbc:TaxExemptionReasonCode[text() = \'10\' or text() = \'11\' or text() = \'12\' or text() = \'13\' or text() = \'14\' or text = \'15\' or text() = \'16\' or text() = \'17\']',
-      ),
-    ),
-    321 => 
+    273 => 
     array (
       'primitive' => 'existAndValidateValueTwoDecimal',
       'params' => 
@@ -5377,7 +4553,7 @@ return array (
       array (
       ),
     ),
-    322 => 
+    274 => 
     array (
       'primitive' => 'isTrueExpresion',
       'params' => 
@@ -5394,7 +4570,7 @@ return array (
         0 => '$codigoTributo = \'9995\' or $codigoTributo = \'9997\' or $codigoTributo = \'9998\'',
       ),
     ),
-    323 => 
+    275 => 
     array (
       'primitive' => 'isTrueExpresion',
       'params' => 
@@ -5411,7 +4587,7 @@ return array (
         0 => '$codigoTributo = \'9996\'',
       ),
     ),
-    324 => 
+    276 => 
     array (
       'primitive' => 'isTrueExpresion',
       'params' => 
@@ -5428,14 +4604,14 @@ return array (
         0 => '$codigoTributo = \'9996\'',
       ),
     ),
-    325 => 
+    277 => 
     array (
       'primitive' => 'isTrueExpresion',
       'params' => 
       array (
         'errorCodeValidate' => '\'3111\'',
         'node' => 'cbc:TaxAmount',
-        'expresion' => 'cbc:TaxableAmount > 0 and cbc:TaxAmount = 0',
+        'expresion' => 'cbc:TaxableAmount > 0 and $tipoOperacion != \'0113\' and cbc:TaxAmount = 0',
         'descripcion' => 'concat(\'Error en la linea: \', $nroLinea, \' Tributo: \', $codigoTributo)',
       ),
       'context' => 'cac:TaxSubtotal',
@@ -5445,7 +4621,7 @@ return array (
         0 => '$codigoTributo = \'1000\' or $codigoTributo = \'1016\'',
       ),
     ),
-    326 => 
+    278 => 
     array (
       'primitive' => 'regexpValidateElementIfExist',
       'params' => 
@@ -5461,7 +4637,7 @@ return array (
       array (
       ),
     ),
-    327 => 
+    279 => 
     array (
       'primitive' => 'isTrueExpresion',
       'params' => 
@@ -5478,7 +4654,7 @@ return array (
         0 => '$codigoTributo = \'9996\'',
       ),
     ),
-    328 => 
+    280 => 
     array (
       'primitive' => 'isTrueExpresion',
       'params' => 
@@ -5495,14 +4671,14 @@ return array (
         0 => '$codigoTributo = \'2000\'',
       ),
     ),
-    329 => 
+    281 => 
     array (
       'primitive' => 'isTrueExpresion',
       'params' => 
       array (
         'errorCodeValidate' => '\'2993\'',
         'node' => 'cac:TaxCategory/cbc:Percent',
-        'expresion' => 'cbc:TaxableAmount > 0 and cac:TaxCategory/cbc:Percent = 0',
+        'expresion' => 'cbc:TaxableAmount > 0 and $tipoOperacion != \'0113\' and cac:TaxCategory/cbc:Percent = 0',
         'descripcion' => 'concat(\'Error en la linea: \', $nroLinea, \' Tributo: \', $codigoTributo)',
       ),
       'context' => 'cac:TaxSubtotal',
@@ -5512,7 +4688,7 @@ return array (
         0 => '$codigoTributo = \'1000\' or $codigoTributo = \'1016\'',
       ),
     ),
-    330 => 
+    282 => 
     array (
       'primitive' => 'isTrueExpresion',
       'params' => 
@@ -5529,7 +4705,7 @@ return array (
         0 => '$codigoTributo = \'2000\'',
       ),
     ),
-    331 => 
+    283 => 
     array (
       'primitive' => 'isTrueExpresion',
       'params' => 
@@ -5546,7 +4722,24 @@ return array (
         0 => '$codigoTributo = \'9999\'',
       ),
     ),
-    332 => 
+    284 => 
+    array (
+      'primitive' => 'isTrueExpresion',
+      'params' => 
+      array (
+        'errorCodeValidate' => '\'3103\'',
+        'node' => 'cbc:TaxAmount',
+        'expresion' => '($MontoTributo + 1 ) < $MontoTributoCalculado or ($MontoTributo - 1) > $MontoTributoCalculado',
+        'descripcion' => 'concat(\'Error en la linea: \', $nroLinea, \' Tributo: \', $codigoTributo)',
+      ),
+      'context' => 'cac:TaxSubtotal',
+      'mode' => 'linea',
+      'conditions' => 
+      array (
+        0 => 'cac:TaxCategory/cbc:TaxExemptionReasonCode[text() = \'10\' or text() = \'11\' or text() = \'12\' or text() = \'13\' or text() = \'14\' or text = \'15\' or text() = \'16\' or text() = \'17\']',
+      ),
+    ),
+    285 => 
     array (
       'primitive' => 'existElement',
       'params' => 
@@ -5560,10 +4753,10 @@ return array (
       'conditions' => 
       array (
         0 => '$codigoTributo != \'7152\'',
-        1 => '$codigoTributo != \'2000\' and $codigoTributo != \'9999\'',
+        1 => '$codigoTributo != \'2000\' and $codigoTributo != \'9999\' and $codigoTributo != \'\'',
       ),
     ),
-    333 => 
+    286 => 
     array (
       'primitive' => 'isTrueExpresion',
       'params' => 
@@ -5580,7 +4773,7 @@ return array (
         0 => '$codigoTributo = \'2000\' or $codigoTributo = \'9999\'',
       ),
     ),
-    334 => 
+    287 => 
     array (
       'primitive' => 'isTrueExpresion',
       'params' => 
@@ -5597,7 +4790,7 @@ return array (
         0 => '$tipoOperacion=\'0200\' or $tipoOperacion=\'0201\' or $tipoOperacion=\'0202\' or $tipoOperacion=\'0203\' or $tipoOperacion=\'0204\' or $tipoOperacion=\'0205\' or $tipoOperacion=\'0206\' or $tipoOperacion=\'0207\' or $tipoOperacion=\'0208\'',
       ),
     ),
-    335 => 
+    288 => 
     array (
       'primitive' => 'regexpValidateElementIfExist',
       'params' => 
@@ -5614,7 +4807,7 @@ return array (
       array (
       ),
     ),
-    336 => 
+    289 => 
     array (
       'primitive' => 'regexpValidateElementIfExist',
       'params' => 
@@ -5631,7 +4824,7 @@ return array (
       array (
       ),
     ),
-    337 => 
+    290 => 
     array (
       'primitive' => 'regexpValidateElementIfExist',
       'params' => 
@@ -5648,7 +4841,7 @@ return array (
       array (
       ),
     ),
-    338 => 
+    291 => 
     array (
       'primitive' => 'existElement',
       'params' => 
@@ -5664,7 +4857,7 @@ return array (
         0 => '$codigoTributo = \'2000\'',
       ),
     ),
-    339 => 
+    292 => 
     array (
       'primitive' => 'findElementInCatalog',
       'params' => 
@@ -5681,7 +4874,7 @@ return array (
         0 => '$codigoTributo = \'2000\'',
       ),
     ),
-    340 => 
+    293 => 
     array (
       'primitive' => 'isTrueExpresion',
       'params' => 
@@ -5698,7 +4891,7 @@ return array (
         0 => '$codigoTributo != \'2000\'',
       ),
     ),
-    341 => 
+    294 => 
     array (
       'primitive' => 'existElement',
       'params' => 
@@ -5714,7 +4907,7 @@ return array (
         0 => '$codigoTributo != \'7152\'',
       ),
     ),
-    342 => 
+    295 => 
     array (
       'primitive' => 'isTrueExpresion',
       'params' => 
@@ -5730,7 +4923,7 @@ return array (
       array (
       ),
     ),
-    343 => 
+    296 => 
     array (
       'primitive' => 'regexpValidateElementIfExist',
       'params' => 
@@ -5747,7 +4940,7 @@ return array (
       array (
       ),
     ),
-    344 => 
+    297 => 
     array (
       'primitive' => 'regexpValidateElementIfExist',
       'params' => 
@@ -5764,7 +4957,7 @@ return array (
       array (
       ),
     ),
-    345 => 
+    298 => 
     array (
       'primitive' => 'regexpValidateElementIfExist',
       'params' => 
@@ -5781,7 +4974,23 @@ return array (
       array (
       ),
     ),
-    346 => 
+    299 => 
+    array (
+      'primitive' => 'existElement',
+      'params' => 
+      array (
+        'errorCodeNotExist' => '\'2038\'',
+        'node' => 'cac:TaxCategory/cac:TaxScheme/cbc:Name',
+        'descripcion' => 'concat(\'Error en la linea: \', $nroLinea, \' Tributo: \', $codigoTributo)',
+      ),
+      'context' => 'cac:TaxSubtotal',
+      'mode' => 'linea',
+      'conditions' => 
+      array (
+        0 => '$codigoTributo = \'2000\' or $codigoTributo = \'9999\'',
+      ),
+    ),
+    300 => 
     array (
       'primitive' => 'existElement',
       'params' => 
@@ -5796,7 +5005,7 @@ return array (
       array (
       ),
     ),
-    347 => 
+    301 => 
     array (
       'primitive' => 'existAndValidateValueTwoDecimal',
       'params' => 
@@ -5813,7 +5022,7 @@ return array (
       array (
       ),
     ),
-    348 => 
+    302 => 
     array (
       'primitive' => 'isTrueExpresion',
       'params' => 
@@ -5829,7 +5038,7 @@ return array (
       array (
       ),
     ),
-    349 => 
+    303 => 
     array (
       'primitive' => 'isTrueExpresion',
       'params' => 
@@ -5847,7 +5056,7 @@ return array (
         0 => 'cac:TaxSubtotal/cac:TaxCategory/cac:TaxScheme/cbc:ID[text() = \'1000\' or text() = \'7152\' or text() = \'1016\' or text() = \'2000\' or text() = \'9999\']',
       ),
     ),
-    350 => 
+    304 => 
     array (
       'primitive' => 'isTrueExpresion',
       'params' => 
@@ -5865,7 +5074,7 @@ return array (
         0 => '$BaseIGVIVAPxLinea',
       ),
     ),
-    351 => 
+    305 => 
     array (
       'primitive' => 'isTrueExpresion',
       'params' => 
@@ -5883,23 +5092,24 @@ return array (
         0 => '$BaseIGVIVAPxLinea',
       ),
     ),
-    352 => 
+    306 => 
     array (
       'primitive' => 'isTrueExpresion',
       'params' => 
       array (
         'errorCodeValidate' => '\'3105\'',
         'node' => 'cac:TaxCategory/cac:TaxScheme/cbc:ID',
-        'expresion' => 'count(cac:TaxSubtotal/cac:TaxCategory/cac:TaxScheme/cbc:ID[text() = \'1000\' or text() = \'1016\' or text() = \'9995\' or text() = \'9996\' or text() = \'7152\' or text() = \'9997\' or text() = \'9998\']) < 1',
+        'expresion' => 'count(cac:TaxSubtotal[cac:TaxCategory/cac:TaxScheme/cbc:ID[text() = \'1000\' or text() = \'1016\' or text() = \'9995\' or text() = \'9996\' or text() = \'9997\' or text() = \'9998\'] and cbc:TaxableAmount > 0]) < 1',
         'descripcion' => 'concat(\'Error en la linea: \', $nroLinea)',
       ),
       'context' => 'cac:TaxTotal',
       'mode' => 'linea',
       'conditions' => 
       array (
+        0 => '$tipoOperacion != \'2100\' and $tipoOperacion != \'2101\' and $tipoOperacion != \'2102\' and $tipoOperacion != \'2103\' and $tipoOperacion != \'2104\'',
       ),
     ),
-    353 => 
+    307 => 
     array (
       'primitive' => 'isTrueExpresion',
       'params' => 
@@ -5915,7 +5125,7 @@ return array (
         0 => 'count(cac:TaxSubtotal[cbc:TaxableAmount > 0]) > 1',
       ),
     ),
-    354 => 
+    308 => 
     array (
       'primitive' => 'isTrueExpresion',
       'params' => 
@@ -5932,7 +5142,7 @@ return array (
         0 => '$codigoCargoDescuento = \'47\' or $codigoCargoDescuento = \'48\'',
       ),
     ),
-    355 => 
+    309 => 
     array (
       'primitive' => 'isTrueExpresion',
       'params' => 
@@ -5949,7 +5159,7 @@ return array (
         0 => '$codigoCargoDescuento = \'00\' or $codigoCargoDescuento = \'01\'',
       ),
     ),
-    356 => 
+    310 => 
     array (
       'primitive' => 'existElement',
       'params' => 
@@ -5964,7 +5174,7 @@ return array (
       array (
       ),
     ),
-    357 => 
+    311 => 
     array (
       'primitive' => 'findElementInCatalog',
       'params' => 
@@ -5980,7 +5190,7 @@ return array (
       array (
       ),
     ),
-    358 => 
+    312 => 
     array (
       'primitive' => 'regexpValidateElementIfExist',
       'params' => 
@@ -5997,7 +5207,7 @@ return array (
       array (
       ),
     ),
-    359 => 
+    313 => 
     array (
       'primitive' => 'regexpValidateElementIfExist',
       'params' => 
@@ -6014,7 +5224,7 @@ return array (
       array (
       ),
     ),
-    360 => 
+    314 => 
     array (
       'primitive' => 'regexpValidateElementIfExist',
       'params' => 
@@ -6031,7 +5241,7 @@ return array (
       array (
       ),
     ),
-    361 => 
+    315 => 
     array (
       'primitive' => 'regexpValidateElementIfExist',
       'params' => 
@@ -6048,7 +5258,7 @@ return array (
       array (
       ),
     ),
-    362 => 
+    316 => 
     array (
       'primitive' => 'regexpValidateElementIfExist',
       'params' => 
@@ -6064,7 +5274,7 @@ return array (
       array (
       ),
     ),
-    363 => 
+    317 => 
     array (
       'primitive' => 'validateValueTwoDecimalIfExist',
       'params' => 
@@ -6080,7 +5290,7 @@ return array (
       array (
       ),
     ),
-    364 => 
+    318 => 
     array (
       'primitive' => 'isTrueExpresion',
       'params' => 
@@ -6097,7 +5307,7 @@ return array (
       array (
       ),
     ),
-    365 => 
+    319 => 
     array (
       'primitive' => 'validateValueTwoDecimalIfExist',
       'params' => 
@@ -6113,7 +5323,7 @@ return array (
       array (
       ),
     ),
-    366 => 
+    320 => 
     array (
       'primitive' => 'existElement',
       'params' => 
@@ -6129,7 +5339,7 @@ return array (
       array (
       ),
     ),
-    367 => 
+    321 => 
     array (
       'primitive' => 'regexpValidateElementIfExist',
       'params' => 
@@ -6146,7 +5356,7 @@ return array (
       array (
       ),
     ),
-    368 => 
+    322 => 
     array (
       'primitive' => 'regexpValidateElementIfExist',
       'params' => 
@@ -6163,7 +5373,7 @@ return array (
       array (
       ),
     ),
-    369 => 
+    323 => 
     array (
       'primitive' => 'regexpValidateElementIfExist',
       'params' => 
@@ -6180,7 +5390,7 @@ return array (
       array (
       ),
     ),
-    370 => 
+    324 => 
     array (
       'primitive' => 'existElement',
       'params' => 
@@ -6196,35 +5406,16 @@ return array (
         0 => '$codigoConcepto = \'3001\'',
       ),
     ),
-    371 => 
-    array (
-      'primitive' => 'isTrueExpresion',
-      'params' => 
-      array (
-        'errorCodeValidate' => '\'4280\'',
-        'node' => 'cbc:Value',
-        'expresion' => 'true()',
-        'isError' => 'false()',
-        'descripcion' => 'concat(\'Error en la linea: \', $nroLinea, \' ConceptoItem \', cbc:NameCode)',
-      ),
-      'context' => 'cac:Item/cac:AdditionalItemProperty',
-      'mode' => 'linea',
-      'conditions' => 
-      array (
-        0 => '$codigoConcepto = \'3001\'',
-        1 => 'string-length(cbc:Value) > 15 or string-length(cbc:Value) < 1 ',
-      ),
-    ),
-    372 => 
+    325 => 
     array (
       'primitive' => 'regexpValidateElementIfExist',
       'params' => 
       array (
         'errorCodeValidate' => '\'4280\'',
         'node' => 'cbc:Value',
-        'regexp' => '\'^(?!\\s*$)[^\\s].{0,}$\'',
-        'isError' => 'false()',
+        'regexp' => '\'^(?!\\s*$)[^\\s].{0,14}$\'',
         'descripcion' => 'concat(\'Error en la linea: \', $nroLinea, \' ConceptoItem \', cbc:NameCode)',
+        'isError' => 'false()',
       ),
       'context' => 'cac:Item/cac:AdditionalItemProperty',
       'mode' => 'linea',
@@ -6233,7 +5424,7 @@ return array (
         0 => '$codigoConcepto = \'3001\'',
       ),
     ),
-    373 => 
+    326 => 
     array (
       'primitive' => 'existElement',
       'params' => 
@@ -6249,35 +5440,16 @@ return array (
         0 => '$codigoConcepto = \'3002\'',
       ),
     ),
-    374 => 
-    array (
-      'primitive' => 'isTrueExpresion',
-      'params' => 
-      array (
-        'errorCodeValidate' => '\'4280\'',
-        'node' => 'cbc:Value',
-        'expresion' => 'true()',
-        'isError' => 'false()',
-        'descripcion' => 'concat(\'Error en la linea: \', $nroLinea, \' ConceptoItem \', cbc:NameCode)',
-      ),
-      'context' => 'cac:Item/cac:AdditionalItemProperty',
-      'mode' => 'linea',
-      'conditions' => 
-      array (
-        0 => '$codigoConcepto = \'3002\'',
-        1 => 'string-length(cbc:Value) > 100 or string-length(cbc:Value) < 1 ',
-      ),
-    ),
-    375 => 
+    327 => 
     array (
       'primitive' => 'regexpValidateElementIfExist',
       'params' => 
       array (
         'errorCodeValidate' => '\'4280\'',
         'node' => 'cbc:Value',
-        'regexp' => '\'^(?!\\s*$)[^\\s].{0,}$\'',
-        'isError' => 'false()',
+        'regexp' => '\'^(?!\\s*$)[^\\s].{0,99}$\'',
         'descripcion' => 'concat(\'Error en la linea: \', $nroLinea, \' ConceptoItem \', cbc:NameCode)',
+        'isError' => 'false()',
       ),
       'context' => 'cac:Item/cac:AdditionalItemProperty',
       'mode' => 'linea',
@@ -6286,7 +5458,7 @@ return array (
         0 => '$codigoConcepto = \'3002\'',
       ),
     ),
-    376 => 
+    328 => 
     array (
       'primitive' => 'existElement',
       'params' => 
@@ -6302,35 +5474,16 @@ return array (
         0 => '$codigoConcepto = \'3003\'',
       ),
     ),
-    377 => 
-    array (
-      'primitive' => 'isTrueExpresion',
-      'params' => 
-      array (
-        'errorCodeValidate' => '\'4280\'',
-        'node' => 'cbc:Value',
-        'expresion' => 'true()',
-        'isError' => 'false()',
-        'descripcion' => 'concat(\'Error en la linea: \', $nroLinea, \' ConceptoItem \', cbc:NameCode)',
-      ),
-      'context' => 'cac:Item/cac:AdditionalItemProperty',
-      'mode' => 'linea',
-      'conditions' => 
-      array (
-        0 => '$codigoConcepto = \'3003\'',
-        1 => 'string-length(cbc:Value) > 150 or string-length(cbc:Value) < 1 ',
-      ),
-    ),
-    378 => 
+    329 => 
     array (
       'primitive' => 'regexpValidateElementIfExist',
       'params' => 
       array (
         'errorCodeValidate' => '\'4280\'',
         'node' => 'cbc:Value',
-        'regexp' => '\'^(?!\\s*$)[^\\s].{0,}$\'',
-        'isError' => 'false()',
+        'regexp' => '\'^(?!\\s*$)[^\\s].{0,149}$\'',
         'descripcion' => 'concat(\'Error en la linea: \', $nroLinea, \' ConceptoItem \', cbc:NameCode)',
+        'isError' => 'false()',
       ),
       'context' => 'cac:Item/cac:AdditionalItemProperty',
       'mode' => 'linea',
@@ -6339,7 +5492,7 @@ return array (
         0 => '$codigoConcepto = \'3003\'',
       ),
     ),
-    379 => 
+    330 => 
     array (
       'primitive' => 'existElement',
       'params' => 
@@ -6355,35 +5508,16 @@ return array (
         0 => '$codigoConcepto = \'3004\'',
       ),
     ),
-    380 => 
-    array (
-      'primitive' => 'isTrueExpresion',
-      'params' => 
-      array (
-        'errorCodeValidate' => '\'4280\'',
-        'node' => 'cbc:Value',
-        'expresion' => 'true()',
-        'isError' => 'false()',
-        'descripcion' => 'concat(\'Error en la linea: \', $nroLinea, \' ConceptoItem \', cbc:NameCode)',
-      ),
-      'context' => 'cac:Item/cac:AdditionalItemProperty',
-      'mode' => 'linea',
-      'conditions' => 
-      array (
-        0 => '$codigoConcepto = \'3004\'',
-        1 => 'string-length(cbc:Value) > 100 or string-length(cbc:Value) < 1 ',
-      ),
-    ),
-    381 => 
+    331 => 
     array (
       'primitive' => 'regexpValidateElementIfExist',
       'params' => 
       array (
         'errorCodeValidate' => '\'4280\'',
         'node' => 'cbc:Value',
-        'regexp' => '\'^(?!\\s*$)[^\\s].{0,}$\'',
-        'isError' => 'false()',
+        'regexp' => '\'^(?!\\s*$)[^\\s].{0,99}$\'',
         'descripcion' => 'concat(\'Error en la linea: \', $nroLinea, \' ConceptoItem \', cbc:NameCode)',
+        'isError' => 'false()',
       ),
       'context' => 'cac:Item/cac:AdditionalItemProperty',
       'mode' => 'linea',
@@ -6392,7 +5526,7 @@ return array (
         0 => '$codigoConcepto = \'3004\'',
       ),
     ),
-    382 => 
+    332 => 
     array (
       'primitive' => 'existElement',
       'params' => 
@@ -6408,7 +5542,7 @@ return array (
         0 => '$codigoConcepto = \'3005\'',
       ),
     ),
-    383 => 
+    333 => 
     array (
       'primitive' => 'existElement',
       'params' => 
@@ -6424,7 +5558,7 @@ return array (
         0 => '$codigoConcepto = \'3006\'',
       ),
     ),
-    384 => 
+    334 => 
     array (
       'primitive' => 'existAndValidateValueTwoDecimal',
       'params' => 
@@ -6443,7 +5577,7 @@ return array (
         0 => '$codigoConcepto = \'3006\'',
       ),
     ),
-    385 => 
+    335 => 
     array (
       'primitive' => 'regexpValidateElementIfExist',
       'params' => 
@@ -6460,7 +5594,7 @@ return array (
         0 => '$codigoConcepto = \'3006\'',
       ),
     ),
-    386 => 
+    336 => 
     array (
       'primitive' => 'existElement',
       'params' => 
@@ -6476,7 +5610,25 @@ return array (
         0 => '$codigoConcepto = \'3050\'',
       ),
     ),
-    387 => 
+    337 => 
+    array (
+      'primitive' => 'regexpValidateElementIfExist',
+      'params' => 
+      array (
+        'errorCodeValidate' => '\'4280\'',
+        'node' => 'cbc:Value',
+        'regexp' => '\'^(?!\\s*$)[^\\s].{2,19}$\'',
+        'descripcion' => 'concat(\'Error en la linea: \', $nroLinea, \' ConceptoItem \', cbc:NameCode)',
+        'isError' => 'false()',
+      ),
+      'context' => 'cac:Item/cac:AdditionalItemProperty',
+      'mode' => 'linea',
+      'conditions' => 
+      array (
+        0 => '$codigoConcepto = \'3050\'',
+      ),
+    ),
+    338 => 
     array (
       'primitive' => 'existElement',
       'params' => 
@@ -6492,7 +5644,25 @@ return array (
         0 => '$codigoConcepto = \'3051\'',
       ),
     ),
-    388 => 
+    339 => 
+    array (
+      'primitive' => 'regexpValidateElementIfExist',
+      'params' => 
+      array (
+        'errorCodeValidate' => '\'4280\'',
+        'node' => 'cbc:Value',
+        'regexp' => '\'^(?!\\s*$)[^\\s].{2,19}$\'',
+        'descripcion' => 'concat(\'Error en la linea: \', $nroLinea, \' ConceptoItem \', cbc:NameCode)',
+        'isError' => 'false()',
+      ),
+      'context' => 'cac:Item/cac:AdditionalItemProperty',
+      'mode' => 'linea',
+      'conditions' => 
+      array (
+        0 => '$codigoConcepto = \'3051\'',
+      ),
+    ),
+    340 => 
     array (
       'primitive' => 'existElement',
       'params' => 
@@ -6508,7 +5678,25 @@ return array (
         0 => '$codigoConcepto = \'3052\'',
       ),
     ),
-    389 => 
+    341 => 
+    array (
+      'primitive' => 'regexpValidateElementIfExist',
+      'params' => 
+      array (
+        'errorCodeValidate' => '\'4280\'',
+        'node' => 'cbc:Value',
+        'regexp' => '\'^(?!\\s*$)[^\\s].{2,14}$\'',
+        'descripcion' => 'concat(\'Error en la linea: \', $nroLinea, \' ConceptoItem \', cbc:NameCode)',
+        'isError' => 'false()',
+      ),
+      'context' => 'cac:Item/cac:AdditionalItemProperty',
+      'mode' => 'linea',
+      'conditions' => 
+      array (
+        0 => '$codigoConcepto = \'3052\'',
+      ),
+    ),
+    342 => 
     array (
       'primitive' => 'existElement',
       'params' => 
@@ -6524,7 +5712,7 @@ return array (
         0 => '$codigoConcepto = \'3053\'',
       ),
     ),
-    390 => 
+    343 => 
     array (
       'primitive' => 'findElementInCatalog',
       'params' => 
@@ -6542,7 +5730,7 @@ return array (
         0 => '$codigoConcepto = \'3053\'',
       ),
     ),
-    391 => 
+    344 => 
     array (
       'primitive' => 'existElement',
       'params' => 
@@ -6558,7 +5746,25 @@ return array (
         0 => '$codigoConcepto = \'3054\'',
       ),
     ),
-    392 => 
+    345 => 
+    array (
+      'primitive' => 'regexpValidateElementIfExist',
+      'params' => 
+      array (
+        'errorCodeValidate' => '\'4280\'',
+        'node' => 'cbc:Value',
+        'regexp' => '\'^(?!\\s*$)[^\\s].{2,199}$\'',
+        'descripcion' => 'concat(\'Error en la linea: \', $nroLinea, \' ConceptoItem \', cbc:NameCode)',
+        'isError' => 'false()',
+      ),
+      'context' => 'cac:Item/cac:AdditionalItemProperty',
+      'mode' => 'linea',
+      'conditions' => 
+      array (
+        0 => '$codigoConcepto = \'3054\'',
+      ),
+    ),
+    346 => 
     array (
       'primitive' => 'existElement',
       'params' => 
@@ -6574,7 +5780,25 @@ return array (
         0 => '$codigoConcepto = \'3055\'',
       ),
     ),
-    393 => 
+    347 => 
+    array (
+      'primitive' => 'findElementInCatalog',
+      'params' => 
+      array (
+        'catalogo' => '\'13\'',
+        'idCatalogo' => 'cbc:Value',
+        'errorCodeValidate' => '\'4280\'',
+        'descripcion' => 'concat(\'Error en la linea: \', $nroLinea, \' ConceptoItem \', cbc:NameCode)',
+        'isError' => 'false()',
+      ),
+      'context' => 'cac:Item/cac:AdditionalItemProperty',
+      'mode' => 'linea',
+      'conditions' => 
+      array (
+        0 => '$codigoConcepto = \'3055\'',
+      ),
+    ),
+    348 => 
     array (
       'primitive' => 'existElement',
       'params' => 
@@ -6590,7 +5814,25 @@ return array (
         0 => '$codigoConcepto = \'3056\'',
       ),
     ),
-    394 => 
+    349 => 
+    array (
+      'primitive' => 'regexpValidateElementIfExist',
+      'params' => 
+      array (
+        'errorCodeValidate' => '\'4280\'',
+        'node' => 'cbc:Value',
+        'regexp' => '\'^(?!\\s*$)[^\\s].{2,199}$\'',
+        'descripcion' => 'concat(\'Error en la linea: \', $nroLinea, \' ConceptoItem \', cbc:NameCode)',
+        'isError' => 'false()',
+      ),
+      'context' => 'cac:Item/cac:AdditionalItemProperty',
+      'mode' => 'linea',
+      'conditions' => 
+      array (
+        0 => '$codigoConcepto = \'3056\'',
+      ),
+    ),
+    350 => 
     array (
       'primitive' => 'existElement',
       'params' => 
@@ -6606,7 +5848,25 @@ return array (
         0 => '$codigoConcepto = \'3057\'',
       ),
     ),
-    395 => 
+    351 => 
+    array (
+      'primitive' => 'findElementInCatalog',
+      'params' => 
+      array (
+        'catalogo' => '\'13\'',
+        'idCatalogo' => 'cbc:Value',
+        'errorCodeValidate' => '\'4280\'',
+        'descripcion' => 'concat(\'Error en la linea: \', $nroLinea, \' ConceptoItem \', cbc:NameCode)',
+        'isError' => 'false()',
+      ),
+      'context' => 'cac:Item/cac:AdditionalItemProperty',
+      'mode' => 'linea',
+      'conditions' => 
+      array (
+        0 => '$codigoConcepto = \'3057\'',
+      ),
+    ),
+    352 => 
     array (
       'primitive' => 'existElement',
       'params' => 
@@ -6622,7 +5882,25 @@ return array (
         0 => '$codigoConcepto = \'3058\'',
       ),
     ),
-    396 => 
+    353 => 
+    array (
+      'primitive' => 'regexpValidateElementIfExist',
+      'params' => 
+      array (
+        'errorCodeValidate' => '\'4280\'',
+        'node' => 'cbc:Value',
+        'regexp' => '\'^(?!\\s*$)[^\\s].{2,199}$\'',
+        'descripcion' => 'concat(\'Error en la linea: \', $nroLinea, \' ConceptoItem \', cbc:NameCode)',
+        'isError' => 'false()',
+      ),
+      'context' => 'cac:Item/cac:AdditionalItemProperty',
+      'mode' => 'linea',
+      'conditions' => 
+      array (
+        0 => '$codigoConcepto = \'3058\'',
+      ),
+    ),
+    354 => 
     array (
       'primitive' => 'existElement',
       'params' => 
@@ -6638,7 +5916,7 @@ return array (
         0 => '$codigoConcepto = \'3059\'',
       ),
     ),
-    397 => 
+    355 => 
     array (
       'primitive' => 'existElement',
       'params' => 
@@ -6654,7 +5932,7 @@ return array (
         0 => '$codigoConcepto = \'3060\'',
       ),
     ),
-    398 => 
+    356 => 
     array (
       'primitive' => 'existElement',
       'params' => 
@@ -6670,7 +5948,7 @@ return array (
         0 => '$codigoConcepto = \'4000\'',
       ),
     ),
-    399 => 
+    357 => 
     array (
       'primitive' => 'findElementInCatalog',
       'params' => 
@@ -6688,7 +5966,7 @@ return array (
         0 => '$codigoConcepto = \'4000\'',
       ),
     ),
-    400 => 
+    358 => 
     array (
       'primitive' => 'existElement',
       'params' => 
@@ -6704,7 +5982,7 @@ return array (
         0 => '$codigoConcepto = \'4001\'',
       ),
     ),
-    401 => 
+    359 => 
     array (
       'primitive' => 'findElementInCatalog',
       'params' => 
@@ -6722,7 +6000,7 @@ return array (
         0 => '$codigoConcepto = \'4001\'',
       ),
     ),
-    402 => 
+    360 => 
     array (
       'primitive' => 'existElement',
       'params' => 
@@ -6738,7 +6016,7 @@ return array (
         0 => '$codigoConcepto = \'4002\'',
       ),
     ),
-    403 => 
+    361 => 
     array (
       'primitive' => 'existElement',
       'params' => 
@@ -6754,7 +6032,7 @@ return array (
         0 => '$codigoConcepto = \'4003\'',
       ),
     ),
-    404 => 
+    362 => 
     array (
       'primitive' => 'existElement',
       'params' => 
@@ -6770,7 +6048,7 @@ return array (
         0 => '$codigoConcepto = \'4004\'',
       ),
     ),
-    405 => 
+    363 => 
     array (
       'primitive' => 'existElement',
       'params' => 
@@ -6786,7 +6064,7 @@ return array (
         0 => '$codigoConcepto = \'4005\'',
       ),
     ),
-    406 => 
+    364 => 
     array (
       'primitive' => 'regexpValidateElementIfExist',
       'params' => 
@@ -6804,7 +6082,7 @@ return array (
         0 => '$codigoConcepto = \'4005\'',
       ),
     ),
-    407 => 
+    365 => 
     array (
       'primitive' => 'regexpValidateElementIfExist',
       'params' => 
@@ -6822,7 +6100,7 @@ return array (
         0 => '$codigoConcepto = \'4005\'',
       ),
     ),
-    408 => 
+    366 => 
     array (
       'primitive' => 'existElement',
       'params' => 
@@ -6838,7 +6116,7 @@ return array (
         0 => '$codigoConcepto = \'4006\'',
       ),
     ),
-    409 => 
+    367 => 
     array (
       'primitive' => 'existElement',
       'params' => 
@@ -6854,35 +6132,16 @@ return array (
         0 => '$codigoConcepto = \'4007\'',
       ),
     ),
-    410 => 
-    array (
-      'primitive' => 'isTrueExpresion',
-      'params' => 
-      array (
-        'errorCodeValidate' => '\'4280\'',
-        'node' => 'cbc:Value',
-        'expresion' => 'true()',
-        'isError' => 'false()',
-        'descripcion' => 'concat(\'Error en la linea: \', $nroLinea, \' ConceptoItem \', cbc:NameCode)',
-      ),
-      'context' => 'cac:Item/cac:AdditionalItemProperty',
-      'mode' => 'linea',
-      'conditions' => 
-      array (
-        0 => '$codigoConcepto = \'4007\'',
-        1 => 'string-length(cbc:Value) > 200 or string-length(cbc:Value) < 3 ',
-      ),
-    ),
-    411 => 
+    368 => 
     array (
       'primitive' => 'regexpValidateElementIfExist',
       'params' => 
       array (
         'errorCodeValidate' => '\'4280\'',
         'node' => 'cbc:Value',
-        'regexp' => '\'^(?!\\s*$)[^\\s].{2,}$\'',
-        'isError' => 'false()',
+        'regexp' => '\'^(?!\\s*$)[^\\s].{2,199}$\'',
         'descripcion' => 'concat(\'Error en la linea: \', $nroLinea, \' ConceptoItem \', cbc:NameCode)',
+        'isError' => 'false()',
       ),
       'context' => 'cac:Item/cac:AdditionalItemProperty',
       'mode' => 'linea',
@@ -6891,7 +6150,7 @@ return array (
         0 => '$codigoConcepto = \'4007\'',
       ),
     ),
-    412 => 
+    369 => 
     array (
       'primitive' => 'existElement',
       'params' => 
@@ -6907,7 +6166,7 @@ return array (
         0 => '$codigoConcepto = \'4008\'',
       ),
     ),
-    413 => 
+    370 => 
     array (
       'primitive' => 'findElementInCatalog',
       'params' => 
@@ -6925,7 +6184,7 @@ return array (
         0 => '$codigoConcepto = \'4008\'',
       ),
     ),
-    414 => 
+    371 => 
     array (
       'primitive' => 'existElement',
       'params' => 
@@ -6939,6 +6198,734 @@ return array (
       'conditions' => 
       array (
         0 => '$codigoConcepto = \'4009\'',
+      ),
+    ),
+    372 => 
+    array (
+      'primitive' => 'regexpValidateElementIfExist',
+      'params' => 
+      array (
+        'errorCodeValidate' => '\'4280\'',
+        'node' => 'cbc:Value',
+        'regexp' => '\'^(?!\\s*$)[^\\s].{2,19}$\'',
+        'descripcion' => 'concat(\'Error en la linea: \', $nroLinea, \' ConceptoItem \', cbc:NameCode)',
+        'isError' => 'false()',
+      ),
+      'context' => 'cac:Item/cac:AdditionalItemProperty',
+      'mode' => 'linea',
+      'conditions' => 
+      array (
+        0 => '$codigoConcepto = \'4009\'',
+      ),
+    ),
+    373 => 
+    array (
+      'primitive' => 'existElement',
+      'params' => 
+      array (
+        'errorCodeNotExist' => '\'3064\'',
+        'node' => 'cbc:Value',
+        'descripcion' => 'concat(\'Error en la linea: \', $nroLinea, \' ConceptoItem \', cbc:NameCode)',
+      ),
+      'context' => 'cac:Item/cac:AdditionalItemProperty',
+      'mode' => 'linea',
+      'conditions' => 
+      array (
+        0 => '$codigoConcepto = \'4030\'',
+      ),
+    ),
+    374 => 
+    array (
+      'primitive' => 'findElementInCatalog',
+      'params' => 
+      array (
+        'catalogo' => '\'13\'',
+        'idCatalogo' => 'cbc:Value',
+        'errorCodeValidate' => '\'4280\'',
+        'descripcion' => 'concat(\'Error en la linea: \', $nroLinea, \' ConceptoItem \', cbc:NameCode)',
+        'isError' => 'false()',
+      ),
+      'context' => 'cac:Item/cac:AdditionalItemProperty',
+      'mode' => 'linea',
+      'conditions' => 
+      array (
+        0 => '$codigoConcepto = \'4030\'',
+      ),
+    ),
+    375 => 
+    array (
+      'primitive' => 'existElement',
+      'params' => 
+      array (
+        'errorCodeNotExist' => '\'3064\'',
+        'node' => 'cbc:Value',
+        'descripcion' => 'concat(\'Error en la linea: \', $nroLinea, \' ConceptoItem \', cbc:NameCode)',
+      ),
+      'context' => 'cac:Item/cac:AdditionalItemProperty',
+      'mode' => 'linea',
+      'conditions' => 
+      array (
+        0 => '$codigoConcepto = \'4031\'',
+      ),
+    ),
+    376 => 
+    array (
+      'primitive' => 'regexpValidateElementIfExist',
+      'params' => 
+      array (
+        'errorCodeValidate' => '\'4280\'',
+        'node' => 'cbc:Value',
+        'regexp' => '\'^(?!\\s*$)[^\\s].{2,199}$\'',
+        'descripcion' => 'concat(\'Error en la linea: \', $nroLinea, \' ConceptoItem \', cbc:NameCode)',
+        'isError' => 'false()',
+      ),
+      'context' => 'cac:Item/cac:AdditionalItemProperty',
+      'mode' => 'linea',
+      'conditions' => 
+      array (
+        0 => '$codigoConcepto = \'4031\'',
+      ),
+    ),
+    377 => 
+    array (
+      'primitive' => 'existElement',
+      'params' => 
+      array (
+        'errorCodeNotExist' => '\'3064\'',
+        'node' => 'cbc:Value',
+        'descripcion' => 'concat(\'Error en la linea: \', $nroLinea, \' ConceptoItem \', cbc:NameCode)',
+      ),
+      'context' => 'cac:Item/cac:AdditionalItemProperty',
+      'mode' => 'linea',
+      'conditions' => 
+      array (
+        0 => '$codigoConcepto = \'4032\'',
+      ),
+    ),
+    378 => 
+    array (
+      'primitive' => 'findElementInCatalog',
+      'params' => 
+      array (
+        'catalogo' => '\'13\'',
+        'idCatalogo' => 'cbc:Value',
+        'errorCodeValidate' => '\'4280\'',
+        'descripcion' => 'concat(\'Error en la linea: \', $nroLinea, \' ConceptoItem \', cbc:NameCode)',
+        'isError' => 'false()',
+      ),
+      'context' => 'cac:Item/cac:AdditionalItemProperty',
+      'mode' => 'linea',
+      'conditions' => 
+      array (
+        0 => '$codigoConcepto = \'4032\'',
+      ),
+    ),
+    379 => 
+    array (
+      'primitive' => 'existElement',
+      'params' => 
+      array (
+        'errorCodeNotExist' => '\'3064\'',
+        'node' => 'cbc:Value',
+        'descripcion' => 'concat(\'Error en la linea: \', $nroLinea, \' ConceptoItem \', cbc:NameCode)',
+      ),
+      'context' => 'cac:Item/cac:AdditionalItemProperty',
+      'mode' => 'linea',
+      'conditions' => 
+      array (
+        0 => '$codigoConcepto = \'4033\'',
+      ),
+    ),
+    380 => 
+    array (
+      'primitive' => 'regexpValidateElementIfExist',
+      'params' => 
+      array (
+        'errorCodeValidate' => '\'4280\'',
+        'node' => 'cbc:Value',
+        'regexp' => '\'^(?!\\s*$)[^\\s].{2,199}$\'',
+        'descripcion' => 'concat(\'Error en la linea: \', $nroLinea, \' ConceptoItem \', cbc:NameCode)',
+        'isError' => 'false()',
+      ),
+      'context' => 'cac:Item/cac:AdditionalItemProperty',
+      'mode' => 'linea',
+      'conditions' => 
+      array (
+        0 => '$codigoConcepto = \'4033\'',
+      ),
+    ),
+    381 => 
+    array (
+      'primitive' => 'existElement',
+      'params' => 
+      array (
+        'errorCodeNotExist' => '\'3064\'',
+        'node' => 'cbc:Value',
+        'descripcion' => 'concat(\'Error en la linea: \', $nroLinea, \' ConceptoItem \', cbc:NameCode)',
+      ),
+      'context' => 'cac:Item/cac:AdditionalItemProperty',
+      'mode' => 'linea',
+      'conditions' => 
+      array (
+        0 => '$codigoConcepto = \'4040\'',
+      ),
+    ),
+    382 => 
+    array (
+      'primitive' => 'regexpValidateElementIfExist',
+      'params' => 
+      array (
+        'errorCodeValidate' => '\'4280\'',
+        'node' => 'cbc:Value',
+        'regexp' => '\'^(?!\\s*$)[^\\s].{2,199}$\'',
+        'descripcion' => 'concat(\'Error en la linea: \', $nroLinea, \' ConceptoItem \', cbc:NameCode)',
+        'isError' => 'false()',
+      ),
+      'context' => 'cac:Item/cac:AdditionalItemProperty',
+      'mode' => 'linea',
+      'conditions' => 
+      array (
+        0 => '$codigoConcepto = \'4040\'',
+      ),
+    ),
+    383 => 
+    array (
+      'primitive' => 'existElement',
+      'params' => 
+      array (
+        'errorCodeNotExist' => '\'3064\'',
+        'node' => 'cbc:Value',
+        'descripcion' => 'concat(\'Error en la linea: \', $nroLinea, \' ConceptoItem \', cbc:NameCode)',
+      ),
+      'context' => 'cac:Item/cac:AdditionalItemProperty',
+      'mode' => 'linea',
+      'conditions' => 
+      array (
+        0 => '$codigoConcepto = \'4041\'',
+      ),
+    ),
+    384 => 
+    array (
+      'primitive' => 'findElementInCatalog',
+      'params' => 
+      array (
+        'catalogo' => '\'06\'',
+        'idCatalogo' => 'cbc:Value',
+        'errorCodeValidate' => '\'4280\'',
+        'descripcion' => 'concat(\'Error en la linea: \', $nroLinea, \' ConceptoItem \', cbc:NameCode)',
+        'isError' => 'false()',
+      ),
+      'context' => 'cac:Item/cac:AdditionalItemProperty',
+      'mode' => 'linea',
+      'conditions' => 
+      array (
+        0 => '$codigoConcepto = \'4041\'',
+      ),
+    ),
+    385 => 
+    array (
+      'primitive' => 'existElement',
+      'params' => 
+      array (
+        'errorCodeNotExist' => '\'3064\'',
+        'node' => 'cbc:Value',
+        'descripcion' => 'concat(\'Error en la linea: \', $nroLinea, \' ConceptoItem \', cbc:NameCode)',
+      ),
+      'context' => 'cac:Item/cac:AdditionalItemProperty',
+      'mode' => 'linea',
+      'conditions' => 
+      array (
+        0 => '$codigoConcepto = \'4042\'',
+      ),
+    ),
+    386 => 
+    array (
+      'primitive' => 'findElementInCatalog',
+      'params' => 
+      array (
+        'catalogo' => '\'13\'',
+        'idCatalogo' => 'cbc:Value',
+        'errorCodeValidate' => '\'4280\'',
+        'descripcion' => 'concat(\'Error en la linea: \', $nroLinea, \' ConceptoItem \', cbc:NameCode)',
+        'isError' => 'false()',
+      ),
+      'context' => 'cac:Item/cac:AdditionalItemProperty',
+      'mode' => 'linea',
+      'conditions' => 
+      array (
+        0 => '$codigoConcepto = \'4042\'',
+      ),
+    ),
+    387 => 
+    array (
+      'primitive' => 'existElement',
+      'params' => 
+      array (
+        'errorCodeNotExist' => '\'3064\'',
+        'node' => 'cbc:Value',
+        'descripcion' => 'concat(\'Error en la linea: \', $nroLinea, \' ConceptoItem \', cbc:NameCode)',
+      ),
+      'context' => 'cac:Item/cac:AdditionalItemProperty',
+      'mode' => 'linea',
+      'conditions' => 
+      array (
+        0 => '$codigoConcepto = \'4043\'',
+      ),
+    ),
+    388 => 
+    array (
+      'primitive' => 'regexpValidateElementIfExist',
+      'params' => 
+      array (
+        'errorCodeValidate' => '\'4280\'',
+        'node' => 'cbc:Value',
+        'regexp' => '\'^(?!\\s*$)[^\\s].{2,199}$\'',
+        'descripcion' => 'concat(\'Error en la linea: \', $nroLinea, \' ConceptoItem \', cbc:NameCode)',
+        'isError' => 'false()',
+      ),
+      'context' => 'cac:Item/cac:AdditionalItemProperty',
+      'mode' => 'linea',
+      'conditions' => 
+      array (
+        0 => '$codigoConcepto = \'4043\'',
+      ),
+    ),
+    389 => 
+    array (
+      'primitive' => 'existElement',
+      'params' => 
+      array (
+        'errorCodeNotExist' => '\'3064\'',
+        'node' => 'cbc:Value',
+        'descripcion' => 'concat(\'Error en la linea: \', $nroLinea, \' ConceptoItem \', cbc:NameCode)',
+      ),
+      'context' => 'cac:Item/cac:AdditionalItemProperty',
+      'mode' => 'linea',
+      'conditions' => 
+      array (
+        0 => '$codigoConcepto = \'4044\'',
+      ),
+    ),
+    390 => 
+    array (
+      'primitive' => 'findElementInCatalog',
+      'params' => 
+      array (
+        'catalogo' => '\'13\'',
+        'idCatalogo' => 'cbc:Value',
+        'errorCodeValidate' => '\'4280\'',
+        'descripcion' => 'concat(\'Error en la linea: \', $nroLinea, \' ConceptoItem \', cbc:NameCode)',
+        'isError' => 'false()',
+      ),
+      'context' => 'cac:Item/cac:AdditionalItemProperty',
+      'mode' => 'linea',
+      'conditions' => 
+      array (
+        0 => '$codigoConcepto = \'4044\'',
+      ),
+    ),
+    391 => 
+    array (
+      'primitive' => 'existElement',
+      'params' => 
+      array (
+        'errorCodeNotExist' => '\'3064\'',
+        'node' => 'cbc:Value',
+        'descripcion' => 'concat(\'Error en la linea: \', $nroLinea, \' ConceptoItem \', cbc:NameCode)',
+      ),
+      'context' => 'cac:Item/cac:AdditionalItemProperty',
+      'mode' => 'linea',
+      'conditions' => 
+      array (
+        0 => '$codigoConcepto = \'4045\'',
+      ),
+    ),
+    392 => 
+    array (
+      'primitive' => 'regexpValidateElementIfExist',
+      'params' => 
+      array (
+        'errorCodeValidate' => '\'4280\'',
+        'node' => 'cbc:Value',
+        'regexp' => '\'^(?!\\s*$)[^\\s].{2,199}$\'',
+        'descripcion' => 'concat(\'Error en la linea: \', $nroLinea, \' ConceptoItem \', cbc:NameCode)',
+        'isError' => 'false()',
+      ),
+      'context' => 'cac:Item/cac:AdditionalItemProperty',
+      'mode' => 'linea',
+      'conditions' => 
+      array (
+        0 => '$codigoConcepto = \'4045\'',
+      ),
+    ),
+    393 => 
+    array (
+      'primitive' => 'existElement',
+      'params' => 
+      array (
+        'errorCodeNotExist' => '\'3064\'',
+        'node' => 'cbc:Value',
+        'descripcion' => 'concat(\'Error en la linea: \', $nroLinea)',
+      ),
+      'context' => 'cac:Item/cac:AdditionalItemProperty',
+      'mode' => 'linea',
+      'conditions' => 
+      array (
+        0 => '$codigoConcepto = \'4046\'',
+      ),
+    ),
+    394 => 
+    array (
+      'primitive' => 'regexpValidateElementIfExist',
+      'params' => 
+      array (
+        'errorCodeValidate' => '\'4280\'',
+        'node' => 'cbc:Value',
+        'regexp' => '\'^(?!\\s*$)[^\\s].{0,99}$\'',
+        'descripcion' => 'concat(\'Error en la linea: \', $nroLinea, \' ConceptoItem \', cbc:NameCode)',
+        'isError' => 'false()',
+      ),
+      'context' => 'cac:Item/cac:AdditionalItemProperty',
+      'mode' => 'linea',
+      'conditions' => 
+      array (
+        0 => '$codigoConcepto = \'4046\'',
+      ),
+    ),
+    395 => 
+    array (
+      'primitive' => 'existElement',
+      'params' => 
+      array (
+        'errorCodeNotExist' => '\'3172\'',
+        'node' => 'cac:UsabilityPeriod/cbc:StartTime',
+        'descripcion' => 'concat(\'Error en la linea: \', $nroLinea, \' ConceptoItem \', cbc:NameCode)',
+      ),
+      'context' => 'cac:Item/cac:AdditionalItemProperty',
+      'mode' => 'linea',
+      'conditions' => 
+      array (
+        0 => '$codigoConcepto = \'4047\'',
+      ),
+    ),
+    396 => 
+    array (
+      'primitive' => 'existElement',
+      'params' => 
+      array (
+        'errorCodeNotExist' => '\'3065\'',
+        'node' => 'cac:UsabilityPeriod/cbc:StartDate',
+        'descripcion' => 'concat(\'Error en la linea: \', $nroLinea, \' ConceptoItem \', cbc:NameCode)',
+      ),
+      'context' => 'cac:Item/cac:AdditionalItemProperty',
+      'mode' => 'linea',
+      'conditions' => 
+      array (
+        0 => '$codigoConcepto = \'4048\'',
+      ),
+    ),
+    397 => 
+    array (
+      'primitive' => 'existElement',
+      'params' => 
+      array (
+        'errorCodeNotExist' => '\'3064\'',
+        'node' => 'cbc:Value',
+        'descripcion' => 'concat(\'Error en la linea: \', $nroLinea, \' ConceptoItem \', cbc:NameCode)',
+      ),
+      'context' => 'cac:Item/cac:AdditionalItemProperty',
+      'mode' => 'linea',
+      'conditions' => 
+      array (
+        0 => '$codigoConcepto = \'4049\'',
+      ),
+    ),
+    398 => 
+    array (
+      'primitive' => 'regexpValidateElementIfExist',
+      'params' => 
+      array (
+        'errorCodeValidate' => '\'4280\'',
+        'node' => 'cbc:Value',
+        'regexp' => '\'^(?!\\s*$)[^\\s].{0,19}$\'',
+        'descripcion' => 'concat(\'Error en la linea: \', $nroLinea, \' ConceptoItem \', cbc:NameCode)',
+        'isError' => 'false()',
+      ),
+      'context' => 'cac:Item/cac:AdditionalItemProperty',
+      'mode' => 'linea',
+      'conditions' => 
+      array (
+        0 => '$codigoConcepto = \'4049\'',
+      ),
+    ),
+    399 => 
+    array (
+      'primitive' => 'existElement',
+      'params' => 
+      array (
+        'errorCodeNotExist' => '\'3064\'',
+        'node' => 'cbc:Value',
+        'descripcion' => 'concat(\'Error en la linea: \', $nroLinea, \' ConceptoItem \', cbc:NameCode)',
+      ),
+      'context' => 'cac:Item/cac:AdditionalItemProperty',
+      'mode' => 'linea',
+      'conditions' => 
+      array (
+        0 => '$codigoConcepto = \'4060\'',
+      ),
+    ),
+    400 => 
+    array (
+      'primitive' => 'regexpValidateElementIfExist',
+      'params' => 
+      array (
+        'errorCodeValidate' => '\'4280\'',
+        'node' => 'cbc:Value',
+        'regexp' => '\'^(?!\\s*$)[^\\s].{2,29}$\'',
+        'descripcion' => 'concat(\'Error en la linea: \', $nroLinea, \' ConceptoItem \', cbc:NameCode)',
+        'isError' => 'false()',
+      ),
+      'context' => 'cac:Item/cac:AdditionalItemProperty',
+      'mode' => 'linea',
+      'conditions' => 
+      array (
+        0 => '$codigoConcepto = \'4060\'',
+      ),
+    ),
+    401 => 
+    array (
+      'primitive' => 'existElement',
+      'params' => 
+      array (
+        'errorCodeNotExist' => '\'3064\'',
+        'node' => 'cbc:Value',
+        'descripcion' => 'concat(\'Error en la linea: \', $nroLinea, \' ConceptoItem \', cbc:NameCode)',
+      ),
+      'context' => 'cac:Item/cac:AdditionalItemProperty',
+      'mode' => 'linea',
+      'conditions' => 
+      array (
+        0 => '$codigoConcepto = \'4061\'',
+      ),
+    ),
+    402 => 
+    array (
+      'primitive' => 'regexpValidateElementIfExist',
+      'params' => 
+      array (
+        'errorCodeValidate' => '\'4280\'',
+        'node' => 'cbc:Value',
+        'regexp' => '\'^(?!\\s*$)[^\\s].{2,9}$\'',
+        'descripcion' => 'concat(\'Error en la linea: \', $nroLinea, \' ConceptoItem \', cbc:NameCode)',
+        'isError' => 'false()',
+      ),
+      'context' => 'cac:Item/cac:AdditionalItemProperty',
+      'mode' => 'linea',
+      'conditions' => 
+      array (
+        0 => '$codigoConcepto = \'4061\'',
+      ),
+    ),
+    403 => 
+    array (
+      'primitive' => 'existElement',
+      'params' => 
+      array (
+        'errorCodeNotExist' => '\'3065\'',
+        'node' => 'cac:UsabilityPeriod/cbc:StartDate',
+        'descripcion' => 'concat(\'Error en la linea: \', $nroLinea, \' ConceptoItem \', cbc:NameCode)',
+      ),
+      'context' => 'cac:Item/cac:AdditionalItemProperty',
+      'mode' => 'linea',
+      'conditions' => 
+      array (
+        0 => '$codigoConcepto = \'4062\'',
+      ),
+    ),
+    404 => 
+    array (
+      'primitive' => 'existElement',
+      'params' => 
+      array (
+        'errorCodeNotExist' => '\'3065\'',
+        'node' => 'cac:UsabilityPeriod/cbc:EndDate',
+        'descripcion' => 'concat(\'Error en la linea: \', $nroLinea, \' ConceptoItem \', cbc:NameCode)',
+      ),
+      'context' => 'cac:Item/cac:AdditionalItemProperty',
+      'mode' => 'linea',
+      'conditions' => 
+      array (
+        0 => '$codigoConcepto = \'4063\'',
+      ),
+    ),
+    405 => 
+    array (
+      'primitive' => 'existElement',
+      'params' => 
+      array (
+        'errorCodeNotExist' => '\'3064\'',
+        'node' => 'cbc:Value',
+        'descripcion' => 'concat(\'Error en la linea: \', $nroLinea, \' ConceptoItem \', cbc:NameCode)',
+      ),
+      'context' => 'cac:Item/cac:AdditionalItemProperty',
+      'mode' => 'linea',
+      'conditions' => 
+      array (
+        0 => '$codigoConcepto = \'5000\'',
+      ),
+    ),
+    406 => 
+    array (
+      'primitive' => 'regexpValidateElementIfExist',
+      'params' => 
+      array (
+        'errorCodeValidate' => '\'4280\'',
+        'node' => 'cbc:Value',
+        'regexp' => '\'^(?!\\s*$)[^\\s].{0,19}$\'',
+        'descripcion' => 'concat(\'Error en la linea: \', $nroLinea, \' ConceptoItem \', cbc:NameCode)',
+        'isError' => 'false()',
+      ),
+      'context' => 'cac:Item/cac:AdditionalItemProperty',
+      'mode' => 'linea',
+      'conditions' => 
+      array (
+        0 => '$codigoConcepto = \'5000\'',
+      ),
+    ),
+    407 => 
+    array (
+      'primitive' => 'existElement',
+      'params' => 
+      array (
+        'errorCodeNotExist' => '\'3064\'',
+        'node' => 'cbc:Value',
+        'descripcion' => 'concat(\'Error en la linea: \', $nroLinea, \' ConceptoItem \', cbc:NameCode)',
+      ),
+      'context' => 'cac:Item/cac:AdditionalItemProperty',
+      'mode' => 'linea',
+      'conditions' => 
+      array (
+        0 => '$codigoConcepto = \'5001\'',
+      ),
+    ),
+    408 => 
+    array (
+      'primitive' => 'regexpValidateElementIfExist',
+      'params' => 
+      array (
+        'errorCodeValidate' => '\'4280\'',
+        'node' => 'cbc:Value',
+        'regexp' => '\'^(?!\\s*$)[^\\s].{0,9}$\'',
+        'descripcion' => 'concat(\'Error en la linea: \', $nroLinea, \' ConceptoItem \', cbc:NameCode)',
+        'isError' => 'false()',
+      ),
+      'context' => 'cac:Item/cac:AdditionalItemProperty',
+      'mode' => 'linea',
+      'conditions' => 
+      array (
+        0 => '$codigoConcepto = \'5001\'',
+      ),
+    ),
+    409 => 
+    array (
+      'primitive' => 'existElement',
+      'params' => 
+      array (
+        'errorCodeNotExist' => '\'3064\'',
+        'node' => 'cbc:Value',
+        'descripcion' => 'concat(\'Error en la linea: \', $nroLinea)',
+      ),
+      'context' => 'cac:Item/cac:AdditionalItemProperty',
+      'mode' => 'linea',
+      'conditions' => 
+      array (
+        0 => '$codigoConcepto = \'5002\'',
+      ),
+    ),
+    410 => 
+    array (
+      'primitive' => 'regexpValidateElementIfExist',
+      'params' => 
+      array (
+        'errorCodeValidate' => '\'4280\'',
+        'node' => 'cbc:Value',
+        'regexp' => '\'^(?!\\s*$)[^\\s].{0,29}$\'',
+        'descripcion' => 'concat(\'Error en la linea: \', $nroLinea)',
+        'isError' => 'false()',
+      ),
+      'context' => 'cac:Item/cac:AdditionalItemProperty',
+      'mode' => 'linea',
+      'conditions' => 
+      array (
+        0 => '$codigoConcepto = \'5002\'',
+      ),
+    ),
+    411 => 
+    array (
+      'primitive' => 'existElement',
+      'params' => 
+      array (
+        'errorCodeNotExist' => '\'3064\'',
+        'node' => 'cbc:Value',
+        'descripcion' => 'concat(\'Error en la linea: \', $nroLinea, \' ConceptoItem \', cbc:NameCode)',
+      ),
+      'context' => 'cac:Item/cac:AdditionalItemProperty',
+      'mode' => 'linea',
+      'conditions' => 
+      array (
+        0 => '$codigoConcepto = \'5003\'',
+      ),
+    ),
+    412 => 
+    array (
+      'primitive' => 'regexpValidateElementIfExist',
+      'params' => 
+      array (
+        'errorCodeValidate' => '\'4280\'',
+        'node' => 'cbc:Value',
+        'regexp' => '\'^(?!\\s*$)[^\\s].{0,29}$\'',
+        'descripcion' => 'concat(\'Error en la linea: \', $nroLinea, \' ConceptoItem \', cbc:NameCode)',
+        'isError' => 'false()',
+      ),
+      'context' => 'cac:Item/cac:AdditionalItemProperty',
+      'mode' => 'linea',
+      'conditions' => 
+      array (
+        0 => '$codigoConcepto = \'5003\'',
+      ),
+    ),
+    413 => 
+    array (
+      'primitive' => 'regexpValidateElementIfExist',
+      'params' => 
+      array (
+        'errorCodeValidate' => '\'4202\'',
+        'node' => 'cbc:Value',
+        'regexp' => '\'^[0-9]{4}-[0-9]{2}-[0-9]{3}-[0-9]{6}$\'',
+        'descripcion' => 'concat(\'Error en la linea: \', $nroLinea, \' ConceptoItem \', cbc:NameCode)',
+        'isError' => 'false()',
+      ),
+      'context' => 'cac:Item/cac:AdditionalItemProperty',
+      'mode' => 'linea',
+      'conditions' => 
+      array (
+        0 => '$codigoConcepto = \'7021\'',
+      ),
+    ),
+    414 => 
+    array (
+      'primitive' => 'existElement',
+      'params' => 
+      array (
+        'errorCodeNotExist' => '\'3064\'',
+        'node' => 'cbc:Value',
+        'descripcion' => 'concat(\'Error en la linea: \', $nroLinea, \' ConceptoItem \', cbc:NameCode)',
+      ),
+      'context' => 'cac:Item/cac:AdditionalItemProperty',
+      'mode' => 'linea',
+      'conditions' => 
+      array (
+        0 => '$codigoConcepto = \'7017\'',
       ),
     ),
     415 => 
@@ -6956,8 +6943,8 @@ return array (
       'mode' => 'linea',
       'conditions' => 
       array (
-        0 => '$codigoConcepto = \'4009\'',
-        1 => 'string-length(cbc:Value) > 20 or string-length(cbc:Value) < 3 ',
+        0 => '$codigoConcepto = \'7017\'',
+        1 => 'string-length(cbc:Value) > 12 or string-length(cbc:Value) < 1 ',
       ),
     ),
     416 => 
@@ -6967,7 +6954,7 @@ return array (
       array (
         'errorCodeValidate' => '\'4280\'',
         'node' => 'cbc:Value',
-        'regexp' => '\'^(?!\\s*$)[^\\s].{2,}$\'',
+        'regexp' => '\'^[\\da-zA-Z]{1,12}$\'',
         'isError' => 'false()',
         'descripcion' => 'concat(\'Error en la linea: \', $nroLinea, \' ConceptoItem \', cbc:NameCode)',
       ),
@@ -6975,7 +6962,7 @@ return array (
       'mode' => 'linea',
       'conditions' => 
       array (
-        0 => '$codigoConcepto = \'4009\'',
+        0 => '$codigoConcepto = \'7017\'',
       ),
     ),
     417 => 
@@ -6991,28 +6978,61 @@ return array (
       'mode' => 'linea',
       'conditions' => 
       array (
-        0 => '$codigoConcepto = \'4030\'',
+        0 => '$codigoConcepto = \'7018\'',
       ),
     ),
     418 => 
     array (
-      'primitive' => 'findElementInCatalog',
+      'primitive' => 'regexpValidateElementIfExist',
       'params' => 
       array (
-        'catalogo' => '\'13\'',
-        'idCatalogo' => 'cbc:Value',
         'errorCodeValidate' => '\'4280\'',
+        'node' => 'cbc:Value',
+        'regexp' => '\'^(20)\\d\\d([- /.])(0[1-9]|1[012])$\'',
+        'isError' => 'false()',
         'descripcion' => 'concat(\'Error en la linea: \', $nroLinea, \' ConceptoItem \', cbc:NameCode)',
+      ),
+      'context' => 'cac:Item/cac:AdditionalItemProperty',
+      'mode' => 'linea',
+      'conditions' => 
+      array (
+        0 => '$codigoConcepto = \'7018\'',
+      ),
+    ),
+    419 => 
+    array (
+      'primitive' => 'existElement',
+      'params' => 
+      array (
+        'errorCodeNotExist' => '\'3064\'',
+        'node' => 'cbc:ValueQuantity',
+        'descripcion' => 'concat(\'Error en la linea: \', $nroLinea, \' ConceptoItem \', cbc:NameCode)',
+      ),
+      'context' => 'cac:Item/cac:AdditionalItemProperty',
+      'mode' => 'linea',
+      'conditions' => 
+      array (
+        0 => '$codigoConcepto = \'7019\'',
+      ),
+    ),
+    420 => 
+    array (
+      'primitive' => 'validateValueTwoDecimalIfExist',
+      'params' => 
+      array (
+        'errorCodeValidate' => '\'4281\'',
+        'node' => 'cbc:ValueQuantity',
+        'isGreaterCero' => 'false()',
         'isError' => 'false()',
       ),
       'context' => 'cac:Item/cac:AdditionalItemProperty',
       'mode' => 'linea',
       'conditions' => 
       array (
-        0 => '$codigoConcepto = \'4030\'',
+        0 => '$codigoConcepto = \'7019\'',
       ),
     ),
-    419 => 
+    421 => 
     array (
       'primitive' => 'existElement',
       'params' => 
@@ -7025,10 +7045,10 @@ return array (
       'mode' => 'linea',
       'conditions' => 
       array (
-        0 => '$codigoConcepto = \'4031\'',
+        0 => '$codigoConcepto = \'7004\'',
       ),
     ),
-    420 => 
+    422 => 
     array (
       'primitive' => 'isTrueExpresion',
       'params' => 
@@ -7043,18 +7063,18 @@ return array (
       'mode' => 'linea',
       'conditions' => 
       array (
-        0 => '$codigoConcepto = \'4031\'',
-        1 => 'string-length(cbc:Value) > 200 or string-length(cbc:Value) < 3 ',
+        0 => '$codigoConcepto = \'7004\'',
+        1 => 'string-length(cbc:Value) > 50 or string-length(cbc:Value) < 3 ',
       ),
     ),
-    421 => 
+    423 => 
     array (
       'primitive' => 'regexpValidateElementIfExist',
       'params' => 
       array (
         'errorCodeValidate' => '\'4280\'',
         'node' => 'cbc:Value',
-        'regexp' => '\'^(?!\\s*$)[^\\s].{2,}$\'',
+        'regexp' => '\'^[^\\t\\n\\r\\f]{3,}$\'',
         'isError' => 'false()',
         'descripcion' => 'concat(\'Error en la linea: \', $nroLinea, \' ConceptoItem \', cbc:NameCode)',
       ),
@@ -7062,41 +7082,7 @@ return array (
       'mode' => 'linea',
       'conditions' => 
       array (
-        0 => '$codigoConcepto = \'4031\'',
-      ),
-    ),
-    422 => 
-    array (
-      'primitive' => 'existElement',
-      'params' => 
-      array (
-        'errorCodeNotExist' => '\'3064\'',
-        'node' => 'cbc:Value',
-        'descripcion' => 'concat(\'Error en la linea: \', $nroLinea, \' ConceptoItem \', cbc:NameCode)',
-      ),
-      'context' => 'cac:Item/cac:AdditionalItemProperty',
-      'mode' => 'linea',
-      'conditions' => 
-      array (
-        0 => '$codigoConcepto = \'4032\'',
-      ),
-    ),
-    423 => 
-    array (
-      'primitive' => 'findElementInCatalog',
-      'params' => 
-      array (
-        'catalogo' => '\'13\'',
-        'idCatalogo' => 'cbc:Value',
-        'errorCodeValidate' => '\'4280\'',
-        'descripcion' => 'concat(\'Error en la linea: \', $nroLinea, \' ConceptoItem \', cbc:NameCode)',
-        'isError' => 'false()',
-      ),
-      'context' => 'cac:Item/cac:AdditionalItemProperty',
-      'mode' => 'linea',
-      'conditions' => 
-      array (
-        0 => '$codigoConcepto = \'4032\'',
+        0 => '$codigoConcepto = \'7004\'',
       ),
     ),
     424 => 
@@ -7112,1002 +7098,10 @@ return array (
       'mode' => 'linea',
       'conditions' => 
       array (
-        0 => '$codigoConcepto = \'4033\'',
-      ),
-    ),
-    425 => 
-    array (
-      'primitive' => 'isTrueExpresion',
-      'params' => 
-      array (
-        'errorCodeValidate' => '\'4280\'',
-        'node' => 'cbc:Value',
-        'expresion' => 'true()',
-        'isError' => 'false()',
-        'descripcion' => 'concat(\'Error en la linea: \', $nroLinea, \' ConceptoItem \', cbc:NameCode)',
-      ),
-      'context' => 'cac:Item/cac:AdditionalItemProperty',
-      'mode' => 'linea',
-      'conditions' => 
-      array (
-        0 => '$codigoConcepto = \'4033\'',
-        1 => 'string-length(cbc:Value) > 200 or string-length(cbc:Value) < 3 ',
-      ),
-    ),
-    426 => 
-    array (
-      'primitive' => 'regexpValidateElementIfExist',
-      'params' => 
-      array (
-        'errorCodeValidate' => '\'4280\'',
-        'node' => 'cbc:Value',
-        'regexp' => '\'^(?!\\s*$)[^\\s].{2,}$\'',
-        'isError' => 'false()',
-        'descripcion' => 'concat(\'Error en la linea: \', $nroLinea, \' ConceptoItem \', cbc:NameCode)',
-      ),
-      'context' => 'cac:Item/cac:AdditionalItemProperty',
-      'mode' => 'linea',
-      'conditions' => 
-      array (
-        0 => '$codigoConcepto = \'4033\'',
-      ),
-    ),
-    427 => 
-    array (
-      'primitive' => 'existElement',
-      'params' => 
-      array (
-        'errorCodeNotExist' => '\'3064\'',
-        'node' => 'cbc:Value',
-        'descripcion' => 'concat(\'Error en la linea: \', $nroLinea, \' ConceptoItem \', cbc:NameCode)',
-      ),
-      'context' => 'cac:Item/cac:AdditionalItemProperty',
-      'mode' => 'linea',
-      'conditions' => 
-      array (
-        0 => '$codigoConcepto = \'4040\'',
-      ),
-    ),
-    428 => 
-    array (
-      'primitive' => 'isTrueExpresion',
-      'params' => 
-      array (
-        'errorCodeValidate' => '\'4280\'',
-        'node' => 'cbc:Value',
-        'expresion' => 'true()',
-        'isError' => 'false()',
-        'descripcion' => 'concat(\'Error en la linea: \', $nroLinea, \' ConceptoItem \', cbc:NameCode)',
-      ),
-      'context' => 'cac:Item/cac:AdditionalItemProperty',
-      'mode' => 'linea',
-      'conditions' => 
-      array (
-        0 => '$codigoConcepto = \'4040\'',
-        1 => 'string-length(cbc:Value) > 200 or string-length(cbc:Value) < 3 ',
-      ),
-    ),
-    429 => 
-    array (
-      'primitive' => 'regexpValidateElementIfExist',
-      'params' => 
-      array (
-        'errorCodeValidate' => '\'4280\'',
-        'node' => 'cbc:Value',
-        'regexp' => '\'^(?!\\s*$)[^\\s].{2,}$\'',
-        'isError' => 'false()',
-        'descripcion' => 'concat(\'Error en la linea: \', $nroLinea, \' ConceptoItem \', cbc:NameCode)',
-      ),
-      'context' => 'cac:Item/cac:AdditionalItemProperty',
-      'mode' => 'linea',
-      'conditions' => 
-      array (
-        0 => '$codigoConcepto = \'4040\'',
-      ),
-    ),
-    430 => 
-    array (
-      'primitive' => 'existElement',
-      'params' => 
-      array (
-        'errorCodeNotExist' => '\'3064\'',
-        'node' => 'cbc:Value',
-        'descripcion' => 'concat(\'Error en la linea: \', $nroLinea, \' ConceptoItem \', cbc:NameCode)',
-      ),
-      'context' => 'cac:Item/cac:AdditionalItemProperty',
-      'mode' => 'linea',
-      'conditions' => 
-      array (
-        0 => '$codigoConcepto = \'4041\'',
-      ),
-    ),
-    431 => 
-    array (
-      'primitive' => 'findElementInCatalog',
-      'params' => 
-      array (
-        'catalogo' => '\'06\'',
-        'idCatalogo' => 'cbc:Value',
-        'errorCodeValidate' => '\'4280\'',
-        'descripcion' => 'concat(\'Error en la linea: \', $nroLinea, \' ConceptoItem \', cbc:NameCode)',
-        'isError' => 'false()',
-      ),
-      'context' => 'cac:Item/cac:AdditionalItemProperty',
-      'mode' => 'linea',
-      'conditions' => 
-      array (
-        0 => '$codigoConcepto = \'4041\'',
-      ),
-    ),
-    432 => 
-    array (
-      'primitive' => 'existElement',
-      'params' => 
-      array (
-        'errorCodeNotExist' => '\'3064\'',
-        'node' => 'cbc:Value',
-        'descripcion' => 'concat(\'Error en la linea: \', $nroLinea, \' ConceptoItem \', cbc:NameCode)',
-      ),
-      'context' => 'cac:Item/cac:AdditionalItemProperty',
-      'mode' => 'linea',
-      'conditions' => 
-      array (
-        0 => '$codigoConcepto = \'4042\'',
-      ),
-    ),
-    433 => 
-    array (
-      'primitive' => 'findElementInCatalog',
-      'params' => 
-      array (
-        'catalogo' => '\'13\'',
-        'idCatalogo' => 'cbc:Value',
-        'errorCodeValidate' => '\'4280\'',
-        'descripcion' => 'concat(\'Error en la linea: \', $nroLinea, \' ConceptoItem \', cbc:NameCode)',
-        'isError' => 'false()',
-      ),
-      'context' => 'cac:Item/cac:AdditionalItemProperty',
-      'mode' => 'linea',
-      'conditions' => 
-      array (
-        0 => '$codigoConcepto = \'4042\'',
-      ),
-    ),
-    434 => 
-    array (
-      'primitive' => 'existElement',
-      'params' => 
-      array (
-        'errorCodeNotExist' => '\'3064\'',
-        'node' => 'cbc:Value',
-        'descripcion' => 'concat(\'Error en la linea: \', $nroLinea, \' ConceptoItem \', cbc:NameCode)',
-      ),
-      'context' => 'cac:Item/cac:AdditionalItemProperty',
-      'mode' => 'linea',
-      'conditions' => 
-      array (
-        0 => '$codigoConcepto = \'4043\'',
-      ),
-    ),
-    435 => 
-    array (
-      'primitive' => 'isTrueExpresion',
-      'params' => 
-      array (
-        'errorCodeValidate' => '\'4280\'',
-        'node' => 'cbc:Value',
-        'expresion' => 'true()',
-        'isError' => 'false()',
-        'descripcion' => 'concat(\'Error en la linea: \', $nroLinea, \' ConceptoItem \', cbc:NameCode)',
-      ),
-      'context' => 'cac:Item/cac:AdditionalItemProperty',
-      'mode' => 'linea',
-      'conditions' => 
-      array (
-        0 => '$codigoConcepto = \'4043\'',
-        1 => 'string-length(cbc:Value) > 200 or string-length(cbc:Value) < 3 ',
-      ),
-    ),
-    436 => 
-    array (
-      'primitive' => 'regexpValidateElementIfExist',
-      'params' => 
-      array (
-        'errorCodeValidate' => '\'4280\'',
-        'node' => 'cbc:Value',
-        'regexp' => '\'^(?!\\s*$)[^\\s].{2,}$\'',
-        'isError' => 'false()',
-        'descripcion' => 'concat(\'Error en la linea: \', $nroLinea, \' ConceptoItem \', cbc:NameCode)',
-      ),
-      'context' => 'cac:Item/cac:AdditionalItemProperty',
-      'mode' => 'linea',
-      'conditions' => 
-      array (
-        0 => '$codigoConcepto = \'4043\'',
-      ),
-    ),
-    437 => 
-    array (
-      'primitive' => 'existElement',
-      'params' => 
-      array (
-        'errorCodeNotExist' => '\'3064\'',
-        'node' => 'cbc:Value',
-        'descripcion' => 'concat(\'Error en la linea: \', $nroLinea, \' ConceptoItem \', cbc:NameCode)',
-      ),
-      'context' => 'cac:Item/cac:AdditionalItemProperty',
-      'mode' => 'linea',
-      'conditions' => 
-      array (
-        0 => '$codigoConcepto = \'4044\'',
-      ),
-    ),
-    438 => 
-    array (
-      'primitive' => 'findElementInCatalog',
-      'params' => 
-      array (
-        'catalogo' => '\'13\'',
-        'idCatalogo' => 'cbc:Value',
-        'errorCodeValidate' => '\'4280\'',
-        'descripcion' => 'concat(\'Error en la linea: \', $nroLinea, \' ConceptoItem \', cbc:NameCode)',
-        'isError' => 'false()',
-      ),
-      'context' => 'cac:Item/cac:AdditionalItemProperty',
-      'mode' => 'linea',
-      'conditions' => 
-      array (
-        0 => '$codigoConcepto = \'4044\'',
-      ),
-    ),
-    439 => 
-    array (
-      'primitive' => 'existElement',
-      'params' => 
-      array (
-        'errorCodeNotExist' => '\'3064\'',
-        'node' => 'cbc:Value',
-        'descripcion' => 'concat(\'Error en la linea: \', $nroLinea, \' ConceptoItem \', cbc:NameCode)',
-      ),
-      'context' => 'cac:Item/cac:AdditionalItemProperty',
-      'mode' => 'linea',
-      'conditions' => 
-      array (
-        0 => '$codigoConcepto = \'4045\'',
-      ),
-    ),
-    440 => 
-    array (
-      'primitive' => 'isTrueExpresion',
-      'params' => 
-      array (
-        'errorCodeValidate' => '\'4280\'',
-        'node' => 'cbc:Value',
-        'expresion' => 'true()',
-        'isError' => 'false()',
-        'descripcion' => 'concat(\'Error en la linea: \', $nroLinea, \' ConceptoItem \', cbc:NameCode)',
-      ),
-      'context' => 'cac:Item/cac:AdditionalItemProperty',
-      'mode' => 'linea',
-      'conditions' => 
-      array (
-        0 => '$codigoConcepto = \'4045\'',
-        1 => 'string-length(cbc:Value) > 200 or string-length(cbc:Value) < 3 ',
-      ),
-    ),
-    441 => 
-    array (
-      'primitive' => 'regexpValidateElementIfExist',
-      'params' => 
-      array (
-        'errorCodeValidate' => '\'4280\'',
-        'node' => 'cbc:Value',
-        'regexp' => '\'^(?!\\s*$)[^\\s].{2,}$\'',
-        'isError' => 'false()',
-        'descripcion' => 'concat(\'Error en la linea: \', $nroLinea, \' ConceptoItem \', cbc:NameCode)',
-      ),
-      'context' => 'cac:Item/cac:AdditionalItemProperty',
-      'mode' => 'linea',
-      'conditions' => 
-      array (
-        0 => '$codigoConcepto = \'4045\'',
-      ),
-    ),
-    442 => 
-    array (
-      'primitive' => 'existElement',
-      'params' => 
-      array (
-        'errorCodeNotExist' => '\'3064\'',
-        'node' => 'cbc:Value',
-        'descripcion' => 'concat(\'Error en la linea: \', $nroLinea)',
-      ),
-      'context' => 'cac:Item/cac:AdditionalItemProperty',
-      'mode' => 'linea',
-      'conditions' => 
-      array (
-        0 => '$codigoConcepto = \'4046\'',
-      ),
-    ),
-    443 => 
-    array (
-      'primitive' => 'isTrueExpresion',
-      'params' => 
-      array (
-        'errorCodeValidate' => '\'4280\'',
-        'node' => 'cbc:Value',
-        'expresion' => 'true()',
-        'isError' => 'false()',
-        'descripcion' => 'concat(\'Error en la linea: \', $nroLinea, \' ConceptoItem \', cbc:NameCode)',
-      ),
-      'context' => 'cac:Item/cac:AdditionalItemProperty',
-      'mode' => 'linea',
-      'conditions' => 
-      array (
-        0 => '$codigoConcepto = \'4046\'',
-        1 => 'string-length(cbc:Value) > 100 or string-length(cbc:Value) < 1 ',
-      ),
-    ),
-    444 => 
-    array (
-      'primitive' => 'regexpValidateElementIfExist',
-      'params' => 
-      array (
-        'errorCodeValidate' => '\'4280\'',
-        'node' => 'cbc:Value',
-        'regexp' => '\'^(?!\\s*$)[^\\s].{0,}$\'',
-        'isError' => 'false()',
-        'descripcion' => 'concat(\'Error en la linea: \', $nroLinea, \' ConceptoItem \', cbc:NameCode)',
-      ),
-      'context' => 'cac:Item/cac:AdditionalItemProperty',
-      'mode' => 'linea',
-      'conditions' => 
-      array (
-        0 => '$codigoConcepto = \'4046\'',
-      ),
-    ),
-    445 => 
-    array (
-      'primitive' => 'existElement',
-      'params' => 
-      array (
-        'errorCodeNotExist' => '\'3172\'',
-        'node' => 'cac:UsabilityPeriod/cbc:StartTime',
-        'descripcion' => 'concat(\'Error en la linea: \', $nroLinea, \' ConceptoItem \', cbc:NameCode)',
-      ),
-      'context' => 'cac:Item/cac:AdditionalItemProperty',
-      'mode' => 'linea',
-      'conditions' => 
-      array (
-        0 => '$codigoConcepto = \'4047\'',
-      ),
-    ),
-    446 => 
-    array (
-      'primitive' => 'existElement',
-      'params' => 
-      array (
-        'errorCodeNotExist' => '\'3065\'',
-        'node' => 'cac:UsabilityPeriod/cbc:StartDate',
-        'descripcion' => 'concat(\'Error en la linea: \', $nroLinea, \' ConceptoItem \', cbc:NameCode)',
-      ),
-      'context' => 'cac:Item/cac:AdditionalItemProperty',
-      'mode' => 'linea',
-      'conditions' => 
-      array (
-        0 => '$codigoConcepto = \'4048\'',
-      ),
-    ),
-    447 => 
-    array (
-      'primitive' => 'existElement',
-      'params' => 
-      array (
-        'errorCodeNotExist' => '\'3064\'',
-        'node' => 'cbc:Value',
-        'descripcion' => 'concat(\'Error en la linea: \', $nroLinea, \' ConceptoItem \', cbc:NameCode)',
-      ),
-      'context' => 'cac:Item/cac:AdditionalItemProperty',
-      'mode' => 'linea',
-      'conditions' => 
-      array (
-        0 => '$codigoConcepto = \'4049\'',
-      ),
-    ),
-    448 => 
-    array (
-      'primitive' => 'isTrueExpresion',
-      'params' => 
-      array (
-        'errorCodeValidate' => '\'4280\'',
-        'node' => 'cbc:Value',
-        'expresion' => 'true()',
-        'isError' => 'false()',
-        'descripcion' => 'concat(\'Error en la linea: \', $nroLinea, \' ConceptoItem \', cbc:NameCode)',
-      ),
-      'context' => 'cac:Item/cac:AdditionalItemProperty',
-      'mode' => 'linea',
-      'conditions' => 
-      array (
-        0 => '$codigoConcepto = \'4049\'',
-        1 => 'string-length(cbc:Value) > 20 or string-length(cbc:Value) < 1',
-      ),
-    ),
-    449 => 
-    array (
-      'primitive' => 'regexpValidateElementIfExist',
-      'params' => 
-      array (
-        'errorCodeValidate' => '\'4280\'',
-        'node' => 'cbc:Value',
-        'regexp' => '\'^(?!\\s*$)[^\\s].{0,}$\'',
-        'isError' => 'false()',
-        'descripcion' => 'concat(\'Error en la linea: \', $nroLinea, \' ConceptoItem \', cbc:NameCode)',
-      ),
-      'context' => 'cac:Item/cac:AdditionalItemProperty',
-      'mode' => 'linea',
-      'conditions' => 
-      array (
-        0 => '$codigoConcepto = \'4049\'',
-      ),
-    ),
-    450 => 
-    array (
-      'primitive' => 'existElement',
-      'params' => 
-      array (
-        'errorCodeNotExist' => '\'3064\'',
-        'node' => 'cbc:Value',
-        'descripcion' => 'concat(\'Error en la linea: \', $nroLinea, \' ConceptoItem \', cbc:NameCode)',
-      ),
-      'context' => 'cac:Item/cac:AdditionalItemProperty',
-      'mode' => 'linea',
-      'conditions' => 
-      array (
-        0 => '$codigoConcepto = \'4060\'',
-      ),
-    ),
-    451 => 
-    array (
-      'primitive' => 'isTrueExpresion',
-      'params' => 
-      array (
-        'errorCodeValidate' => '\'4280\'',
-        'node' => 'cbc:Value',
-        'expresion' => 'true()',
-        'isError' => 'false()',
-        'descripcion' => 'concat(\'Error en la linea: \', $nroLinea, \' ConceptoItem \', cbc:NameCode)',
-      ),
-      'context' => 'cac:Item/cac:AdditionalItemProperty',
-      'mode' => 'linea',
-      'conditions' => 
-      array (
-        0 => '$codigoConcepto = \'4060\'',
-        1 => 'string-length(cbc:Value) > 30 or string-length(cbc:Value) < 3 ',
-      ),
-    ),
-    452 => 
-    array (
-      'primitive' => 'regexpValidateElementIfExist',
-      'params' => 
-      array (
-        'errorCodeValidate' => '\'4280\'',
-        'node' => 'cbc:Value',
-        'regexp' => '\'^(?!\\s*$)[^\\s].{2,}$\'',
-        'isError' => 'false()',
-        'descripcion' => 'concat(\'Error en la linea: \', $nroLinea, \' ConceptoItem \', cbc:NameCode)',
-      ),
-      'context' => 'cac:Item/cac:AdditionalItemProperty',
-      'mode' => 'linea',
-      'conditions' => 
-      array (
-        0 => '$codigoConcepto = \'4060\'',
-      ),
-    ),
-    453 => 
-    array (
-      'primitive' => 'existElement',
-      'params' => 
-      array (
-        'errorCodeNotExist' => '\'3064\'',
-        'node' => 'cbc:Value',
-        'descripcion' => 'concat(\'Error en la linea: \', $nroLinea, \' ConceptoItem \', cbc:NameCode)',
-      ),
-      'context' => 'cac:Item/cac:AdditionalItemProperty',
-      'mode' => 'linea',
-      'conditions' => 
-      array (
-        0 => '$codigoConcepto = \'4061\'',
-      ),
-    ),
-    454 => 
-    array (
-      'primitive' => 'isTrueExpresion',
-      'params' => 
-      array (
-        'errorCodeValidate' => '\'4280\'',
-        'node' => 'cbc:Value',
-        'expresion' => 'true()',
-        'isError' => 'false()',
-        'descripcion' => 'concat(\'Error en la linea: \', $nroLinea, \' ConceptoItem \', cbc:NameCode)',
-      ),
-      'context' => 'cac:Item/cac:AdditionalItemProperty',
-      'mode' => 'linea',
-      'conditions' => 
-      array (
-        0 => '$codigoConcepto = \'4061\'',
-        1 => 'string-length(cbc:Value) > 10 or string-length(cbc:Value) < 3 ',
-      ),
-    ),
-    455 => 
-    array (
-      'primitive' => 'regexpValidateElementIfExist',
-      'params' => 
-      array (
-        'errorCodeValidate' => '\'4280\'',
-        'node' => 'cbc:Value',
-        'regexp' => '\'^(?!\\s*$)[^\\n]{1,}$\'',
-        'isError' => 'false()',
-        'descripcion' => 'concat(\'Error en la linea: \', $nroLinea, \' ConceptoItem \', cbc:NameCode)',
-      ),
-      'context' => 'cac:Item/cac:AdditionalItemProperty',
-      'mode' => 'linea',
-      'conditions' => 
-      array (
-        0 => '$codigoConcepto = \'4061\'',
-      ),
-    ),
-    456 => 
-    array (
-      'primitive' => 'existElement',
-      'params' => 
-      array (
-        'errorCodeNotExist' => '\'3065\'',
-        'node' => 'cac:UsabilityPeriod/cbc:StartDate',
-        'descripcion' => 'concat(\'Error en la linea: \', $nroLinea, \' ConceptoItem \', cbc:NameCode)',
-      ),
-      'context' => 'cac:Item/cac:AdditionalItemProperty',
-      'mode' => 'linea',
-      'conditions' => 
-      array (
-        0 => '$codigoConcepto = \'4062\'',
-      ),
-    ),
-    457 => 
-    array (
-      'primitive' => 'existElement',
-      'params' => 
-      array (
-        'errorCodeNotExist' => '\'3065\'',
-        'node' => 'cac:UsabilityPeriod/cbc:EndDate',
-        'descripcion' => 'concat(\'Error en la linea: \', $nroLinea, \' ConceptoItem \', cbc:NameCode)',
-      ),
-      'context' => 'cac:Item/cac:AdditionalItemProperty',
-      'mode' => 'linea',
-      'conditions' => 
-      array (
-        0 => '$codigoConcepto = \'4063\'',
-      ),
-    ),
-    458 => 
-    array (
-      'primitive' => 'existElement',
-      'params' => 
-      array (
-        'errorCodeNotExist' => '\'3064\'',
-        'node' => 'cbc:Value',
-        'descripcion' => 'concat(\'Error en la linea: \', $nroLinea, \' ConceptoItem \', cbc:NameCode)',
-      ),
-      'context' => 'cac:Item/cac:AdditionalItemProperty',
-      'mode' => 'linea',
-      'conditions' => 
-      array (
-        0 => '$codigoConcepto = \'5000\'',
-      ),
-    ),
-    459 => 
-    array (
-      'primitive' => 'isTrueExpresion',
-      'params' => 
-      array (
-        'errorCodeValidate' => '\'4280\'',
-        'node' => 'cbc:Value',
-        'expresion' => 'true()',
-        'isError' => 'false()',
-        'descripcion' => 'concat(\'Error en la linea: \', $nroLinea, \' ConceptoItem \', cbc:NameCode)',
-      ),
-      'context' => 'cac:Item/cac:AdditionalItemProperty',
-      'mode' => 'linea',
-      'conditions' => 
-      array (
-        0 => '$codigoConcepto = \'5000\'',
-        1 => 'string-length(cbc:Value) > 20 or string-length(cbc:Value) < 1 ',
-      ),
-    ),
-    460 => 
-    array (
-      'primitive' => 'regexpValidateElementIfExist',
-      'params' => 
-      array (
-        'errorCodeValidate' => '\'4280\'',
-        'node' => 'cbc:Value',
-        'regexp' => '\'^(?!\\s*$)[^\\s].{0,}$\'',
-        'isError' => 'false()',
-        'descripcion' => 'concat(\'Error en la linea: \', $nroLinea, \' ConceptoItem \', cbc:NameCode)',
-      ),
-      'context' => 'cac:Item/cac:AdditionalItemProperty',
-      'mode' => 'linea',
-      'conditions' => 
-      array (
-        0 => '$codigoConcepto = \'5000\'',
-      ),
-    ),
-    461 => 
-    array (
-      'primitive' => 'existElement',
-      'params' => 
-      array (
-        'errorCodeNotExist' => '\'3064\'',
-        'node' => 'cbc:Value',
-        'descripcion' => 'concat(\'Error en la linea: \', $nroLinea, \' ConceptoItem \', cbc:NameCode)',
-      ),
-      'context' => 'cac:Item/cac:AdditionalItemProperty',
-      'mode' => 'linea',
-      'conditions' => 
-      array (
-        0 => '$codigoConcepto = \'5001\'',
-      ),
-    ),
-    462 => 
-    array (
-      'primitive' => 'isTrueExpresion',
-      'params' => 
-      array (
-        'errorCodeValidate' => '\'4280\'',
-        'node' => 'cbc:Value',
-        'expresion' => 'true()',
-        'isError' => 'false()',
-        'descripcion' => 'concat(\'Error en la linea: \', $nroLinea, \' ConceptoItem \', cbc:NameCode)',
-      ),
-      'context' => 'cac:Item/cac:AdditionalItemProperty',
-      'mode' => 'linea',
-      'conditions' => 
-      array (
-        0 => '$codigoConcepto = \'5001\'',
-        1 => 'string-length(cbc:Value) > 10 or string-length(cbc:Value) < 1 ',
-      ),
-    ),
-    463 => 
-    array (
-      'primitive' => 'regexpValidateElementIfExist',
-      'params' => 
-      array (
-        'errorCodeValidate' => '\'4280\'',
-        'node' => 'cbc:Value',
-        'regexp' => '\'^(?!\\s*$)[^\\s].{0,}$\'',
-        'isError' => 'false()',
-        'descripcion' => 'concat(\'Error en la linea: \', $nroLinea, \' ConceptoItem \', cbc:NameCode)',
-      ),
-      'context' => 'cac:Item/cac:AdditionalItemProperty',
-      'mode' => 'linea',
-      'conditions' => 
-      array (
-        0 => '$codigoConcepto = \'5001\'',
-      ),
-    ),
-    464 => 
-    array (
-      'primitive' => 'existElement',
-      'params' => 
-      array (
-        'errorCodeNotExist' => '\'3064\'',
-        'node' => 'cbc:Value',
-        'descripcion' => 'concat(\'Error en la linea: \', $nroLinea)',
-      ),
-      'context' => 'cac:Item/cac:AdditionalItemProperty',
-      'mode' => 'linea',
-      'conditions' => 
-      array (
-        0 => '$codigoConcepto = \'5002\'',
-      ),
-    ),
-    465 => 
-    array (
-      'primitive' => 'isTrueExpresion',
-      'params' => 
-      array (
-        'errorCodeValidate' => '\'4280\'',
-        'node' => 'cbc:Value',
-        'expresion' => 'true()',
-        'isError' => 'false()',
-        'descripcion' => 'concat(\'Error en la linea: \', $nroLinea, \' ConceptoItem \', cbc:NameCode)',
-      ),
-      'context' => 'cac:Item/cac:AdditionalItemProperty',
-      'mode' => 'linea',
-      'conditions' => 
-      array (
-        0 => '$codigoConcepto = \'5002\'',
-        1 => 'string-length(cbc:Value) > 30 or string-length(cbc:Value) < 1 ',
-      ),
-    ),
-    466 => 
-    array (
-      'primitive' => 'regexpValidateElementIfExist',
-      'params' => 
-      array (
-        'errorCodeValidate' => '\'4280\'',
-        'node' => 'cbc:Value',
-        'regexp' => '\'^(?!\\s*$)[^\\s].{0,}$\'',
-        'isError' => 'false()',
-        'descripcion' => 'concat(\'Error en la linea: \', $nroLinea, \' ConceptoItem \', cbc:NameCode)',
-      ),
-      'context' => 'cac:Item/cac:AdditionalItemProperty',
-      'mode' => 'linea',
-      'conditions' => 
-      array (
-        0 => '$codigoConcepto = \'5002\'',
-      ),
-    ),
-    467 => 
-    array (
-      'primitive' => 'existElement',
-      'params' => 
-      array (
-        'errorCodeNotExist' => '\'3064\'',
-        'node' => 'cbc:Value',
-        'descripcion' => 'concat(\'Error en la linea: \', $nroLinea, \' ConceptoItem \', cbc:NameCode)',
-      ),
-      'context' => 'cac:Item/cac:AdditionalItemProperty',
-      'mode' => 'linea',
-      'conditions' => 
-      array (
-        0 => '$codigoConcepto = \'5003\'',
-      ),
-    ),
-    468 => 
-    array (
-      'primitive' => 'isTrueExpresion',
-      'params' => 
-      array (
-        'errorCodeValidate' => '\'4280\'',
-        'node' => 'cbc:Value',
-        'expresion' => 'true()',
-        'isError' => 'false()',
-        'descripcion' => 'concat(\'Error en la linea: \', $nroLinea, \' ConceptoItem \', cbc:NameCode)',
-      ),
-      'context' => 'cac:Item/cac:AdditionalItemProperty',
-      'mode' => 'linea',
-      'conditions' => 
-      array (
-        0 => '$codigoConcepto = \'5003\'',
-        1 => 'string-length(cbc:Value) > 30 or string-length(cbc:Value) < 1 ',
-      ),
-    ),
-    469 => 
-    array (
-      'primitive' => 'regexpValidateElementIfExist',
-      'params' => 
-      array (
-        'errorCodeValidate' => '\'4280\'',
-        'node' => 'cbc:Value',
-        'regexp' => '\'^(?!\\s*$)[^\\s].{0,}$\'',
-        'isError' => 'false()',
-        'descripcion' => 'concat(\'Error en la linea: \', $nroLinea, \' ConceptoItem \', cbc:NameCode)',
-      ),
-      'context' => 'cac:Item/cac:AdditionalItemProperty',
-      'mode' => 'linea',
-      'conditions' => 
-      array (
-        0 => '$codigoConcepto = \'5003\'',
-      ),
-    ),
-    470 => 
-    array (
-      'primitive' => 'existElement',
-      'params' => 
-      array (
-        'errorCodeNotExist' => '\'3064\'',
-        'node' => 'cbc:Value',
-        'descripcion' => 'concat(\'Error en la linea: \', $nroLinea, \' ConceptoItem \', cbc:NameCode)',
-      ),
-      'context' => 'cac:Item/cac:AdditionalItemProperty',
-      'mode' => 'linea',
-      'conditions' => 
-      array (
-        0 => '$codigoConcepto = \'7000\'',
-      ),
-    ),
-    471 => 
-    array (
-      'primitive' => 'existElement',
-      'params' => 
-      array (
-        'errorCodeNotExist' => '\'3064\'',
-        'node' => 'cbc:Value',
-        'descripcion' => 'concat(\'Error en la linea: \', $nroLinea, \' ConceptoItem \', cbc:NameCode)',
-      ),
-      'context' => 'cac:Item/cac:AdditionalItemProperty',
-      'mode' => 'linea',
-      'conditions' => 
-      array (
-        0 => '$codigoConcepto = \'7001\'',
-      ),
-    ),
-    472 => 
-    array (
-      'primitive' => 'findElementInCatalog',
-      'params' => 
-      array (
-        'catalogo' => '\'26\'',
-        'idCatalogo' => 'cbc:Value',
-        'errorCodeValidate' => '\'4280\'',
-        'descripcion' => 'concat(\'Error en la linea: \', $nroLinea, \' ConceptoItem \', cbc:NameCode)',
-        'isError' => 'false()',
-      ),
-      'context' => 'cac:Item/cac:AdditionalItemProperty',
-      'mode' => 'linea',
-      'conditions' => 
-      array (
-        0 => '$codigoConcepto = \'7001\'',
-      ),
-    ),
-    473 => 
-    array (
-      'primitive' => 'existElement',
-      'params' => 
-      array (
-        'errorCodeNotExist' => '\'3064\'',
-        'node' => 'cbc:Value',
-        'descripcion' => 'concat(\'Error en la linea: \', $nroLinea, \' ConceptoItem \', cbc:NameCode)',
-      ),
-      'context' => 'cac:Item/cac:AdditionalItemProperty',
-      'mode' => 'linea',
-      'conditions' => 
-      array (
-        0 => '$codigoConcepto = \'7002\'',
-      ),
-    ),
-    474 => 
-    array (
-      'primitive' => 'findElementInCatalog',
-      'params' => 
-      array (
-        'catalogo' => '\'27\'',
-        'idCatalogo' => 'cbc:Value',
-        'errorCodeValidate' => '\'4280\'',
-        'descripcion' => 'concat(\'Error en la linea: \', $nroLinea, \' ConceptoItem \', cbc:NameCode)',
-        'isError' => 'false()',
-      ),
-      'context' => 'cac:Item/cac:AdditionalItemProperty',
-      'mode' => 'linea',
-      'conditions' => 
-      array (
-        0 => '$codigoConcepto = \'7002\'',
-      ),
-    ),
-    475 => 
-    array (
-      'primitive' => 'existElement',
-      'params' => 
-      array (
-        'errorCodeNotExist' => '\'3064\'',
-        'node' => 'cbc:Value',
-        'descripcion' => 'concat(\'Error en la linea: \', $nroLinea, \' ConceptoItem \', cbc:NameCode)',
-      ),
-      'context' => 'cac:Item/cac:AdditionalItemProperty',
-      'mode' => 'linea',
-      'conditions' => 
-      array (
-        0 => '$codigoConcepto = \'7003\'',
-      ),
-    ),
-    476 => 
-    array (
-      'primitive' => 'isTrueExpresion',
-      'params' => 
-      array (
-        'errorCodeValidate' => '\'4280\'',
-        'node' => 'cbc:Value',
-        'expresion' => 'true()',
-        'isError' => 'false()',
-        'descripcion' => 'concat(\'Error en la linea: \', $nroLinea, \' ConceptoItem \', cbc:NameCode)',
-      ),
-      'context' => 'cac:Item/cac:AdditionalItemProperty',
-      'mode' => 'linea',
-      'conditions' => 
-      array (
-        0 => '$codigoConcepto = \'7003\'',
-        1 => 'string-length(cbc:Value) > 50 or string-length(cbc:Value) < 3 ',
-      ),
-    ),
-    477 => 
-    array (
-      'primitive' => 'regexpValidateElementIfExist',
-      'params' => 
-      array (
-        'errorCodeValidate' => '\'4280\'',
-        'node' => 'cbc:Value',
-        'regexp' => '\'^[^\\n\\t\\r\\f]{2,}$\'',
-        'isError' => 'false()',
-        'descripcion' => 'concat(\'Error en la linea: \', $nroLinea, \' ConceptoItem \', cbc:NameCode)',
-      ),
-      'context' => 'cac:Item/cac:AdditionalItemProperty',
-      'mode' => 'linea',
-      'conditions' => 
-      array (
-        0 => '$codigoConcepto = \'7003\'',
-      ),
-    ),
-    478 => 
-    array (
-      'primitive' => 'existElement',
-      'params' => 
-      array (
-        'errorCodeNotExist' => '\'3064\'',
-        'node' => 'cbc:Value',
-        'descripcion' => 'concat(\'Error en la linea: \', $nroLinea, \' ConceptoItem \', cbc:NameCode)',
-      ),
-      'context' => 'cac:Item/cac:AdditionalItemProperty',
-      'mode' => 'linea',
-      'conditions' => 
-      array (
-        0 => '$codigoConcepto = \'7004\'',
-      ),
-    ),
-    479 => 
-    array (
-      'primitive' => 'isTrueExpresion',
-      'params' => 
-      array (
-        'errorCodeValidate' => '\'4280\'',
-        'node' => 'cbc:Value',
-        'expresion' => 'true()',
-        'isError' => 'false()',
-        'descripcion' => 'concat(\'Error en la linea: \', $nroLinea, \' ConceptoItem \', cbc:NameCode)',
-      ),
-      'context' => 'cac:Item/cac:AdditionalItemProperty',
-      'mode' => 'linea',
-      'conditions' => 
-      array (
-        0 => '$codigoConcepto = \'7004\'',
-        1 => 'string-length(cbc:Value) > 50 or string-length(cbc:Value) < 3 ',
-      ),
-    ),
-    480 => 
-    array (
-      'primitive' => 'regexpValidateElementIfExist',
-      'params' => 
-      array (
-        'errorCodeValidate' => '\'4280\'',
-        'node' => 'cbc:Value',
-        'regexp' => '\'^[^\\n\\t\\r\\f]{2,}$\'',
-        'isError' => 'false()',
-        'descripcion' => 'concat(\'Error en la linea: \', $nroLinea, \' ConceptoItem \', cbc:NameCode)',
-      ),
-      'context' => 'cac:Item/cac:AdditionalItemProperty',
-      'mode' => 'linea',
-      'conditions' => 
-      array (
-        0 => '$codigoConcepto = \'7004\'',
-      ),
-    ),
-    481 => 
-    array (
-      'primitive' => 'existElement',
-      'params' => 
-      array (
-        'errorCodeNotExist' => '\'3064\'',
-        'node' => 'cbc:Value',
-        'descripcion' => 'concat(\'Error en la linea: \', $nroLinea, \' ConceptoItem \', cbc:NameCode)',
-      ),
-      'context' => 'cac:Item/cac:AdditionalItemProperty',
-      'mode' => 'linea',
-      'conditions' => 
-      array (
         0 => '$codigoConcepto = \'7005\'',
       ),
     ),
-    482 => 
+    425 => 
     array (
       'primitive' => 'regexpValidateElementIfExist',
       'params' => 
@@ -8125,110 +7119,7 @@ return array (
         0 => '$codigoConcepto = \'7005\'',
       ),
     ),
-    483 => 
-    array (
-      'primitive' => 'existElement',
-      'params' => 
-      array (
-        'errorCodeNotExist' => '\'3064\'',
-        'node' => 'cbc:Value',
-        'descripcion' => 'concat(\'Error en la linea: \', $nroLinea, \' ConceptoItem \', cbc:NameCode)',
-      ),
-      'context' => 'cac:Item/cac:AdditionalItemProperty',
-      'mode' => 'linea',
-      'conditions' => 
-      array (
-        0 => '$codigoConcepto = \'7006\'',
-      ),
-    ),
-    484 => 
-    array (
-      'primitive' => 'findElementInCatalog',
-      'params' => 
-      array (
-        'catalogo' => '\'13\'',
-        'idCatalogo' => 'cbc:Value',
-        'errorCodeValidate' => '\'4280\'',
-        'descripcion' => 'concat(\'Error en la linea: \', $nroLinea, \' ConceptoItem \', cbc:NameCode)',
-        'isError' => 'false()',
-      ),
-      'context' => 'cac:Item/cac:AdditionalItemProperty',
-      'mode' => 'linea',
-      'conditions' => 
-      array (
-        0 => '$codigoConcepto = \'7006\'',
-      ),
-    ),
-    485 => 
-    array (
-      'primitive' => 'existElement',
-      'params' => 
-      array (
-        'errorCodeNotExist' => '\'3064\'',
-        'node' => 'cbc:Value',
-        'descripcion' => 'concat(\'Error en la linea: \', $nroLinea, \' ConceptoItem \', cbc:NameCode)',
-      ),
-      'context' => 'cac:Item/cac:AdditionalItemProperty',
-      'mode' => 'linea',
-      'conditions' => 
-      array (
-        0 => '$codigoConcepto = \'7007\'',
-      ),
-    ),
-    486 => 
-    array (
-      'primitive' => 'isTrueExpresion',
-      'params' => 
-      array (
-        'errorCodeValidate' => '\'4280\'',
-        'node' => 'cbc:Value',
-        'expresion' => 'true()',
-        'isError' => 'false()',
-        'descripcion' => 'concat(\'Error en la linea: \', $nroLinea, \' ConceptoItem \', cbc:NameCode)',
-      ),
-      'context' => 'cac:Item/cac:AdditionalItemProperty',
-      'mode' => 'linea',
-      'conditions' => 
-      array (
-        0 => '$codigoConcepto = \'7007\'',
-        1 => 'string-length(cbc:Value) > 200 or string-length(cbc:Value) < 3 ',
-      ),
-    ),
-    487 => 
-    array (
-      'primitive' => 'regexpValidateElementIfExist',
-      'params' => 
-      array (
-        'errorCodeValidate' => '\'4280\'',
-        'node' => 'cbc:Value',
-        'regexp' => '\'^[^\\n\\t\\r\\f]{2,}$\'',
-        'isError' => 'false()',
-        'descripcion' => 'concat(\'Error en la linea: \', $nroLinea, \' ConceptoItem \', cbc:NameCode)',
-      ),
-      'context' => 'cac:Item/cac:AdditionalItemProperty',
-      'mode' => 'linea',
-      'conditions' => 
-      array (
-        0 => '$codigoConcepto = \'7007\'',
-      ),
-    ),
-    488 => 
-    array (
-      'primitive' => 'existElement',
-      'params' => 
-      array (
-        'errorCodeNotExist' => '\'3064\'',
-        'node' => 'cbc:Value',
-        'descripcion' => 'concat(\'Error en la linea: \', $nroLinea, \' ConceptoItem \', cbc:NameCode)',
-      ),
-      'context' => 'cac:Item/cac:AdditionalItemProperty',
-      'mode' => 'linea',
-      'conditions' => 
-      array (
-        0 => '$codigoConcepto = \'7008\' or $codigoConcepto = \'7009\' or $codigoConcepto = \'7010\' or $codigoConcepto = \'7011\'',
-      ),
-    ),
-    489 => 
+    426 => 
     array (
       'primitive' => 'existElement',
       'params' => 
@@ -8244,7 +7135,7 @@ return array (
         0 => '$codigoConcepto = \'7013\'',
       ),
     ),
-    490 => 
+    427 => 
     array (
       'primitive' => 'isTrueExpresion',
       'params' => 
@@ -8263,7 +7154,7 @@ return array (
         1 => 'string-length(cbc:Value) > 50 or string-length(cbc:Value) < 1 ',
       ),
     ),
-    491 => 
+    428 => 
     array (
       'primitive' => 'regexpValidateElementIfExist',
       'params' => 
@@ -8281,7 +7172,7 @@ return array (
         0 => '$codigoConcepto = \'7013\'',
       ),
     ),
-    492 => 
+    429 => 
     array (
       'primitive' => 'existElement',
       'params' => 
@@ -8297,7 +7188,7 @@ return array (
         0 => '$codigoConcepto = \'7015\'',
       ),
     ),
-    493 => 
+    430 => 
     array (
       'primitive' => 'regexpValidateElementIfExist',
       'params' => 
@@ -8315,7 +7206,7 @@ return array (
         0 => '$codigoConcepto = \'7015\'',
       ),
     ),
-    494 => 
+    431 => 
     array (
       'primitive' => 'existElement',
       'params' => 
@@ -8331,7 +7222,7 @@ return array (
         0 => '$codigoConcepto = \'7012\' or $codigoConcepto = \'7016\'',
       ),
     ),
-    495 => 
+    432 => 
     array (
       'primitive' => 'regexpValidateElementIfExist',
       'params' => 
@@ -8349,7 +7240,7 @@ return array (
         0 => '$codigoConcepto = \'7012\' or $codigoConcepto = \'7016\'',
       ),
     ),
-    496 => 
+    433 => 
     array (
       'primitive' => 'existElement',
       'params' => 
@@ -8365,7 +7256,7 @@ return array (
         0 => '$codigoConcepto = \'7014\'',
       ),
     ),
-    497 => 
+    434 => 
     array (
       'primitive' => 'regexpValidateElementIfExist',
       'params' => 
@@ -8383,7 +7274,7 @@ return array (
         0 => '$codigoConcepto = \'7014\'',
       ),
     ),
-    498 => 
+    435 => 
     array (
       'primitive' => 'existElement',
       'params' => 
@@ -8400,7 +7291,7 @@ return array (
         0 => '$codigoConcepto = \'7014\'',
       ),
     ),
-    499 => 
+    436 => 
     array (
       'primitive' => 'regexpValidateElementIfExist',
       'params' => 
@@ -8418,7 +7309,7 @@ return array (
         0 => '$codigoConcepto = \'7014\'',
       ),
     ),
-    500 => 
+    437 => 
     array (
       'primitive' => 'existAndValidateValueTwoDecimal',
       'params' => 
@@ -8436,7 +7327,7 @@ return array (
         0 => '$codigoTributo != \'7152\'',
       ),
     ),
-    501 => 
+    438 => 
     array (
       'primitive' => 'existAndValidateValueTwoDecimal',
       'params' => 
@@ -8453,7 +7344,7 @@ return array (
       array (
       ),
     ),
-    502 => 
+    439 => 
     array (
       'primitive' => 'isTrueExpresion',
       'params' => 
@@ -8470,7 +7361,25 @@ return array (
         0 => '$codigoTributo = \'9995\' or $codigoTributo = \'9997\' or $codigoTributo = \'9998\'',
       ),
     ),
-    503 => 
+    440 => 
+    array (
+      'primitive' => 'isTrueExpresion',
+      'params' => 
+      array (
+        'errorCodeValidate' => '\'3240\'',
+        'node' => 'cbc:TaxAmount',
+        'expresion' => '$tipoOperacion = \'0113\'',
+        'descripcion' => 'concat(\'Error Tributo \', $codigoTributo)',
+      ),
+      'context' => 'cac:TaxSubtotal',
+      'mode' => 'cabecera',
+      'conditions' => 
+      array (
+        0 => '$codigoTributo = \'7152\'',
+        1 => 'cbc:TaxAmount > 0',
+      ),
+    ),
+    441 => 
     array (
       'primitive' => 'existElement',
       'params' => 
@@ -8484,7 +7393,7 @@ return array (
       array (
       ),
     ),
-    504 => 
+    442 => 
     array (
       'primitive' => 'findElementInCatalog',
       'params' => 
@@ -8500,7 +7409,7 @@ return array (
       array (
       ),
     ),
-    505 => 
+    443 => 
     array (
       'primitive' => 'regexpValidateElementIfExist',
       'params' => 
@@ -8517,7 +7426,7 @@ return array (
       array (
       ),
     ),
-    506 => 
+    444 => 
     array (
       'primitive' => 'regexpValidateElementIfExist',
       'params' => 
@@ -8534,7 +7443,7 @@ return array (
       array (
       ),
     ),
-    507 => 
+    445 => 
     array (
       'primitive' => 'regexpValidateElementIfExist',
       'params' => 
@@ -8551,7 +7460,7 @@ return array (
       array (
       ),
     ),
-    508 => 
+    446 => 
     array (
       'primitive' => 'existElement',
       'params' => 
@@ -8566,7 +7475,7 @@ return array (
       array (
       ),
     ),
-    509 => 
+    447 => 
     array (
       'primitive' => 'existElement',
       'params' => 
@@ -8581,7 +7490,7 @@ return array (
       array (
       ),
     ),
-    510 => 
+    448 => 
     array (
       'primitive' => 'isTrueExpresion',
       'params' => 
@@ -8597,7 +7506,7 @@ return array (
       array (
       ),
     ),
-    511 => 
+    449 => 
     array (
       'primitive' => 'existAndValidateValueTwoDecimal',
       'params' => 
@@ -8613,13 +7522,13 @@ return array (
       array (
       ),
     ),
-    512 => 
+    450 => 
     array (
       'primitive' => 'isTrueExpresion',
       'params' => 
       array (
         'errorCodeValidate' => '\'4022\'',
-        'node' => 'cac:TaxSubtotal/cac:TaxCategory/cac:TaxScheme/cbc:ID',
+        'node' => 'cac:TaxSubtotal[cac:TaxCategory/cac:TaxScheme/cbc:ID[text() = \'9997\']]/cbc:TaxableAmount',
         'expresion' => 'not(cac:TaxSubtotal[cac:TaxCategory/cac:TaxScheme/cbc:ID[text() = \'9997\']]) or cac:TaxSubtotal[cac:TaxCategory/cac:TaxScheme/cbc:ID[text() = \'9997\']]/cbc:TaxableAmount = 0',
         'isError' => 'false()',
       ),
@@ -8630,13 +7539,13 @@ return array (
         0 => '$root/cbc:Note[@languageLocaleID = \'2001\']',
       ),
     ),
-    513 => 
+    451 => 
     array (
       'primitive' => 'isTrueExpresion',
       'params' => 
       array (
         'errorCodeValidate' => '\'4023\'',
-        'node' => 'cac:TaxSubtotal/cac:TaxCategory/cac:TaxScheme/cbc:ID',
+        'node' => 'cac:TaxSubtotal[cac:TaxCategory/cac:TaxScheme/cbc:ID[text() = \'9997\']]/cbc:TaxableAmount',
         'expresion' => 'not(cac:TaxSubtotal[cac:TaxCategory/cac:TaxScheme/cbc:ID[text() = \'9997\']]) or cac:TaxSubtotal[cac:TaxCategory/cac:TaxScheme/cbc:ID[text() = \'9997\']]/cbc:TaxableAmount = 0',
         'isError' => 'false()',
       ),
@@ -8647,13 +7556,13 @@ return array (
         0 => '$root/cbc:Note[@languageLocaleID = \'2002\']',
       ),
     ),
-    514 => 
+    452 => 
     array (
       'primitive' => 'isTrueExpresion',
       'params' => 
       array (
         'errorCodeValidate' => '\'4024\'',
-        'node' => 'cac:TaxSubtotal/cac:TaxCategory/cac:TaxScheme/cbc:ID',
+        'node' => 'cac:TaxSubtotal[cac:TaxCategory/cac:TaxScheme/cbc:ID[text() = \'9997\']]/cbc:TaxableAmount',
         'expresion' => 'not(cac:TaxSubtotal[cac:TaxCategory/cac:TaxScheme/cbc:ID[text() = \'9997\']]) or cac:TaxSubtotal[cac:TaxCategory/cac:TaxScheme/cbc:ID[text() = \'9997\']]/cbc:TaxableAmount = 0',
         'isError' => 'false()',
       ),
@@ -8664,13 +7573,13 @@ return array (
         0 => '$root/cbc:Note[@languageLocaleID = \'2003\']',
       ),
     ),
-    515 => 
+    453 => 
     array (
       'primitive' => 'isTrueExpresion',
       'params' => 
       array (
         'errorCodeValidate' => '\'4244\'',
-        'node' => 'cac:TaxSubtotal/cac:TaxCategory/cac:TaxScheme/cbc:ID',
+        'node' => 'cac:TaxSubtotal[cac:TaxCategory/cac:TaxScheme/cbc:ID[text() = \'9997\']]/cbc:TaxableAmount',
         'expresion' => 'not(cac:TaxSubtotal[cac:TaxCategory/cac:TaxScheme/cbc:ID[text() = \'9997\']]) or cac:TaxSubtotal[cac:TaxCategory/cac:TaxScheme/cbc:ID[text() = \'9997\']]/cbc:TaxableAmount = 0',
         'isError' => 'false()',
       ),
@@ -8681,7 +7590,7 @@ return array (
         0 => '$root/cbc:Note[@languageLocaleID = \'2008\']',
       ),
     ),
-    516 => 
+    454 => 
     array (
       'primitive' => 'isTrueExpresion',
       'params' => 
@@ -8698,7 +7607,7 @@ return array (
         0 => '$tipoOperacion=\'0200\' or $tipoOperacion=\'0201\' or $tipoOperacion=\'0202\' or $tipoOperacion=\'0203\' or $tipoOperacion=\'0204\' or $tipoOperacion=\'0205\' or $tipoOperacion=\'0206\' or $tipoOperacion=\'0207\' or $tipoOperacion=\'0208\'',
       ),
     ),
-    517 => 
+    455 => 
     array (
       'primitive' => 'isTrueExpresion',
       'params' => 
@@ -8714,7 +7623,23 @@ return array (
       array (
       ),
     ),
-    518 => 
+    456 => 
+    array (
+      'primitive' => 'isTrueExpresion',
+      'params' => 
+      array (
+        'errorCodeValidate' => '\'2641\'',
+        'node' => 'cac:TaxSubtotal/cac:TaxCategory/cac:TaxScheme[cbc:ID = \'9996\']/cbc:ID',
+        'expresion' => 'not(cac:TaxSubtotal[cac:TaxCategory/cac:TaxScheme/cbc:ID[text() = \'9996\']]) or cac:TaxSubtotal[cac:TaxCategory/cac:TaxScheme/cbc:ID[text() = \'9996\']]/cbc:TaxableAmount = 0',
+      ),
+      'context' => 'cac:TaxTotal',
+      'mode' => 'cabecera',
+      'conditions' => 
+      array (
+        0 => '$root/cac:InvoiceLine/cac:PricingReference/cac:AlternativeConditionPrice/cbc:PriceTypeCode =\'02\'',
+      ),
+    ),
+    457 => 
     array (
       'primitive' => 'isTrueExpresion',
       'params' => 
@@ -8730,22 +7655,7 @@ return array (
         0 => '$root/cbc:Note[@languageLocaleID = \'1002\']',
       ),
     ),
-    519 => 
-    array (
-      'primitive' => 'isTrueExpresion',
-      'params' => 
-      array (
-        'errorCodeValidate' => '\'2641\'',
-        'node' => 'cac:TaxSubtotal/cac:TaxCategory/cac:TaxScheme[cbc:ID = \'9996\']/cbc:ID',
-        'expresion' => '$root/cac:InvoiceLine/cac:PricingReference/cac:AlternativeConditionPrice[cbc:PriceTypeCode =\'02\']/cbc:PriceAmount > 0 and (not(cac:TaxSubtotal[cac:TaxCategory/cac:TaxScheme/cbc:ID[text() = \'9996\']]) or cac:TaxSubtotal[cac:TaxCategory/cac:TaxScheme/cbc:ID[text() = \'9996\']]/cbc:TaxableAmount = 0)',
-      ),
-      'context' => 'cac:TaxTotal',
-      'mode' => 'cabecera',
-      'conditions' => 
-      array (
-      ),
-    ),
-    520 => 
+    458 => 
     array (
       'primitive' => 'isTrueExpresion',
       'params' => 
@@ -8761,14 +7671,14 @@ return array (
       array (
       ),
     ),
-    521 => 
+    459 => 
     array (
       'primitive' => 'isTrueExpresion',
       'params' => 
       array (
         'errorCodeValidate' => '\'4297\'',
         'node' => 'cac:TaxSubtotal[cac:TaxCategory/cac:TaxScheme/cbc:ID[text() = \'9997\']]/cbc:TaxableAmount',
-        'expresion' => '(round(($totalBaseExoneradas + 1 ) * 100) div 100)  < $totalBaseExoneradasxLineaCalc or (round(($totalBaseExoneradas - 1) * 100) div 100)  > $totalBaseExoneradasxLineaCalc',
+        'expresion' => '(round(($totalBaseExoneradas + 1 ) * 100) div 100) < $totalBaseExoneradasxLineaCalc or (round(($totalBaseExoneradas - 1) * 100) div 100) > $totalBaseExoneradasxLineaCalc',
         'isError' => 'false()',
       ),
       'context' => 'cac:TaxTotal',
@@ -8777,7 +7687,7 @@ return array (
       array (
       ),
     ),
-    522 => 
+    460 => 
     array (
       'primitive' => 'isTrueExpresion',
       'params' => 
@@ -8793,7 +7703,7 @@ return array (
       array (
       ),
     ),
-    523 => 
+    461 => 
     array (
       'primitive' => 'isTrueExpresion',
       'params' => 
@@ -8809,7 +7719,7 @@ return array (
       array (
       ),
     ),
-    524 => 
+    462 => 
     array (
       'primitive' => 'isTrueExpresion',
       'params' => 
@@ -8825,7 +7735,7 @@ return array (
       array (
       ),
     ),
-    525 => 
+    463 => 
     array (
       'primitive' => 'isTrueExpresion',
       'params' => 
@@ -8841,7 +7751,7 @@ return array (
       array (
       ),
     ),
-    526 => 
+    464 => 
     array (
       'primitive' => 'isTrueExpresion',
       'params' => 
@@ -8858,7 +7768,7 @@ return array (
         0 => 'cac:TaxSubtotal[cac:TaxCategory/cac:TaxScheme/cbc:ID[text() = \'1000\']]/cbc:TaxableAmount > 0',
       ),
     ),
-    527 => 
+    465 => 
     array (
       'primitive' => 'isTrueExpresion',
       'params' => 
@@ -8875,7 +7785,7 @@ return array (
         0 => 'cac:TaxSubtotal[cac:TaxCategory/cac:TaxScheme/cbc:ID[text() = \'1016\']]/cbc:TaxableAmount > 0',
       ),
     ),
-    528 => 
+    466 => 
     array (
       'primitive' => 'isTrueExpresion',
       'params' => 
@@ -8891,14 +7801,14 @@ return array (
       array (
       ),
     ),
-    529 => 
+    467 => 
     array (
       'primitive' => 'isTrueExpresion',
       'params' => 
       array (
         'errorCodeValidate' => '\'4301\'',
         'node' => 'cbc:TaxAmount',
-        'expresion' => '(round(($totalImpuestos + 1 ) * 100) div 100) < (round($SumatoriaImpuestos * 100) div 100) or (round(($totalImpuestos - 1) * 100) div 100) > (round($SumatoriaImpuestos * 100) div 100)',
+        'expresion' => '(round(($totalImpuestos + 1 ) * 100) div 100) < (round($SumatoriaImpuestos * 100) div 100)  or (round(($totalImpuestos - 1) * 100) div 100) > (round($SumatoriaImpuestos * 100) div 100) ',
         'isError' => 'false()',
       ),
       'context' => 'cac:TaxTotal',
@@ -8907,7 +7817,7 @@ return array (
       array (
       ),
     ),
-    530 => 
+    468 => 
     array (
       'primitive' => 'isTrueExpresion',
       'params' => 
@@ -8923,7 +7833,7 @@ return array (
       array (
       ),
     ),
-    531 => 
+    469 => 
     array (
       'primitive' => 'isTrueExpresion',
       'params' => 
@@ -8939,7 +7849,7 @@ return array (
       array (
       ),
     ),
-    532 => 
+    470 => 
     array (
       'primitive' => 'isTrueExpresion',
       'params' => 
@@ -8955,7 +7865,7 @@ return array (
       array (
       ),
     ),
-    533 => 
+    471 => 
     array (
       'primitive' => 'isTrueExpresion',
       'params' => 
@@ -8972,7 +7882,7 @@ return array (
         0 => '$codigoCargoDescuento = \'45\' or $codigoCargoDescuento = \'46\' or $codigoCargoDescuento = \'49\' or $codigoCargoDescuento = \'50\' or $codigoCargoDescuento = \'51\' or $codigoCargoDescuento = \'52\' or $codigoCargoDescuento = \'53\'',
       ),
     ),
-    534 => 
+    472 => 
     array (
       'primitive' => 'isTrueExpresion',
       'params' => 
@@ -8989,42 +7899,7 @@ return array (
         0 => '$codigoCargoDescuento = \'02\' or $codigoCargoDescuento = \'03\' or $codigoCargoDescuento = \'04\' or $codigoCargoDescuento = \'05\' or $codigoCargoDescuento = \'06\'',
       ),
     ),
-    535 => 
-    array (
-      'primitive' => 'isTrueExpresion',
-      'params' => 
-      array (
-        'errorCodeValidate' => '\'3114\'',
-        'node' => 'cbc:ChargeIndicator',
-        'expresion' => 'cbc:ChargeIndicator/text() = \'true\'',
-        'isError' => 'boolean(number(0))',
-        'descripcion' => 'concat(\'Error Cargo/Descuento \', $codigoCargoDescuento)',
-      ),
-      'context' => 'cac:AllowanceCharge',
-      'mode' => 'cabecera',
-      'conditions' => 
-      array (
-        0 => '$codigoCargoDescuento = \'62\'',
-      ),
-    ),
-    536 => 
-    array (
-      'primitive' => 'isTrueExpresion',
-      'params' => 
-      array (
-        'errorCodeValidate' => '\'3262\'',
-        'node' => 'cac:AccountingCustomerParty/cac:Party/cac:PartyIdentification/cbc:ID/@schemeID',
-        'expresion' => '$root/cac:AccountingCustomerParty/cac:Party/cac:PartyIdentification/cbc:ID/@schemeID != \'6\'',
-        'isError' => 'boolean(number(0))',
-      ),
-      'context' => 'cac:AllowanceCharge',
-      'mode' => 'cabecera',
-      'conditions' => 
-      array (
-        0 => '$codigoCargoDescuento = \'62\'',
-      ),
-    ),
-    537 => 
+    473 => 
     array (
       'primitive' => 'existElement',
       'params' => 
@@ -9039,7 +7914,7 @@ return array (
       array (
       ),
     ),
-    538 => 
+    474 => 
     array (
       'primitive' => 'isTrueExpresion',
       'params' => 
@@ -9056,7 +7931,7 @@ return array (
       array (
       ),
     ),
-    539 => 
+    475 => 
     array (
       'primitive' => 'findElementInCatalog',
       'params' => 
@@ -9072,7 +7947,7 @@ return array (
       array (
       ),
     ),
-    540 => 
+    476 => 
     array (
       'primitive' => 'regexpValidateElementIfExist',
       'params' => 
@@ -9089,7 +7964,7 @@ return array (
       array (
       ),
     ),
-    541 => 
+    477 => 
     array (
       'primitive' => 'regexpValidateElementIfExist',
       'params' => 
@@ -9106,7 +7981,7 @@ return array (
       array (
       ),
     ),
-    542 => 
+    478 => 
     array (
       'primitive' => 'regexpValidateElementIfExist',
       'params' => 
@@ -9123,7 +7998,7 @@ return array (
       array (
       ),
     ),
-    543 => 
+    479 => 
     array (
       'primitive' => 'regexpValidateElementIfExist',
       'params' => 
@@ -9137,10 +8012,10 @@ return array (
       'mode' => 'cabecera',
       'conditions' => 
       array (
-        0 => '$codigoCargoDescuento = \'62\' or $codigoCargoDescuento = \'51\' or $codigoCargoDescuento = \'52\' or $codigoCargoDescuento = \'53\'',
+        0 => '$codigoCargoDescuento = \'51\' or $codigoCargoDescuento = \'52\' or $codigoCargoDescuento = \'53\'',
       ),
     ),
-    544 => 
+    480 => 
     array (
       'primitive' => 'validateValueTwoDecimalIfExist',
       'params' => 
@@ -9153,10 +8028,10 @@ return array (
       'mode' => 'cabecera',
       'conditions' => 
       array (
-        0 => '$codigoCargoDescuento = \'62\' or $codigoCargoDescuento = \'51\' or $codigoCargoDescuento = \'52\' or $codigoCargoDescuento = \'53\'',
+        0 => '$codigoCargoDescuento = \'51\' or $codigoCargoDescuento = \'52\' or $codigoCargoDescuento = \'53\'',
       ),
     ),
-    545 => 
+    481 => 
     array (
       'primitive' => 'regexpValidateElementIfExist',
       'params' => 
@@ -9172,7 +8047,7 @@ return array (
       array (
       ),
     ),
-    546 => 
+    482 => 
     array (
       'primitive' => 'validateValueTwoDecimalIfExist',
       'params' => 
@@ -9188,7 +8063,7 @@ return array (
       array (
       ),
     ),
-    547 => 
+    483 => 
     array (
       'primitive' => 'regexpValidateElementIfExist',
       'params' => 
@@ -9205,7 +8080,7 @@ return array (
         0 => '$codigoCargoDescuento = \'51\' or $codigoCargoDescuento = \'52\' or $codigoCargoDescuento = \'53\'',
       ),
     ),
-    548 => 
+    484 => 
     array (
       'primitive' => 'isTrueExpresion',
       'params' => 
@@ -9220,28 +8095,10 @@ return array (
       'mode' => 'cabecera',
       'conditions' => 
       array (
-        0 => '$codigoCargoDescuento != \'45\' and $codigoCargoDescuento != \'51\' and $codigoCargoDescuento != \'52\' and $codigoCargoDescuento != \'53\' and $codigoCargoDescuento != \'62\'',
+        0 => '$codigoCargoDescuento != \'45\' and $codigoCargoDescuento != \'51\' and $codigoCargoDescuento != \'52\' and $codigoCargoDescuento != \'53\'',
       ),
     ),
-    549 => 
-    array (
-      'primitive' => 'isTrueExpresion',
-      'params' => 
-      array (
-        'errorCodeValidate' => '\'3263\'',
-        'node' => 'cbc:Amount',
-        'expresion' => 'cbc:MultiplierFactorNumeric > 0 and (($MontoCalculado + 1 ) < $Monto or ($MontoCalculado - 1) > $Monto)',
-        'descripcion' => 'concat(\'Error Cargo/Descuento \', $codigoCargoDescuento)',
-        'isError' => 'boolean(number(0))',
-      ),
-      'context' => 'cac:AllowanceCharge',
-      'mode' => 'cabecera',
-      'conditions' => 
-      array (
-        0 => '$codigoCargoDescuento = \'62\'',
-      ),
-    ),
-    550 => 
+    485 => 
     array (
       'primitive' => 'isTrueExpresion',
       'params' => 
@@ -9258,41 +8115,7 @@ return array (
         0 => '$codigoCargoDescuento = \'45\'',
       ),
     ),
-    551 => 
-    array (
-      'primitive' => 'validateValueTwoDecimalIfExist',
-      'params' => 
-      array (
-        'errorCodeValidate' => '\'3016\'',
-        'node' => 'cbc:BaseAmount',
-        'descripcion' => 'concat(\'Error Cargo/Descuento \', $codigoCargoDescuento)',
-      ),
-      'context' => 'cac:AllowanceCharge',
-      'mode' => 'cabecera',
-      'conditions' => 
-      array (
-        0 => '$codigoCargoDescuento = \'62\'',
-      ),
-    ),
-    552 => 
-    array (
-      'primitive' => 'isTrueExpresion',
-      'params' => 
-      array (
-        'errorCodeValidate' => '\'3264\'',
-        'node' => 'cbc:BaseAmount',
-        'expresion' => 'cbc:BaseAmount > $importeComprobante',
-        'descripcion' => 'concat(\'Error Cargo/Descuento \', $codigoCargoDescuento)',
-        'isError' => 'boolean(number(0))',
-      ),
-      'context' => 'cac:AllowanceCharge',
-      'mode' => 'cabecera',
-      'conditions' => 
-      array (
-        0 => '$codigoCargoDescuento = \'62\'',
-      ),
-    ),
-    553 => 
+    486 => 
     array (
       'primitive' => 'validateValueTwoDecimalIfExist',
       'params' => 
@@ -9308,23 +8131,7 @@ return array (
       array (
       ),
     ),
-    554 => 
-    array (
-      'primitive' => 'validateValueTwoDecimalIfExist',
-      'params' => 
-      array (
-        'errorCodeValidate' => '\'3016\'',
-        'node' => 'cbc:BaseAmount',
-        'isGreaterCero' => 'false()',
-        'descripcion' => 'concat(\'Error Cargo/Descuento \', $codigoCargoDescuento)',
-      ),
-      'context' => 'cac:AllowanceCharge',
-      'mode' => 'cabecera',
-      'conditions' => 
-      array (
-      ),
-    ),
-    555 => 
+    487 => 
     array (
       'primitive' => 'existElement',
       'params' => 
@@ -9340,7 +8147,7 @@ return array (
         0 => '$codigoCargoDescuento = \'45\'',
       ),
     ),
-    556 => 
+    488 => 
     array (
       'primitive' => 'isTrueExpresion',
       'params' => 
@@ -9357,7 +8164,7 @@ return array (
         0 => '$codigoCargoDescuento = \'45\'',
       ),
     ),
-    557 => 
+    489 => 
     array (
       'primitive' => 'existElement',
       'params' => 
@@ -9373,7 +8180,7 @@ return array (
         0 => '$codigoCargoDescuento = \'51\' or $codigoCargoDescuento = \'52\' or $codigoCargoDescuento = \'53\'',
       ),
     ),
-    558 => 
+    490 => 
     array (
       'primitive' => 'isTrueExpresion',
       'params' => 
@@ -9390,7 +8197,24 @@ return array (
         0 => '$codigoCargoDescuento = \'51\' or $codigoCargoDescuento = \'52\' or $codigoCargoDescuento = \'53\'',
       ),
     ),
-    559 => 
+    491 => 
+    array (
+      'primitive' => 'isTrueExpresion',
+      'params' => 
+      array (
+        'errorCodeValidate' => '\'2798\'',
+        'node' => 'cbc:Amount',
+        'expresion' => '($MontoCalculadoPercepcion + 1 ) < $MontoPercepcion or ($MontoCalculadoPercepcion - 1) > $MontoPercepcion',
+        'descripcion' => 'concat(\'Error Cargo/Descuento \', $codigoCargoDescuento)',
+      ),
+      'context' => 'cac:AllowanceCharge',
+      'mode' => 'cabecera',
+      'conditions' => 
+      array (
+        0 => '$codigoCargoDescuento = \'51\' or $codigoCargoDescuento = \'52\' or $codigoCargoDescuento = \'53\'',
+      ),
+    ),
+    492 => 
     array (
       'primitive' => 'isTrueExpresion',
       'params' => 
@@ -9408,24 +8232,7 @@ return array (
         1 => '$monedaComprobante = \'PEN\'',
       ),
     ),
-    560 => 
-    array (
-      'primitive' => 'isTrueExpresion',
-      'params' => 
-      array (
-        'errorCodeValidate' => '\'2798\'',
-        'node' => 'cbc:Amount',
-        'expresion' => '($MontoCalculadoPercepcion + 1 ) < $MontoPercepcion or ($MontoCalculadoPercepcion - 1) > $MontoPercepcion',
-        'descripcion' => 'concat(\'Error Cargo/Descuento \', $codigoCargoDescuento)',
-      ),
-      'context' => 'cac:AllowanceCharge',
-      'mode' => 'cabecera',
-      'conditions' => 
-      array (
-        0 => '$codigoCargoDescuento = \'51\' or $codigoCargoDescuento = \'52\' or $codigoCargoDescuento = \'53\'',
-      ),
-    ),
-    561 => 
+    493 => 
     array (
       'primitive' => 'regexpValidateElementIfExist',
       'params' => 
@@ -9442,953 +8249,264 @@ return array (
         0 => '$codigoCargoDescuento = \'51\' or $codigoCargoDescuento = \'52\' or $codigoCargoDescuento = \'53\'',
       ),
     ),
-    562 => 
+    494 => 
     array (
       'primitive' => 'findElementInCatalog',
       'params' => 
       array (
-        'errorCodeValidate' => '\'4249\'',
+        'errorCodeValidate' => '\'4231\'',
         'idCatalogo' => 'cbc:ID',
-        'catalogo' => '\'20\'',
+        'catalogo' => '\'13\'',
         'isError' => 'false()',
       ),
-      'context' => 'cac:Delivery/cac:Shipment',
+      'context' => 'cac:Delivery/cac:Shipment/cac:Delivery/cac:DeliveryAddress',
       'mode' => NULL,
       'conditions' => 
       array (
         0 => 'cbc:ID',
       ),
     ),
-    563 => 
-    array (
-      'primitive' => 'regexpValidateElementIfExist',
-      'params' => 
-      array (
-        'errorCodeValidate' => '\'4255\'',
-        'node' => 'cbc:ID/@schemeName',
-        'regexp' => '\'^(Motivo de Traslado)$\'',
-        'isError' => 'false()',
-      ),
-      'context' => 'cac:Delivery/cac:Shipment',
-      'mode' => NULL,
-      'conditions' => 
-      array (
-      ),
-    ),
-    564 => 
+    495 => 
     array (
       'primitive' => 'regexpValidateElementIfExist',
       'params' => 
       array (
         'errorCodeValidate' => '\'4256\'',
         'node' => 'cbc:ID/@schemeAgencyName',
-        'regexp' => '\'^(PE:SUNAT)$\'',
+        'regexp' => '\'^(PE:INEI)$\'',
         'isError' => 'false()',
       ),
-      'context' => 'cac:Delivery/cac:Shipment',
+      'context' => 'cac:Delivery/cac:Shipment/cac:Delivery/cac:DeliveryAddress',
       'mode' => NULL,
       'conditions' => 
       array (
       ),
     ),
-    565 => 
+    496 => 
     array (
       'primitive' => 'regexpValidateElementIfExist',
       'params' => 
       array (
-        'errorCodeValidate' => '\'4257\'',
-        'node' => 'cbc:ID/@schemeURI',
-        'regexp' => '\'^(urn:pe:gob:sunat:cpe:see:gem:catalogos:catalogo20)$\'',
+        'errorCodeValidate' => '\'4255\'',
+        'node' => 'cbc:ID/@schemeName',
+        'regexp' => '\'^(Ubigeos)$\'',
         'isError' => 'false()',
       ),
-      'context' => 'cac:Delivery/cac:Shipment',
+      'context' => 'cac:Delivery/cac:Shipment/cac:Delivery/cac:DeliveryAddress',
       'mode' => NULL,
       'conditions' => 
       array (
       ),
     ),
-    566 => 
-    array (
-      'primitive' => 'validateValueTwoDecimalIfExist',
-      'params' => 
-      array (
-        'errorCodeValidate' => '\'4155\'',
-        'node' => 'cbc:GrossWeightMeasure',
-        'isGreaterCero' => 'false()',
-        'isError' => 'false()',
-      ),
-      'context' => 'cac:Delivery/cac:Shipment',
-      'mode' => NULL,
-      'conditions' => 
-      array (
-      ),
-    ),
-    567 => 
+    497 => 
     array (
       'primitive' => 'regexpValidateElementIfExist',
       'params' => 
       array (
-        'errorCodeValidate' => '\'4154\'',
-        'node' => 'cbc:GrossWeightMeasure/@unitCode',
-        'regexp' => '\'^(KGM)$\'',
+        'errorCodeValidate' => '\'4236\'',
+        'node' => 'cac:AddressLine/cbc:Line',
+        'regexp' => '\'^(?!\\s*$)[^\\s].{2,199}$\'',
         'isError' => 'false()',
       ),
-      'context' => 'cac:Delivery/cac:Shipment',
+      'context' => 'cac:Delivery/cac:Shipment/cac:Delivery/cac:DeliveryAddress',
       'mode' => NULL,
       'conditions' => 
       array (
       ),
     ),
-    568 => 
+    498 => 
     array (
-      'primitive' => 'findElementInCatalog',
+      'primitive' => 'isTrueExpresion',
       'params' => 
       array (
-        'errorCodeValidate' => '\'4043\'',
-        'idCatalogo' => 'cac:ShipmentStage/cbc:TransportModeCode',
-        'catalogo' => '\'18\'',
+        'errorCodeValidate' => '\'4238\'',
+        'node' => 'cbc:CitySubdivisionName',
+        'expresion' => 'string-length(cbc:CitySubdivisionName) > 25 or string-length(cbc:CitySubdivisionName) < 1 ',
         'isError' => 'false()',
       ),
-      'context' => 'cac:Delivery/cac:Shipment',
+      'context' => 'cac:Delivery/cac:Shipment/cac:Delivery/cac:DeliveryAddress',
       'mode' => NULL,
       'conditions' => 
       array (
       ),
     ),
-    569 => 
+    499 => 
     array (
       'primitive' => 'regexpValidateElementIfExist',
       'params' => 
       array (
-        'errorCodeValidate' => '\'4252\'',
-        'node' => 'cac:ShipmentStage/cbc:TransportModeCode/@listName',
-        'regexp' => '\'^(Modalidad de Transporte)$\'',
+        'errorCodeValidate' => '\'4238\'',
+        'node' => 'cbc:CitySubdivisionName',
+        'regexp' => '\'^(?!\\s*$)[^\\s].{0,}$\'',
         'isError' => 'false()',
       ),
-      'context' => 'cac:Delivery/cac:Shipment',
+      'context' => 'cac:Delivery/cac:Shipment/cac:Delivery/cac:DeliveryAddress',
       'mode' => NULL,
       'conditions' => 
       array (
       ),
     ),
-    570 => 
+    500 => 
+    array (
+      'primitive' => 'isTrueExpresionIfExist',
+      'params' => 
+      array (
+        'errorCodeValidate' => '\'4239\'',
+        'node' => 'cbc:CityName',
+        'expresion' => 'string-length(cbc:CityName) > 30 or string-length(cbc:CityName) < 1 ',
+        'isError' => 'false()',
+      ),
+      'context' => 'cac:Delivery/cac:Shipment/cac:Delivery/cac:DeliveryAddress',
+      'mode' => NULL,
+      'conditions' => 
+      array (
+      ),
+    ),
+    501 => 
+    array (
+      'primitive' => 'regexpValidateElementIfExist',
+      'params' => 
+      array (
+        'errorCodeValidate' => '\'4239\'',
+        'node' => 'cbc:CityName',
+        'regexp' => '\'^(?!\\s*$)[^\\s].{0,}$\'',
+        'isError' => 'false()',
+      ),
+      'context' => 'cac:Delivery/cac:Shipment/cac:Delivery/cac:DeliveryAddress',
+      'mode' => NULL,
+      'conditions' => 
+      array (
+      ),
+    ),
+    502 => 
+    array (
+      'primitive' => 'isTrueExpresionIfExist',
+      'params' => 
+      array (
+        'errorCodeValidate' => '\'4240\'',
+        'node' => 'cbc:CountrySubentity',
+        'expresion' => 'string-length(cbc:CountrySubentity) > 30 or string-length(cbc:CountrySubentity) < 1 ',
+        'isError' => 'false()',
+      ),
+      'context' => 'cac:Delivery/cac:Shipment/cac:Delivery/cac:DeliveryAddress',
+      'mode' => NULL,
+      'conditions' => 
+      array (
+      ),
+    ),
+    503 => 
+    array (
+      'primitive' => 'regexpValidateElementIfExist',
+      'params' => 
+      array (
+        'errorCodeValidate' => '\'4240\'',
+        'node' => 'cbc:CountrySubentity',
+        'regexp' => '\'^(?!\\s*$)[^\\s].{0,}$\'',
+        'isError' => 'false()',
+      ),
+      'context' => 'cac:Delivery/cac:Shipment/cac:Delivery/cac:DeliveryAddress',
+      'mode' => NULL,
+      'conditions' => 
+      array (
+      ),
+    ),
+    504 => 
+    array (
+      'primitive' => 'isTrueExpresionIfExist',
+      'params' => 
+      array (
+        'errorCodeValidate' => '\'4241\'',
+        'node' => 'cbc:District',
+        'expresion' => 'string-length(cbc:District) > 30 or string-length(cbc:District) < 1 ',
+        'isError' => 'false()',
+      ),
+      'context' => 'cac:Delivery/cac:Shipment/cac:Delivery/cac:DeliveryAddress',
+      'mode' => NULL,
+      'conditions' => 
+      array (
+      ),
+    ),
+    505 => 
+    array (
+      'primitive' => 'regexpValidateElementIfExist',
+      'params' => 
+      array (
+        'errorCodeValidate' => '\'4241\'',
+        'node' => 'cbc:District',
+        'regexp' => '\'^(?!\\s*$)[^\\s].{0,}$\'',
+        'isError' => 'false()',
+      ),
+      'context' => 'cac:Delivery/cac:Shipment/cac:Delivery/cac:DeliveryAddress',
+      'mode' => NULL,
+      'conditions' => 
+      array (
+      ),
+    ),
+    506 => 
+    array (
+      'primitive' => 'regexpValidateElementIfExist',
+      'params' => 
+      array (
+        'errorCodeValidate' => '\'4041\'',
+        'node' => 'cac:Country/cbc:IdentificationCode',
+        'regexp' => '\'^(PE)$\'',
+        'isError' => 'false()',
+      ),
+      'context' => 'cac:Delivery/cac:Shipment/cac:Delivery/cac:DeliveryAddress',
+      'mode' => NULL,
+      'conditions' => 
+      array (
+      ),
+    ),
+    507 => 
+    array (
+      'primitive' => 'regexpValidateElementIfExist',
+      'params' => 
+      array (
+        'errorCodeValidate' => '\'4254\'',
+        'node' => 'cac:Country/cbc:IdentificationCode/@listID',
+        'regexp' => '\'^(ISO 3166-1)$\'',
+        'isError' => 'false()',
+      ),
+      'context' => 'cac:Delivery/cac:Shipment/cac:Delivery/cac:DeliveryAddress',
+      'mode' => NULL,
+      'conditions' => 
+      array (
+      ),
+    ),
+    508 => 
     array (
       'primitive' => 'regexpValidateElementIfExist',
       'params' => 
       array (
         'errorCodeValidate' => '\'4251\'',
-        'node' => 'cac:ShipmentStage/cbc:TransportModeCode/@listAgencyName',
-        'regexp' => '\'^(PE:SUNAT)$\'',
+        'node' => 'cac:Country/cbc:IdentificationCode/@listAgencyName',
+        'regexp' => '\'^(United Nations Economic Commission for Europe)$\'',
         'isError' => 'false()',
       ),
-      'context' => 'cac:Delivery/cac:Shipment',
+      'context' => 'cac:Delivery/cac:Shipment/cac:Delivery/cac:DeliveryAddress',
       'mode' => NULL,
       'conditions' => 
       array (
       ),
     ),
-    571 => 
+    509 => 
     array (
       'primitive' => 'regexpValidateElementIfExist',
       'params' => 
       array (
-        'errorCodeValidate' => '\'4253\'',
-        'node' => 'cac:ShipmentStage/cbc:TransportModeCode/@listURI',
-        'regexp' => '\'^(urn:pe:gob:sunat:cpe:see:gem:catalogos:catalogo18)$\'',
+        'errorCodeValidate' => '\'4252\'',
+        'node' => 'cac:Country/cbc:IdentificationCode/@listName',
+        'regexp' => '\'^(Country)$\'',
         'isError' => 'false()',
       ),
-      'context' => 'cac:Delivery/cac:Shipment',
+      'context' => 'cac:Delivery/cac:Shipment/cac:Delivery/cac:DeliveryAddress',
       'mode' => NULL,
       'conditions' => 
       array (
       ),
     ),
-    572 => 
-    array (
-      'primitive' => 'existElementNoVacio',
-      'params' => 
-      array (
-        'errorCodeNotExist' => '\'4126\'',
-        'node' => 'cac:ShipmentStage/cac:TransitPeriod/cbc:StartDate',
-        'isError' => 'false()',
-      ),
-      'context' => 'cac:Delivery/cac:Shipment',
-      'mode' => NULL,
-      'conditions' => 
-      array (
-        0 => 'cbc:ID and cac:ShipmentStage/cbc:TransportModeCode',
-      ),
-    ),
-    573 => 
-    array (
-      'primitive' => 'existElementNoVacio',
-      'params' => 
-      array (
-        'errorCodeNotExist' => '\'4126\'',
-        'node' => 'cac:ShipmentStage/cac:TransitPeriod/cbc:StartDate',
-        'isError' => 'false()',
-      ),
-      'context' => 'cac:Delivery/cac:Shipment',
-      'mode' => NULL,
-      'conditions' => 
-      array (
-        0 => 'cbc:ID and not(cac:ShipmentStage/cbc:TransportModeCode)',
-      ),
-    ),
-    574 => 
-    array (
-      'primitive' => 'existElement',
-      'params' => 
-      array (
-        'errorCodeNotExist' => '\'4286\'',
-        'node' => 'cac:ShipmentStage/cac:CarrierParty/cac:PartyIdentification/cbc:ID',
-        'isError' => 'false()',
-      ),
-      'context' => 'cac:Delivery/cac:Shipment',
-      'mode' => NULL,
-      'conditions' => 
-      array (
-        0 => 'cbc:ID and cac:ShipmentStage/cbc:TransportModeCode = \'01\'',
-      ),
-    ),
-    575 => 
-    array (
-      'primitive' => 'isTrueExpresion',
-      'params' => 
-      array (
-        'errorCodeValidate' => '\'4159\'',
-        'node' => 'cac:ShipmentStage/cac:CarrierParty/cac:PartyIdentification/cbc:ID',
-        'expresion' => 'cac:ShipmentStage/cac:CarrierParty/cac:PartyIdentification/cbc:ID',
-        'isError' => 'false()',
-      ),
-      'context' => 'cac:Delivery/cac:Shipment',
-      'mode' => NULL,
-      'conditions' => 
-      array (
-        0 => 'cbc:ID and cac:ShipmentStage/cbc:TransportModeCode = \'02\'',
-      ),
-    ),
-    576 => 
-    array (
-      'primitive' => 'existElement',
-      'params' => 
-      array (
-        'errorCodeNotExist' => '\'4160\'',
-        'node' => 'cac:ShipmentStage/cac:CarrierParty/cac:PartyIdentification/cbc:ID',
-        'isError' => 'false()',
-      ),
-      'context' => 'cac:Delivery/cac:Shipment',
-      'mode' => NULL,
-      'conditions' => 
-      array (
-        0 => 'cbc:ID and not(cac:ShipmentStage/cbc:TransportModeCode)',
-      ),
-    ),
-    577 => 
-    array (
-      'primitive' => 'existElementNoVacio',
-      'params' => 
-      array (
-        'errorCodeNotExist' => '\'4161\'',
-        'node' => 'cac:ShipmentStage/cac:CarrierParty/cac:PartyIdentification/cbc:ID/@schemeID',
-        'isError' => 'false()',
-      ),
-      'context' => 'cac:Delivery/cac:Shipment',
-      'mode' => NULL,
-      'conditions' => 
-      array (
-        0 => 'cac:ShipmentStage/cac:CarrierParty/cac:PartyIdentification/cbc:ID',
-      ),
-    ),
-    578 => 
-    array (
-      'primitive' => 'regexpValidateElementIfExist',
-      'params' => 
-      array (
-        'errorCodeValidate' => '\'4162\'',
-        'node' => 'cac:ShipmentStage/cac:CarrierParty/cac:PartyIdentification/cbc:ID/@schemeID',
-        'regexp' => '\'^(6)$\'',
-        'isError' => 'false()',
-      ),
-      'context' => 'cac:Delivery/cac:Shipment',
-      'mode' => NULL,
-      'conditions' => 
-      array (
-        0 => 'cac:ShipmentStage/cac:CarrierParty/cac:PartyIdentification/cbc:ID',
-      ),
-    ),
-    579 => 
-    array (
-      'primitive' => 'existElement',
-      'params' => 
-      array (
-        'errorCodeNotExist' => '\'4164\'',
-        'node' => 'cac:ShipmentStage/cac:CarrierParty/cac:PartyLegalEntity/cbc:RegistrationName',
-        'isError' => 'false()',
-      ),
-      'context' => 'cac:Delivery/cac:Shipment',
-      'mode' => NULL,
-      'conditions' => 
-      array (
-        0 => 'cac:ShipmentStage/cac:CarrierParty/cac:PartyIdentification/cbc:ID and not(cac:ShipmentStage/cac:CarrierParty/cac:PartyLegalEntity/cbc:RegistrationName)',
-      ),
-    ),
-    580 => 
-    array (
-      'primitive' => 'regexpValidateElementIfExist',
-      'params' => 
-      array (
-        'errorCodeValidate' => '\'4165\'',
-        'node' => 'cac:ShipmentStage/cac:CarrierParty/cac:PartyLegalEntity/cbc:RegistrationName',
-        'regexp' => '\'^(?!\\s*$)[^\\s].{2,99}$\'',
-        'isError' => 'false()',
-      ),
-      'context' => 'cac:Delivery/cac:Shipment',
-      'mode' => NULL,
-      'conditions' => 
-      array (
-        0 => 'cac:ShipmentStage/cac:CarrierParty/cac:PartyLegalEntity/cbc:RegistrationName',
-      ),
-    ),
-    581 => 
-    array (
-      'primitive' => 'regexpValidateElementIfExist',
-      'params' => 
-      array (
-        'errorCodeValidate' => '\'4163\'',
-        'node' => 'cac:ShipmentStage/cac:CarrierParty/cac:PartyIdentification/cbc:ID',
-        'regexp' => '\'^[\\d]{11}$\'',
-        'isError' => 'false()',
-      ),
-      'context' => 'cac:Delivery/cac:Shipment',
-      'mode' => NULL,
-      'conditions' => 
-      array (
-      ),
-    ),
-    582 => 
-    array (
-      'primitive' => 'regexpValidateElementIfExist',
-      'params' => 
-      array (
-        'errorCodeValidate' => '\'4255\'',
-        'node' => 'cac:ShipmentStage/cac:CarrierParty/cac:PartyIdentification/cbc:ID/@schemeName',
-        'regexp' => '\'^(Documento de Identidad)$\'',
-        'isError' => 'false()',
-      ),
-      'context' => 'cac:Delivery/cac:Shipment',
-      'mode' => NULL,
-      'conditions' => 
-      array (
-      ),
-    ),
-    583 => 
-    array (
-      'primitive' => 'regexpValidateElementIfExist',
-      'params' => 
-      array (
-        'errorCodeValidate' => '\'4256\'',
-        'node' => 'cac:ShipmentStage/cac:CarrierParty/cac:PartyIdentification/cbc:ID/@schemeAgencyName',
-        'regexp' => '\'^(PE:SUNAT)$\'',
-        'isError' => 'false()',
-      ),
-      'context' => 'cac:Delivery/cac:Shipment',
-      'mode' => NULL,
-      'conditions' => 
-      array (
-      ),
-    ),
-    584 => 
-    array (
-      'primitive' => 'regexpValidateElementIfExist',
-      'params' => 
-      array (
-        'errorCodeValidate' => '\'4257\'',
-        'node' => 'cac:ShipmentStage/cac:CarrierParty/cac:PartyIdentification/cbc:ID/@schemeURI',
-        'regexp' => '\'^(urn:pe:gob:sunat:cpe:see:gem:catalogos:catalogo06)$\'',
-        'isError' => 'false()',
-      ),
-      'context' => 'cac:Delivery/cac:Shipment',
-      'mode' => NULL,
-      'conditions' => 
-      array (
-      ),
-    ),
-    585 => 
-    array (
-      'primitive' => 'existElement',
-      'params' => 
-      array (
-        'errorCodeNotExist' => '\'4156\'',
-        'node' => 'cac:ShipmentStage/cac:TransportMeans/cac:RoadTransport/cbc:LicensePlateID',
-        'isError' => 'false()',
-      ),
-      'context' => 'cac:Delivery/cac:Shipment',
-      'mode' => NULL,
-      'conditions' => 
-      array (
-        0 => '$tipoOperacion = \'0110\' and cac:ShipmentStage/cbc:TransportModeCode = \'01\' and cac:ShipmentStage/cac:DriverPerson/cbc:ID',
-      ),
-    ),
-    586 => 
-    array (
-      'primitive' => 'existElement',
-      'params' => 
-      array (
-        'errorCodeNotExist' => '\'4157\'',
-        'node' => 'cac:ShipmentStage/cac:DriverPerson/cbc:ID',
-        'isError' => 'false()',
-      ),
-      'context' => 'cac:Delivery/cac:Shipment',
-      'mode' => NULL,
-      'conditions' => 
-      array (
-        0 => '$modalidadTransporte = \'01\' and $numeroPlaca',
-      ),
-    ),
-    587 => 
-    array (
-      'primitive' => 'existElement',
-      'params' => 
-      array (
-        'errorCodeNotExist' => '\'4157\'',
-        'node' => 'cac:ShipmentStage/cac:DriverPerson/cbc:ID',
-        'isError' => 'false()',
-      ),
-      'context' => 'cac:Delivery/cac:Shipment',
-      'mode' => NULL,
-      'conditions' => 
-      array (
-        0 => '$modalidadTransporte = \'02\' and not(cac:ShipmentStage/cac:DriverPerson/cbc:ID)',
-      ),
-    ),
-    588 => 
-    array (
-      'primitive' => 'existElement',
-      'params' => 
-      array (
-        'errorCodeNotExist' => '\'4157\'',
-        'node' => 'cac:ShipmentStage/cac:DriverPerson/cbc:ID',
-        'isError' => 'false()',
-      ),
-      'context' => 'cac:Delivery/cac:Shipment',
-      'mode' => NULL,
-      'conditions' => 
-      array (
-        0 => '$motivoTraslado and not($modalidadTransporte) and not(cac:ShipmentStage/cac:DriverPerson/cbc:ID)',
-      ),
-    ),
-    589 => 
-    array (
-      'primitive' => 'isTrueExpresion',
-      'params' => 
-      array (
-        'errorCodeValidate' => '\'4167\'',
-        'node' => 'cac:Party/cac:PartyName/cbc:Name',
-        'expresion' => 'true()',
-        'isError' => 'false()',
-        'descripcion' => 'concat(\' cbc:LicensePlateID \', cbc:LicensePlateID)',
-      ),
-      'context' => 'cac:Delivery/cac:Shipment',
-      'mode' => NULL,
-      'conditions' => 
-      array (
-        0 => 'cac:ShipmentStage/cac:TransportMeans/cac:RoadTransport/cbc:LicensePlateID and (string-length(cac:ShipmentStage/cac:TransportMeans/cac:RoadTransport/cbc:LicensePlateID) > 8 or string-length(cac:ShipmentStage/cac:TransportMeans/cac:RoadTransport/cbc:LicensePlateID) < 6 )',
-      ),
-    ),
-    590 => 
-    array (
-      'primitive' => 'regexpValidateElementIfExist',
-      'params' => 
-      array (
-        'errorCodeValidate' => '\'4167\'',
-        'node' => 'cac:ShipmentStage/cac:TransportMeans/cac:RoadTransport/cbc:LicensePlateID',
-        'regexp' => '\'^[A-Z0-9\\-]{5,}$\'',
-        'isError' => 'false()',
-      ),
-      'context' => 'cac:Delivery/cac:Shipment',
-      'mode' => NULL,
-      'conditions' => 
-      array (
-      ),
-    ),
-    591 => 
-    array (
-      'primitive' => 'regexpValidateElementIfExist',
-      'params' => 
-      array (
-        'errorCodeValidate' => '\'4170\'',
-        'node' => 'cac:TransportHandlingUnit/cac:TransportEquipment/cbc:ID',
-        'regexp' => '\'^(?!\\s*$)[^\\s].{5,7}$\'',
-        'isError' => 'false()',
-      ),
-      'context' => 'cac:Delivery/cac:Shipment',
-      'mode' => NULL,
-      'conditions' => 
-      array (
-      ),
-    ),
-    592 => 
-    array (
-      'primitive' => 'existElement',
-      'params' => 
-      array (
-        'errorCodeNotExist' => '\'4156\'',
-        'node' => 'cac:ShipmentStage/cac:DriverPerson/cbc:ID',
-        'isError' => 'false()',
-      ),
-      'context' => 'cac:Delivery/cac:Shipment',
-      'mode' => NULL,
-      'conditions' => 
-      array (
-        0 => '$tipoOperacion = \'0110\' and cac:ShipmentStage/cac:TransportMeans/cac:RoadTransport/cbc:LicensePlateID',
-      ),
-    ),
-    593 => 
-    array (
-      'primitive' => 'existElement',
-      'params' => 
-      array (
-        'errorCodeNotExist' => '\'4158\'',
-        'node' => 'cac:ShipmentStage/cac:TransportMeans/cac:RoadTransport/cbc:LicensePlateID',
-        'isError' => 'false()',
-      ),
-      'context' => 'cac:Delivery/cac:Shipment',
-      'mode' => NULL,
-      'conditions' => 
-      array (
-        0 => '$motivoTraslado and $modalidadTransporte = \'01\' and $numeroDocumentoId and not($numeroPlaca)',
-      ),
-    ),
-    594 => 
-    array (
-      'primitive' => 'existElement',
-      'params' => 
-      array (
-        'errorCodeNotExist' => '\'4158\'',
-        'node' => 'cac:ShipmentStage/cac:TransportMeans/cac:RoadTransport/cbc:LicensePlateID',
-        'isError' => 'false()',
-      ),
-      'context' => 'cac:Delivery/cac:Shipment',
-      'mode' => NULL,
-      'conditions' => 
-      array (
-        0 => '$motivoTraslado and $modalidadTransporte = \'02\' and not($numeroPlaca)',
-      ),
-    ),
-    595 => 
-    array (
-      'primitive' => 'existElement',
-      'params' => 
-      array (
-        'errorCodeNotExist' => '\'4158\'',
-        'node' => 'cac:ShipmentStage/cac:TransportMeans/cac:RoadTransport/cbc:LicensePlateID',
-        'isError' => 'false()',
-      ),
-      'context' => 'cac:Delivery/cac:Shipment',
-      'mode' => NULL,
-      'conditions' => 
-      array (
-        0 => '$motivoTraslado and not($modalidadTransporte) and not($numeroPlaca)',
-      ),
-    ),
-    596 => 
-    array (
-      'primitive' => 'regexpValidateElementIfExist',
-      'params' => 
-      array (
-        'errorCodeValidate' => '\'4174\'',
-        'node' => 'cac:ShipmentStage/cac:DriverPerson/cbc:ID',
-        'regexp' => '\'^(?!\\s*$)[^\\s]{1,15}$\'',
-        'isError' => 'false()',
-      ),
-      'context' => 'cac:Delivery/cac:Shipment',
-      'mode' => NULL,
-      'conditions' => 
-      array (
-        0 => '$tipoDocumentoConductores =\'0\' or $tipoDocumentoConductores =\'A\'',
-      ),
-    ),
-    597 => 
-    array (
-      'primitive' => 'regexpValidateElementIfExist',
-      'params' => 
-      array (
-        'errorCodeValidate' => '\'4174\'',
-        'node' => 'cac:ShipmentStage/cac:DriverPerson/cbc:ID',
-        'regexp' => '\'^[\\d]{8}$\'',
-        'isError' => 'false()',
-      ),
-      'context' => 'cac:Delivery/cac:Shipment',
-      'mode' => NULL,
-      'conditions' => 
-      array (
-        0 => '$tipoDocumentoConductores =\'1\'',
-      ),
-    ),
-    598 => 
-    array (
-      'primitive' => 'regexpValidateElementIfExist',
-      'params' => 
-      array (
-        'errorCodeValidate' => '\'4174\'',
-        'node' => 'cac:ShipmentStage/cac:DriverPerson/cbc:ID',
-        'regexp' => '\'^(?!\\s*$)[^\\s]{1,12}$\'',
-        'isError' => 'false()',
-      ),
-      'context' => 'cac:Delivery/cac:Shipment',
-      'mode' => NULL,
-      'conditions' => 
-      array (
-        0 => '$tipoDocumentoConductores =\'4\' or $tipoDocumentoConductores =\'7\'',
-      ),
-    ),
-    599 => 
-    array (
-      'primitive' => 'existAndRegexpValidateElement',
-      'params' => 
-      array (
-        'errorCodeNotExist' => '\'4172\'',
-        'errorCodeValidate' => '\'4173\'',
-        'node' => 'cac:ShipmentStage/cac:DriverPerson/cbc:ID/@schemeID',
-        'regexp' => '\'^(1|4|7|A)$\'',
-        'isError' => 'false()',
-      ),
-      'context' => 'cac:Delivery/cac:Shipment',
-      'mode' => NULL,
-      'conditions' => 
-      array (
-        0 => 'cac:ShipmentStage/cac:DriverPerson/cbc:ID',
-      ),
-    ),
-    600 => 
-    array (
-      'primitive' => 'regexpValidateElementIfExist',
-      'params' => 
-      array (
-        'errorCodeValidate' => '\'4255\'',
-        'node' => 'cac:ShipmentStage/cac:DriverPerson/cbc:ID/@schemeName',
-        'regexp' => '\'^(Documento de Identidad)$\'',
-        'isError' => 'false()',
-      ),
-      'context' => 'cac:Delivery/cac:Shipment',
-      'mode' => NULL,
-      'conditions' => 
-      array (
-      ),
-    ),
-    601 => 
-    array (
-      'primitive' => 'regexpValidateElementIfExist',
-      'params' => 
-      array (
-        'errorCodeValidate' => '\'4256\'',
-        'node' => 'cac:ShipmentStage/cac:DriverPerson/cbc:ID/@schemeAgencyName',
-        'regexp' => '\'^(PE:SUNAT)$\'',
-        'isError' => 'false()',
-      ),
-      'context' => 'cac:Delivery/cac:Shipment',
-      'mode' => NULL,
-      'conditions' => 
-      array (
-      ),
-    ),
-    602 => 
-    array (
-      'primitive' => 'regexpValidateElementIfExist',
-      'params' => 
-      array (
-        'errorCodeValidate' => '\'4257\'',
-        'node' => 'cac:ShipmentStage/cac:DriverPerson/cbc:ID/@schemeURI',
-        'regexp' => '\'^(urn:pe:gob:sunat:cpe:see:gem:catalogos:catalogo06)$\'',
-        'isError' => 'false()',
-      ),
-      'context' => 'cac:Delivery/cac:Shipment',
-      'mode' => NULL,
-      'conditions' => 
-      array (
-      ),
-    ),
-    603 => 
-    array (
-      'primitive' => 'existElement',
-      'params' => 
-      array (
-        'errorCodeNotExist' => '\'4127\'',
-        'node' => 'cac:Delivery/cac:DeliveryAddress/cbc:ID',
-        'isError' => 'false()',
-      ),
-      'context' => 'cac:Delivery/cac:Shipment',
-      'mode' => NULL,
-      'conditions' => 
-      array (
-        0 => '$motivoTraslado and $modalidadTransporte and not(cac:Delivery/cac:DeliveryAddress/cbc:ID)',
-      ),
-    ),
-    604 => 
-    array (
-      'primitive' => 'existElement',
-      'params' => 
-      array (
-        'errorCodeNotExist' => '\'4127\'',
-        'node' => 'cac:Delivery/cac:DeliveryAddress/cac:AddressLine/cbc:Line',
-        'isError' => 'false()',
-      ),
-      'context' => 'cac:Delivery/cac:Shipment',
-      'mode' => NULL,
-      'conditions' => 
-      array (
-        0 => '$motivoTraslado and $modalidadTransporte and not(cac:Delivery/cac:DeliveryAddress/cac:AddressLine/cbc:Line)',
-      ),
-    ),
-    605 => 
-    array (
-      'primitive' => 'isTrueExpresion',
-      'params' => 
-      array (
-        'errorCodeValidate' => '\'4135\'',
-        'node' => 'cac:Delivery/cac:DeliveryAddress/cbc:ID',
-        'expresion' => 'cac:Delivery/cac:DeliveryAddress/cbc:ID',
-        'isError' => 'false()',
-      ),
-      'context' => 'cac:Delivery/cac:Shipment',
-      'mode' => NULL,
-      'conditions' => 
-      array (
-        0 => '$motivoTraslado and not($modalidadTransporte)',
-      ),
-    ),
-    606 => 
-    array (
-      'primitive' => 'isTrueExpresion',
-      'params' => 
-      array (
-        'errorCodeValidate' => '\'4135\'',
-        'node' => 'cac:Delivery/cac:DeliveryAddress/cac:AddressLine/cbc:Line',
-        'expresion' => 'cac:Delivery/cac:DeliveryAddress/cac:AddressLine/cbc:Line',
-        'isError' => 'false()',
-      ),
-      'context' => 'cac:Delivery/cac:Shipment',
-      'mode' => NULL,
-      'conditions' => 
-      array (
-        0 => '$motivoTraslado and not($modalidadTransporte)',
-      ),
-    ),
-    607 => 
-    array (
-      'primitive' => 'findElementInCatalog',
-      'params' => 
-      array (
-        'errorCodeValidate' => '\'4176\'',
-        'idCatalogo' => 'cac:Delivery/cac:DeliveryAddress/cbc:ID',
-        'catalogo' => '\'13\'',
-        'isError' => 'false()',
-      ),
-      'context' => 'cac:Delivery/cac:Shipment',
-      'mode' => NULL,
-      'conditions' => 
-      array (
-        0 => 'cac:Delivery/cac:DeliveryAddress/cbc:ID',
-      ),
-    ),
-    608 => 
-    array (
-      'primitive' => 'regexpValidateElementIfExist',
-      'params' => 
-      array (
-        'errorCodeValidate' => '\'4256\'',
-        'node' => 'cac:Delivery/cac:DeliveryAddress/cbc:ID/@schemeAgencyName',
-        'regexp' => '\'^(PE:INEI)$\'',
-        'isError' => 'false()',
-      ),
-      'context' => 'cac:Delivery/cac:Shipment',
-      'mode' => NULL,
-      'conditions' => 
-      array (
-      ),
-    ),
-    609 => 
-    array (
-      'primitive' => 'regexpValidateElementIfExist',
-      'params' => 
-      array (
-        'errorCodeValidate' => '\'4255\'',
-        'node' => 'cac:Delivery/cac:DeliveryAddress/cbc:ID/@schemeName',
-        'regexp' => '\'^(Ubigeos)$\'',
-        'isError' => 'false()',
-      ),
-      'context' => 'cac:Delivery/cac:Shipment',
-      'mode' => NULL,
-      'conditions' => 
-      array (
-      ),
-    ),
-    610 => 
-    array (
-      'primitive' => 'regexpValidateElementIfExist',
-      'params' => 
-      array (
-        'errorCodeValidate' => '\'4179\'',
-        'node' => 'cac:Delivery/cac:DeliveryAddress/cac:AddressLine/cbc:Line',
-        'regexp' => '\'^(?!\\s*$)[^\\s].{2,99}$\'',
-        'isError' => 'false()',
-      ),
-      'context' => 'cac:Delivery/cac:Shipment',
-      'mode' => NULL,
-      'conditions' => 
-      array (
-      ),
-    ),
-    611 => 
-    array (
-      'primitive' => 'existElement',
-      'params' => 
-      array (
-        'errorCodeNotExist' => '\'4128\'',
-        'node' => 'cac:OriginAddress/cbc:ID',
-        'isError' => 'false()',
-      ),
-      'context' => 'cac:Delivery/cac:Shipment',
-      'mode' => NULL,
-      'conditions' => 
-      array (
-        0 => '$motivoTraslado and $modalidadTransporte and not(cac:OriginAddress/cbc:ID)',
-      ),
-    ),
-    612 => 
-    array (
-      'primitive' => 'existElement',
-      'params' => 
-      array (
-        'errorCodeNotExist' => '\'4128\'',
-        'node' => 'cac:OriginAddress/cac:AddressLine/cbc:Line',
-        'isError' => 'false()',
-      ),
-      'context' => 'cac:Delivery/cac:Shipment',
-      'mode' => NULL,
-      'conditions' => 
-      array (
-        0 => '$motivoTraslado and $modalidadTransporte and not(cac:OriginAddress/cac:AddressLine/cbc:Line)',
-      ),
-    ),
-    613 => 
-    array (
-      'primitive' => 'isTrueExpresion',
-      'params' => 
-      array (
-        'errorCodeValidate' => '\'4136\'',
-        'node' => 'cac:OriginAddress/cbc:ID',
-        'expresion' => 'cac:OriginAddress/cbc:ID',
-        'isError' => 'false()',
-      ),
-      'context' => 'cac:Delivery/cac:Shipment',
-      'mode' => NULL,
-      'conditions' => 
-      array (
-        0 => '$motivoTraslado and not($modalidadTransporte)',
-      ),
-    ),
-    614 => 
-    array (
-      'primitive' => 'isTrueExpresion',
-      'params' => 
-      array (
-        'errorCodeValidate' => '\'4136\'',
-        'node' => 'cac:OriginAddress/cac:AddressLine/cbc:Line',
-        'expresion' => 'cac:OriginAddress/cac:AddressLine/cbc:Line',
-        'isError' => 'false()',
-      ),
-      'context' => 'cac:Delivery/cac:Shipment',
-      'mode' => NULL,
-      'conditions' => 
-      array (
-        0 => '$motivoTraslado and not($modalidadTransporte)',
-      ),
-    ),
-    615 => 
-    array (
-      'primitive' => 'findElementInCatalog',
-      'params' => 
-      array (
-        'errorCodeValidate' => '\'4181\'',
-        'idCatalogo' => 'cac:OriginAddress/cbc:ID',
-        'catalogo' => '\'13\'',
-        'isError' => 'false()',
-      ),
-      'context' => 'cac:Delivery/cac:Shipment',
-      'mode' => NULL,
-      'conditions' => 
-      array (
-        0 => 'cac:OriginAddress/cbc:ID',
-      ),
-    ),
-    616 => 
-    array (
-      'primitive' => 'regexpValidateElementIfExist',
-      'params' => 
-      array (
-        'errorCodeValidate' => '\'4256\'',
-        'node' => 'cac:OriginAddress/cbc:ID/@schemeAgencyName',
-        'regexp' => '\'^(PE:INEI)$\'',
-        'isError' => 'false()',
-      ),
-      'context' => 'cac:Delivery/cac:Shipment',
-      'mode' => NULL,
-      'conditions' => 
-      array (
-      ),
-    ),
-    617 => 
-    array (
-      'primitive' => 'regexpValidateElementIfExist',
-      'params' => 
-      array (
-        'errorCodeValidate' => '\'4255\'',
-        'node' => 'cac:OriginAddress/cbc:ID/@schemeName',
-        'regexp' => '\'^(Ubigeos)$\'',
-        'isError' => 'false()',
-      ),
-      'context' => 'cac:Delivery/cac:Shipment',
-      'mode' => NULL,
-      'conditions' => 
-      array (
-      ),
-    ),
-    618 => 
-    array (
-      'primitive' => 'regexpValidateElementIfExist',
-      'params' => 
-      array (
-        'errorCodeValidate' => '\'4184\'',
-        'node' => 'cac:OriginAddress/cac:AddressLine/cbc:Line',
-        'regexp' => '\'^(?!\\s*$)[^\\s].{2,99}$\'',
-        'isError' => 'false()',
-      ),
-      'context' => 'cac:Delivery/cac:Shipment',
-      'mode' => NULL,
-      'conditions' => 
-      array (
-      ),
-    ),
-    619 => 
-    array (
-      'primitive' => 'isTrueExpresion',
-      'params' => 
-      array (
-        'errorCodeValidate' => '\'4129\'',
-        'node' => 'cac:Delivery/cac:DeliveryParty/cbc:MarkAttentionIndicator',
-        'expresion' => 'cac:Delivery/cac:DeliveryParty/cbc:MarkAttentionIndicator',
-        'isError' => 'false()',
-      ),
-      'context' => 'cac:Delivery/cac:Shipment',
-      'mode' => NULL,
-      'conditions' => 
-      array (
-        0 => '$motivoTraslado and $modalidadTransporte',
-      ),
-    ),
-    620 => 
+    510 => 
     array (
       'primitive' => 'isTrueExpresion',
       'params' => 
@@ -10404,7 +8522,7 @@ return array (
       array (
       ),
     ),
-    621 => 
+    511 => 
     array (
       'primitive' => 'isTrueExpresion',
       'params' => 
@@ -10420,7 +8538,7 @@ return array (
       array (
       ),
     ),
-    622 => 
+    512 => 
     array (
       'primitive' => 'isTrueExpresion',
       'params' => 
@@ -10436,7 +8554,7 @@ return array (
       array (
       ),
     ),
-    623 => 
+    513 => 
     array (
       'primitive' => 'regexpValidateElementIfExist',
       'params' => 
@@ -10453,7 +8571,7 @@ return array (
       array (
       ),
     ),
-    624 => 
+    514 => 
     array (
       'primitive' => 'regexpValidateElementIfExist',
       'params' => 
@@ -10470,7 +8588,7 @@ return array (
       array (
       ),
     ),
-    625 => 
+    515 => 
     array (
       'primitive' => 'isTrueExpresion',
       'params' => 
@@ -10486,7 +8604,7 @@ return array (
       array (
       ),
     ),
-    626 => 
+    516 => 
     array (
       'primitive' => 'isTrueExpresion',
       'params' => 
@@ -10502,319 +8620,62 @@ return array (
         0 => 'cbc:PaidAmount and cbc:PaidAmount > 0',
       ),
     ),
-    627 => 
+    517 => 
     array (
-      'primitive' => 'isTrueExpresion',
+      'primitive' => 'findElementInCatalog',
       'params' => 
       array (
-        'errorCodeValidate' => '\'3128\'',
-        'node' => 'cbc:ID',
-        'expresion' => 'cbc:ID/text() = \'Detraccion\'',
+        'errorCodeValidate' => '\'3033\'',
+        'idCatalogo' => 'cbc:PaymentMeansID',
+        'catalogo' => '\'54\'',
       ),
       'context' => 'cac:PaymentTerms',
       'mode' => NULL,
       'conditions' => 
       array (
-        0 => '$tipoOperacion !=\'1001\' and $tipoOperacion !=\'1002\' and $tipoOperacion !=\'1003\' and $tipoOperacion !=\'1004\'',
+        0 => 'cbc:PaymentMeansID',
       ),
     ),
-    628 => 
+    518 => 
     array (
-      'primitive' => 'isTrueExpresion',
+      'primitive' => 'existAndValidateValueTwoDecimal',
       'params' => 
       array (
-        'errorCodeValidate' => '\'3248\'',
-        'node' => 'cbc:PaymentMeansID',
-        'expresion' => 'count(key(\'by-cuotas-in-root\', cbc:PaymentMeansID)) > 1',
-        'isError' => 'boolean(number(0))',
-        'descripcion' => 'concat(\'Forma Pago : \', cac:PaymentTerms/cbc:PaymentMeansID)',
+        'errorCodeNotExist' => '\'3035\'',
+        'errorCodeValidate' => '\'3037\'',
+        'node' => 'cbc:Amount',
       ),
       'context' => 'cac:PaymentTerms',
       'mode' => NULL,
       'conditions' => 
       array (
+        0 => 'cbc:PaymentMeansID',
       ),
     ),
-    629 => 
-    array (
-      'primitive' => 'existElementNoVacio',
-      'params' => 
-      array (
-        'errorCodeNotExist' => '\'3245\'',
-        'node' => 'cbc:PaymentMeansID',
-        'isError' => 'boolean(number(0))',
-      ),
-      'context' => 'cac:PaymentTerms',
-      'mode' => NULL,
-      'conditions' => 
-      array (
-        0 => 'cbc:ID and cbc:ID=\'FormaPago\'',
-      ),
-    ),
-    630 => 
+    519 => 
     array (
       'primitive' => 'regexpValidateElementIfExist',
       'params' => 
       array (
-        'errorCodeValidate' => '\'3246\'',
-        'node' => 'cbc:PaymentMeansID',
-        'regexp' => '\'^((Contado)|(Credito)|(Cuota[0-9]{3}))$\'',
-        'isError' => 'boolean(number(0))',
-      ),
-      'context' => 'cac:PaymentTerms',
-      'mode' => NULL,
-      'conditions' => 
-      array (
-        0 => 'cbc:ID and cbc:ID=\'FormaPago\'',
-      ),
-    ),
-    631 => 
-    array (
-      'primitive' => 'isTrueExpresion',
-      'params' => 
-      array (
-        'errorCodeValidate' => '\'3249\'',
-        'node' => 'cac:PaymentTerms/cbc:ID',
-        'expresion' => 'count(cac:PaymentTerms[cbc:ID[text() = \'FormaPago\'] and cbc:PaymentMeansID[substring(text(),1,5) = \'Cuota\']]) = 0',
-        'isError' => 'boolean(number(0))',
-      ),
-      'context' => 'cac:PaymentTerms',
-      'mode' => NULL,
-      'conditions' => 
-      array (
-        0 => 'cbc:ID and cbc:ID=\'FormaPago\'',
-        1 => 'cbc:PaymentMeansID = \'Credito\'',
-      ),
-    ),
-    632 => 
-    array (
-      'primitive' => 'existElement',
-      'params' => 
-      array (
-        'errorCodeNotExist' => '\'3251\'',
-        'node' => 'cbc:Amount',
-        'isError' => 'boolean(number(0))',
-      ),
-      'context' => 'cac:PaymentTerms',
-      'mode' => NULL,
-      'conditions' => 
-      array (
-        0 => 'cbc:ID and cbc:ID=\'FormaPago\'',
-        1 => 'cbc:PaymentMeansID = \'Credito\'',
-      ),
-    ),
-    633 => 
-    array (
-      'primitive' => 'validateValueTwoDecimalIfExist',
-      'params' => 
-      array (
-        'errorCodeValidate' => '\'3250\'',
-        'node' => 'cbc:Amount',
-        'isError' => 'boolean(number(0))',
-      ),
-      'context' => 'cac:PaymentTerms',
-      'mode' => NULL,
-      'conditions' => 
-      array (
-        0 => 'cbc:ID and cbc:ID=\'FormaPago\'',
-        1 => 'cbc:PaymentMeansID = \'Credito\'',
-      ),
-    ),
-    634 => 
-    array (
-      'primitive' => 'isTrueExpresion',
-      'params' => 
-      array (
-        'errorCodeValidate' => '\'3265\'',
-        'node' => 'cbc:Amount',
-        'expresion' => 'cac:LegalMonetaryTotal/cbc:PayableAmount < cbc:Amount',
-        'isError' => 'boolean(number(0))',
-      ),
-      'context' => 'cac:PaymentTerms',
-      'mode' => NULL,
-      'conditions' => 
-      array (
-        0 => 'cbc:ID and cbc:ID=\'FormaPago\'',
-        1 => 'cbc:PaymentMeansID = \'Credito\'',
-      ),
-    ),
-    635 => 
-    array (
-      'primitive' => 'isTrueExpresion',
-      'params' => 
-      array (
-        'errorCodeValidate' => '\'2071\'',
+        'errorCodeValidate' => '\'3208\'',
         'node' => 'cbc:Amount/@currencyID',
-        'expresion' => '$root/cbc:DocumentCurrencyCode != cbc:Amount/@currencyID',
-        'isError' => 'boolean(number(1))',
-        'descripcion' => 'concat(\'Error en \', cbc:PaymentMeansID)',
+        'regexp' => '\'^(PEN)$\'',
       ),
       'context' => 'cac:PaymentTerms',
       'mode' => NULL,
       'conditions' => 
       array (
-        0 => 'cbc:ID and cbc:ID=\'FormaPago\'',
-        1 => 'cbc:PaymentMeansID = \'Credito\'',
+        0 => 'cbc:PaymentMeansID',
       ),
     ),
-    636 => 
-    array (
-      'primitive' => 'isTrueExpresion',
-      'params' => 
-      array (
-        'errorCodeValidate' => '\'3252\'',
-        'node' => 'cac:PaymentTerms/cbc:ID',
-        'expresion' => 'count(cac:PaymentTerms[cbc:ID[text() = \'FormaPago\'] and cac:PaymentTerms/cbc:PaymentMeansID[text() = \'Credito\' or substring(text(),1,5) = \'Cuota\']]) > 1',
-        'isError' => 'boolean(number(0))',
-        'descripcion' => 'concat(\'Error en \', cbc:PaymentMeansID)',
-      ),
-      'context' => 'cac:PaymentTerms',
-      'mode' => NULL,
-      'conditions' => 
-      array (
-        0 => 'cbc:ID and cbc:ID=\'FormaPago\'',
-        1 => 'substring(cbc:PaymentMeansID,1,5) = \'Cuota\'',
-      ),
-    ),
-    637 => 
-    array (
-      'primitive' => 'existElement',
-      'params' => 
-      array (
-        'errorCodeNotExist' => '\'3254\'',
-        'node' => 'cbc:Amount',
-        'isError' => 'boolean(number(0))',
-        'descripcion' => 'concat(\'Error en \', cbc:PaymentMeansID)',
-      ),
-      'context' => 'cac:PaymentTerms',
-      'mode' => NULL,
-      'conditions' => 
-      array (
-        0 => 'cbc:ID and cbc:ID=\'FormaPago\'',
-        1 => 'substring(cbc:PaymentMeansID,1,5) = \'Cuota\'',
-      ),
-    ),
-    638 => 
-    array (
-      'primitive' => 'validateValueTwoDecimalIfExist',
-      'params' => 
-      array (
-        'errorCodeValidate' => '\'3253\'',
-        'node' => 'cbc:Amount',
-        'isError' => 'boolean(number(0))',
-        'descripcion' => 'concat(\'Error en \', cbc:PaymentMeansID)',
-      ),
-      'context' => 'cac:PaymentTerms',
-      'mode' => NULL,
-      'conditions' => 
-      array (
-        0 => 'cbc:ID and cbc:ID=\'FormaPago\'',
-        1 => 'substring(cbc:PaymentMeansID,1,5) = \'Cuota\'',
-      ),
-    ),
-    639 => 
-    array (
-      'primitive' => 'isTrueExpresion',
-      'params' => 
-      array (
-        'errorCodeValidate' => '\'3266\'',
-        'node' => 'cbc:Amount',
-        'expresion' => 'cac:LegalMonetaryTotal/cbc:PayableAmount < cbc:Amount',
-        'isError' => 'boolean(number(0))',
-        'descripcion' => 'concat(\'Error en \', cbc:PaymentMeansID)',
-      ),
-      'context' => 'cac:PaymentTerms',
-      'mode' => NULL,
-      'conditions' => 
-      array (
-        0 => 'cbc:ID and cbc:ID=\'FormaPago\'',
-        1 => 'substring(cbc:PaymentMeansID,1,5) = \'Cuota\'',
-      ),
-    ),
-    640 => 
-    array (
-      'primitive' => 'isTrueExpresion',
-      'params' => 
-      array (
-        'errorCodeValidate' => '\'2071\'',
-        'node' => 'cbc:Amount/@currencyID',
-        'expresion' => '$root/cbc:DocumentCurrencyCode != cbc:Amount/@currencyID',
-        'isError' => 'boolean(number(1))',
-        'descripcion' => 'concat(\'Error en \', cbc:PaymentMeansID)',
-      ),
-      'context' => 'cac:PaymentTerms',
-      'mode' => NULL,
-      'conditions' => 
-      array (
-        0 => 'cbc:ID and cbc:ID=\'FormaPago\'',
-        1 => 'substring(cbc:PaymentMeansID,1,5) = \'Cuota\'',
-      ),
-    ),
-    641 => 
-    array (
-      'primitive' => 'existElement',
-      'params' => 
-      array (
-        'errorCodeNotExist' => '\'3256\'',
-        'node' => 'cbc:PaymentDueDate',
-        'isError' => 'boolean(number(0))',
-        'descripcion' => 'concat(\'Error en \', cbc:PaymentMeansID)',
-      ),
-      'context' => 'cac:PaymentTerms',
-      'mode' => NULL,
-      'conditions' => 
-      array (
-        0 => 'cbc:ID and cbc:ID=\'FormaPago\'',
-        1 => 'substring(cbc:PaymentMeansID,1,5) = \'Cuota\'',
-      ),
-    ),
-    642 => 
-    array (
-      'primitive' => 'regexpValidateElementIfExist',
-      'params' => 
-      array (
-        'errorCodeValidate' => '\'3255\'',
-        'node' => 'cbc:PaymentDueDate',
-        'regexp' => '\'^[0-9]{4}-[0-9]{2}-[0-9]{2}?$\'',
-        'isError' => 'boolean(number(0))',
-        'descripcion' => 'concat(\'Error en \', cbc:PaymentMeansID)',
-      ),
-      'context' => 'cac:PaymentTerms',
-      'mode' => NULL,
-      'conditions' => 
-      array (
-        0 => 'cbc:ID and cbc:ID=\'FormaPago\'',
-        1 => 'substring(cbc:PaymentMeansID,1,5) = \'Cuota\'',
-      ),
-    ),
-    643 => 
-    array (
-      'primitive' => 'isTrueExpresion',
-      'params' => 
-      array (
-        'errorCodeValidate' => '\'3267\'',
-        'node' => 'cbc:PaymentDueDate',
-        'expresion' => 'number(concat(substring($fechaEmision,1,4),substring($fechaEmision,6,2),substring($fechaEmision,9,2))) > number(concat(substring($fechaPago,1,4),substring($fechaPago,6,2),substring($fechaPago,9,2)))',
-        'isError' => 'boolean(number(0))',
-        'descripcion' => 'concat(\'Error en \', cbc:PaymentMeansID)',
-      ),
-      'context' => 'cac:PaymentTerms',
-      'mode' => NULL,
-      'conditions' => 
-      array (
-        0 => 'cbc:ID and cbc:ID=\'FormaPago\'',
-        1 => 'substring(cbc:PaymentMeansID,1,5) = \'Cuota\'',
-      ),
-    ),
-    644 => 
+    520 => 
     array (
       'primitive' => 'isTrueExpresion',
       'params' => 
       array (
         'errorCodeValidate' => '\'3129\'',
         'node' => 'cbc:PaymentMeansID',
-        'expresion' => 'cbc:PaymentMeansID/text() != \'004\'',
-        'isError' => 'boolean(number(0))',
+        'expresion' => 'cbc:PaymentMeansID != \'004\'',
       ),
       'context' => 'cac:PaymentTerms',
       'mode' => NULL,
@@ -10823,15 +8684,14 @@ return array (
         0 => '$tipoOperacion = \'1002\'',
       ),
     ),
-    645 => 
+    521 => 
     array (
       'primitive' => 'isTrueExpresion',
       'params' => 
       array (
         'errorCodeValidate' => '\'3129\'',
         'node' => 'cbc:PaymentMeansID',
-        'expresion' => 'cbc:PaymentMeansID/text() != \'028\'',
-        'isError' => 'boolean(number(0))',
+        'expresion' => 'cbc:PaymentMeansID != \'028\'',
       ),
       'context' => 'cac:PaymentTerms',
       'mode' => NULL,
@@ -10840,15 +8700,14 @@ return array (
         0 => '$tipoOperacion = \'1003\'',
       ),
     ),
-    646 => 
+    522 => 
     array (
       'primitive' => 'isTrueExpresion',
       'params' => 
       array (
         'errorCodeValidate' => '\'3129\'',
         'node' => 'cbc:PaymentMeansID',
-        'expresion' => 'cbc:PaymentMeansID/text() != \'027\'',
-        'isError' => 'boolean(number(0))',
+        'expresion' => 'cbc:PaymentMeansID != \'027\'',
       ),
       'context' => 'cac:PaymentTerms',
       'mode' => NULL,
@@ -10857,7 +8716,7 @@ return array (
         0 => '$tipoOperacion = \'1004\'',
       ),
     ),
-    647 => 
+    523 => 
     array (
       'primitive' => 'regexpValidateElementIfExist',
       'params' => 
@@ -10873,7 +8732,7 @@ return array (
       array (
       ),
     ),
-    648 => 
+    524 => 
     array (
       'primitive' => 'regexpValidateElementIfExist',
       'params' => 
@@ -10889,7 +8748,7 @@ return array (
       array (
       ),
     ),
-    649 => 
+    525 => 
     array (
       'primitive' => 'regexpValidateElementIfExist',
       'params' => 
@@ -10905,23 +8764,7 @@ return array (
       array (
       ),
     ),
-    650 => 
-    array (
-      'primitive' => 'regexpValidateElementIfExist',
-      'params' => 
-      array (
-        'errorCodeValidate' => '\'2788\'',
-        'node' => 'cbc:Amount/@currencyID',
-        'regexp' => '\'^(PEN)$\'',
-      ),
-      'context' => 'cac:PaymentTerms',
-      'mode' => NULL,
-      'conditions' => 
-      array (
-        0 => ' cbc:Amount and cbc:ID = \'Percepcion\'',
-      ),
-    ),
-    651 => 
+    526 => 
     array (
       'primitive' => 'existElement',
       'params' => 
@@ -10936,7 +8779,7 @@ return array (
         0 => '$codigoProducto',
       ),
     ),
-    652 => 
+    527 => 
     array (
       'primitive' => 'existElement',
       'params' => 
@@ -10951,7 +8794,7 @@ return array (
         0 => '$tipoOPeracion = \'0302\'',
       ),
     ),
-    653 => 
+    528 => 
     array (
       'primitive' => 'findElementInCatalog',
       'params' => 
@@ -10967,7 +8810,7 @@ return array (
         0 => 'cbc:PaymentMeansCode',
       ),
     ),
-    654 => 
+    529 => 
     array (
       'primitive' => 'regexpValidateElementIfExist',
       'params' => 
@@ -10983,7 +8826,7 @@ return array (
       array (
       ),
     ),
-    655 => 
+    530 => 
     array (
       'primitive' => 'regexpValidateElementIfExist',
       'params' => 
@@ -10999,7 +8842,7 @@ return array (
       array (
       ),
     ),
-    656 => 
+    531 => 
     array (
       'primitive' => 'regexpValidateElementIfExist',
       'params' => 

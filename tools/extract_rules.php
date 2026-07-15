@@ -71,17 +71,20 @@ $skipped = [];    // motivo => conteo
  */
 $contextOf = function (DOMNode $node) {
     $conditions = [];
+    $forEach = [];   // @select de xsl:for-each, de fuera hacia dentro
     $match = null;
     $mode = null;
     $n = $node->parentNode;
     while ($n instanceof DOMElement) {
         if ($n->namespaceURI === XSL_NS) {
-            if ($n->localName === 'if') {
+            if ($n->localName === 'if' || $n->localName === 'when') {
                 $t = $n->getAttribute('test');
                 if ($t !== '') array_unshift($conditions, $t);
-            } elseif ($n->localName === 'when') {
-                $t = $n->getAttribute('test');
-                if ($t !== '') array_unshift($conditions, $t);
+            } elseif ($n->localName === 'for-each') {
+                // El for-each cambia el nodo de contexto: su @select se
+                // encadena al match del template contenedor.
+                $sel = $n->getAttribute('select');
+                if ($sel !== '') array_unshift($forEach, $sel);
             } elseif ($n->localName === 'template') {
                 $match = $n->getAttribute('match') ?: null;
                 $mode = $n->getAttribute('mode') ?: null;
@@ -90,7 +93,15 @@ $contextOf = function (DOMNode $node) {
         }
         $n = $n->parentNode;
     }
-    return [$match, $mode, $conditions];
+
+    // Contexto completo = match del template + los for-each anidados.
+    $context = $match;
+    if ($forEach) {
+        $base = ($match !== null && $match !== '/*') ? rtrim($match, '/') . '/' : '';
+        $context = $base . implode('/', $forEach);
+    }
+
+    return [$context, $mode, $conditions];
 };
 
 foreach ($xp->query('//xsl:call-template') as $call) {
