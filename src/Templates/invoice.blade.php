@@ -363,8 +363,9 @@
             </cac:TaxSubtotal>
         @endif
         @if(floatval($document['total_plastic_bag_taxes']) > 0)
+            {{-- ICBPER a nivel documento: solo TaxAmount (sin TaxableAmount, que no aplica al 7152) --}}
             <cac:TaxSubtotal>
-                <cbc:TaxableAmount currencyID="{{ $document['currency_type_id'] }}">{{ $document['total_plastic_bag_taxes'] }}</cbc:TaxableAmount>
+                <cbc:TaxAmount currencyID="{{ $document['currency_type_id'] }}">{{ $document['total_plastic_bag_taxes'] }}</cbc:TaxAmount>
                 <cac:TaxCategory>
                     <cac:TaxScheme>
                         <cbc:ID>7152</cbc:ID>

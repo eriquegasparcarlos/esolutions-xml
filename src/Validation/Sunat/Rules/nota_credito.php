@@ -3246,7 +3246,7 @@ return array (
         'descripcion' => 'concat(\'Error en la linea: \', $nroLinea, \' ConceptoItem \', cbc:NameCode)',
         'isError' => 'false()',
       ),
-      'context' => 'cac:Item/cac:AdditionalItemProperty',
+      'context' => 'cac:CreditNoteLine/cac:Item/cac:AdditionalItemProperty',
       'mode' => 'linea',
       'conditions' => 
       array (
@@ -3263,7 +3263,7 @@ return array (
         'isError' => 'false()',
         'descripcion' => 'concat(\'Error en la linea: \', $nroLinea, \' ConceptoItem \', cbc:NameCode)',
       ),
-      'context' => 'cac:Item/cac:AdditionalItemProperty',
+      'context' => 'cac:CreditNoteLine/cac:Item/cac:AdditionalItemProperty',
       'mode' => 'linea',
       'conditions' => 
       array (
@@ -3280,7 +3280,7 @@ return array (
         'isError' => 'false()',
         'descripcion' => 'concat(\'Error en la linea: \', $nroLinea, \' ConceptoItem \', cbc:NameCode)',
       ),
-      'context' => 'cac:Item/cac:AdditionalItemProperty',
+      'context' => 'cac:CreditNoteLine/cac:Item/cac:AdditionalItemProperty',
       'mode' => 'linea',
       'conditions' => 
       array (
@@ -3297,7 +3297,7 @@ return array (
         'isError' => 'false()',
         'descripcion' => 'concat(\'Error en la linea: \', $nroLinea, \' ConceptoItem \', cbc:NameCode)',
       ),
-      'context' => 'cac:Item/cac:AdditionalItemProperty',
+      'context' => 'cac:CreditNoteLine/cac:Item/cac:AdditionalItemProperty',
       'mode' => 'linea',
       'conditions' => 
       array (
@@ -3312,7 +3312,7 @@ return array (
         'node' => 'cbc:Value',
         'descripcion' => 'concat(\'Error en la linea: \', $nroLinea, \' ConceptoItem \', cbc:NameCode)',
       ),
-      'context' => 'cac:Item/cac:AdditionalItemProperty',
+      'context' => 'cac:CreditNoteLine/cac:Item/cac:AdditionalItemProperty',
       'mode' => 'linea',
       'conditions' => 
       array (
@@ -3328,7 +3328,7 @@ return array (
         'node' => 'cbc:Value',
         'descripcion' => 'concat(\'Error en la linea: \', $nroLinea, \' ConceptoItem \', cbc:NameCode)',
       ),
-      'context' => 'cac:Item/cac:AdditionalItemProperty',
+      'context' => 'cac:CreditNoteLine/cac:Item/cac:AdditionalItemProperty',
       'mode' => 'linea',
       'conditions' => 
       array (
@@ -3346,7 +3346,7 @@ return array (
         'descripcion' => 'concat(\'Error en la linea: \', $nroLinea, \' ConceptoItem \', cbc:NameCode)',
         'isError' => 'false()',
       ),
-      'context' => 'cac:Item/cac:AdditionalItemProperty',
+      'context' => 'cac:CreditNoteLine/cac:Item/cac:AdditionalItemProperty',
       'mode' => 'linea',
       'conditions' => 
       array (
@@ -3362,7 +3362,7 @@ return array (
         'node' => 'cbc:Value',
         'descripcion' => 'concat(\'Error en la linea: \', $nroLinea, \' ConceptoItem \', cbc:NameCode)',
       ),
-      'context' => 'cac:Item/cac:AdditionalItemProperty',
+      'context' => 'cac:CreditNoteLine/cac:Item/cac:AdditionalItemProperty',
       'mode' => 'linea',
       'conditions' => 
       array (
@@ -3380,7 +3380,7 @@ return array (
         'descripcion' => 'concat(\'Error en la linea: \', $nroLinea, \' ConceptoItem \', cbc:NameCode)',
         'isError' => 'false()',
       ),
-      'context' => 'cac:Item/cac:AdditionalItemProperty',
+      'context' => 'cac:CreditNoteLine/cac:Item/cac:AdditionalItemProperty',
       'mode' => 'linea',
       'conditions' => 
       array (
@@ -3396,7 +3396,7 @@ return array (
         'node' => 'cbc:Value',
         'descripcion' => 'concat(\'Error en la linea: \', $nroLinea, \' ConceptoItem \', cbc:NameCode)',
       ),
-      'context' => 'cac:Item/cac:AdditionalItemProperty',
+      'context' => 'cac:CreditNoteLine/cac:Item/cac:AdditionalItemProperty',
       'mode' => 'linea',
       'conditions' => 
       array (
@@ -3414,7 +3414,7 @@ return array (
         'isError' => 'false()',
         'descripcion' => 'concat(\'Error en la linea: \', $nroLinea, \' ConceptoItem \', cbc:NameCode)',
       ),
-      'context' => 'cac:Item/cac:AdditionalItemProperty',
+      'context' => 'cac:CreditNoteLine/cac:Item/cac:AdditionalItemProperty',
       'mode' => 'linea',
       'conditions' => 
       array (
@@ -3433,7 +3433,7 @@ return array (
         'isError' => 'false()',
         'descripcion' => 'concat(\'Error en la linea: \', $nroLinea, \' ConceptoItem \', cbc:NameCode)',
       ),
-      'context' => 'cac:Item/cac:AdditionalItemProperty',
+      'context' => 'cac:CreditNoteLine/cac:Item/cac:AdditionalItemProperty',
       'mode' => 'linea',
       'conditions' => 
       array (
@@ -3449,7 +3449,7 @@ return array (
         'node' => 'cbc:Value',
         'descripcion' => 'concat(\'Error en la linea: \', $nroLinea, \' ConceptoItem \', cbc:NameCode)',
       ),
-      'context' => 'cac:Item/cac:AdditionalItemProperty',
+      'context' => 'cac:CreditNoteLine/cac:Item/cac:AdditionalItemProperty',
       'mode' => 'linea',
       'conditions' => 
       array (
@@ -3467,7 +3467,7 @@ return array (
         'isError' => 'false()',
         'descripcion' => 'concat(\'Error en la linea: \', $nroLinea, \' ConceptoItem \', cbc:NameCode)',
       ),
-      'context' => 'cac:Item/cac:AdditionalItemProperty',
+      'context' => 'cac:CreditNoteLine/cac:Item/cac:AdditionalItemProperty',
       'mode' => 'linea',
       'conditions' => 
       array (
@@ -3486,7 +3486,7 @@ return array (
         'isError' => 'false()',
         'descripcion' => 'concat(\'Error en la linea: \', $nroLinea, \' ConceptoItem \', cbc:NameCode)',
       ),
-      'context' => 'cac:Item/cac:AdditionalItemProperty',
+      'context' => 'cac:CreditNoteLine/cac:Item/cac:AdditionalItemProperty',
       'mode' => 'linea',
       'conditions' => 
       array (
@@ -3502,7 +3502,7 @@ return array (
         'node' => 'cbc:Value',
         'descripcion' => 'concat(\'Error en la linea: \', $nroLinea, \' ConceptoItem \', cbc:NameCode)',
       ),
-      'context' => 'cac:Item/cac:AdditionalItemProperty',
+      'context' => 'cac:CreditNoteLine/cac:Item/cac:AdditionalItemProperty',
       'mode' => 'linea',
       'conditions' => 
       array (
@@ -3520,7 +3520,7 @@ return array (
         'descripcion' => 'concat(\'Error en la linea: \', $nroLinea, \' ConceptoItem \', cbc:NameCode)',
         'isError' => 'false()',
       ),
-      'context' => 'cac:Item/cac:AdditionalItemProperty',
+      'context' => 'cac:CreditNoteLine/cac:Item/cac:AdditionalItemProperty',
       'mode' => 'linea',
       'conditions' => 
       array (
@@ -3536,7 +3536,7 @@ return array (
         'node' => 'cbc:Value',
         'descripcion' => 'concat(\'Error en la linea: \', $nroLinea, \' ConceptoItem \', cbc:NameCode)',
       ),
-      'context' => 'cac:Item/cac:AdditionalItemProperty',
+      'context' => 'cac:CreditNoteLine/cac:Item/cac:AdditionalItemProperty',
       'mode' => 'linea',
       'conditions' => 
       array (
@@ -3554,7 +3554,7 @@ return array (
         'descripcion' => 'concat(\'Error en la linea: \', $nroLinea, \' ConceptoItem \', cbc:NameCode)',
         'isError' => 'false()',
       ),
-      'context' => 'cac:Item/cac:AdditionalItemProperty',
+      'context' => 'cac:CreditNoteLine/cac:Item/cac:AdditionalItemProperty',
       'mode' => 'linea',
       'conditions' => 
       array (
@@ -3570,7 +3570,7 @@ return array (
         'node' => 'cbc:Value',
         'descripcion' => 'concat(\'Error en la linea: \', $nroLinea, \' ConceptoItem \', cbc:NameCode)',
       ),
-      'context' => 'cac:Item/cac:AdditionalItemProperty',
+      'context' => 'cac:CreditNoteLine/cac:Item/cac:AdditionalItemProperty',
       'mode' => 'linea',
       'conditions' => 
       array (
@@ -3588,7 +3588,7 @@ return array (
         'isError' => 'false()',
         'descripcion' => 'concat(\'Error en la linea: \', $nroLinea, \' ConceptoItem \', cbc:NameCode)',
       ),
-      'context' => 'cac:Item/cac:AdditionalItemProperty',
+      'context' => 'cac:CreditNoteLine/cac:Item/cac:AdditionalItemProperty',
       'mode' => 'linea',
       'conditions' => 
       array (
@@ -3607,7 +3607,7 @@ return array (
         'isError' => 'false()',
         'descripcion' => 'concat(\'Error en la linea: \', $nroLinea, \' ConceptoItem \', cbc:NameCode)',
       ),
-      'context' => 'cac:Item/cac:AdditionalItemProperty',
+      'context' => 'cac:CreditNoteLine/cac:Item/cac:AdditionalItemProperty',
       'mode' => 'linea',
       'conditions' => 
       array (
@@ -3623,7 +3623,7 @@ return array (
         'node' => 'cbc:Value',
         'descripcion' => 'concat(\'Error en la linea: \', $nroLinea, \' ConceptoItem \', cbc:NameCode)',
       ),
-      'context' => 'cac:Item/cac:AdditionalItemProperty',
+      'context' => 'cac:CreditNoteLine/cac:Item/cac:AdditionalItemProperty',
       'mode' => 'linea',
       'conditions' => 
       array (
@@ -3639,7 +3639,7 @@ return array (
         'node' => 'cbc:Value',
         'descripcion' => 'concat(\'Error en la linea: \', $nroLinea, \' ConceptoItem \', cbc:NameCode)',
       ),
-      'context' => 'cac:Item/cac:AdditionalItemProperty',
+      'context' => 'cac:CreditNoteLine/cac:Item/cac:AdditionalItemProperty',
       'mode' => 'linea',
       'conditions' => 
       array (
@@ -3657,7 +3657,7 @@ return array (
         'isError' => 'false()',
         'descripcion' => 'concat(\'Error en la linea: \', $nroLinea, \' ConceptoItem \', cbc:NameCode)',
       ),
-      'context' => 'cac:Item/cac:AdditionalItemProperty',
+      'context' => 'cac:CreditNoteLine/cac:Item/cac:AdditionalItemProperty',
       'mode' => 'linea',
       'conditions' => 
       array (
@@ -3676,7 +3676,7 @@ return array (
         'isError' => 'false()',
         'descripcion' => 'concat(\'Error en la linea: \', $nroLinea, \' ConceptoItem \', cbc:NameCode)',
       ),
-      'context' => 'cac:Item/cac:AdditionalItemProperty',
+      'context' => 'cac:CreditNoteLine/cac:Item/cac:AdditionalItemProperty',
       'mode' => 'linea',
       'conditions' => 
       array (
@@ -3692,7 +3692,7 @@ return array (
         'node' => 'cbc:Value',
         'descripcion' => 'concat(\'Error en la linea: \', $nroLinea, \' ConceptoItem \', cbc:NameCode)',
       ),
-      'context' => 'cac:Item/cac:AdditionalItemProperty',
+      'context' => 'cac:CreditNoteLine/cac:Item/cac:AdditionalItemProperty',
       'mode' => 'linea',
       'conditions' => 
       array (
@@ -3710,7 +3710,7 @@ return array (
         'descripcion' => 'concat(\'Error en la linea: \', $nroLinea, \' ConceptoItem \', cbc:NameCode)',
         'isError' => 'false()',
       ),
-      'context' => 'cac:Item/cac:AdditionalItemProperty',
+      'context' => 'cac:CreditNoteLine/cac:Item/cac:AdditionalItemProperty',
       'mode' => 'linea',
       'conditions' => 
       array (
@@ -3726,7 +3726,7 @@ return array (
         'node' => 'cbc:Value',
         'descripcion' => 'concat(\'Error en la linea: \', $nroLinea, \' ConceptoItem \', cbc:NameCode)',
       ),
-      'context' => 'cac:Item/cac:AdditionalItemProperty',
+      'context' => 'cac:CreditNoteLine/cac:Item/cac:AdditionalItemProperty',
       'mode' => 'linea',
       'conditions' => 
       array (
@@ -3744,7 +3744,7 @@ return array (
         'isError' => 'false()',
         'descripcion' => 'concat(\'Error en la linea: \', $nroLinea, \' ConceptoItem \', cbc:NameCode)',
       ),
-      'context' => 'cac:Item/cac:AdditionalItemProperty',
+      'context' => 'cac:CreditNoteLine/cac:Item/cac:AdditionalItemProperty',
       'mode' => 'linea',
       'conditions' => 
       array (
@@ -3763,7 +3763,7 @@ return array (
         'isError' => 'false()',
         'descripcion' => 'concat(\'Error en la linea: \', $nroLinea, \' ConceptoItem \', cbc:NameCode)',
       ),
-      'context' => 'cac:Item/cac:AdditionalItemProperty',
+      'context' => 'cac:CreditNoteLine/cac:Item/cac:AdditionalItemProperty',
       'mode' => 'linea',
       'conditions' => 
       array (
@@ -3779,7 +3779,7 @@ return array (
         'node' => 'cbc:Value',
         'descripcion' => 'concat(\'Error en la linea: \', $nroLinea, \' ConceptoItem \', cbc:NameCode)',
       ),
-      'context' => 'cac:Item/cac:AdditionalItemProperty',
+      'context' => 'cac:CreditNoteLine/cac:Item/cac:AdditionalItemProperty',
       'mode' => 'linea',
       'conditions' => 
       array (
@@ -3797,7 +3797,7 @@ return array (
         'isError' => 'false()',
         'descripcion' => 'concat(\'Error en la linea: \', $nroLinea, \' ConceptoItem \', cbc:NameCode)',
       ),
-      'context' => 'cac:Item/cac:AdditionalItemProperty',
+      'context' => 'cac:CreditNoteLine/cac:Item/cac:AdditionalItemProperty',
       'mode' => 'linea',
       'conditions' => 
       array (
@@ -3813,7 +3813,7 @@ return array (
         'node' => 'cbc:Value',
         'descripcion' => 'concat(\'Error en la linea: \', $nroLinea, \' ConceptoItem \', cbc:NameCode)',
       ),
-      'context' => 'cac:Item/cac:AdditionalItemProperty',
+      'context' => 'cac:CreditNoteLine/cac:Item/cac:AdditionalItemProperty',
       'mode' => 'linea',
       'conditions' => 
       array (
@@ -3831,7 +3831,7 @@ return array (
         'isError' => 'false()',
         'descripcion' => 'concat(\'Error en la linea: \', $nroLinea, \' ConceptoItem \', cbc:NameCode)',
       ),
-      'context' => 'cac:Item/cac:AdditionalItemProperty',
+      'context' => 'cac:CreditNoteLine/cac:Item/cac:AdditionalItemProperty',
       'mode' => 'linea',
       'conditions' => 
       array (
@@ -3847,7 +3847,7 @@ return array (
         'node' => 'cac:UsabilityPeriod/cbc:StartDate',
         'descripcion' => 'concat(\'Error en la linea: \', $nroLinea, \' ConceptoItem \', cbc:NameCode)',
       ),
-      'context' => 'cac:Item/cac:AdditionalItemProperty',
+      'context' => 'cac:CreditNoteLine/cac:Item/cac:AdditionalItemProperty',
       'mode' => 'linea',
       'conditions' => 
       array (
@@ -3865,7 +3865,7 @@ return array (
         'isError' => 'false()',
         'descripcion' => 'concat(\'Error en la linea: \', $nroLinea, \' ConceptoItem \', cbc:NameCode)',
       ),
-      'context' => 'cac:Item/cac:AdditionalItemProperty',
+      'context' => 'cac:CreditNoteLine/cac:Item/cac:AdditionalItemProperty',
       'mode' => 'linea',
       'conditions' => 
       array (
@@ -3882,7 +3882,7 @@ return array (
         'isError' => 'false()',
         'descripcion' => 'concat(\'Error en la linea: \', $nroLinea, \' ConceptoItem \', cbc:NameCode)',
       ),
-      'context' => 'cac:Item/cac:AdditionalItemProperty',
+      'context' => 'cac:CreditNoteLine/cac:Item/cac:AdditionalItemProperty',
       'mode' => 'linea',
       'conditions' => 
       array (
@@ -3900,7 +3900,7 @@ return array (
         'isError' => 'false()',
         'descripcion' => 'concat(\'Error en la linea: \', $nroLinea, \' ConceptoItem \', cbc:NameCode)',
       ),
-      'context' => 'cac:Item/cac:AdditionalItemProperty',
+      'context' => 'cac:CreditNoteLine/cac:Item/cac:AdditionalItemProperty',
       'mode' => 'linea',
       'conditions' => 
       array (
@@ -3918,7 +3918,7 @@ return array (
         'descripcion' => 'concat(\'Error en la linea: \', $nroLinea)',
         'isError' => 'false()',
       ),
-      'context' => 'cac:TaxTotal',
+      'context' => 'cac:CreditNoteLine/cac:TaxTotal',
       'mode' => 'linea',
       'conditions' => 
       array (
@@ -3936,7 +3936,7 @@ return array (
         'descripcion' => 'concat(\'Error en la linea: \', $nroLinea)',
         'isError' => 'false()',
       ),
-      'context' => 'cac:TaxTotal',
+      'context' => 'cac:CreditNoteLine/cac:TaxTotal',
       'mode' => 'linea',
       'conditions' => 
       array (
@@ -3953,7 +3953,7 @@ return array (
         'expresion' => 'count(cac:TaxSubtotal/cac:TaxCategory/cac:TaxScheme/cbc:ID[text() = \'1000\' or text() = \'1016\' or text() = \'9995\' or text() = \'9996\' or text() = \'9997\' or text() = \'9998\']) < 1',
         'descripcion' => 'concat(\'Error en la linea: \', $nroLinea)',
       ),
-      'context' => 'cac:TaxTotal',
+      'context' => 'cac:CreditNoteLine/cac:TaxTotal',
       'mode' => 'linea',
       'conditions' => 
       array (
@@ -3968,7 +3968,7 @@ return array (
         'node' => 'cac:TaxSubtotal[cbc:TaxableAmount > 0]/cac:TaxCategory/cac:TaxScheme/cbc:ID',
         'expresion' => 'not((cac:TaxSubtotal[cac:TaxCategory/cac:TaxScheme/cbc:ID = \'1000\' and cbc:TaxableAmount > 0] and cac:TaxSubtotal[cac:TaxCategory/cac:TaxScheme/cbc:ID = \'2000\' and cbc:TaxableAmount > 0] and count(cac:TaxSubtotal[cbc:TaxableAmount > 0]) = 2) or                            (cac:TaxSubtotal[cac:TaxCategory/cac:TaxScheme/cbc:ID = \'1000\' and cbc:TaxableAmount > 0] and cac:TaxSubtotal[cac:TaxCategory/cac:TaxScheme/cbc:ID = \'9999\' and cbc:TaxableAmount > 0] and count(cac:TaxSubtotal[cbc:TaxableAmount > 0]) = 2) or                            (cac:TaxSubtotal[cac:TaxCategory/cac:TaxScheme/cbc:ID = \'1000\' and cbc:TaxableAmount > 0] and cac:TaxSubtotal[cac:TaxCategory/cac:TaxScheme/cbc:ID = \'2000\' and cbc:TaxableAmount > 0] and cac:TaxSubtotal[cac:TaxCategory/cac:TaxScheme/cbc:ID = \'9999\' and cbc:TaxableAmount > 0] and count(cac:TaxSubtotal[cbc:TaxableAmount > 0]) = 3) or                            (cac:TaxSubtotal[cac:TaxCategory/cac:TaxScheme/cbc:ID = \'1016\' and cbc:TaxableAmount > 0] and cac:TaxSubtotal[cac:TaxCategory/cac:TaxScheme/cbc:ID = \'9999\' and cbc:TaxableAmount > 0] and count(cac:TaxSubtotal[cbc:TaxableAmount > 0]) = 2) or                            (cac:TaxSubtotal[cac:TaxCategory/cac:TaxScheme/cbc:ID = \'9995\' and cbc:TaxableAmount > 0] and cac:TaxSubtotal[cac:TaxCategory/cac:TaxScheme/cbc:ID = \'9999\' and cbc:TaxableAmount > 0] and count(cac:TaxSubtotal[cbc:TaxableAmount > 0]) = 2) or                            (cac:TaxSubtotal[cac:TaxCategory/cac:TaxScheme/cbc:ID = \'9996\' and cbc:TaxableAmount > 0] and cac:TaxSubtotal[cac:TaxCategory/cac:TaxScheme/cbc:ID = \'2000\' and cbc:TaxableAmount > 0] and count(cac:TaxSubtotal[cbc:TaxableAmount > 0]) = 2) or                             (cac:TaxSubtotal[cac:TaxCategory/cac:TaxScheme/cbc:ID = \'9996\' and cbc:TaxableAmount > 0] and cac:TaxSubtotal[cac:TaxCategory/cac:TaxScheme/cbc:ID = \'2000\' and cbc:TaxableAmount > 0] and cac:TaxSubtotal[cac:TaxCategory/cac:TaxScheme/cbc:ID = \'9999\' and cbc:TaxableAmount > 0] and count(cac:TaxSubtotal[cbc:TaxableAmount > 0]) = 3) or                             (cac:TaxSubtotal[cac:TaxCategory/cac:TaxScheme/cbc:ID = \'9996\' and cbc:TaxableAmount > 0] and cac:TaxSubtotal[cac:TaxCategory/cac:TaxScheme/cbc:ID = \'9999\' and cbc:TaxableAmount > 0] and count(cac:TaxSubtotal[cbc:TaxableAmount > 0]) = 2) or                             (cac:TaxSubtotal[cac:TaxCategory/cac:TaxScheme/cbc:ID = \'9997\' and cbc:TaxableAmount > 0] and cac:TaxSubtotal[cac:TaxCategory/cac:TaxScheme/cbc:ID = \'2000\' and cbc:TaxableAmount > 0] and count(cac:TaxSubtotal[cbc:TaxableAmount > 0]) = 2) or                             (cac:TaxSubtotal[cac:TaxCategory/cac:TaxScheme/cbc:ID = \'9997\' and cbc:TaxableAmount > 0] and cac:TaxSubtotal[cac:TaxCategory/cac:TaxScheme/cbc:ID = \'2000\' and cbc:TaxableAmount > 0] and cac:TaxSubtotal[cac:TaxCategory/cac:TaxScheme/cbc:ID = \'9999\' and cbc:TaxableAmount > 0] and count(cac:TaxSubtotal[cbc:TaxableAmount > 0]) = 3) or                             (cac:TaxSubtotal[cac:TaxCategory/cac:TaxScheme/cbc:ID = \'9997\' and cbc:TaxableAmount > 0] and cac:TaxSubtotal[cac:TaxCategory/cac:TaxScheme/cbc:ID = \'9999\' and cbc:TaxableAmount > 0] and count(cac:TaxSubtotal[cbc:TaxableAmount > 0]) = 2) or                             (cac:TaxSubtotal[cac:TaxCategory/cac:TaxScheme/cbc:ID = \'9998\' and cbc:TaxableAmount > 0] and cac:TaxSubtotal[cac:TaxCategory/cac:TaxScheme/cbc:ID = \'2000\' and cbc:TaxableAmount > 0] and count(cac:TaxSubtotal[cbc:TaxableAmount > 0]) = 2)or                             (cac:TaxSubtotal[cac:TaxCategory/cac:TaxScheme/cbc:ID = \'9998\' and cbc:TaxableAmount > 0] and cac:TaxSubtotal[cac:TaxCategory/cac:TaxScheme/cbc:ID = \'2000\' and cbc:TaxableAmount > 0] and cac:TaxSubtotal[cac:TaxCategory/cac:TaxScheme/cbc:ID = \'9999\' and cbc:TaxableAmount > 0] and count(cac:TaxSubtotal[cbc:TaxableAmount > 0]) = 3) or                             (cac:TaxSubtotal[cac:TaxCategory/cac:TaxScheme/cbc:ID = \'9998\' and cbc:TaxableAmount > 0] and cac:TaxSubtotal[cac:TaxCategory/cac:TaxScheme/cbc:ID = \'9999\' and cbc:TaxableAmount > 0] and count(cac:TaxSubtotal[cbc:TaxableAmount > 0]) = 2))',
       ),
-      'context' => 'cac:TaxTotal',
+      'context' => 'cac:CreditNoteLine/cac:TaxTotal',
       'mode' => 'linea',
       'conditions' => 
       array (

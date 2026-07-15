@@ -90,27 +90,50 @@ $contextOf = function (DOMNode $node) {
                 $t = $n->getAttribute('test');
                 if ($t !== '') array_unshift($conditions, $t);
             } elseif ($n->localName === 'for-each') {
-                // El for-each cambia el nodo de contexto: su @select se
-                // encadena al match del template contenedor.
                 $sel = $n->getAttribute('select');
                 if ($sel !== '') array_unshift($forEach, $sel);
             } elseif ($n->localName === 'template') {
                 $match = $n->getAttribute('match') ?: null;
                 $mode = $n->getAttribute('mode') ?: null;
-                break; // el template acota el contexto
+                break;
             }
         }
         $n = $n->parentNode;
     }
+    return [$match, $mode, $forEach, $conditions];
+};
 
-    // Contexto completo = match del template + los for-each anidados.
-    $context = $match;
-    if ($forEach) {
-        $base = ($match !== null && $match !== '/*') ? rtrim($match, '/') . '/' : '';
-        $context = $base . implode('/', $forEach);
+// Compone el contexto XPath: match del template + for-each anidados.
+$compose = function (?string $match, array $forEach): ?string {
+    if (!$forEach) return $match;
+    $base = ($match !== null && $match !== '/*') ? rtrim($match, '/') . '/' : '';
+    return $base . implode('/', $forEach);
+};
+
+// Precomputa los apply-templates para resolver el contexto de los templates
+// con @mode (que solo se aplican donde el apply-templates los invoca).
+$applies = []; // [ 'select', 'mode', 'container' ]
+foreach ($xp->query('//xsl:apply-templates[@select]') as $at) {
+    [$m, , $fe, ] = $contextOf($at);
+    $applies[] = [
+        'select' => $at->getAttribute('select'),
+        'mode' => $at->getAttribute('mode') ?: null,
+        'container' => $compose($m, $fe),
+    ];
+}
+
+// Para un template match=$match mode=$mode, devuelve el contexto efectivo
+// según el apply-templates que lo invoca (container/select).
+$resolveMode = function (?string $match, ?string $mode) use ($applies): ?string {
+    if ($mode === null || $match === null) return $match;
+    foreach ($applies as $a) {
+        if ($a['mode'] === $mode && $a['select'] !== ''
+            && (str_ends_with($a['select'], $match) || str_contains($a['select'], $match))) {
+            $base = ($a['container'] !== null && $a['container'] !== '/*') ? rtrim($a['container'], '/') . '/' : '';
+            return $base . $a['select'];
+        }
     }
-
-    return [$context, $mode, $conditions];
+    return $match;
 };
 
 foreach ($xp->query('//xsl:call-template') as $call) {
@@ -132,7 +155,9 @@ foreach ($xp->query('//xsl:call-template') as $call) {
         $params[$pname] = $psel;
     }
 
-    [$match, $mode, $conditions] = $contextOf($call);
+    [$match, $mode, $forEach, $conditions] = $contextOf($call);
+    // Contexto efectivo: resuelve @mode vía apply-templates y encadena for-each.
+    $context = $compose($resolveMode($match, $mode), $forEach);
 
     // Solo nos interesan las llamadas a PRIMITIVAS de validación (que llevan
     // algún errorCode). Las llamadas internas de utilidades no.
@@ -151,7 +176,7 @@ foreach ($xp->query('//xsl:call-template') as $call) {
     $rules[] = [
         'primitive' => $primitive,
         'params' => $params,
-        'context' => $match,
+        'context' => $context,
         'mode' => $mode,
         'conditions' => $conditions,
     ];

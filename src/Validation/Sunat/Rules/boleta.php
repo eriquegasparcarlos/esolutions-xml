@@ -4029,7 +4029,7 @@ return array (
         'descripcion' => 'concat(\'Error en la linea: \', $nroLinea)',
         'isError' => 'false()',
       ),
-      'context' => 'cac:Delivery',
+      'context' => 'cac:InvoiceLine/cac:Delivery/cac:DeliveryTerms',
       'mode' => 'linea',
       'conditions' => 
       array (
@@ -4046,7 +4046,7 @@ return array (
         'isError' => 'false()',
         'descripcion' => 'concat(\'Error en la linea: \', $nroLinea)',
       ),
-      'context' => 'cac:Delivery',
+      'context' => 'cac:InvoiceLine/cac:Delivery/cac:DeliveryTerms',
       'mode' => 'linea',
       'conditions' => 
       array (
@@ -4063,7 +4063,7 @@ return array (
         'isError' => 'false()',
         'descripcion' => 'concat(\'Error en la linea: \', $nroLinea)',
       ),
-      'context' => 'cac:Delivery',
+      'context' => 'cac:InvoiceLine/cac:Delivery/cac:DeliveryTerms',
       'mode' => 'linea',
       'conditions' => 
       array (
@@ -4080,7 +4080,7 @@ return array (
         'isError' => 'false()',
         'descripcion' => 'concat(\'Error en la linea: \', $nroLinea)',
       ),
-      'context' => 'cac:Delivery',
+      'context' => 'cac:InvoiceLine/cac:Delivery/cac:DeliveryTerms',
       'mode' => 'linea',
       'conditions' => 
       array (
@@ -4097,7 +4097,7 @@ return array (
         'descripcion' => 'concat(\'Error en la linea: \', $nroLinea)',
         'isError' => 'false()',
       ),
-      'context' => 'cac:Delivery',
+      'context' => 'cac:InvoiceLine/cac:Delivery/cac:DeliveryTerms',
       'mode' => 'linea',
       'conditions' => 
       array (
@@ -4114,7 +4114,7 @@ return array (
         'isError' => 'false()',
         'descripcion' => 'concat(\'Error en la linea: \', $nroLinea)',
       ),
-      'context' => 'cac:Delivery',
+      'context' => 'cac:InvoiceLine/cac:Delivery/cac:DeliveryTerms',
       'mode' => 'linea',
       'conditions' => 
       array (
@@ -4131,7 +4131,7 @@ return array (
         'isError' => 'false()',
         'descripcion' => 'concat(\'Error en la linea: \', $nroLinea)',
       ),
-      'context' => 'cac:Delivery',
+      'context' => 'cac:InvoiceLine/cac:Delivery/cac:DeliveryTerms',
       'mode' => 'linea',
       'conditions' => 
       array (
@@ -4148,7 +4148,7 @@ return array (
         'isError' => 'false()',
         'descripcion' => 'concat(\'Error en la linea: \', $nroLinea)',
       ),
-      'context' => 'cac:Delivery',
+      'context' => 'cac:InvoiceLine/cac:Delivery/cac:DeliveryTerms',
       'mode' => 'linea',
       'conditions' => 
       array (
@@ -4165,7 +4165,7 @@ return array (
         'isError' => 'false()',
         'descripcion' => 'concat(\'Error en la linea: \', $nroLinea)',
       ),
-      'context' => 'cac:Delivery',
+      'context' => 'cac:InvoiceLine/cac:Delivery/cac:DeliveryTerms',
       'mode' => 'linea',
       'conditions' => 
       array (
@@ -4182,7 +4182,7 @@ return array (
         'isError' => 'false()',
         'descripcion' => 'concat(\'Error en la linea: \', $nroLinea)',
       ),
-      'context' => 'cac:Delivery',
+      'context' => 'cac:InvoiceLine/cac:Delivery/cac:DeliveryTerms',
       'mode' => 'linea',
       'conditions' => 
       array (
@@ -4199,7 +4199,7 @@ return array (
         'isError' => 'false()',
         'descripcion' => 'concat(\'Error en la linea: \', $nroLinea)',
       ),
-      'context' => 'cac:Delivery',
+      'context' => 'cac:InvoiceLine/cac:Delivery/cac:DeliveryTerms',
       'mode' => 'linea',
       'conditions' => 
       array (
@@ -4216,7 +4216,7 @@ return array (
         'isError' => 'false()',
         'descripcion' => 'concat(\'Error en la linea: \', $nroLinea)',
       ),
-      'context' => 'cac:Delivery',
+      'context' => 'cac:InvoiceLine/cac:Delivery/cac:DeliveryTerms',
       'mode' => 'linea',
       'conditions' => 
       array (
@@ -4233,7 +4233,7 @@ return array (
         'isError' => 'false()',
         'descripcion' => 'concat(\'Error en la linea: \', $nroLinea)',
       ),
-      'context' => 'cac:Delivery',
+      'context' => 'cac:InvoiceLine/cac:Delivery/cac:DeliveryTerms',
       'mode' => 'linea',
       'conditions' => 
       array (
@@ -4249,7 +4249,7 @@ return array (
         'regexp' => '\'^(PEN)$\'',
         'descripcion' => 'concat(\'Error en la linea: \', $nroLinea)',
       ),
-      'context' => 'cac:Delivery',
+      'context' => 'cac:InvoiceLine/cac:Delivery/cac:DeliveryTerms',
       'mode' => 'linea',
       'conditions' => 
       array (
@@ -4266,7 +4266,7 @@ return array (
         'isError' => 'false()',
         'descripcion' => 'concat(\'Error en la linea: \', $nroLinea)',
       ),
-      'context' => 'cac:Delivery',
+      'context' => 'cac:InvoiceLine/cac:Delivery/cac:DeliveryTerms',
       'mode' => 'linea',
       'conditions' => 
       array (
@@ -4283,7 +4283,7 @@ return array (
         'isError' => 'false()',
         'descripcion' => 'concat(\'Error en la linea: \', $nroLinea)',
       ),
-      'context' => 'cac:Delivery',
+      'context' => 'cac:InvoiceLine/cac:Delivery/cac:DeliveryTerms',
       'mode' => 'linea',
       'conditions' => 
       array (
@@ -4299,7 +4299,7 @@ return array (
         'regexp' => '\'^(PEN)$\'',
         'descripcion' => 'concat(\'Error en la linea: \', $nroLinea)',
       ),
-      'context' => 'cac:Delivery',
+      'context' => 'cac:InvoiceLine/cac:Delivery/cac:DeliveryTerms',
       'mode' => 'linea',
       'conditions' => 
       array (
@@ -4315,7 +4315,7 @@ return array (
         'regexp' => '\'^(PEN)$\'',
         'descripcion' => 'concat(\'Error en la linea: \', $nroLinea)',
       ),
-      'context' => 'cac:Delivery',
+      'context' => 'cac:InvoiceLine/cac:Delivery/cac:DeliveryTerms',
       'mode' => 'linea',
       'conditions' => 
       array (
@@ -4332,7 +4332,7 @@ return array (
         'descripcion' => 'concat(\'Error en la linea: \', $nroLinea, \' TipoCarga: \', cbc:AttributeID)',
         'isError' => 'false()',
       ),
-      'context' => 'cac:Delivery/cac:Shipment/cac:Consignment/cac:TransportHandlingUnit/cac:MeasurementDimension',
+      'context' => 'cac:InvoiceLine/cac:Delivery/cac:Shipment/cac:Consignment/cac:TransportHandlingUnit/cac:MeasurementDimension',
       'mode' => 'linea',
       'conditions' => 
       array (
@@ -4349,7 +4349,7 @@ return array (
         'descripcion' => 'concat(\'Error en la linea: \', $nroLinea, \' TipoCarga: \', cbc:AttributeID)',
         'isError' => 'false()',
       ),
-      'context' => 'cac:Delivery/cac:Shipment/cac:Consignment/cac:TransportHandlingUnit/cac:MeasurementDimension',
+      'context' => 'cac:InvoiceLine/cac:Delivery/cac:Shipment/cac:Consignment/cac:TransportHandlingUnit/cac:MeasurementDimension',
       'mode' => 'linea',
       'conditions' => 
       array (
@@ -4368,7 +4368,7 @@ return array (
         'descripcion' => 'concat(\'Error en la linea: \', $nroLinea, \' TipoCarga: \', cbc:AttributeID)',
         'isError' => 'false()',
       ),
-      'context' => 'cac:Delivery/cac:Shipment/cac:Consignment/cac:TransportHandlingUnit/cac:MeasurementDimension',
+      'context' => 'cac:InvoiceLine/cac:Delivery/cac:Shipment/cac:Consignment/cac:TransportHandlingUnit/cac:MeasurementDimension',
       'mode' => 'linea',
       'conditions' => 
       array (
@@ -4385,7 +4385,7 @@ return array (
         'node' => 'cbc:Amount',
         'descripcion' => 'concat(\'Error en la linea: \', $nroLinea)',
       ),
-      'context' => 'cac:Delivery/cac:DeliveryTerms',
+      'context' => 'cac:InvoiceLine/cac:Delivery/cac:DeliveryTerms',
       'mode' => 'linea',
       'conditions' => 
       array (
@@ -4401,7 +4401,7 @@ return array (
         'regexp' => '\'^(PEN)$\'',
         'descripcion' => 'concat(\'Error en la linea: \', $nroLinea)',
       ),
-      'context' => 'cac:Delivery/cac:DeliveryTerms',
+      'context' => 'cac:InvoiceLine/cac:Delivery/cac:DeliveryTerms',
       'mode' => 'linea',
       'conditions' => 
       array (
@@ -4417,7 +4417,7 @@ return array (
         'expresion' => '$monedaDocumento != $monedaBolsa',
         'descripcion' => 'concat(\'Error en la linea: \', $nroLinea, \' Tributo: \', $codigoTributo)',
       ),
-      'context' => 'cac:TaxSubtotal',
+      'context' => 'cac:TaxTotal/cac:TaxSubtotal',
       'mode' => 'linea',
       'conditions' => 
       array (
@@ -4435,7 +4435,7 @@ return array (
         'isError' => 'false()',
         'descripcion' => 'concat(\'Error en la linea: \', $nroLinea, \' Tributo: \', $codigoTributo)',
       ),
-      'context' => 'cac:TaxSubtotal',
+      'context' => 'cac:TaxTotal/cac:TaxSubtotal',
       'mode' => 'linea',
       'conditions' => 
       array (
@@ -4452,7 +4452,7 @@ return array (
         'node' => 'cbc:BaseUnitMeasure',
         'descripcion' => 'concat(\'Error en la linea: \', $nroLinea, \' Tributo: \', $codigoTributo)',
       ),
-      'context' => 'cac:TaxSubtotal',
+      'context' => 'cac:TaxTotal/cac:TaxSubtotal',
       'mode' => 'linea',
       'conditions' => 
       array (
@@ -4470,7 +4470,7 @@ return array (
         'regexp' => '\'^([0-9]{1,5})?$\'',
         'descripcion' => 'concat(\'Error en la linea:\', position(), \'. \')',
       ),
-      'context' => 'cac:TaxSubtotal',
+      'context' => 'cac:TaxTotal/cac:TaxSubtotal',
       'mode' => 'linea',
       'conditions' => 
       array (
@@ -4488,7 +4488,7 @@ return array (
         'isError' => 'false()',
         'descripcion' => 'concat(\'Error en la linea: \', $nroLinea, \' Tributo: \', $codigoTributo)',
       ),
-      'context' => 'cac:TaxSubtotal',
+      'context' => 'cac:TaxTotal/cac:TaxSubtotal',
       'mode' => 'linea',
       'conditions' => 
       array (
@@ -4505,7 +4505,7 @@ return array (
         'expresion' => '$CantidadBolsa!=$CantProducto',
         'descripcion' => 'concat(\'Error en la linea: \', $nroLinea, \' Tributo: \', $codigoTributo)',
       ),
-      'context' => 'cac:TaxSubtotal',
+      'context' => 'cac:TaxTotal/cac:TaxSubtotal',
       'mode' => 'linea',
       'conditions' => 
       array (
@@ -4523,7 +4523,7 @@ return array (
         'regexp' => '\'^(?!(0)[0-9]+$)[0-9]{1,3}(\\.[0-9]{1,5})?$\'',
         'descripcion' => 'concat(\'Error en la linea: \', $nroLinea, \' Tributo: \', $codigoTributo)',
       ),
-      'context' => 'cac:TaxSubtotal',
+      'context' => 'cac:TaxTotal/cac:TaxSubtotal',
       'mode' => 'linea',
       'conditions' => 
       array (
@@ -4540,7 +4540,7 @@ return array (
         'expresion' => '(round(cac:TaxCategory/cbc:PerUnitAmount * 100000) div 100000) = 0 ',
         'descripcion' => 'concat(\'Error en la linea: \', $nroLinea, \' Tributo: \', $codigoTributo)',
       ),
-      'context' => 'cac:TaxSubtotal',
+      'context' => 'cac:TaxTotal/cac:TaxSubtotal',
       'mode' => 'linea',
       'conditions' => 
       array (
@@ -4559,7 +4559,7 @@ return array (
         'isGreaterCero' => 'false()',
         'descripcion' => 'concat(\'Error en la linea: \', $nroLinea, \' Tributo: \', $codigoTributo)',
       ),
-      'context' => 'cac:TaxSubtotal',
+      'context' => 'cac:TaxTotal/cac:TaxSubtotal',
       'mode' => 'linea',
       'conditions' => 
       array (
@@ -4575,7 +4575,7 @@ return array (
         'node' => 'cac:TaxCategory/cac:TaxScheme/cbc:ID',
         'descripcion' => 'concat(\'Error en la linea: \', $nroLinea, \' Tributo: \', $codigoTributo)',
       ),
-      'context' => 'cac:TaxSubtotal',
+      'context' => 'cac:TaxTotal/cac:TaxSubtotal',
       'mode' => 'linea',
       'conditions' => 
       array (
@@ -4591,7 +4591,7 @@ return array (
         'errorCodeValidate' => '\'2036\'',
         'descripcion' => 'concat(\'Error en la linea: \', $nroLinea, \' Tributo: \', $codigoTributo)',
       ),
-      'context' => 'cac:TaxSubtotal',
+      'context' => 'cac:TaxTotal/cac:TaxSubtotal',
       'mode' => 'linea',
       'conditions' => 
       array (
@@ -4608,7 +4608,7 @@ return array (
         'isGreaterCero' => 'false()',
         'descripcion' => 'concat(\'Error en la linea: \', $nroLinea, \' Tributo: \', $codigoTributo)',
       ),
-      'context' => 'cac:TaxSubtotal',
+      'context' => 'cac:TaxTotal/cac:TaxSubtotal',
       'mode' => 'linea',
       'conditions' => 
       array (
@@ -4624,7 +4624,7 @@ return array (
         'expresion' => 'cbc:TaxAmount != 0',
         'descripcion' => 'concat(\'Error en la linea: \', $nroLinea, \' Tributo: \', $codigoTributo)',
       ),
-      'context' => 'cac:TaxSubtotal',
+      'context' => 'cac:TaxTotal/cac:TaxSubtotal',
       'mode' => 'linea',
       'conditions' => 
       array (
@@ -4641,7 +4641,7 @@ return array (
         'expresion' => 'cbc:TaxableAmount > 0 and cac:TaxCategory/cbc:TaxExemptionReasonCode[text() = \'11\' or text() = \'12\' or text() = \'13\' or text() = \'14\' or text() = \'15\' or text() = \'16\' or text() = \'17\'] and cbc:TaxAmount = 0',
         'descripcion' => 'concat(\'Error en la linea: \', $nroLinea, \' Tributo: \', $codigoTributo)',
       ),
-      'context' => 'cac:TaxSubtotal',
+      'context' => 'cac:TaxTotal/cac:TaxSubtotal',
       'mode' => 'linea',
       'conditions' => 
       array (
@@ -4658,7 +4658,7 @@ return array (
         'expresion' => 'cbc:TaxableAmount > 0 and cac:TaxCategory/cbc:TaxExemptionReasonCode[text() = \'21\' or text() = \'31\' or text() = \'32\' or text() = \'33\' or text() = \'34\' or text() = \'35\' or text() = \'36\' or text() = \'37\' or text() = \'40\'] and cbc:TaxAmount != 0',
         'descripcion' => 'concat(\'Error en la linea: \', $nroLinea, \' Tributo: \', $codigoTributo)',
       ),
-      'context' => 'cac:TaxSubtotal',
+      'context' => 'cac:TaxTotal/cac:TaxSubtotal',
       'mode' => 'linea',
       'conditions' => 
       array (
@@ -4675,7 +4675,7 @@ return array (
         'expresion' => 'cbc:TaxableAmount > 0 and $tipoOperacion != \'0113\' and cbc:TaxAmount = 0',
         'descripcion' => 'concat(\'Error en la linea: \', $nroLinea, \' Tributo: \', $codigoTributo)',
       ),
-      'context' => 'cac:TaxSubtotal',
+      'context' => 'cac:TaxTotal/cac:TaxSubtotal',
       'mode' => 'linea',
       'conditions' => 
       array (
@@ -4692,7 +4692,7 @@ return array (
         'regexp' => '\'^(?!(0)[0-9]+$)[0-9]{1,3}(\\.[0-9]{1,5})?$\'',
         'descripcion' => 'concat(\'Error en la linea: \', $nroLinea, \' Tributo: \', $codigoTributo)',
       ),
-      'context' => 'cac:TaxSubtotal',
+      'context' => 'cac:TaxTotal/cac:TaxSubtotal',
       'mode' => 'linea',
       'conditions' => 
       array (
@@ -4708,7 +4708,7 @@ return array (
         'expresion' => 'cbc:TaxableAmount > 0 and cac:TaxCategory/cbc:TaxExemptionReasonCode[text() = \'11\' or text() = \'12\' or text() = \'13\' or text() = \'14\' or text = \'15\' or text() = \'16\' or text() = \'17\'] and cac:TaxCategory/cbc:Percent = 0',
         'descripcion' => 'concat(\'Error en la linea: \', $nroLinea, \' Tributo: \', $codigoTributo)',
       ),
-      'context' => 'cac:TaxSubtotal',
+      'context' => 'cac:TaxTotal/cac:TaxSubtotal',
       'mode' => 'linea',
       'conditions' => 
       array (
@@ -4725,7 +4725,7 @@ return array (
         'expresion' => 'cbc:TaxableAmount > 0 and cac:TaxCategory/cbc:Percent = 0',
         'descripcion' => 'concat(\'Error en la linea: \', $nroLinea, \' Tributo: \', $codigoTributo)',
       ),
-      'context' => 'cac:TaxSubtotal',
+      'context' => 'cac:TaxTotal/cac:TaxSubtotal',
       'mode' => 'linea',
       'conditions' => 
       array (
@@ -4742,7 +4742,7 @@ return array (
         'expresion' => 'cbc:TaxableAmount > 0 and $tipoOperacion != \'0113\' and cac:TaxCategory/cbc:Percent = 0',
         'descripcion' => 'concat(\'Error en la linea: \', $nroLinea, \' Tributo: \', $codigoTributo)',
       ),
-      'context' => 'cac:TaxSubtotal',
+      'context' => 'cac:TaxTotal/cac:TaxSubtotal',
       'mode' => 'linea',
       'conditions' => 
       array (
@@ -4759,7 +4759,7 @@ return array (
         'expresion' => '($MontoTributo + 1 ) < $MontoTributoCalculado or ($MontoTributo - 1) > $MontoTributoCalculado',
         'descripcion' => 'concat(\'Error en la linea: \', $nroLinea, \' Tributo: \', $codigoTributo)',
       ),
-      'context' => 'cac:TaxSubtotal',
+      'context' => 'cac:TaxTotal/cac:TaxSubtotal',
       'mode' => 'linea',
       'conditions' => 
       array (
@@ -4776,7 +4776,7 @@ return array (
         'expresion' => '($MontoTributo + 1 ) < $MontoTributoCalculado or ($MontoTributo - 1) > $MontoTributoCalculado',
         'descripcion' => 'concat(\'Error en la linea: \', $nroLinea, \' Tributo: \', $codigoTributo)',
       ),
-      'context' => 'cac:TaxSubtotal',
+      'context' => 'cac:TaxTotal/cac:TaxSubtotal',
       'mode' => 'linea',
       'conditions' => 
       array (
@@ -4793,7 +4793,7 @@ return array (
         'expresion' => '($MontoTributo + 1 ) < $MontoTributoCalculado or ($MontoTributo - 1) > $MontoTributoCalculado',
         'descripcion' => 'concat(\'Error en la linea: \', $nroLinea, \' Tributo: \', $codigoTributo)',
       ),
-      'context' => 'cac:TaxSubtotal',
+      'context' => 'cac:TaxTotal/cac:TaxSubtotal',
       'mode' => 'linea',
       'conditions' => 
       array (
@@ -4809,7 +4809,7 @@ return array (
         'node' => 'cac:TaxCategory/cbc:TaxExemptionReasonCode',
         'descripcion' => 'concat(\'Error en la linea: \', $nroLinea, \' Tributo: \', $codigoTributo)',
       ),
-      'context' => 'cac:TaxSubtotal',
+      'context' => 'cac:TaxTotal/cac:TaxSubtotal',
       'mode' => 'linea',
       'conditions' => 
       array (
@@ -4827,7 +4827,7 @@ return array (
         'expresion' => 'cac:TaxCategory/cbc:TaxExemptionReasonCode',
         'descripcion' => 'concat(\'Error en la linea: \', $nroLinea, \' Tributo: \', $codigoTributo)',
       ),
-      'context' => 'cac:TaxSubtotal',
+      'context' => 'cac:TaxTotal/cac:TaxSubtotal',
       'mode' => 'linea',
       'conditions' => 
       array (
@@ -4844,7 +4844,7 @@ return array (
         'expresion' => 'cbc:TaxableAmount > 0 and cac:TaxCategory/cbc:TaxExemptionReasonCode != \'40\'',
         'descripcion' => 'concat(\'Error en la linea: \', $nroLinea, \' Tributo: \', $codigoTributo)',
       ),
-      'context' => 'cac:TaxSubtotal',
+      'context' => 'cac:TaxTotal/cac:TaxSubtotal',
       'mode' => 'linea',
       'conditions' => 
       array (
@@ -4862,7 +4862,7 @@ return array (
         'isError' => 'false()',
         'descripcion' => 'concat(\'Error en la linea: \', $nroLinea, \' Tributo: \', $codigoTributo)',
       ),
-      'context' => 'cac:TaxSubtotal',
+      'context' => 'cac:TaxTotal/cac:TaxSubtotal',
       'mode' => 'linea',
       'conditions' => 
       array (
@@ -4879,7 +4879,7 @@ return array (
         'isError' => 'false()',
         'descripcion' => 'concat(\'Error en la linea: \', $nroLinea, \' Tributo: \', $codigoTributo)',
       ),
-      'context' => 'cac:TaxSubtotal',
+      'context' => 'cac:TaxTotal/cac:TaxSubtotal',
       'mode' => 'linea',
       'conditions' => 
       array (
@@ -4896,7 +4896,7 @@ return array (
         'isError' => 'false()',
         'descripcion' => 'concat(\'Error en la linea: \', $nroLinea, \' Tributo: \', $codigoTributo)',
       ),
-      'context' => 'cac:TaxSubtotal',
+      'context' => 'cac:TaxTotal/cac:TaxSubtotal',
       'mode' => 'linea',
       'conditions' => 
       array (
@@ -4911,7 +4911,7 @@ return array (
         'node' => 'cac:TaxCategory/cbc:TierRange',
         'descripcion' => 'concat(\'Error en la linea: \', $nroLinea, \' Tributo: \', $codigoTributo)',
       ),
-      'context' => 'cac:TaxSubtotal',
+      'context' => 'cac:TaxTotal/cac:TaxSubtotal',
       'mode' => 'linea',
       'conditions' => 
       array (
@@ -4928,7 +4928,7 @@ return array (
         'errorCodeValidate' => '\'2041\'',
         'descripcion' => 'concat(\'Error en la linea: \', $nroLinea, \' Tributo: \', $codigoTributo)',
       ),
-      'context' => 'cac:TaxSubtotal',
+      'context' => 'cac:TaxTotal/cac:TaxSubtotal',
       'mode' => 'linea',
       'conditions' => 
       array (
@@ -4945,7 +4945,7 @@ return array (
         'expresion' => 'cac:TaxCategory/cbc:TierRange',
         'descripcion' => 'concat(\'Error en la linea: \', $nroLinea, \' Tributo: \', $codigoTributo)',
       ),
-      'context' => 'cac:TaxSubtotal',
+      'context' => 'cac:TaxTotal/cac:TaxSubtotal',
       'mode' => 'linea',
       'conditions' => 
       array (
@@ -4961,7 +4961,7 @@ return array (
         'node' => 'cac:TaxCategory/cbc:Percent',
         'descripcion' => 'concat(\'Error en la linea: \', $nroLinea, \' Tributo: \', $codigoTributo)',
       ),
-      'context' => 'cac:TaxSubtotal',
+      'context' => 'cac:TaxTotal/cac:TaxSubtotal',
       'mode' => 'linea',
       'conditions' => 
       array (
@@ -4978,7 +4978,7 @@ return array (
         'expresion' => 'count(key(\'by-tributos-in-line\', concat(cac:TaxCategory/cac:TaxScheme/cbc:ID,\'-\', $nroLinea))) > 1',
         'descripcion' => 'concat(\'Error en la linea: \', $nroLinea, \' Tributo: \', $codigoTributo)',
       ),
-      'context' => 'cac:TaxSubtotal',
+      'context' => 'cac:TaxTotal/cac:TaxSubtotal',
       'mode' => 'linea',
       'conditions' => 
       array (
@@ -4995,7 +4995,7 @@ return array (
         'isError' => 'false()',
         'descripcion' => 'concat(\'Error en la linea: \', $nroLinea, \' Tributo: \', $codigoTributo)',
       ),
-      'context' => 'cac:TaxSubtotal',
+      'context' => 'cac:TaxTotal/cac:TaxSubtotal',
       'mode' => 'linea',
       'conditions' => 
       array (
@@ -5012,7 +5012,7 @@ return array (
         'isError' => 'false()',
         'descripcion' => 'concat(\'Error en la linea: \', $nroLinea, \' Tributo: \', $codigoTributo)',
       ),
-      'context' => 'cac:TaxSubtotal',
+      'context' => 'cac:TaxTotal/cac:TaxSubtotal',
       'mode' => 'linea',
       'conditions' => 
       array (
@@ -5029,7 +5029,7 @@ return array (
         'isError' => 'false()',
         'descripcion' => 'concat(\'Error en la linea: \', $nroLinea, \' Tributo: \', $codigoTributo)',
       ),
-      'context' => 'cac:TaxSubtotal',
+      'context' => 'cac:TaxTotal/cac:TaxSubtotal',
       'mode' => 'linea',
       'conditions' => 
       array (
@@ -5044,7 +5044,7 @@ return array (
         'node' => 'cac:TaxCategory/cac:TaxScheme/cbc:Name',
         'descripcion' => 'concat(\'Error en la linea: \', $nroLinea, \' Tributo: \', $codigoTributo)',
       ),
-      'context' => 'cac:TaxSubtotal',
+      'context' => 'cac:TaxTotal/cac:TaxSubtotal',
       'mode' => 'linea',
       'conditions' => 
       array (
@@ -5060,7 +5060,7 @@ return array (
         'node' => 'cac:TaxCategory/cac:TaxScheme/cbc:Name',
         'descripcion' => 'concat(\'Error en la linea: \', $nroLinea, \' Tributo: \', $codigoTributo)',
       ),
-      'context' => 'cac:TaxSubtotal',
+      'context' => 'cac:TaxTotal/cac:TaxSubtotal',
       'mode' => 'linea',
       'conditions' => 
       array (
@@ -5077,7 +5077,7 @@ return array (
         'isGreaterCero' => 'false()',
         'descripcion' => 'concat(\'Error en la linea: \', $nroLinea)',
       ),
-      'context' => 'cac:TaxTotal',
+      'context' => 'cac:InvoiceLine/cac:TaxTotal',
       'mode' => 'linea',
       'conditions' => 
       array (
@@ -5093,7 +5093,7 @@ return array (
         'expresion' => 'cac:TaxSubtotal[cac:TaxCategory/cbc:TaxExemptionReasonCode=\'17\']/cbc:TaxableAmount > 0 and $root/cac:InvoiceLine/cac:TaxTotal/cac:TaxSubtotal[cac:TaxCategory/cbc:TaxExemptionReasonCode!=\'17\']/cbc:TaxableAmount > 0',
         'descripcion' => 'concat(\'Error en la linea: \', $nroLinea)',
       ),
-      'context' => 'cac:TaxTotal',
+      'context' => 'cac:InvoiceLine/cac:TaxTotal',
       'mode' => 'linea',
       'conditions' => 
       array (
@@ -5110,7 +5110,7 @@ return array (
         'descripcion' => 'concat(\'Error en la linea: \', $nroLinea)',
         'isError' => 'false()',
       ),
-      'context' => 'cac:TaxTotal',
+      'context' => 'cac:InvoiceLine/cac:TaxTotal',
       'mode' => 'linea',
       'conditions' => 
       array (
@@ -5128,7 +5128,7 @@ return array (
         'descripcion' => 'concat(\'Error en la linea: \', $nroLinea)',
         'isError' => 'false()',
       ),
-      'context' => 'cac:TaxTotal',
+      'context' => 'cac:InvoiceLine/cac:TaxTotal',
       'mode' => 'linea',
       'conditions' => 
       array (
@@ -5146,7 +5146,7 @@ return array (
         'descripcion' => 'concat(\'Error en la linea: \', $nroLinea)',
         'isError' => 'false()',
       ),
-      'context' => 'cac:TaxTotal',
+      'context' => 'cac:InvoiceLine/cac:TaxTotal',
       'mode' => 'linea',
       'conditions' => 
       array (
@@ -5163,7 +5163,7 @@ return array (
         'expresion' => 'count(cac:TaxSubtotal[cac:TaxCategory/cac:TaxScheme/cbc:ID[text() = \'1000\' or text() = \'1016\' or text() = \'9995\' or text() = \'9996\' or text() = \'9997\' or text() = \'9998\'] and cbc:TaxableAmount > 0]) < 1',
         'descripcion' => 'concat(\'Error en la linea: \', $nroLinea)',
       ),
-      'context' => 'cac:TaxTotal',
+      'context' => 'cac:InvoiceLine/cac:TaxTotal',
       'mode' => 'linea',
       'conditions' => 
       array (
@@ -5179,7 +5179,7 @@ return array (
         'node' => 'cac:TaxSubtotal[cbc:TaxableAmount > 0]/cac:TaxCategory/cac:TaxScheme/cbc:ID',
         'expresion' => 'not((cac:TaxSubtotal[cac:TaxCategory/cac:TaxScheme/cbc:ID = \'1000\' and cbc:TaxableAmount > 0] and cac:TaxSubtotal[cac:TaxCategory/cac:TaxScheme/cbc:ID = \'2000\' and cbc:TaxableAmount > 0] and count(cac:TaxSubtotal[cbc:TaxableAmount > 0]) = 2) or                            (cac:TaxSubtotal[cac:TaxCategory/cac:TaxScheme/cbc:ID = \'1000\' and cbc:TaxableAmount > 0] and cac:TaxSubtotal[cac:TaxCategory/cac:TaxScheme/cbc:ID = \'9999\' and cbc:TaxableAmount > 0] and count(cac:TaxSubtotal[cbc:TaxableAmount > 0]) = 2) or                            (cac:TaxSubtotal[cac:TaxCategory/cac:TaxScheme/cbc:ID = \'1000\' and cbc:TaxableAmount > 0] and cac:TaxSubtotal[cac:TaxCategory/cac:TaxScheme/cbc:ID = \'2000\' and cbc:TaxableAmount > 0] and cac:TaxSubtotal[cac:TaxCategory/cac:TaxScheme/cbc:ID = \'9999\' and cbc:TaxableAmount > 0] and count(cac:TaxSubtotal[cbc:TaxableAmount > 0]) = 3) or                            (cac:TaxSubtotal[cac:TaxCategory/cac:TaxScheme/cbc:ID = \'1016\' and cbc:TaxableAmount > 0] and cac:TaxSubtotal[cac:TaxCategory/cac:TaxScheme/cbc:ID = \'9999\' and cbc:TaxableAmount > 0] and count(cac:TaxSubtotal[cbc:TaxableAmount > 0]) = 2) or                            (cac:TaxSubtotal[cac:TaxCategory/cac:TaxScheme/cbc:ID = \'9995\' and cbc:TaxableAmount > 0] and cac:TaxSubtotal[cac:TaxCategory/cac:TaxScheme/cbc:ID = \'9999\' and cbc:TaxableAmount > 0] and count(cac:TaxSubtotal[cbc:TaxableAmount > 0]) = 2) or                            (cac:TaxSubtotal[cac:TaxCategory/cac:TaxScheme/cbc:ID = \'9996\' and cbc:TaxableAmount > 0] and cac:TaxSubtotal[cac:TaxCategory/cac:TaxScheme/cbc:ID = \'2000\' and cbc:TaxableAmount > 0] and count(cac:TaxSubtotal[cbc:TaxableAmount > 0]) = 2) or                             (cac:TaxSubtotal[cac:TaxCategory/cac:TaxScheme/cbc:ID = \'9996\' and cbc:TaxableAmount > 0] and cac:TaxSubtotal[cac:TaxCategory/cac:TaxScheme/cbc:ID = \'2000\' and cbc:TaxableAmount > 0] and cac:TaxSubtotal[cac:TaxCategory/cac:TaxScheme/cbc:ID = \'9999\' and cbc:TaxableAmount > 0] and count(cac:TaxSubtotal[cbc:TaxableAmount > 0]) = 3) or                             (cac:TaxSubtotal[cac:TaxCategory/cac:TaxScheme/cbc:ID = \'9996\' and cbc:TaxableAmount > 0] and cac:TaxSubtotal[cac:TaxCategory/cac:TaxScheme/cbc:ID = \'9999\' and cbc:TaxableAmount > 0] and count(cac:TaxSubtotal[cbc:TaxableAmount > 0]) = 2) or                             (cac:TaxSubtotal[cac:TaxCategory/cac:TaxScheme/cbc:ID = \'9997\' and cbc:TaxableAmount > 0] and cac:TaxSubtotal[cac:TaxCategory/cac:TaxScheme/cbc:ID = \'2000\' and cbc:TaxableAmount > 0] and count(cac:TaxSubtotal[cbc:TaxableAmount > 0]) = 2) or                             (cac:TaxSubtotal[cac:TaxCategory/cac:TaxScheme/cbc:ID = \'9997\' and cbc:TaxableAmount > 0] and cac:TaxSubtotal[cac:TaxCategory/cac:TaxScheme/cbc:ID = \'2000\' and cbc:TaxableAmount > 0] and cac:TaxSubtotal[cac:TaxCategory/cac:TaxScheme/cbc:ID = \'9999\' and cbc:TaxableAmount > 0] and count(cac:TaxSubtotal[cbc:TaxableAmount > 0]) = 3) or                             (cac:TaxSubtotal[cac:TaxCategory/cac:TaxScheme/cbc:ID = \'9997\' and cbc:TaxableAmount > 0] and cac:TaxSubtotal[cac:TaxCategory/cac:TaxScheme/cbc:ID = \'9999\' and cbc:TaxableAmount > 0] and count(cac:TaxSubtotal[cbc:TaxableAmount > 0]) = 2) or                             (cac:TaxSubtotal[cac:TaxCategory/cac:TaxScheme/cbc:ID = \'9998\' and cbc:TaxableAmount > 0] and cac:TaxSubtotal[cac:TaxCategory/cac:TaxScheme/cbc:ID = \'2000\' and cbc:TaxableAmount > 0] and count(cac:TaxSubtotal[cbc:TaxableAmount > 0]) = 2)or                             (cac:TaxSubtotal[cac:TaxCategory/cac:TaxScheme/cbc:ID = \'9998\' and cbc:TaxableAmount > 0] and cac:TaxSubtotal[cac:TaxCategory/cac:TaxScheme/cbc:ID = \'2000\' and cbc:TaxableAmount > 0] and cac:TaxSubtotal[cac:TaxCategory/cac:TaxScheme/cbc:ID = \'9999\' and cbc:TaxableAmount > 0] and count(cac:TaxSubtotal[cbc:TaxableAmount > 0]) = 3) or                             (cac:TaxSubtotal[cac:TaxCategory/cac:TaxScheme/cbc:ID = \'9998\' and cbc:TaxableAmount > 0] and cac:TaxSubtotal[cac:TaxCategory/cac:TaxScheme/cbc:ID = \'9999\' and cbc:TaxableAmount > 0] and count(cac:TaxSubtotal[cbc:TaxableAmount > 0]) = 2))',
       ),
-      'context' => 'cac:TaxTotal',
+      'context' => 'cac:InvoiceLine/cac:TaxTotal',
       'mode' => 'linea',
       'conditions' => 
       array (
@@ -5196,7 +5196,7 @@ return array (
         'expresion' => 'cbc:ChargeIndicator/text() = \'false\'',
         'descripcion' => 'concat(\'Error en la linea: \', $nroLinea, \' Cargo/Descuento: \', $codigoCargoDescuento)',
       ),
-      'context' => 'cac:AllowanceCharge',
+      'context' => 'cac:InvoiceLine/cac:AllowanceCharge',
       'mode' => 'linea',
       'conditions' => 
       array (
@@ -5213,7 +5213,7 @@ return array (
         'expresion' => 'cbc:ChargeIndicator/text() = \'true\'',
         'descripcion' => 'concat(\'Error en la linea: \', $nroLinea, \' Cargo/Descuento: \', $codigoCargoDescuento)',
       ),
-      'context' => 'cac:AllowanceCharge',
+      'context' => 'cac:InvoiceLine/cac:AllowanceCharge',
       'mode' => 'linea',
       'conditions' => 
       array (
@@ -5229,7 +5229,7 @@ return array (
         'node' => 'cbc:AllowanceChargeReasonCode',
         'descripcion' => 'concat(\'Error en la linea: \', $nroLinea, \' Cargo/Descuento: \', $codigoCargoDescuento)',
       ),
-      'context' => 'cac:AllowanceCharge',
+      'context' => 'cac:InvoiceLine/cac:AllowanceCharge',
       'mode' => 'linea',
       'conditions' => 
       array (
@@ -5245,7 +5245,7 @@ return array (
         'errorCodeValidate' => '\'2954\'',
         'descripcion' => 'concat(\'Error en la linea: \', $nroLinea, \' Cargo/Descuento: \', $codigoCargoDescuento)',
       ),
-      'context' => 'cac:AllowanceCharge',
+      'context' => 'cac:InvoiceLine/cac:AllowanceCharge',
       'mode' => 'linea',
       'conditions' => 
       array (
@@ -5262,7 +5262,7 @@ return array (
         'isError' => 'false()',
         'descripcion' => 'concat(\'Error en la linea: \', $nroLinea, \' Cargo/Descuento: \', $codigoCargoDescuento)',
       ),
-      'context' => 'cac:AllowanceCharge',
+      'context' => 'cac:InvoiceLine/cac:AllowanceCharge',
       'mode' => 'linea',
       'conditions' => 
       array (
@@ -5279,7 +5279,7 @@ return array (
         'isError' => 'false()',
         'descripcion' => 'concat(\'Error en la linea: \', $nroLinea, \' Cargo/Descuento: \', $codigoCargoDescuento)',
       ),
-      'context' => 'cac:AllowanceCharge',
+      'context' => 'cac:InvoiceLine/cac:AllowanceCharge',
       'mode' => 'linea',
       'conditions' => 
       array (
@@ -5296,7 +5296,7 @@ return array (
         'isError' => 'false()',
         'descripcion' => 'concat(\'Error en la linea: \', $nroLinea, \' Cargo/Descuento: \', $codigoCargoDescuento)',
       ),
-      'context' => 'cac:AllowanceCharge',
+      'context' => 'cac:InvoiceLine/cac:AllowanceCharge',
       'mode' => 'linea',
       'conditions' => 
       array (
@@ -5313,7 +5313,7 @@ return array (
         'isError' => 'false()',
         'descripcion' => 'concat(\'Error en la linea: \', $nroLinea, \' Cargo/Descuento: \', $codigoCargoDescuento)',
       ),
-      'context' => 'cac:AllowanceCharge',
+      'context' => 'cac:InvoiceLine/cac:AllowanceCharge',
       'mode' => 'linea',
       'conditions' => 
       array (
@@ -5329,7 +5329,7 @@ return array (
         'regexp' => '\'^(?!(0)[0-9]+$)[0-9]{1,3}(\\.[0-9]{1,5})?$\'',
         'descripcion' => 'concat(\'Error en la linea: \', $nroLinea, \' Cargo/Descuento: \', $codigoCargoDescuento)',
       ),
-      'context' => 'cac:AllowanceCharge',
+      'context' => 'cac:InvoiceLine/cac:AllowanceCharge',
       'mode' => 'linea',
       'conditions' => 
       array (
@@ -5345,7 +5345,7 @@ return array (
         'isGreaterCero' => 'false()',
         'descripcion' => 'concat(\'Error en la linea: \', $nroLinea, \' Cargo/Descuento: \', $codigoCargoDescuento)',
       ),
-      'context' => 'cac:AllowanceCharge',
+      'context' => 'cac:InvoiceLine/cac:AllowanceCharge',
       'mode' => 'linea',
       'conditions' => 
       array (
@@ -5362,7 +5362,7 @@ return array (
         'descripcion' => 'concat(\'Error en la linea: \', $nroLinea, \' Cargo/Descuento: \', $codigoCargoDescuento)',
         'isError' => 'false()',
       ),
-      'context' => 'cac:AllowanceCharge',
+      'context' => 'cac:InvoiceLine/cac:AllowanceCharge',
       'mode' => 'linea',
       'conditions' => 
       array (
@@ -5378,7 +5378,7 @@ return array (
         'isGreaterCero' => 'false()',
         'descripcion' => 'concat(\'Error en la linea: \', $nroLinea, \' Cargo/Descuento: \', $codigoCargoDescuento)',
       ),
-      'context' => 'cac:AllowanceCharge',
+      'context' => 'cac:InvoiceLine/cac:AllowanceCharge',
       'mode' => 'linea',
       'conditions' => 
       array (
@@ -5394,7 +5394,7 @@ return array (
         'descripcion' => 'concat(\'Error en la linea: \', $nroLinea, \' ConceptoItem \', cbc:NameCode)',
         'isError' => 'false()',
       ),
-      'context' => 'cac:Item/cac:AdditionalItemProperty',
+      'context' => 'cac:InvoiceLine/cac:Item/cac:AdditionalItemProperty',
       'mode' => 'linea',
       'conditions' => 
       array (
@@ -5411,7 +5411,7 @@ return array (
         'isError' => 'false()',
         'descripcion' => 'concat(\'Error en la linea: \', $nroLinea, \' ConceptoItem \', cbc:NameCode)',
       ),
-      'context' => 'cac:Item/cac:AdditionalItemProperty',
+      'context' => 'cac:InvoiceLine/cac:Item/cac:AdditionalItemProperty',
       'mode' => 'linea',
       'conditions' => 
       array (
@@ -5428,7 +5428,7 @@ return array (
         'isError' => 'false()',
         'descripcion' => 'concat(\'Error en la linea: \', $nroLinea, \' ConceptoItem \', cbc:NameCode)',
       ),
-      'context' => 'cac:Item/cac:AdditionalItemProperty',
+      'context' => 'cac:InvoiceLine/cac:Item/cac:AdditionalItemProperty',
       'mode' => 'linea',
       'conditions' => 
       array (
@@ -5445,7 +5445,7 @@ return array (
         'isError' => 'false()',
         'descripcion' => 'concat(\'Error en la linea: \', $nroLinea, \' ConceptoItem \', cbc:NameCode)',
       ),
-      'context' => 'cac:Item/cac:AdditionalItemProperty',
+      'context' => 'cac:InvoiceLine/cac:Item/cac:AdditionalItemProperty',
       'mode' => 'linea',
       'conditions' => 
       array (
@@ -5460,7 +5460,7 @@ return array (
         'node' => 'cbc:Value',
         'descripcion' => 'concat(\'Error en la linea: \', $nroLinea, \' ConceptoItem \', cbc:NameCode)',
       ),
-      'context' => 'cac:Item/cac:AdditionalItemProperty',
+      'context' => 'cac:InvoiceLine/cac:Item/cac:AdditionalItemProperty',
       'mode' => 'linea',
       'conditions' => 
       array (
@@ -5478,7 +5478,7 @@ return array (
         'descripcion' => 'concat(\'Error en la linea: \', $nroLinea, \' ConceptoItem \', cbc:NameCode)',
         'isError' => 'false()',
       ),
-      'context' => 'cac:Item/cac:AdditionalItemProperty',
+      'context' => 'cac:InvoiceLine/cac:Item/cac:AdditionalItemProperty',
       'mode' => 'linea',
       'conditions' => 
       array (
@@ -5494,7 +5494,7 @@ return array (
         'node' => 'cbc:Value',
         'descripcion' => 'concat(\'Error en la linea: \', $nroLinea, \' ConceptoItem \', cbc:NameCode)',
       ),
-      'context' => 'cac:Item/cac:AdditionalItemProperty',
+      'context' => 'cac:InvoiceLine/cac:Item/cac:AdditionalItemProperty',
       'mode' => 'linea',
       'conditions' => 
       array (
@@ -5512,7 +5512,7 @@ return array (
         'descripcion' => 'concat(\'Error en la linea: \', $nroLinea, \' ConceptoItem \', cbc:NameCode)',
         'isError' => 'false()',
       ),
-      'context' => 'cac:Item/cac:AdditionalItemProperty',
+      'context' => 'cac:InvoiceLine/cac:Item/cac:AdditionalItemProperty',
       'mode' => 'linea',
       'conditions' => 
       array (
@@ -5528,7 +5528,7 @@ return array (
         'node' => 'cbc:Value',
         'descripcion' => 'concat(\'Error en la linea: \', $nroLinea, \' ConceptoItem \', cbc:NameCode)',
       ),
-      'context' => 'cac:Item/cac:AdditionalItemProperty',
+      'context' => 'cac:InvoiceLine/cac:Item/cac:AdditionalItemProperty',
       'mode' => 'linea',
       'conditions' => 
       array (
@@ -5546,7 +5546,7 @@ return array (
         'descripcion' => 'concat(\'Error en la linea: \', $nroLinea, \' ConceptoItem \', cbc:NameCode)',
         'isError' => 'false()',
       ),
-      'context' => 'cac:Item/cac:AdditionalItemProperty',
+      'context' => 'cac:InvoiceLine/cac:Item/cac:AdditionalItemProperty',
       'mode' => 'linea',
       'conditions' => 
       array (
@@ -5562,7 +5562,7 @@ return array (
         'node' => 'cbc:Value',
         'descripcion' => 'concat(\'Error en la linea: \', $nroLinea)',
       ),
-      'context' => 'cac:Item/cac:AdditionalItemProperty',
+      'context' => 'cac:InvoiceLine/cac:Item/cac:AdditionalItemProperty',
       'mode' => 'linea',
       'conditions' => 
       array (
@@ -5580,7 +5580,7 @@ return array (
         'descripcion' => 'concat(\'Error en la linea: \', $nroLinea, \' ConceptoItem \', cbc:NameCode)',
         'isError' => 'false()',
       ),
-      'context' => 'cac:Item/cac:AdditionalItemProperty',
+      'context' => 'cac:InvoiceLine/cac:Item/cac:AdditionalItemProperty',
       'mode' => 'linea',
       'conditions' => 
       array (
@@ -5596,7 +5596,7 @@ return array (
         'node' => 'cac:UsabilityPeriod/cbc:StartDate',
         'descripcion' => 'concat(\'Error en la linea: \', $nroLinea, \' ConceptoItem \', cbc:NameCode)',
       ),
-      'context' => 'cac:Item/cac:AdditionalItemProperty',
+      'context' => 'cac:InvoiceLine/cac:Item/cac:AdditionalItemProperty',
       'mode' => 'linea',
       'conditions' => 
       array (
@@ -5612,7 +5612,7 @@ return array (
         'node' => 'cbc:ValueQuantity',
         'descripcion' => 'concat(\'Error en la linea: \', $nroLinea, \' ConceptoItem \', cbc:NameCode)',
       ),
-      'context' => 'cac:Item/cac:AdditionalItemProperty',
+      'context' => 'cac:InvoiceLine/cac:Item/cac:AdditionalItemProperty',
       'mode' => 'linea',
       'conditions' => 
       array (
@@ -5631,7 +5631,7 @@ return array (
         'descripcion' => 'concat(\'Error en la linea: \', $nroLinea, \' ConceptoItem \', cbc:NameCode)',
         'isError' => 'false()',
       ),
-      'context' => 'cac:Item/cac:AdditionalItemProperty',
+      'context' => 'cac:InvoiceLine/cac:Item/cac:AdditionalItemProperty',
       'mode' => 'linea',
       'conditions' => 
       array (
@@ -5648,7 +5648,7 @@ return array (
         'regexp' => '\'^(TNE)$\'',
         'descripcion' => 'concat(\'Error en la linea: \', $nroLinea, \' ConceptoItem \', cbc:NameCode)',
       ),
-      'context' => 'cac:Item/cac:AdditionalItemProperty',
+      'context' => 'cac:InvoiceLine/cac:Item/cac:AdditionalItemProperty',
       'mode' => 'linea',
       'conditions' => 
       array (
@@ -5664,7 +5664,7 @@ return array (
         'node' => 'cbc:Value',
         'descripcion' => 'concat(\'Error en la linea: \', $nroLinea, \' ConceptoItem \', cbc:NameCode)',
       ),
-      'context' => 'cac:Item/cac:AdditionalItemProperty',
+      'context' => 'cac:InvoiceLine/cac:Item/cac:AdditionalItemProperty',
       'mode' => 'linea',
       'conditions' => 
       array (
@@ -5682,7 +5682,7 @@ return array (
         'descripcion' => 'concat(\'Error en la linea: \', $nroLinea, \' ConceptoItem \', cbc:NameCode)',
         'isError' => 'false()',
       ),
-      'context' => 'cac:Item/cac:AdditionalItemProperty',
+      'context' => 'cac:InvoiceLine/cac:Item/cac:AdditionalItemProperty',
       'mode' => 'linea',
       'conditions' => 
       array (
@@ -5698,7 +5698,7 @@ return array (
         'node' => 'cbc:Value',
         'descripcion' => 'concat(\'Error en la linea: \', $nroLinea, \' ConceptoItem \', cbc:NameCode)',
       ),
-      'context' => 'cac:Item/cac:AdditionalItemProperty',
+      'context' => 'cac:InvoiceLine/cac:Item/cac:AdditionalItemProperty',
       'mode' => 'linea',
       'conditions' => 
       array (
@@ -5716,7 +5716,7 @@ return array (
         'descripcion' => 'concat(\'Error en la linea: \', $nroLinea, \' ConceptoItem \', cbc:NameCode)',
         'isError' => 'false()',
       ),
-      'context' => 'cac:Item/cac:AdditionalItemProperty',
+      'context' => 'cac:InvoiceLine/cac:Item/cac:AdditionalItemProperty',
       'mode' => 'linea',
       'conditions' => 
       array (
@@ -5732,7 +5732,7 @@ return array (
         'node' => 'cbc:Value',
         'descripcion' => 'concat(\'Error en la linea: \', $nroLinea, \' ConceptoItem \', cbc:NameCode)',
       ),
-      'context' => 'cac:Item/cac:AdditionalItemProperty',
+      'context' => 'cac:InvoiceLine/cac:Item/cac:AdditionalItemProperty',
       'mode' => 'linea',
       'conditions' => 
       array (
@@ -5750,7 +5750,7 @@ return array (
         'descripcion' => 'concat(\'Error en la linea: \', $nroLinea, \' ConceptoItem \', cbc:NameCode)',
         'isError' => 'false()',
       ),
-      'context' => 'cac:Item/cac:AdditionalItemProperty',
+      'context' => 'cac:InvoiceLine/cac:Item/cac:AdditionalItemProperty',
       'mode' => 'linea',
       'conditions' => 
       array (
@@ -5766,7 +5766,7 @@ return array (
         'node' => 'cbc:Value',
         'descripcion' => 'concat(\'Error en la linea: \', $nroLinea, \' ConceptoItem \', cbc:NameCode)',
       ),
-      'context' => 'cac:Item/cac:AdditionalItemProperty',
+      'context' => 'cac:InvoiceLine/cac:Item/cac:AdditionalItemProperty',
       'mode' => 'linea',
       'conditions' => 
       array (
@@ -5784,7 +5784,7 @@ return array (
         'descripcion' => 'concat(\'Error en la linea: \', $nroLinea, \' ConceptoItem \', cbc:NameCode)',
         'isError' => 'false()',
       ),
-      'context' => 'cac:Item/cac:AdditionalItemProperty',
+      'context' => 'cac:InvoiceLine/cac:Item/cac:AdditionalItemProperty',
       'mode' => 'linea',
       'conditions' => 
       array (
@@ -5800,7 +5800,7 @@ return array (
         'node' => 'cbc:Value',
         'descripcion' => 'concat(\'Error en la linea: \', $nroLinea, \' ConceptoItem \', cbc:NameCode)',
       ),
-      'context' => 'cac:Item/cac:AdditionalItemProperty',
+      'context' => 'cac:InvoiceLine/cac:Item/cac:AdditionalItemProperty',
       'mode' => 'linea',
       'conditions' => 
       array (
@@ -5818,7 +5818,7 @@ return array (
         'descripcion' => 'concat(\'Error en la linea: \', $nroLinea, \' ConceptoItem \', cbc:NameCode)',
         'isError' => 'false()',
       ),
-      'context' => 'cac:Item/cac:AdditionalItemProperty',
+      'context' => 'cac:InvoiceLine/cac:Item/cac:AdditionalItemProperty',
       'mode' => 'linea',
       'conditions' => 
       array (
@@ -5834,7 +5834,7 @@ return array (
         'node' => 'cbc:Value',
         'descripcion' => 'concat(\'Error en la linea: \', $nroLinea, \' ConceptoItem \', cbc:NameCode)',
       ),
-      'context' => 'cac:Item/cac:AdditionalItemProperty',
+      'context' => 'cac:InvoiceLine/cac:Item/cac:AdditionalItemProperty',
       'mode' => 'linea',
       'conditions' => 
       array (
@@ -5852,7 +5852,7 @@ return array (
         'descripcion' => 'concat(\'Error en la linea: \', $nroLinea, \' ConceptoItem \', cbc:NameCode)',
         'isError' => 'false()',
       ),
-      'context' => 'cac:Item/cac:AdditionalItemProperty',
+      'context' => 'cac:InvoiceLine/cac:Item/cac:AdditionalItemProperty',
       'mode' => 'linea',
       'conditions' => 
       array (
@@ -5868,7 +5868,7 @@ return array (
         'node' => 'cbc:Value',
         'descripcion' => 'concat(\'Error en la linea: \', $nroLinea, \' ConceptoItem \', cbc:NameCode)',
       ),
-      'context' => 'cac:Item/cac:AdditionalItemProperty',
+      'context' => 'cac:InvoiceLine/cac:Item/cac:AdditionalItemProperty',
       'mode' => 'linea',
       'conditions' => 
       array (
@@ -5886,7 +5886,7 @@ return array (
         'descripcion' => 'concat(\'Error en la linea: \', $nroLinea, \' ConceptoItem \', cbc:NameCode)',
         'isError' => 'false()',
       ),
-      'context' => 'cac:Item/cac:AdditionalItemProperty',
+      'context' => 'cac:InvoiceLine/cac:Item/cac:AdditionalItemProperty',
       'mode' => 'linea',
       'conditions' => 
       array (
@@ -5902,7 +5902,7 @@ return array (
         'node' => 'cbc:Value',
         'descripcion' => 'concat(\'Error en la linea: \', $nroLinea, \' ConceptoItem \', cbc:NameCode)',
       ),
-      'context' => 'cac:Item/cac:AdditionalItemProperty',
+      'context' => 'cac:InvoiceLine/cac:Item/cac:AdditionalItemProperty',
       'mode' => 'linea',
       'conditions' => 
       array (
@@ -5920,7 +5920,7 @@ return array (
         'descripcion' => 'concat(\'Error en la linea: \', $nroLinea, \' ConceptoItem \', cbc:NameCode)',
         'isError' => 'false()',
       ),
-      'context' => 'cac:Item/cac:AdditionalItemProperty',
+      'context' => 'cac:InvoiceLine/cac:Item/cac:AdditionalItemProperty',
       'mode' => 'linea',
       'conditions' => 
       array (
@@ -5936,7 +5936,7 @@ return array (
         'node' => 'cbc:Value',
         'descripcion' => 'concat(\'Error en la linea: \', $nroLinea, \' ConceptoItem \', cbc:NameCode)',
       ),
-      'context' => 'cac:Item/cac:AdditionalItemProperty',
+      'context' => 'cac:InvoiceLine/cac:Item/cac:AdditionalItemProperty',
       'mode' => 'linea',
       'conditions' => 
       array (
@@ -5954,7 +5954,7 @@ return array (
         'descripcion' => 'concat(\'Error en la linea: \', $nroLinea, \' ConceptoItem \', cbc:NameCode)',
         'isError' => 'false()',
       ),
-      'context' => 'cac:Item/cac:AdditionalItemProperty',
+      'context' => 'cac:InvoiceLine/cac:Item/cac:AdditionalItemProperty',
       'mode' => 'linea',
       'conditions' => 
       array (
@@ -5970,7 +5970,7 @@ return array (
         'node' => 'cac:UsabilityPeriod/cbc:StartDate',
         'descripcion' => 'concat(\'Error en la linea: \', $nroLinea, \' ConceptoItem \', cbc:NameCode)',
       ),
-      'context' => 'cac:Item/cac:AdditionalItemProperty',
+      'context' => 'cac:InvoiceLine/cac:Item/cac:AdditionalItemProperty',
       'mode' => 'linea',
       'conditions' => 
       array (
@@ -5986,7 +5986,7 @@ return array (
         'node' => 'cac:UsabilityPeriod/cbc:StartTime',
         'descripcion' => 'concat(\'Error en la linea: \', $nroLinea, \' ConceptoItem \', cbc:NameCode)',
       ),
-      'context' => 'cac:Item/cac:AdditionalItemProperty',
+      'context' => 'cac:InvoiceLine/cac:Item/cac:AdditionalItemProperty',
       'mode' => 'linea',
       'conditions' => 
       array (
@@ -6002,7 +6002,7 @@ return array (
         'node' => 'cbc:Value',
         'descripcion' => 'concat(\'Error en la linea: \', $nroLinea, \' ConceptoItem \', cbc:NameCode)',
       ),
-      'context' => 'cac:Item/cac:AdditionalItemProperty',
+      'context' => 'cac:InvoiceLine/cac:Item/cac:AdditionalItemProperty',
       'mode' => 'linea',
       'conditions' => 
       array (
@@ -6020,7 +6020,7 @@ return array (
         'descripcion' => 'concat(\'Error en la linea: \', $nroLinea, \' ConceptoItem \', cbc:NameCode)',
         'isError' => 'false()',
       ),
-      'context' => 'cac:Item/cac:AdditionalItemProperty',
+      'context' => 'cac:InvoiceLine/cac:Item/cac:AdditionalItemProperty',
       'mode' => 'linea',
       'conditions' => 
       array (
@@ -6036,7 +6036,7 @@ return array (
         'node' => 'cbc:Value',
         'descripcion' => 'concat(\'Error en la linea: \', $nroLinea, \' ConceptoItem \', cbc:NameCode)',
       ),
-      'context' => 'cac:Item/cac:AdditionalItemProperty',
+      'context' => 'cac:InvoiceLine/cac:Item/cac:AdditionalItemProperty',
       'mode' => 'linea',
       'conditions' => 
       array (
@@ -6054,7 +6054,7 @@ return array (
         'descripcion' => 'concat(\'Error en la linea: \', $nroLinea, \' ConceptoItem \', cbc:NameCode)',
         'isError' => 'false()',
       ),
-      'context' => 'cac:Item/cac:AdditionalItemProperty',
+      'context' => 'cac:InvoiceLine/cac:Item/cac:AdditionalItemProperty',
       'mode' => 'linea',
       'conditions' => 
       array (
@@ -6070,7 +6070,7 @@ return array (
         'node' => 'cac:UsabilityPeriod/cbc:StartDate',
         'descripcion' => 'concat(\'Error en la linea: \', $nroLinea, \' ConceptoItem \', cbc:NameCode)',
       ),
-      'context' => 'cac:Item/cac:AdditionalItemProperty',
+      'context' => 'cac:InvoiceLine/cac:Item/cac:AdditionalItemProperty',
       'mode' => 'linea',
       'conditions' => 
       array (
@@ -6086,7 +6086,7 @@ return array (
         'node' => 'cac:UsabilityPeriod/cbc:StartDate',
         'descripcion' => 'concat(\'Error en la linea: \', $nroLinea, \' ConceptoItem \', cbc:NameCode)',
       ),
-      'context' => 'cac:Item/cac:AdditionalItemProperty',
+      'context' => 'cac:InvoiceLine/cac:Item/cac:AdditionalItemProperty',
       'mode' => 'linea',
       'conditions' => 
       array (
@@ -6102,7 +6102,7 @@ return array (
         'node' => 'cac:UsabilityPeriod/cbc:StartDate',
         'descripcion' => 'concat(\'Error en la linea: \', $nroLinea, \' ConceptoItem \', cbc:NameCode)',
       ),
-      'context' => 'cac:Item/cac:AdditionalItemProperty',
+      'context' => 'cac:InvoiceLine/cac:Item/cac:AdditionalItemProperty',
       'mode' => 'linea',
       'conditions' => 
       array (
@@ -6118,7 +6118,7 @@ return array (
         'node' => 'cac:UsabilityPeriod/cbc:DurationMeasure',
         'descripcion' => 'concat(\'Error en la linea: \', $nroLinea, \' ConceptoItem \', cbc:NameCode)',
       ),
-      'context' => 'cac:Item/cac:AdditionalItemProperty',
+      'context' => 'cac:InvoiceLine/cac:Item/cac:AdditionalItemProperty',
       'mode' => 'linea',
       'conditions' => 
       array (
@@ -6136,7 +6136,7 @@ return array (
         'descripcion' => 'concat(\'Error en la linea: \', $nroLinea, \' ConceptoItem \', cbc:NameCode)',
         'isError' => 'false()',
       ),
-      'context' => 'cac:Item/cac:AdditionalItemProperty',
+      'context' => 'cac:InvoiceLine/cac:Item/cac:AdditionalItemProperty',
       'mode' => 'linea',
       'conditions' => 
       array (
@@ -6154,7 +6154,7 @@ return array (
         'descripcion' => 'concat(\'Error en la linea: \', $nroLinea, \' ConceptoItem \', cbc:NameCode)',
         'isError' => 'false()',
       ),
-      'context' => 'cac:Item/cac:AdditionalItemProperty',
+      'context' => 'cac:InvoiceLine/cac:Item/cac:AdditionalItemProperty',
       'mode' => 'linea',
       'conditions' => 
       array (
@@ -6170,7 +6170,7 @@ return array (
         'node' => 'cac:UsabilityPeriod/cbc:StartDate',
         'descripcion' => 'concat(\'Error en la linea: \', $nroLinea, \' ConceptoItem \', cbc:NameCode)',
       ),
-      'context' => 'cac:Item/cac:AdditionalItemProperty',
+      'context' => 'cac:InvoiceLine/cac:Item/cac:AdditionalItemProperty',
       'mode' => 'linea',
       'conditions' => 
       array (
@@ -6186,7 +6186,7 @@ return array (
         'node' => 'cbc:Value',
         'descripcion' => 'concat(\'Error en la linea: \', $nroLinea, \' ConceptoItem \', cbc:NameCode)',
       ),
-      'context' => 'cac:Item/cac:AdditionalItemProperty',
+      'context' => 'cac:InvoiceLine/cac:Item/cac:AdditionalItemProperty',
       'mode' => 'linea',
       'conditions' => 
       array (
@@ -6204,7 +6204,7 @@ return array (
         'descripcion' => 'concat(\'Error en la linea: \', $nroLinea, \' ConceptoItem \', cbc:NameCode)',
         'isError' => 'false()',
       ),
-      'context' => 'cac:Item/cac:AdditionalItemProperty',
+      'context' => 'cac:InvoiceLine/cac:Item/cac:AdditionalItemProperty',
       'mode' => 'linea',
       'conditions' => 
       array (
@@ -6220,7 +6220,7 @@ return array (
         'node' => 'cbc:Value',
         'descripcion' => 'concat(\'Error en la linea: \', $nroLinea, \' ConceptoItem \', cbc:NameCode)',
       ),
-      'context' => 'cac:Item/cac:AdditionalItemProperty',
+      'context' => 'cac:InvoiceLine/cac:Item/cac:AdditionalItemProperty',
       'mode' => 'linea',
       'conditions' => 
       array (
@@ -6238,7 +6238,7 @@ return array (
         'descripcion' => 'concat(\'Error en la linea: \', $nroLinea, \' ConceptoItem \', cbc:NameCode)',
         'isError' => 'false()',
       ),
-      'context' => 'cac:Item/cac:AdditionalItemProperty',
+      'context' => 'cac:InvoiceLine/cac:Item/cac:AdditionalItemProperty',
       'mode' => 'linea',
       'conditions' => 
       array (
@@ -6254,7 +6254,7 @@ return array (
         'node' => 'cbc:Value',
         'descripcion' => 'concat(\'Error en la linea: \', $nroLinea, \' ConceptoItem \', cbc:NameCode)',
       ),
-      'context' => 'cac:Item/cac:AdditionalItemProperty',
+      'context' => 'cac:InvoiceLine/cac:Item/cac:AdditionalItemProperty',
       'mode' => 'linea',
       'conditions' => 
       array (
@@ -6272,7 +6272,7 @@ return array (
         'descripcion' => 'concat(\'Error en la linea: \', $nroLinea, \' ConceptoItem \', cbc:NameCode)',
         'isError' => 'false()',
       ),
-      'context' => 'cac:Item/cac:AdditionalItemProperty',
+      'context' => 'cac:InvoiceLine/cac:Item/cac:AdditionalItemProperty',
       'mode' => 'linea',
       'conditions' => 
       array (
@@ -6288,7 +6288,7 @@ return array (
         'node' => 'cbc:Value',
         'descripcion' => 'concat(\'Error en la linea: \', $nroLinea, \' ConceptoItem \', cbc:NameCode)',
       ),
-      'context' => 'cac:Item/cac:AdditionalItemProperty',
+      'context' => 'cac:InvoiceLine/cac:Item/cac:AdditionalItemProperty',
       'mode' => 'linea',
       'conditions' => 
       array (
@@ -6306,7 +6306,7 @@ return array (
         'descripcion' => 'concat(\'Error en la linea: \', $nroLinea, \' ConceptoItem \', cbc:NameCode)',
         'isError' => 'false()',
       ),
-      'context' => 'cac:Item/cac:AdditionalItemProperty',
+      'context' => 'cac:InvoiceLine/cac:Item/cac:AdditionalItemProperty',
       'mode' => 'linea',
       'conditions' => 
       array (
@@ -6322,7 +6322,7 @@ return array (
         'node' => 'cbc:Value',
         'descripcion' => 'concat(\'Error en la linea: \', $nroLinea, \' ConceptoItem \', cbc:NameCode)',
       ),
-      'context' => 'cac:Item/cac:AdditionalItemProperty',
+      'context' => 'cac:InvoiceLine/cac:Item/cac:AdditionalItemProperty',
       'mode' => 'linea',
       'conditions' => 
       array (
@@ -6340,7 +6340,7 @@ return array (
         'descripcion' => 'concat(\'Error en la linea: \', $nroLinea, \' ConceptoItem \', cbc:NameCode)',
         'isError' => 'false()',
       ),
-      'context' => 'cac:Item/cac:AdditionalItemProperty',
+      'context' => 'cac:InvoiceLine/cac:Item/cac:AdditionalItemProperty',
       'mode' => 'linea',
       'conditions' => 
       array (
@@ -6356,7 +6356,7 @@ return array (
         'node' => 'cbc:Value',
         'descripcion' => 'concat(\'Error en la linea: \', $nroLinea, \' ConceptoItem \', cbc:NameCode)',
       ),
-      'context' => 'cac:Item/cac:AdditionalItemProperty',
+      'context' => 'cac:InvoiceLine/cac:Item/cac:AdditionalItemProperty',
       'mode' => 'linea',
       'conditions' => 
       array (
@@ -6374,7 +6374,7 @@ return array (
         'descripcion' => 'concat(\'Error en la linea: \', $nroLinea, \' ConceptoItem \', cbc:NameCode)',
         'isError' => 'false()',
       ),
-      'context' => 'cac:Item/cac:AdditionalItemProperty',
+      'context' => 'cac:InvoiceLine/cac:Item/cac:AdditionalItemProperty',
       'mode' => 'linea',
       'conditions' => 
       array (
@@ -6390,7 +6390,7 @@ return array (
         'node' => 'cbc:Value',
         'descripcion' => 'concat(\'Error en la linea: \', $nroLinea, \' ConceptoItem \', cbc:NameCode)',
       ),
-      'context' => 'cac:Item/cac:AdditionalItemProperty',
+      'context' => 'cac:InvoiceLine/cac:Item/cac:AdditionalItemProperty',
       'mode' => 'linea',
       'conditions' => 
       array (
@@ -6408,7 +6408,7 @@ return array (
         'descripcion' => 'concat(\'Error en la linea: \', $nroLinea, \' ConceptoItem \', cbc:NameCode)',
         'isError' => 'false()',
       ),
-      'context' => 'cac:Item/cac:AdditionalItemProperty',
+      'context' => 'cac:InvoiceLine/cac:Item/cac:AdditionalItemProperty',
       'mode' => 'linea',
       'conditions' => 
       array (
@@ -6424,7 +6424,7 @@ return array (
         'node' => 'cbc:Value',
         'descripcion' => 'concat(\'Error en la linea: \', $nroLinea, \' ConceptoItem \', cbc:NameCode)',
       ),
-      'context' => 'cac:Item/cac:AdditionalItemProperty',
+      'context' => 'cac:InvoiceLine/cac:Item/cac:AdditionalItemProperty',
       'mode' => 'linea',
       'conditions' => 
       array (
@@ -6442,7 +6442,7 @@ return array (
         'descripcion' => 'concat(\'Error en la linea: \', $nroLinea, \' ConceptoItem \', cbc:NameCode)',
         'isError' => 'false()',
       ),
-      'context' => 'cac:Item/cac:AdditionalItemProperty',
+      'context' => 'cac:InvoiceLine/cac:Item/cac:AdditionalItemProperty',
       'mode' => 'linea',
       'conditions' => 
       array (
@@ -6458,7 +6458,7 @@ return array (
         'node' => 'cbc:Value',
         'descripcion' => 'concat(\'Error en la linea: \', $nroLinea, \' ConceptoItem \', cbc:NameCode)',
       ),
-      'context' => 'cac:Item/cac:AdditionalItemProperty',
+      'context' => 'cac:InvoiceLine/cac:Item/cac:AdditionalItemProperty',
       'mode' => 'linea',
       'conditions' => 
       array (
@@ -6476,7 +6476,7 @@ return array (
         'descripcion' => 'concat(\'Error en la linea: \', $nroLinea, \' ConceptoItem \', cbc:NameCode)',
         'isError' => 'false()',
       ),
-      'context' => 'cac:Item/cac:AdditionalItemProperty',
+      'context' => 'cac:InvoiceLine/cac:Item/cac:AdditionalItemProperty',
       'mode' => 'linea',
       'conditions' => 
       array (
@@ -6492,7 +6492,7 @@ return array (
         'node' => 'cbc:Value',
         'descripcion' => 'concat(\'Error en la linea: \', $nroLinea, \' ConceptoItem \', cbc:NameCode)',
       ),
-      'context' => 'cac:Item/cac:AdditionalItemProperty',
+      'context' => 'cac:InvoiceLine/cac:Item/cac:AdditionalItemProperty',
       'mode' => 'linea',
       'conditions' => 
       array (
@@ -6510,7 +6510,7 @@ return array (
         'descripcion' => 'concat(\'Error en la linea: \', $nroLinea, \' ConceptoItem \', cbc:NameCode)',
         'isError' => 'false()',
       ),
-      'context' => 'cac:Item/cac:AdditionalItemProperty',
+      'context' => 'cac:InvoiceLine/cac:Item/cac:AdditionalItemProperty',
       'mode' => 'linea',
       'conditions' => 
       array (
@@ -6526,7 +6526,7 @@ return array (
         'node' => 'cbc:Value',
         'descripcion' => 'concat(\'Error en la linea: \', $nroLinea, \' ConceptoItem \', cbc:NameCode)',
       ),
-      'context' => 'cac:Item/cac:AdditionalItemProperty',
+      'context' => 'cac:InvoiceLine/cac:Item/cac:AdditionalItemProperty',
       'mode' => 'linea',
       'conditions' => 
       array (
@@ -6544,7 +6544,7 @@ return array (
         'descripcion' => 'concat(\'Error en la linea: \', $nroLinea, \' ConceptoItem \', cbc:NameCode)',
         'isError' => 'false()',
       ),
-      'context' => 'cac:Item/cac:AdditionalItemProperty',
+      'context' => 'cac:InvoiceLine/cac:Item/cac:AdditionalItemProperty',
       'mode' => 'linea',
       'conditions' => 
       array (
@@ -6560,7 +6560,7 @@ return array (
         'node' => 'cbc:Value',
         'descripcion' => 'concat(\'Error en la linea: \', $nroLinea, \' ConceptoItem \', cbc:NameCode)',
       ),
-      'context' => 'cac:Item/cac:AdditionalItemProperty',
+      'context' => 'cac:InvoiceLine/cac:Item/cac:AdditionalItemProperty',
       'mode' => 'linea',
       'conditions' => 
       array (
@@ -6578,7 +6578,7 @@ return array (
         'descripcion' => 'concat(\'Error en la linea: \', $nroLinea, \' ConceptoItem \', cbc:NameCode)',
         'isError' => 'false()',
       ),
-      'context' => 'cac:Item/cac:AdditionalItemProperty',
+      'context' => 'cac:InvoiceLine/cac:Item/cac:AdditionalItemProperty',
       'mode' => 'linea',
       'conditions' => 
       array (
@@ -6594,7 +6594,7 @@ return array (
         'node' => 'cbc:Value',
         'descripcion' => 'concat(\'Error en la linea: \', $nroLinea, \' ConceptoItem \', cbc:NameCode)',
       ),
-      'context' => 'cac:Item/cac:AdditionalItemProperty',
+      'context' => 'cac:InvoiceLine/cac:Item/cac:AdditionalItemProperty',
       'mode' => 'linea',
       'conditions' => 
       array (
@@ -6612,7 +6612,7 @@ return array (
         'descripcion' => 'concat(\'Error en la linea: \', $nroLinea, \' ConceptoItem \', cbc:NameCode)',
         'isError' => 'false()',
       ),
-      'context' => 'cac:Item/cac:AdditionalItemProperty',
+      'context' => 'cac:InvoiceLine/cac:Item/cac:AdditionalItemProperty',
       'mode' => 'linea',
       'conditions' => 
       array (
@@ -6628,7 +6628,7 @@ return array (
         'node' => 'cbc:Value',
         'descripcion' => 'concat(\'Error en la linea: \', $nroLinea)',
       ),
-      'context' => 'cac:Item/cac:AdditionalItemProperty',
+      'context' => 'cac:InvoiceLine/cac:Item/cac:AdditionalItemProperty',
       'mode' => 'linea',
       'conditions' => 
       array (
@@ -6646,7 +6646,7 @@ return array (
         'descripcion' => 'concat(\'Error en la linea: \', $nroLinea, \' ConceptoItem \', cbc:NameCode)',
         'isError' => 'false()',
       ),
-      'context' => 'cac:Item/cac:AdditionalItemProperty',
+      'context' => 'cac:InvoiceLine/cac:Item/cac:AdditionalItemProperty',
       'mode' => 'linea',
       'conditions' => 
       array (
@@ -6662,7 +6662,7 @@ return array (
         'node' => 'cac:UsabilityPeriod/cbc:StartTime',
         'descripcion' => 'concat(\'Error en la linea: \', $nroLinea, \' ConceptoItem \', cbc:NameCode)',
       ),
-      'context' => 'cac:Item/cac:AdditionalItemProperty',
+      'context' => 'cac:InvoiceLine/cac:Item/cac:AdditionalItemProperty',
       'mode' => 'linea',
       'conditions' => 
       array (
@@ -6678,7 +6678,7 @@ return array (
         'node' => 'cac:UsabilityPeriod/cbc:StartDate',
         'descripcion' => 'concat(\'Error en la linea: \', $nroLinea, \' ConceptoItem \', cbc:NameCode)',
       ),
-      'context' => 'cac:Item/cac:AdditionalItemProperty',
+      'context' => 'cac:InvoiceLine/cac:Item/cac:AdditionalItemProperty',
       'mode' => 'linea',
       'conditions' => 
       array (
@@ -6694,7 +6694,7 @@ return array (
         'node' => 'cbc:Value',
         'descripcion' => 'concat(\'Error en la linea: \', $nroLinea, \' ConceptoItem \', cbc:NameCode)',
       ),
-      'context' => 'cac:Item/cac:AdditionalItemProperty',
+      'context' => 'cac:InvoiceLine/cac:Item/cac:AdditionalItemProperty',
       'mode' => 'linea',
       'conditions' => 
       array (
@@ -6712,7 +6712,7 @@ return array (
         'descripcion' => 'concat(\'Error en la linea: \', $nroLinea, \' ConceptoItem \', cbc:NameCode)',
         'isError' => 'false()',
       ),
-      'context' => 'cac:Item/cac:AdditionalItemProperty',
+      'context' => 'cac:InvoiceLine/cac:Item/cac:AdditionalItemProperty',
       'mode' => 'linea',
       'conditions' => 
       array (
@@ -6728,7 +6728,7 @@ return array (
         'node' => 'cbc:Value',
         'descripcion' => 'concat(\'Error en la linea: \', $nroLinea, \' ConceptoItem \', cbc:NameCode)',
       ),
-      'context' => 'cac:Item/cac:AdditionalItemProperty',
+      'context' => 'cac:InvoiceLine/cac:Item/cac:AdditionalItemProperty',
       'mode' => 'linea',
       'conditions' => 
       array (
@@ -6746,7 +6746,7 @@ return array (
         'descripcion' => 'concat(\'Error en la linea: \', $nroLinea, \' ConceptoItem \', cbc:NameCode)',
         'isError' => 'false()',
       ),
-      'context' => 'cac:Item/cac:AdditionalItemProperty',
+      'context' => 'cac:InvoiceLine/cac:Item/cac:AdditionalItemProperty',
       'mode' => 'linea',
       'conditions' => 
       array (
@@ -6762,7 +6762,7 @@ return array (
         'node' => 'cbc:Value',
         'descripcion' => 'concat(\'Error en la linea: \', $nroLinea, \' ConceptoItem \', cbc:NameCode)',
       ),
-      'context' => 'cac:Item/cac:AdditionalItemProperty',
+      'context' => 'cac:InvoiceLine/cac:Item/cac:AdditionalItemProperty',
       'mode' => 'linea',
       'conditions' => 
       array (
@@ -6780,7 +6780,7 @@ return array (
         'descripcion' => 'concat(\'Error en la linea: \', $nroLinea, \' ConceptoItem \', cbc:NameCode)',
         'isError' => 'false()',
       ),
-      'context' => 'cac:Item/cac:AdditionalItemProperty',
+      'context' => 'cac:InvoiceLine/cac:Item/cac:AdditionalItemProperty',
       'mode' => 'linea',
       'conditions' => 
       array (
@@ -6796,7 +6796,7 @@ return array (
         'node' => 'cac:UsabilityPeriod/cbc:StartDate',
         'descripcion' => 'concat(\'Error en la linea: \', $nroLinea, \' ConceptoItem \', cbc:NameCode)',
       ),
-      'context' => 'cac:Item/cac:AdditionalItemProperty',
+      'context' => 'cac:InvoiceLine/cac:Item/cac:AdditionalItemProperty',
       'mode' => 'linea',
       'conditions' => 
       array (
@@ -6812,7 +6812,7 @@ return array (
         'node' => 'cac:UsabilityPeriod/cbc:EndDate',
         'descripcion' => 'concat(\'Error en la linea: \', $nroLinea, \' ConceptoItem \', cbc:NameCode)',
       ),
-      'context' => 'cac:Item/cac:AdditionalItemProperty',
+      'context' => 'cac:InvoiceLine/cac:Item/cac:AdditionalItemProperty',
       'mode' => 'linea',
       'conditions' => 
       array (
@@ -6828,7 +6828,7 @@ return array (
         'node' => 'cbc:Value',
         'descripcion' => 'concat(\'Error en la linea: \', $nroLinea, \' ConceptoItem \', cbc:NameCode)',
       ),
-      'context' => 'cac:Item/cac:AdditionalItemProperty',
+      'context' => 'cac:InvoiceLine/cac:Item/cac:AdditionalItemProperty',
       'mode' => 'linea',
       'conditions' => 
       array (
@@ -6846,7 +6846,7 @@ return array (
         'descripcion' => 'concat(\'Error en la linea: \', $nroLinea, \' ConceptoItem \', cbc:NameCode)',
         'isError' => 'false()',
       ),
-      'context' => 'cac:Item/cac:AdditionalItemProperty',
+      'context' => 'cac:InvoiceLine/cac:Item/cac:AdditionalItemProperty',
       'mode' => 'linea',
       'conditions' => 
       array (
@@ -6862,7 +6862,7 @@ return array (
         'node' => 'cbc:Value',
         'descripcion' => 'concat(\'Error en la linea: \', $nroLinea, \' ConceptoItem \', cbc:NameCode)',
       ),
-      'context' => 'cac:Item/cac:AdditionalItemProperty',
+      'context' => 'cac:InvoiceLine/cac:Item/cac:AdditionalItemProperty',
       'mode' => 'linea',
       'conditions' => 
       array (
@@ -6880,7 +6880,7 @@ return array (
         'descripcion' => 'concat(\'Error en la linea: \', $nroLinea, \' ConceptoItem \', cbc:NameCode)',
         'isError' => 'false()',
       ),
-      'context' => 'cac:Item/cac:AdditionalItemProperty',
+      'context' => 'cac:InvoiceLine/cac:Item/cac:AdditionalItemProperty',
       'mode' => 'linea',
       'conditions' => 
       array (
@@ -6896,7 +6896,7 @@ return array (
         'node' => 'cbc:Value',
         'descripcion' => 'concat(\'Error en la linea: \', $nroLinea)',
       ),
-      'context' => 'cac:Item/cac:AdditionalItemProperty',
+      'context' => 'cac:InvoiceLine/cac:Item/cac:AdditionalItemProperty',
       'mode' => 'linea',
       'conditions' => 
       array (
@@ -6914,7 +6914,7 @@ return array (
         'descripcion' => 'concat(\'Error en la linea: \', $nroLinea)',
         'isError' => 'false()',
       ),
-      'context' => 'cac:Item/cac:AdditionalItemProperty',
+      'context' => 'cac:InvoiceLine/cac:Item/cac:AdditionalItemProperty',
       'mode' => 'linea',
       'conditions' => 
       array (
@@ -6930,7 +6930,7 @@ return array (
         'node' => 'cbc:Value',
         'descripcion' => 'concat(\'Error en la linea: \', $nroLinea, \' ConceptoItem \', cbc:NameCode)',
       ),
-      'context' => 'cac:Item/cac:AdditionalItemProperty',
+      'context' => 'cac:InvoiceLine/cac:Item/cac:AdditionalItemProperty',
       'mode' => 'linea',
       'conditions' => 
       array (
@@ -6948,7 +6948,7 @@ return array (
         'descripcion' => 'concat(\'Error en la linea: \', $nroLinea, \' ConceptoItem \', cbc:NameCode)',
         'isError' => 'false()',
       ),
-      'context' => 'cac:Item/cac:AdditionalItemProperty',
+      'context' => 'cac:InvoiceLine/cac:Item/cac:AdditionalItemProperty',
       'mode' => 'linea',
       'conditions' => 
       array (
@@ -6966,7 +6966,7 @@ return array (
         'descripcion' => 'concat(\'Error en la linea: \', $nroLinea, \' ConceptoItem \', cbc:NameCode)',
         'isError' => 'false()',
       ),
-      'context' => 'cac:Item/cac:AdditionalItemProperty',
+      'context' => 'cac:InvoiceLine/cac:Item/cac:AdditionalItemProperty',
       'mode' => 'linea',
       'conditions' => 
       array (
@@ -6982,7 +6982,7 @@ return array (
         'node' => 'cbc:Value',
         'descripcion' => 'concat(\'Error en la linea: \', $nroLinea, \' ConceptoItem \', cbc:NameCode)',
       ),
-      'context' => 'cac:Item/cac:AdditionalItemProperty',
+      'context' => 'cac:InvoiceLine/cac:Item/cac:AdditionalItemProperty',
       'mode' => 'linea',
       'conditions' => 
       array (
@@ -7000,7 +7000,7 @@ return array (
         'isError' => 'false()',
         'descripcion' => 'concat(\'Error en la linea: \', $nroLinea, \' ConceptoItem \', cbc:NameCode)',
       ),
-      'context' => 'cac:Item/cac:AdditionalItemProperty',
+      'context' => 'cac:InvoiceLine/cac:Item/cac:AdditionalItemProperty',
       'mode' => 'linea',
       'conditions' => 
       array (
@@ -7019,7 +7019,7 @@ return array (
         'isError' => 'false()',
         'descripcion' => 'concat(\'Error en la linea: \', $nroLinea, \' ConceptoItem \', cbc:NameCode)',
       ),
-      'context' => 'cac:Item/cac:AdditionalItemProperty',
+      'context' => 'cac:InvoiceLine/cac:Item/cac:AdditionalItemProperty',
       'mode' => 'linea',
       'conditions' => 
       array (
@@ -7035,7 +7035,7 @@ return array (
         'node' => 'cbc:Value',
         'descripcion' => 'concat(\'Error en la linea: \', $nroLinea, \' ConceptoItem \', cbc:NameCode)',
       ),
-      'context' => 'cac:Item/cac:AdditionalItemProperty',
+      'context' => 'cac:InvoiceLine/cac:Item/cac:AdditionalItemProperty',
       'mode' => 'linea',
       'conditions' => 
       array (
@@ -7053,7 +7053,7 @@ return array (
         'isError' => 'false()',
         'descripcion' => 'concat(\'Error en la linea: \', $nroLinea, \' ConceptoItem \', cbc:NameCode)',
       ),
-      'context' => 'cac:Item/cac:AdditionalItemProperty',
+      'context' => 'cac:InvoiceLine/cac:Item/cac:AdditionalItemProperty',
       'mode' => 'linea',
       'conditions' => 
       array (
@@ -7069,7 +7069,7 @@ return array (
         'node' => 'cbc:ValueQuantity',
         'descripcion' => 'concat(\'Error en la linea: \', $nroLinea, \' ConceptoItem \', cbc:NameCode)',
       ),
-      'context' => 'cac:Item/cac:AdditionalItemProperty',
+      'context' => 'cac:InvoiceLine/cac:Item/cac:AdditionalItemProperty',
       'mode' => 'linea',
       'conditions' => 
       array (
@@ -7086,7 +7086,7 @@ return array (
         'isGreaterCero' => 'false()',
         'isError' => 'false()',
       ),
-      'context' => 'cac:Item/cac:AdditionalItemProperty',
+      'context' => 'cac:InvoiceLine/cac:Item/cac:AdditionalItemProperty',
       'mode' => 'linea',
       'conditions' => 
       array (
@@ -7102,7 +7102,7 @@ return array (
         'node' => 'cbc:Value',
         'descripcion' => 'concat(\'Error en la linea: \', $nroLinea, \' ConceptoItem \', cbc:NameCode)',
       ),
-      'context' => 'cac:Item/cac:AdditionalItemProperty',
+      'context' => 'cac:InvoiceLine/cac:Item/cac:AdditionalItemProperty',
       'mode' => 'linea',
       'conditions' => 
       array (
@@ -7120,7 +7120,7 @@ return array (
         'isError' => 'false()',
         'descripcion' => 'concat(\'Error en la linea: \', $nroLinea, \' ConceptoItem \', cbc:NameCode)',
       ),
-      'context' => 'cac:Item/cac:AdditionalItemProperty',
+      'context' => 'cac:InvoiceLine/cac:Item/cac:AdditionalItemProperty',
       'mode' => 'linea',
       'conditions' => 
       array (
@@ -7139,7 +7139,7 @@ return array (
         'isError' => 'false()',
         'descripcion' => 'concat(\'Error en la linea: \', $nroLinea, \' ConceptoItem \', cbc:NameCode)',
       ),
-      'context' => 'cac:Item/cac:AdditionalItemProperty',
+      'context' => 'cac:InvoiceLine/cac:Item/cac:AdditionalItemProperty',
       'mode' => 'linea',
       'conditions' => 
       array (
@@ -7155,7 +7155,7 @@ return array (
         'node' => 'cbc:Value',
         'descripcion' => 'concat(\'Error en la linea: \', $nroLinea, \' ConceptoItem \', cbc:NameCode)',
       ),
-      'context' => 'cac:Item/cac:AdditionalItemProperty',
+      'context' => 'cac:InvoiceLine/cac:Item/cac:AdditionalItemProperty',
       'mode' => 'linea',
       'conditions' => 
       array (
@@ -7173,7 +7173,7 @@ return array (
         'descripcion' => 'concat(\'Error en la linea: \', $nroLinea, \' ConceptoItem \', cbc:NameCode)',
         'isError' => 'false()',
       ),
-      'context' => 'cac:Item/cac:AdditionalItemProperty',
+      'context' => 'cac:InvoiceLine/cac:Item/cac:AdditionalItemProperty',
       'mode' => 'linea',
       'conditions' => 
       array (
@@ -7189,7 +7189,7 @@ return array (
         'node' => 'cbc:Value',
         'descripcion' => 'concat(\'Error en la linea: \', $nroLinea, \' ConceptoItem \', cbc:NameCode)',
       ),
-      'context' => 'cac:Item/cac:AdditionalItemProperty',
+      'context' => 'cac:InvoiceLine/cac:Item/cac:AdditionalItemProperty',
       'mode' => 'linea',
       'conditions' => 
       array (
@@ -7207,7 +7207,7 @@ return array (
         'isError' => 'false()',
         'descripcion' => 'concat(\'Error en la linea: \', $nroLinea, \' ConceptoItem \', cbc:NameCode)',
       ),
-      'context' => 'cac:Item/cac:AdditionalItemProperty',
+      'context' => 'cac:InvoiceLine/cac:Item/cac:AdditionalItemProperty',
       'mode' => 'linea',
       'conditions' => 
       array (
@@ -7226,7 +7226,7 @@ return array (
         'isError' => 'false()',
         'descripcion' => 'concat(\'Error en la linea: \', $nroLinea, \' ConceptoItem \', cbc:NameCode)',
       ),
-      'context' => 'cac:Item/cac:AdditionalItemProperty',
+      'context' => 'cac:InvoiceLine/cac:Item/cac:AdditionalItemProperty',
       'mode' => 'linea',
       'conditions' => 
       array (
@@ -7242,7 +7242,7 @@ return array (
         'node' => 'cbc:Value',
         'descripcion' => 'concat(\'Error en la linea: \', $nroLinea, \' ConceptoItem \', cbc:NameCode)',
       ),
-      'context' => 'cac:Item/cac:AdditionalItemProperty',
+      'context' => 'cac:InvoiceLine/cac:Item/cac:AdditionalItemProperty',
       'mode' => 'linea',
       'conditions' => 
       array (
@@ -7260,7 +7260,7 @@ return array (
         'isError' => 'false()',
         'descripcion' => 'concat(\'Error en la linea: \', $nroLinea, \' ConceptoItem \', cbc:NameCode)',
       ),
-      'context' => 'cac:Item/cac:AdditionalItemProperty',
+      'context' => 'cac:InvoiceLine/cac:Item/cac:AdditionalItemProperty',
       'mode' => 'linea',
       'conditions' => 
       array (
@@ -7276,7 +7276,7 @@ return array (
         'node' => 'cbc:Value',
         'descripcion' => 'concat(\'Error en la linea: \', $nroLinea, \' ConceptoItem \', cbc:NameCode)',
       ),
-      'context' => 'cac:Item/cac:AdditionalItemProperty',
+      'context' => 'cac:InvoiceLine/cac:Item/cac:AdditionalItemProperty',
       'mode' => 'linea',
       'conditions' => 
       array (
@@ -7294,7 +7294,7 @@ return array (
         'isError' => 'false()',
         'descripcion' => 'concat(\'Error en la linea: \', $nroLinea, \' ConceptoItem \', cbc:NameCode)',
       ),
-      'context' => 'cac:Item/cac:AdditionalItemProperty',
+      'context' => 'cac:InvoiceLine/cac:Item/cac:AdditionalItemProperty',
       'mode' => 'linea',
       'conditions' => 
       array (
@@ -7310,7 +7310,7 @@ return array (
         'node' => 'cac:UsabilityPeriod/cbc:StartDate',
         'descripcion' => 'concat(\'Error en la linea: \', $nroLinea, \' ConceptoItem \', cbc:NameCode)',
       ),
-      'context' => 'cac:Item/cac:AdditionalItemProperty',
+      'context' => 'cac:InvoiceLine/cac:Item/cac:AdditionalItemProperty',
       'mode' => 'linea',
       'conditions' => 
       array (
@@ -7328,7 +7328,7 @@ return array (
         'isError' => 'false()',
         'descripcion' => 'concat(\'Error en la linea: \', $nroLinea, \' ConceptoItem \', cbc:NameCode)',
       ),
-      'context' => 'cac:Item/cac:AdditionalItemProperty',
+      'context' => 'cac:InvoiceLine/cac:Item/cac:AdditionalItemProperty',
       'mode' => 'linea',
       'conditions' => 
       array (
@@ -7345,7 +7345,7 @@ return array (
         'isError' => 'false()',
         'descripcion' => 'concat(\'Error en la linea: \', $nroLinea, \' ConceptoItem \', cbc:NameCode)',
       ),
-      'context' => 'cac:Item/cac:AdditionalItemProperty',
+      'context' => 'cac:InvoiceLine/cac:Item/cac:AdditionalItemProperty',
       'mode' => 'linea',
       'conditions' => 
       array (
@@ -7363,7 +7363,7 @@ return array (
         'isError' => 'false()',
         'descripcion' => 'concat(\'Error en la linea: \', $nroLinea, \' ConceptoItem \', cbc:NameCode)',
       ),
-      'context' => 'cac:Item/cac:AdditionalItemProperty',
+      'context' => 'cac:InvoiceLine/cac:Item/cac:AdditionalItemProperty',
       'mode' => 'linea',
       'conditions' => 
       array (
@@ -7381,7 +7381,7 @@ return array (
         'isGreaterCero' => 'false()',
         'descripcion' => 'concat(\'Error Tributo \', $codigoTributo)',
       ),
-      'context' => 'cac:TaxSubtotal',
+      'context' => 'cac:TaxTotal/cac:TaxSubtotal',
       'mode' => 'cabecera',
       'conditions' => 
       array (
@@ -7399,7 +7399,7 @@ return array (
         'isGreaterCero' => 'false()',
         'descripcion' => 'concat(\'Error Tributo \', $codigoTributo)',
       ),
-      'context' => 'cac:TaxSubtotal',
+      'context' => 'cac:TaxTotal/cac:TaxSubtotal',
       'mode' => 'cabecera',
       'conditions' => 
       array (
@@ -7415,7 +7415,7 @@ return array (
         'expresion' => 'cbc:TaxAmount != 0',
         'descripcion' => 'concat(\'Error Tributo \', $codigoTributo)',
       ),
-      'context' => 'cac:TaxSubtotal',
+      'context' => 'cac:TaxTotal/cac:TaxSubtotal',
       'mode' => 'cabecera',
       'conditions' => 
       array (
@@ -7432,7 +7432,7 @@ return array (
         'expresion' => '$tipoOperacion = \'0113\'',
         'descripcion' => 'concat(\'Error Tributo \', $codigoTributo)',
       ),
-      'context' => 'cac:TaxSubtotal',
+      'context' => 'cac:TaxTotal/cac:TaxSubtotal',
       'mode' => 'cabecera',
       'conditions' => 
       array (
@@ -7448,7 +7448,7 @@ return array (
         'errorCodeNotExist' => '\'3059\'',
         'node' => 'cac:TaxCategory/cac:TaxScheme/cbc:ID',
       ),
-      'context' => 'cac:TaxSubtotal',
+      'context' => 'cac:TaxTotal/cac:TaxSubtotal',
       'mode' => 'cabecera',
       'conditions' => 
       array (
@@ -7464,7 +7464,7 @@ return array (
         'errorCodeValidate' => '\'3007\'',
         'descripcion' => 'concat(\'Error Tributo \', $codigoTributo)',
       ),
-      'context' => 'cac:TaxSubtotal',
+      'context' => 'cac:TaxTotal/cac:TaxSubtotal',
       'mode' => 'cabecera',
       'conditions' => 
       array (
@@ -7481,7 +7481,7 @@ return array (
         'isError' => 'false()',
         'descripcion' => 'concat(\'Error Tributo \', $codigoTributo)',
       ),
-      'context' => 'cac:TaxSubtotal',
+      'context' => 'cac:TaxTotal/cac:TaxSubtotal',
       'mode' => 'cabecera',
       'conditions' => 
       array (
@@ -7498,7 +7498,7 @@ return array (
         'isError' => 'false()',
         'descripcion' => 'concat(\'Error Tributo \', $codigoTributo)',
       ),
-      'context' => 'cac:TaxSubtotal',
+      'context' => 'cac:TaxTotal/cac:TaxSubtotal',
       'mode' => 'cabecera',
       'conditions' => 
       array (
@@ -7515,7 +7515,7 @@ return array (
         'isError' => 'false()',
         'descripcion' => 'concat(\'Error Tributo \', $codigoTributo)',
       ),
-      'context' => 'cac:TaxSubtotal',
+      'context' => 'cac:TaxTotal/cac:TaxSubtotal',
       'mode' => 'cabecera',
       'conditions' => 
       array (
@@ -7530,7 +7530,7 @@ return array (
         'node' => 'cac:TaxCategory/cac:TaxScheme/cbc:Name',
         'descripcion' => 'concat(\'Error Tributo \', $codigoTributo)',
       ),
-      'context' => 'cac:TaxSubtotal',
+      'context' => 'cac:TaxTotal/cac:TaxSubtotal',
       'mode' => 'cabecera',
       'conditions' => 
       array (
@@ -7545,7 +7545,7 @@ return array (
         'node' => 'cac:TaxCategory/cac:TaxScheme/cbc:TaxTypeCode',
         'descripcion' => 'concat(\'Error Tributo \', $codigoTributo)',
       ),
-      'context' => 'cac:TaxSubtotal',
+      'context' => 'cac:TaxTotal/cac:TaxSubtotal',
       'mode' => 'cabecera',
       'conditions' => 
       array (
@@ -7561,7 +7561,7 @@ return array (
         'expresion' => 'count(key(\'by-tributos-in-root\', cac:TaxCategory/cac:TaxScheme/cbc:ID)) > 1',
         'descripcion' => 'concat(\'Error Tributo \', $codigoTributo)',
       ),
-      'context' => 'cac:TaxSubtotal',
+      'context' => 'cac:TaxTotal/cac:TaxSubtotal',
       'mode' => 'cabecera',
       'conditions' => 
       array (

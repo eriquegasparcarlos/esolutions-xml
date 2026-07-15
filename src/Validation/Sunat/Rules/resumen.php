@@ -597,7 +597,7 @@ return array (
         'expresion' => 'count(key(\'by-tributos-in-line\', concat(cac:TaxCategory/cac:TaxScheme/cbc:ID,\'-\', $nroLinea))) > 1',
         'descripcion' => 'concat(\'Error en la linea: \', $nroLinea, \'. \')',
       ),
-      'context' => 'cac:TaxTotal/cac:TaxSubtotal',
+      'context' => 'sac:SummaryDocumentsLine/cac:TaxTotal/cac:TaxSubtotal',
       'mode' => 'linea',
       'conditions' => 
       array (
@@ -614,7 +614,7 @@ return array (
         'isGreaterCero' => 'false()',
         'descripcion' => 'concat(\'Error en la linea: \', $nroLinea)',
       ),
-      'context' => 'cac:TaxTotal',
+      'context' => 'sac:SummaryDocumentsLine/cac:TaxTotal',
       'mode' => 'linea',
       'conditions' => 
       array (
@@ -630,7 +630,7 @@ return array (
         'expresion' => 'number(cac:TaxSubtotal/cbc:TaxAmount) != number(cbc:TaxAmount)',
         'descripcion' => 'concat(\'Error en la linea: \', $nroLinea, \'. \')',
       ),
-      'context' => 'cac:TaxTotal',
+      'context' => 'sac:SummaryDocumentsLine/cac:TaxTotal',
       'mode' => 'linea',
       'conditions' => 
       array (
@@ -645,7 +645,7 @@ return array (
         'node' => 'cac:TaxSubtotal/cac:TaxCategory/cac:TaxScheme/cbc:ID',
         'descripcion' => 'concat(\'Error en la linea: \', $nroLinea, \'. \')',
       ),
-      'context' => 'cac:TaxTotal',
+      'context' => 'sac:SummaryDocumentsLine/cac:TaxTotal',
       'mode' => 'linea',
       'conditions' => 
       array (
@@ -661,7 +661,7 @@ return array (
         'errorCodeValidate' => '\'2268\'',
         'descripcion' => 'concat(\'Error en la linea: \', $nroLinea, \'. \')',
       ),
-      'context' => 'cac:TaxTotal',
+      'context' => 'sac:SummaryDocumentsLine/cac:TaxTotal',
       'mode' => 'linea',
       'conditions' => 
       array (
@@ -676,7 +676,7 @@ return array (
         'node' => 'cac:TaxSubtotal/cac:TaxCategory/cac:TaxScheme/cbc:Name',
         'descripcion' => 'concat(\'Error en la linea: \', $nroLinea, \'. \')',
       ),
-      'context' => 'cac:TaxTotal',
+      'context' => 'sac:SummaryDocumentsLine/cac:TaxTotal',
       'mode' => 'linea',
       'conditions' => 
       array (
@@ -692,7 +692,7 @@ return array (
         'expresion' => 'cac:TaxSubtotal/cac:TaxCategory/cac:TaxScheme[cbc:ID = \'1000\']/cbc:Name != \'IGV\'',
         'descripcion' => 'concat(\'Error en la linea: \', $nroLinea, \'. cbc:Name debe de ser IGV\')',
       ),
-      'context' => 'cac:TaxTotal',
+      'context' => 'sac:SummaryDocumentsLine/cac:TaxTotal',
       'mode' => 'linea',
       'conditions' => 
       array (
@@ -709,7 +709,7 @@ return array (
         'expresion' => 'cac:TaxSubtotal/cac:TaxCategory/cac:TaxScheme[cbc:ID = \'2000\']/cbc:Name != \'ISC\'',
         'descripcion' => 'concat(\'Error en la linea: \', $nroLinea, \'. \')',
       ),
-      'context' => 'cac:TaxTotal',
+      'context' => 'sac:SummaryDocumentsLine/cac:TaxTotal',
       'mode' => 'linea',
       'conditions' => 
       array (

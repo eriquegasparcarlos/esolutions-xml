@@ -1,105 +1,155 @@
 <?php
 
 /**
- * Genera facturas/boletas de ejemplo cubriendo distintas estructuras y las
- * corre por el motor de reglas SUNAT para detectar falsos positivos.
+ * Matriz COMPLETA de comprobantes de ejemplo (facturas/boletas/NC/ND) cubriendo
+ * todas las estructuras posibles, con totales reconciliados. Cada uno:
+ *  - se genera + firma + valida XSD por el paquete
+ *  - se corre por el motor de reglas cliente SUNAT (nivel determinista)
  */
 tenancy()->initialize(\App\Models\Tenant::find('garcia'));
 
 use ESolutions\Xml\Contracts\XmlDocumentGeneratorContract;
-use ESolutions\Xml\Validation\Sunat\RuleEngine;
+use ESolutions\Xml\Validation\Sunat\SunatRulesValidator;
 use Modules\Sale\Models\Sale;
 use Modules\Sale\Services\SaleXmlPayloadBuilder;
 
 $gen = app(XmlDocumentGeneratorContract::class);
+$validator = new SunatRulesValidator();
 $dir = 'C:/Users/Krlos/AppData/Local/Temp/claude/F--laragon-www-intipos13/99c0fdff-68e8-4478-827b-5435e92e3e6b/scratchpad/fixtures';
 @mkdir($dir, 0777, true);
 
-// Base: payloads reales conocidos-válidos
-$facBase = (new SaleXmlPayloadBuilder())->build(Sale::find(39)); // F001-2 gravada RUC
-$bolBase = (new SaleXmlPayloadBuilder())->build(Sale::find(38)); // B001-31 gravada DNI
+$facBase = (new SaleXmlPayloadBuilder())->build(Sale::find(39));
+$bolBase = (new SaleXmlPayloadBuilder())->build(Sale::find(38));
 
-$rulesFac = require 'F:/laragon/www/e-solutions-xml/src/Validation/Sunat/Rules/factura.php';
-$rulesBol = require 'F:/laragon/www/e-solutions-xml/src/Validation/Sunat/Rules/boleta.php';
-
-// helper: deep clone + set
-function mut(array $p, callable $mutate): array { $mutate($p); return $p; }
-
-// ─── Matriz de variantes ───────────────────────────────────────────────
-$variants = [];
-
-// 1. Factura gravada simple (base)
-$variants['FAC-01 gravada simple (RUC, contado)'] = ['01', $facBase, $rulesFac];
-
-// 2. Factura con descuento global
-$variants['FAC-02 con descuento global'] = ['01', mut($facBase, function (&$p) {
-    $p['document']['discounts'] = [[
-        'discount_type_id' => '02', 'factor' => 0.1, 'amount' => 50.85, 'base' => 508.47,
-    ]];
-    $p['document']['total_discount_no_base'] = 50.85;
-}), $rulesFac];
-
-// 3. Factura con detracción (op 1001)
-$variants['FAC-03 con detracción'] = ['01', mut($facBase, function (&$p) {
-    $p['document']['operation_type_id'] = '1001';
-    $p['document']['detraction'] = [
-        'payment_method_type_id' => '001',
-        'bank_account' => '00-099-025344',
-        'detraction_type_id' => '037', // Demás servicios gravados
-        'percentage' => 12,
-        'amount_pen' => 72.0,
+// ── Helper: línea consistente por afectación ────────────────────────────
+// $afect: 10 gravado, 20 exonerado, 30 inafecto, 21 gratuito, 40 exportación
+function L(float $valor, string $afect, string $name, float $qty = 1, float $icbper = 0, float $isc = 0): array {
+    $igv = ($afect === '10') ? round($valor * 0.18, 2) : 0.0;
+    $gratuito = ($afect === '21');
+    $unit = round($valor / $qty, 6);
+    return [
+        'unit_type_id' => 'NIU', 'quantity' => $qty,
+        'total_value' => $gratuito ? 0.0 : $valor,
+        'price_type_id' => $gratuito ? '02' : '01',
+        'price_amount_01' => $gratuito ? 0.0 : ($afect === '10' ? round($unit * 1.18, 6) : $unit),
+        'price_amount_02' => $gratuito ? $unit : $unit,
+        'unit_value' => $unit,
+        'charges' => [], 'discounts' => [],
+        'total_taxes' => $igv + $isc + $icbper,
+        'total_isc' => $isc, 'total_base_isc' => $isc > 0 ? $valor : 0, 'percentage_isc' => $isc > 0 ? 10 : 0, 'system_isc_type_id' => $isc > 0 ? '01' : null,
+        'total_base_igv' => $valor, 'total_igv' => $igv, 'percentage_igv' => ($afect === '10') ? 18 : 0,
+        'affectation_igv_type_id' => $afect,
+        'total_other_taxes' => 0, 'total_base_other_taxes' => 0, 'percentage_other_taxes' => 0,
+        'total_plastic_bag_taxes' => $icbper, 'amount_plastic_bag_taxes' => $icbper > 0 ? 0.5 : 0,
+        'name_parts' => [$name], 'internal_id' => null, 'item_code' => null,
+        'accommodation_attributes' => [], 'attributes' => [],
     ];
-    $p['document']['legends'][] = ['code' => '2006', 'value' => 'Operación sujeta a detracción'];
-}), $rulesFac];
+}
 
-// 4. Factura con retención
-$variants['FAC-04 con retención'] = ['01', mut($facBase, function (&$p) {
-    $p['document']['retention'] = [
-        'code' => '62', 'percentage' => 3, 'amount' => 18.0, 'base' => 600.0,
-    ];
-}), $rulesFac];
+// ── Helper: arma payload con totales reconciliados ──────────────────────
+function INV(array $base, string $tipo, string $id, array $lines, array $ov = []): array {
+    $p = $base;
+    $d = &$p['document'];
+    $d['id'] = $id;
+    $d['document_type_id'] = $tipo;
+    $d['items'] = $lines;
+    // sumas por tipo de afectación
+    $sum = fn($k) => array_sum(array_map(fn($l) => $l[$k], $lines));
+    $byAfect = fn($a, $k) => array_sum(array_map(fn($l) => $l['affectation_igv_type_id'] === $a ? $l[$k] : 0, $lines));
+    $d['total_taxed'] = $byAfect('10', 'total_value');
+    $d['total_exonerated_init'] = $byAfect('20', 'total_value');
+    $d['total_unaffected_init'] = $byAfect('30', 'total_value');
+    $d['total_exportation_init'] = $byAfect('40', 'total_value');
+    $d['total_free'] = array_sum(array_map(fn($l) => $l['affectation_igv_type_id'] === '21' ? $l['unit_value'] * $l['quantity'] : 0, $lines));
+    $d['total_igv'] = $sum('total_igv');
+    $d['total_isc'] = $sum('total_isc');
+    $d['total_icbper'] ?? null;
+    $d['total_plastic_bag_taxes'] = $sum('total_plastic_bag_taxes');
+    $d['total_other_taxes'] = 0;
+    $d['total_base_other_taxes'] = 0;
+    $d['total_igv_free'] = 0.0;
+    $d['total_prepayment_unaffected'] = 0.0;
+    $d['total_prepayment_exonerated'] = 0.0;
+    $d['total_taxes'] = $d['total_igv'] + $d['total_isc'] + $d['total_plastic_bag_taxes'];
+    $d['total_value'] = $sum('total_value');
+    $d['total_discount_no_base'] = 0.0;
+    $d['total_charge'] = 0.0;
+    $d['total_prepayment'] = 0.0;
+    $d['total_payable'] = round($d['total_value'] + $d['total_taxes'], 2);
+    $d['discounts'] = [];
+    $d['charges'] = [];
+    $d['detraction'] = null; $d['retention'] = null; $d['perception'] = null;
+    $d['payment_condition_id'] = '01'; $d['fee'] = []; $d['fee_total'] = 0.0;
+    $d['operation_type_id'] = ($tipo === '01') ? '0101' : '0101';
+    $d['operation_type_is_exportation'] = false;
+    foreach ($ov as $k => $v) { if (is_callable($v)) $v($d); else $d[$k] = $v; }
+    return $p;
+}
 
-// 5. Factura a crédito (cuotas)
-$variants['FAC-05 a crédito (cuotas)'] = ['01', mut($facBase, function (&$p) {
-    $p['document']['payment_condition_id'] = '02';
-    $p['document']['fee_total'] = 600.0;
-    $p['document']['fee'] = [
-        ['currency_type_id' => 'PEN', 'amount' => 300.0, 'date_of_due' => '2026-08-15'],
-        ['currency_type_id' => 'PEN', 'amount' => 300.0, 'date_of_due' => '2026-09-15'],
-    ];
-}), $rulesFac];
+$V = [];
+// FACTURAS por afectación
+$V['FAC-01 gravada'] = INV($facBase, '01', 'F001-101', [L(100, '10', 'Servicio gravado')]);
+$V['FAC-06 exonerada'] = INV($facBase, '01', 'F001-106', [L(100, '20', 'Consulta exonerada')]);
+$V['FAC-07 inafecta'] = INV($facBase, '01', 'F001-107', [L(100, '30', 'Servicio inafecto')]);
+$V['FAC-08 gratuita'] = INV($facBase, '01', 'F001-108', [L(100, '21', 'Muestra gratuita')], [
+    'legends' => fn(&$d) => $d['legends'][] = ['code' => '1002', 'value' => 'TRANSFERENCIA GRATUITA'],
+]);
+$V['FAC-09 exportacion'] = INV($facBase, '01', 'F001-109', [L(100, '40', 'Exportacion')], [
+    'operation_type_id' => '0200', 'operation_type_is_exportation' => true,
+]);
+$V['FAC-10 con ICBPER'] = INV($facBase, '01', 'F001-110', [L(100, '10', 'Producto', 1, 2.0)]);
+$V['FAC-11 con ISC'] = INV($facBase, '01', 'F001-111', [L(100, '10', 'Producto con ISC', 1, 0, 10.0)]);
+$V['FAC-12 multi-linea mixta'] = INV($facBase, '01', 'F001-112', [
+    L(100, '10', 'Gravado'), L(50, '20', 'Exonerado'), L(30, '30', 'Inafecto'),
+]);
+// FACTURAS con estructuras (reusando el motor de INV para consistencia)
+$V['FAC-02 con descuento global'] = INV($facBase, '01', 'F001-102', [L(100, '10', 'Servicio')], [
+    'discounts' => fn(&$d) => $d['discounts'] = [['discount_type_id' => '02', 'factor' => 0.1, 'amount' => 10, 'base' => 100]],
+    'total_discount_no_base' => 10.0,
+    'total_payable' => 108.0,
+]);
+$V['FAC-03 con detraccion'] = INV($facBase, '01', 'F001-103', [L(1000, '10', 'Servicio sujeto a detraccion')], [
+    'operation_type_id' => '1001',
+    'detraction' => fn(&$d) => $d['detraction'] = ['payment_method_type_id' => '001', 'bank_account' => '00-099-025344', 'detraction_type_id' => '037', 'percentage' => 12, 'amount_pen' => 141.6],
+    'legends' => fn(&$d) => $d['legends'][] = ['code' => '2006', 'value' => 'Operacion sujeta a detraccion'],
+]);
+$V['FAC-05 a credito'] = INV($facBase, '01', 'F001-105', [L(100, '10', 'Servicio')], [
+    'payment_condition_id' => '02', 'fee_total' => 118.0,
+    'fee' => fn(&$d) => $d['fee'] = [['currency_type_id' => 'PEN', 'amount' => 118.0, 'date_of_due' => '2026-08-15']],
+]);
+// BOLETAS
+$V['BOL-01 gravada DNI'] = INV($bolBase, '03', 'B001-101', [L(100, '10', 'Consulta')]);
+$V['BOL-06 exonerada'] = INV($bolBase, '03', 'B001-106', [L(100, '20', 'Consulta exonerada')]);
+// NOTAS DE CREDITO
+$V['NC-01 anulacion'] = INV($facBase, '07', 'FC01-1', [L(100, '10', 'Servicio')], [
+    'affected_document' => ['id' => 'F001-101', 'document_type_id' => '01', 'date_of_issue' => '2026-07-14'],
+    'note_type_id' => '01', 'note_description' => 'Anulacion de la operacion',
+]);
+$V['NC-02 descuento'] = INV($facBase, '07', 'FC01-2', [L(20, '10', 'Descuento')], [
+    'affected_document' => ['id' => 'F001-101', 'document_type_id' => '01', 'date_of_issue' => '2026-07-14'],
+    'note_type_id' => '02', 'note_description' => 'Descuento global',
+]);
+// NOTAS DE DEBITO
+$V['ND-01 intereses'] = INV($facBase, '08', 'FD01-1', [L(50, '10', 'Intereses por mora')], [
+    'affected_document' => ['id' => 'F001-101', 'document_type_id' => '01', 'date_of_issue' => '2026-07-14'],
+    'note_type_id' => '01', 'note_description' => 'Intereses por mora',
+]);
 
-// 6. Boleta con DNI (base)
-$variants['BOL-01 con DNI'] = ['03', $bolBase, $rulesBol];
-
-// 7. Boleta a consumidor final (sin doc, número 0)
-$variants['BOL-02 consumidor final'] = ['03', mut($bolBase, function (&$p) {
-    $p['document']['customer_identity_document_type_id'] = '0';
-    $p['document']['customer_number'] = '00000000';
-    $p['document']['customer_name'] = 'CLIENTES VARIOS';
-}), $rulesBol];
-
-// ─── Ejecutar ──────────────────────────────────────────────────────────
-foreach ($variants as $label => [$tipo, $payload, $rules]) {
+// ── Ejecutar ────────────────────────────────────────────────────────────
+$tipoDoc = fn($t) => ['01' => '01', '03' => '03', '07' => '07', '08' => '08'][$t];
+foreach ($V as $label => $payload) {
+    $tipo = $payload['document']['document_type_id'];
     $res = $gen->generate($tipo, $payload);
-    $xsdOk = $res->isOk();
     $file = $dir . '/' . preg_replace('/[^A-Z0-9]+/i', '_', $label) . '.xml';
     if ($res->xml) file_put_contents($file, $res->xml);
-
+    $xsd = $res->isOk() ? 'XSD OK' : ('XSD FALLA: ' . ($res->validation->firstMessage() ?? ''));
     $emits = [];
     if ($res->xml) {
-        $eng = new RuleEngine();
-        foreach ($eng->run($res->xml, $rules) as $e) {
-            $emits[$e->path] = ($emits[$e->code] ?? 0) + 1;
-        }
+        $r = $validator->validate($res->xml, $tipo);
+        foreach ($r->errors as $e) $emits[$e->path] = ($emits[$e->path] ?? 0) + 1;
     }
-
-    $xsdMsg = $xsdOk ? 'XSD OK' : ('XSD FALLA: ' . ($res->validation->firstMessage() ?? ''));
-    printf("%-38s | %-10s | reglas: %d emisiones", $label, $xsdMsg, array_sum($emits));
-    if ($emits) {
-        echo ' -> ';
-        foreach ($emits as $c => $n) echo $c . " x" . $n . " ";
-    }
+    printf("%-30s | %-9s | reglas: %d", $label, $xsd, array_sum($emits));
+    if ($emits) { echo ' -> '; foreach ($emits as $c => $n) echo $c . 'x' . $n . ' '; }
     echo "\n";
 }
-echo "\nXMLs en: $dir\n";
+echo "\nTotal: " . count($V) . " ejemplos en $dir\n";

@@ -4180,7 +4180,7 @@ return array (
         'descripcion' => 'concat(\'Error en la linea: \', $nroLinea, \' Concepto: \', cbc:NameCode)',
         'isError' => 'false()',
       ),
-      'context' => 'cac:Item/cac:AdditionalItemProperty',
+      'context' => 'cac:DespatchLine/cac:Item/cac:AdditionalItemProperty',
       'mode' => 'linea',
       'conditions' => 
       array (
@@ -4198,7 +4198,7 @@ return array (
         'isError' => 'false()',
         'descripcion' => 'concat(\'Error en la linea: \', $nroLinea, \' Concepto: \', cbc:NameCode)',
       ),
-      'context' => 'cac:Item/cac:AdditionalItemProperty',
+      'context' => 'cac:DespatchLine/cac:Item/cac:AdditionalItemProperty',
       'mode' => 'linea',
       'conditions' => 
       array (
@@ -4215,7 +4215,7 @@ return array (
         'isError' => 'false()',
         'descripcion' => 'concat(\'Error en la linea: \', $nroLinea, \' Concepto: \', cbc:NameCode)',
       ),
-      'context' => 'cac:Item/cac:AdditionalItemProperty',
+      'context' => 'cac:DespatchLine/cac:Item/cac:AdditionalItemProperty',
       'mode' => 'linea',
       'conditions' => 
       array (
@@ -4232,7 +4232,7 @@ return array (
         'isError' => 'false()',
         'descripcion' => 'concat(\'Error en la linea: \', $nroLinea, \' Concepto: \', cbc:NameCode)',
       ),
-      'context' => 'cac:Item/cac:AdditionalItemProperty',
+      'context' => 'cac:DespatchLine/cac:Item/cac:AdditionalItemProperty',
       'mode' => 'linea',
       'conditions' => 
       array (
@@ -4247,7 +4247,7 @@ return array (
         'node' => 'cbc:Value',
         'descripcion' => 'concat(\'Error en la linea: \', $nroLinea, \' Concepto: \', cbc:NameCode)',
       ),
-      'context' => 'cac:Item/cac:AdditionalItemProperty',
+      'context' => 'cac:DespatchLine/cac:Item/cac:AdditionalItemProperty',
       'mode' => 'linea',
       'conditions' => 
       array (
@@ -4264,7 +4264,7 @@ return array (
         'regexp' => '\'^(?!0+$)([0-9]{1,10})$\'',
         'descripcion' => 'concat(\'Error en la linea: \', $nroLinea, \' Concepto: \', cbc:NameCode)',
       ),
-      'context' => 'cac:Item/cac:AdditionalItemProperty',
+      'context' => 'cac:DespatchLine/cac:Item/cac:AdditionalItemProperty',
       'mode' => 'linea',
       'conditions' => 
       array (
@@ -4281,7 +4281,7 @@ return array (
         'catalogo' => '\'62\'',
         'descripcion' => 'concat(\'Error en la linea: \', $nroLinea, \' Concepto: \', cbc:NameCode)',
       ),
-      'context' => 'cac:Item/cac:AdditionalItemProperty',
+      'context' => 'cac:DespatchLine/cac:Item/cac:AdditionalItemProperty',
       'mode' => 'linea',
       'conditions' => 
       array (
@@ -4299,7 +4299,7 @@ return array (
         'expresion' => 'cbc:Value != \'0\' and cbc:Value != \'1\'',
         'descripcion' => 'concat(\'Error en la linea: \', $nroLinea, \' Concepto: \', cbc:NameCode)',
       ),
-      'context' => 'cac:Item/cac:AdditionalItemProperty',
+      'context' => 'cac:DespatchLine/cac:Item/cac:AdditionalItemProperty',
       'mode' => 'linea',
       'conditions' => 
       array (
