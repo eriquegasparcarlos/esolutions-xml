@@ -54,24 +54,34 @@ class ErrorCatalog
      */
     private function load(): array
     {
-        if (!is_file($this->file)) {
-            return [];
-        }
-
         $out = [];
-        $prev = libxml_use_internal_errors(true);
-        $xml = simplexml_load_file($this->file);
-        libxml_clear_errors();
-        libxml_use_internal_errors($prev);
 
-        if ($xml === false) {
-            return [];
+        // Base: CatalogoErrores.xml (SFS).
+        if (is_file($this->file)) {
+            $prev = libxml_use_internal_errors(true);
+            $xml = simplexml_load_file($this->file);
+            libxml_clear_errors();
+            libxml_use_internal_errors($prev);
+            if ($xml !== false) {
+                foreach ($xml->error as $error) {
+                    $code = (string) $error['numero'];
+                    if ($code !== '') {
+                        $out[$this->normalize($code)] = trim((string) $error);
+                    }
+                }
+            }
         }
 
-        foreach ($xml->error as $error) {
-            $code = (string) $error['numero'];
-            if ($code !== '') {
-                $out[$code] = trim((string) $error);
+        // Overlay: error-codes.php extraído del Excel oficial de SUNAT (más actual;
+        // gana en conflicto y aporta códigos nuevos). Generado por
+        // tools/extract_from_excel.php. Ver docs/sunat-changes-2026-08.md.
+        $php = dirname(__DIR__, 2) . '/Resources/sunat/error-codes.php';
+        if (is_file($php)) {
+            $codes = require $php;
+            if (is_array($codes)) {
+                foreach ($codes as $code => $msg) {
+                    $out[$this->normalize((string) $code)] = (string) $msg;
+                }
             }
         }
 
