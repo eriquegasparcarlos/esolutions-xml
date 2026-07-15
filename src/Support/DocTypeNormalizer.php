@@ -5,31 +5,55 @@ namespace ESolutions\Xml\Support;
 class DocTypeNormalizer
 {
     /**
-     * Normaliza entradas tipo:
-     * - invoice, boleta, credit_note, debit_note
-     * - credit-note, debit-note
-     * - 01, 03, 07, 08
+     * Normaliza el tipo de documento a la clave usada en config
+     * (views/schemas) y en Payload/Schemas.
+     *
+     * Acepta:
+     * - códigos SUNAT: 01, 03, 07, 08, 09, 20, 40, RC, RA, RR
+     * - alias: invoice, boleta, factura, credit-note, credit_note, ...
      */
     public static function normalize(string $type): string
     {
         $t = trim(strtolower($type));
 
-        // códigos SUNAT típicos
-        if ($t === '01') return 'invoice';
-        if ($t === '03') return 'boleta';
-        if ($t === '07') return 'credit_note';
-        if ($t === '08') return 'debit_note';
+        // Códigos SUNAT (catálogo 01 + resúmenes)
+        $codes = [
+            '01' => 'invoice',
+            '03' => 'invoice',   // boleta usa la misma plantilla/XSD que factura
+            '07' => 'credit_note',
+            '08' => 'debit_note',
+            '09' => 'despatch',
+            '20' => 'retention',
+            '40' => 'perception',
+            'rc' => 'summary',
+            'ra' => 'voided',
+            'rr' => 'reversion',
+        ];
+        if (isset($codes[$t])) {
+            return $codes[$t];
+        }
 
         // normaliza separadores
         $t = str_replace('-', '_', $t);
 
-        // alias comunes
         $aliases = [
             'factura' => 'invoice',
+            'boleta' => 'invoice',
             'invoice' => 'invoice',
-            'boleta' => 'boleta',
             'credit_note' => 'credit_note',
             'debit_note' => 'debit_note',
+            'despatch' => 'despatch',
+            'dispatch' => 'despatch',
+            'guia' => 'despatch',
+            'summary' => 'summary',
+            'resumen' => 'summary',
+            'voided' => 'voided',
+            'baja' => 'voided',
+            'reversion' => 'reversion',
+            'retention' => 'retention',
+            'retencion' => 'retention',
+            'perception' => 'perception',
+            'percepcion' => 'perception',
         ];
 
         return $aliases[$t] ?? $t;

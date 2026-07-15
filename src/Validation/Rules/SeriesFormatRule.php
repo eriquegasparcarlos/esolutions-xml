@@ -3,7 +3,6 @@
 namespace ESolutions\Xml\Validation\Rules;
 
 use ESolutions\Xml\Results\ValidationError;
-use Illuminate\Support\Facades\Log;
 
 class SeriesFormatRule
 {
@@ -21,10 +20,8 @@ class SeriesFormatRule
 
         $series = strtoupper(trim($series));
 
-        // ✅ Prefijo esperado: para notas SIEMPRE depende del documento relacionado
+        // Prefijo esperado: para notas SIEMPRE depende del documento relacionado
         $expectedPrefix = $this->expectedPrefix($doc, $type);
-        Log::info($doc);
-        Log::info($expectedPrefix);
         if ($expectedPrefix === null) {
             return [new ValidationError(
                 'No se pudo determinar el tipo de documento relacionado (01/03) para validar el prefijo de la serie de la nota.',
@@ -114,19 +111,8 @@ class SeriesFormatRule
     protected function findRelatedDocType(array $doc): ?string
     {
         $candidates = [
-            // recomendado (payload claro)
-            'doc.affectedDocument.docTypeCode',
-            'affectedDocument.docTypeCode',
-
-            // billing reference típico
-            'doc.billingReference.documentTypeCode',
-            'billingReference.documentTypeCode',
-
-            // si lo mandas como relatedDocuments
-            'relatedDocuments.0.docType',
-            'relatedDocuments.0.documentTypeCode',
-            'doc.relatedDocuments.0.docType',
-            'doc.relatedDocuments.0.documentTypeCode',
+            // contrato v2 (ver docs/payloads/credit-note.md)
+            'document.affected_document.document_type_id',
         ];
 
         foreach ($candidates as $path) {
