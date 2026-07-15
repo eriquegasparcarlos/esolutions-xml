@@ -1,0 +1,15 @@
+# Qué NO viaja en el paquete distribuido (composer dist / Packagist).
+# Se excluye el runner de tests y el cruft de desarrollo, PERO se conservan
+# los fixtures (tests/fixtures) porque son ejemplos de payload por tipo.
+/.gitattributes                export-ignore
+/.gitignore                    export-ignore
+/phpunit.xml                   export-ignore
+/.phpunit.cache                export-ignore
+/tools                         export-ignore
+/tests/TestCase.php            export-ignore
+/tests/PayloadFixturesTest.php export-ignore
+
+# Normaliza fin de línea a LF en el repo (evita ruido CRLF en Windows).
+* text=auto eol=lf
+*.png binary
+*.pem binary
