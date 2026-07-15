@@ -31,6 +31,9 @@ class OwnRules
      * (SUNAT valida por fecha de emisión, no por fecha de envío).
      */
     private const EFFECTIVE_PRODUCT_CODE = '2026-08-01'; // #12 ERR-3496
+    private const EFFECTIVE_ND13_INAFECTA = '2026-08-01'; // #23 ERR-3507
+
+    private string $rootName = '';
 
     public function __construct(?ErrorCatalog $errors = null)
     {
@@ -56,17 +59,45 @@ class OwnRules
             $this->xp->registerNamespace($p, $u);
         }
 
-        $root = $dom->documentElement->localName;
+        $this->rootName = $dom->documentElement->localName;
         // Solo comprobantes con LegalMonetaryTotal (factura/boleta/NC/ND).
-        $hasTotals = in_array($root, ['Invoice', 'CreditNote', 'DebitNote'], true);
+        $hasTotals = in_array($this->rootName, ['Invoice', 'CreditNote', 'DebitNote'], true);
 
         $errors = [];
         if ($hasTotals) {
             $this->checkTaxSum($errors);            // 3294
             $this->checkTaxInclusiveAmount($errors); // 3305
             $this->checkProductCodeMandatory($errors); // 3496 (date-gated 2026-08-01)
+            $this->checkDebitNote13Inafecta($errors);  // 3507 (date-gated 2026-08-01)
         }
         return $errors;
+    }
+
+    /**
+     * #23 (ERR-3507, vigencia 2026-08-01): la nota de débito tipo "13"
+     * (Penalidades) solo se emite por operaciones INAFECTAS. Cada ítem debe tener
+     * afectación al IGV en el rango inafecto (catálogo 07: 30-36).
+     */
+    private function checkDebitNote13Inafecta(array &$errors): void
+    {
+        if ($this->rootName !== 'DebitNote' || !$this->effectiveFrom(self::EFFECTIVE_ND13_INAFECTA)) {
+            return;
+        }
+        $noteType = trim((string) $this->xp->evaluate('string(//cac:DiscrepancyResponse/cbc:ResponseCode)'));
+        if ($noteType !== '13') {
+            return;
+        }
+        $codes = $this->xp->query('//cac:DebitNoteLine//cac:TaxCategory/cbc:TaxExemptionReasonCode');
+        if ($codes === false) {
+            return;
+        }
+        foreach ($codes as $c) {
+            $code = trim($c->textContent);
+            if ($code !== '' && !preg_match('/^3[0-6]$/', $code)) {
+                $errors[] = $this->err('3507', 'La nota de débito tipo 13 (Penalidades) solo debe emitirse por operaciones inafectas.');
+                return;
+            }
+        }
     }
 
     /**
