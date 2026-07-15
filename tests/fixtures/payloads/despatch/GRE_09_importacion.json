@@ -1,6 +1,6 @@
 {
     "type": "09",
-    "description": "Guía remitente motivo 08 (importación)",
+    "description": "Guía remitente, importación (08), DAM + bultos + anexo partida — requiere establecimiento aduanero real para aceptación",
     "expect": "ok",
     "payload": {
         "document": {
@@ -35,8 +35,8 @@
             "carrier_number": null,
             "carrier_name": null,
             "carrier_mtc_number": null,
-            "origin_establishment_code": null,
-            "origin_establishment_ruc": null,
+            "origin_establishment_code": "0000",
+            "origin_establishment_ruc": "20100070970",
             "delivery_establishment_code": null,
             "delivery_establishment_ruc": null,
             "observations": null,
@@ -51,7 +51,13 @@
                     "internal_id": "P001",
                     "item_code": null
                 }
-            ]
+            ],
+            "customs_declaration": {
+                "number": "235-2026-10-123456",
+                "type_id": "50",
+                "type_name": "Declaracion Aduanera de Mercancias"
+            },
+            "packages_number": 5
         }
     }
 }

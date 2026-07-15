@@ -26,8 +26,8 @@ gre-test), con el certificado demo estándar (RUC **10417844398**, usuario
 | itinerante | 18 | ✅ aceptado |
 | vehículo M1/L | 01 | ✅ aceptado (sin conductor/vehículo) |
 | **2 conductores + 2 vehículos** | 01 | ✅ aceptado |
-| importación | 08 | ⚠️ requiere DAM completa (código 50 cat. 61 + formato de número + nº bultos) |
-| exportación | 09 | ⚠️ requiere DAM completa (ídem) |
+| exportación | 09 | ✅ aceptado (DAM régimen 40 + bultos + anexo llegada) |
+| importación | 08 | ⚠️ estructura completa; la aceptación requiere un establecimiento aduanero real (de tercero) registrado en SUNAT |
 
 Hallazgos que solo el envío en vivo destapó (corregidos en template/fixtures):
 - **2554**: para traslado entre establecimientos (04) el destinatario debe ser el
@@ -36,10 +36,16 @@ Hallazgos que solo el envío en vivo destapó (corregidos en template/fixtures):
   los omite cuando `is_transport_category_m1l`.
 - La guía remitente ahora soporta **múltiples conductores y vehículos**
   (`secondary_drivers` / `secondary_vehicles`).
-- **Importación/exportación (08/09)** exigen una **DAM/DS** (catálogo 61 código 50/52)
-  con `IssuerParty` (RUC) y número de bultos/contenedor. El template ya emite la
-  referencia aduanera (`customs_declaration`); falta afinar el formato del número
-  DAM y los bultos para lograr la aceptación (escenario de comercio exterior).
+- **Importación/exportación (08/09)** exigen: DAM/DS (catálogo 61 código 50/52) con
+  `IssuerParty` (RUC), número de bultos (`packages_number` →
+  `TotalTransportHandlingUnitQuantity`), formato de número DAM por régimen (import
+  `NNN-YYYY-10-N…`, export `NNN-YYYY-40-N…`) y establecimiento anexo del punto de
+  partida (import) / llegada (export). El template los emite todos.
+  - **Exportación**: aceptada en vivo.
+  - **Importación**: el punto de partida debe apuntar a un establecimiento de un RUC
+    **distinto** al emisor (terminal aduanero, código 3411) y **registrado** en SUNAT
+    (código 3446) — dato de comercio exterior real, no fabricable en homologación con
+    un RUC demo (misma clase de límite que el 2560 del transportista).
 
 ## Hallazgos incorporados a los fixtures
 

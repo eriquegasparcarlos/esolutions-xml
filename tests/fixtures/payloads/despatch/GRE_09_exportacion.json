@@ -1,6 +1,6 @@
 {
     "type": "09",
-    "description": "Guía remitente motivo 09 (exportación, traslado total DAM)",
+    "description": "Guía remitente, exportación (09), DAM + bultos + anexo llegada — aceptado en vivo",
     "expect": "ok",
     "payload": {
         "document": {
@@ -37,8 +37,8 @@
             "carrier_mtc_number": null,
             "origin_establishment_code": null,
             "origin_establishment_ruc": null,
-            "delivery_establishment_code": null,
-            "delivery_establishment_ruc": null,
+            "delivery_establishment_code": "0000",
+            "delivery_establishment_ruc": "10417844398",
             "observations": null,
             "is_transport_category_m1l": false,
             "items": [
@@ -52,7 +52,13 @@
                     "item_code": null
                 }
             ],
-            "is_total_dam_transfer": true
+            "is_total_dam_transfer": true,
+            "customs_declaration": {
+                "number": "235-2026-40-123456",
+                "type_id": "50",
+                "type_name": "Declaracion Aduanera de Mercancias"
+            },
+            "packages_number": 5
         }
     }
 }

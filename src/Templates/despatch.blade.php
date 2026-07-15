@@ -124,6 +124,10 @@
             <cbc:HandlingInstructions><![CDATA[{{ $document['transfer_reason_description'] }}]]></cbc:HandlingInstructions>
         @endif
         <cbc:GrossWeightMeasure unitCode="{{ $document['weight_unit_type_id'] }}">{{ $document['total_weight'] }}</cbc:GrossWeightMeasure>
+        @if(!empty($document['packages_number']))
+            {{-- Número de bultos o pallets (requerido en importación/exportación) --}}
+            <cbc:TotalTransportHandlingUnitQuantity>{{ $document['packages_number'] }}</cbc:TotalTransportHandlingUnitQuantity>
+        @endif
         @if($document['is_transport_category_m1l'])
             <cbc:SpecialInstructions>SUNAT_Envio_IndicadorTrasladoVehiculoM1L</cbc:SpecialInstructions>
         @endif
