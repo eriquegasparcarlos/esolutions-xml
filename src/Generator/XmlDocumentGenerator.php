@@ -47,6 +47,22 @@ class XmlDocumentGenerator implements XmlDocumentGeneratorContract
      *  3) Firmar (inserta ds:Signature dentro de ext:ExtensionContent)
      *  4) Validar sobre el XML FINAL (firmado)
      */
+    /**
+     * Recibe el payload con campos en español (Greenter-style), lo traduce al
+     * contrato interno y genera. Útil para exponer el paquete como API.
+     */
+    public function generateFromEs(
+        string  $type,
+        array   $payloadEs,
+        ?string $certificateFile = null,
+        ?string $certificatePassword = null
+    ): GenerationResult
+    {
+        $payload = (new \ESolutions\Xml\Payload\EsPayloadMapper())->toInternal($payloadEs);
+
+        return $this->generate($type, $payload, $certificateFile, $certificatePassword);
+    }
+
     public function generate(
         string  $type,
         array   $payload,

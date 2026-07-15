@@ -23,4 +23,16 @@ interface XmlDocumentGeneratorContract
         ?string $certificateFile = null,
         ?string $certificatePassword = null
     ): GenerationResult;
+
+    /**
+     * Igual que generate(), pero recibe el payload con campos en español
+     * (estilo Greenter/camelCase). Lo traduce al contrato interno con
+     * EsPayloadMapper y genera. Pensado para exponer el paquete como API.
+     */
+    public function generateFromEs(
+        string $type,
+        array $payloadEs,
+        ?string $certificateFile = null,
+        ?string $certificatePassword = null
+    ): GenerationResult;
 }
