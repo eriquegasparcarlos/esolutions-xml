@@ -1,0 +1,40 @@
+{
+    "type": "40",
+    "description": "ES: comprobante de percepción 2%",
+    "expect": "ok",
+    "payload": {
+        "tipoDoc": "40",
+        "serie": "P001",
+        "correlativo": "1",
+        "fechaEmision": "2026-07-15",
+        "horaEmision": "10:00:00",
+        "company": {
+            "ruc": "10417844398",
+            "razonSocial": "CLINICA QUIROSYS SAC",
+            "nombreComercial": "QUIROSYS"
+        },
+        "cliente": {
+            "tipoDoc": "6",
+            "numDoc": "20601234567",
+            "rznSocial": "CLIENTE SAC"
+        },
+        "regimen": {
+            "tipo": "01",
+            "tasa": 2
+        },
+        "totalPercibido": 20,
+        "totalCobrado": 1020,
+        "documentos": [
+            {
+                "tipoDoc": "01",
+                "id": "F001-200",
+                "fechaEmision": "2026-07-10",
+                "moneda": "PEN",
+                "importeTotal": 1000,
+                "importePercibido": 20,
+                "fechaPercepcion": "2026-07-15",
+                "importeNetoCobrado": 1020
+            }
+        ]
+    }
+}

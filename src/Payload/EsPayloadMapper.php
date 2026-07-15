@@ -31,7 +31,22 @@ class EsPayloadMapper
     {
         // Acepta tanto la raíz plana como envuelta en 'comprobante'/'documento'.
         $d = $es['comprobante'] ?? $es['documento'] ?? $es;
+        $tipoDoc = strtolower((string) ($d['tipoDoc'] ?? $d['tipoDocumento'] ?? $d['tipo_documento'] ?? '01'));
 
+        return match ($tipoDoc) {
+            '09' => $this->mapDespatch($d),
+            '31' => $this->mapDespatchCarrier($d),
+            'rc' => $this->mapSummary($d),
+            'ra' => $this->mapVoided($d),
+            '20' => $this->mapRetentionDoc($d),
+            '40' => $this->mapPerceptionDoc($d),
+            default => $this->mapInvoiceFamily($d),
+        };
+    }
+
+    /** Factura/boleta (01/03) y notas (07/08). */
+    private function mapInvoiceFamily(array $d): array
+    {
         $moneda = $d['tipoMoneda'] ?? $d['moneda'] ?? 'PEN';
         $company = $d['company'] ?? $d['emisor'] ?? [];
         $client = $d['client'] ?? $d['cliente'] ?? [];
@@ -215,6 +230,266 @@ class EsPayloadMapper
             'percentage' => (float) ($p['porcentaje'] ?? 0),
             'amount' => (float) ($p['monto'] ?? 0),
             'base' => (float) ($p['montoBase'] ?? $p['base'] ?? 0),
+        ];
+    }
+
+    /** Guía de remisión remitente (09). */
+    private function mapDespatch(array $d): array
+    {
+        $env = $d['envio'] ?? $d['traslado'] ?? $d;
+        $cli = $d['destinatario'] ?? $d['client'] ?? $d['cliente'] ?? [];
+        $company = $d['company'] ?? $d['emisor'] ?? [];
+        $part = $env['puntoPartida'] ?? [];
+        $lleg = $env['puntoLlegada'] ?? [];
+        $trans = $env['transportista'] ?? [];
+        $cond = $env['conductor'] ?? [];
+        $modo = (string) ($env['modalidadTraslado'] ?? $env['modoTraslado'] ?? '02');
+
+        return ['document' => [
+            'id' => $this->serieNum($d),
+            'date_of_issue' => $d['fechaEmision'] ?? null,
+            'time_of_issue' => $d['horaEmision'] ?? '00:00:00',
+            'document_type_id' => '09',
+            'signature_uri' => 'SIGN', 'signature_note' => 'SIGN',
+            'company_number' => (string) ($company['ruc'] ?? ''),
+            'company_name' => (string) ($company['razonSocial'] ?? $company['razon_social'] ?? ''),
+            'customer_identity_document_type_id' => (string) ($cli['tipoDoc'] ?? '6'),
+            'customer_number' => (string) ($cli['numDoc'] ?? $cli['numero'] ?? ''),
+            'customer_name' => (string) ($cli['rznSocial'] ?? $cli['nombre'] ?? ''),
+            'transfer_reason_type_id' => (string) ($env['motivoTraslado'] ?? '01'),
+            'transfer_reason_description' => $env['descripcionMotivo'] ?? $env['motivoDescripcion'] ?? null,
+            'weight_unit_type_id' => (string) ($env['unidadPeso'] ?? 'KGM'),
+            'total_weight' => (float) ($env['pesoTotal'] ?? 0),
+            'transport_mode_type_id' => $modo,
+            'date_of_shipping' => $env['fechaTraslado'] ?? $env['fechaInicioTraslado'] ?? null,
+            'origin_location_id' => (string) ($part['ubigeo'] ?? ''),
+            'origin_address' => (string) ($part['direccion'] ?? ''),
+            'delivery_location_id' => (string) ($lleg['ubigeo'] ?? ''),
+            'delivery_address' => (string) ($lleg['direccion'] ?? ''),
+            'observations' => $d['observaciones'] ?? null,
+            'is_transport_category_m1l' => (bool) ($env['vehiculoM1L'] ?? false),
+            'is_total_dam_transfer' => (bool) ($env['trasladoTotalDam'] ?? false),
+            'plate_number' => $env['placa'] ?? null,
+            'carrier_identity_document_type_id' => $trans ? (string) ($trans['tipoDoc'] ?? '6') : null,
+            'carrier_number' => $trans['numDoc'] ?? null,
+            'carrier_name' => $trans['rznSocial'] ?? $trans['razonSocial'] ?? null,
+            'carrier_mtc_number' => $trans['nroMtc'] ?? $trans['registroMtc'] ?? null,
+            'driver_identity_document_type_id' => $cond ? (string) ($cond['tipoDoc'] ?? '1') : null,
+            'driver_number' => $cond['numDoc'] ?? null,
+            'driver_first_name' => $cond['nombres'] ?? null,
+            'driver_family_name' => $cond['apellidos'] ?? null,
+            'driver_license_number' => $cond['licencia'] ?? null,
+            'origin_establishment_code' => $part['codLocal'] ?? null,
+            'origin_establishment_ruc' => $part['ruc'] ?? null,
+            'delivery_establishment_code' => $lleg['codLocal'] ?? null,
+            'delivery_establishment_ruc' => $lleg['ruc'] ?? null,
+            'items' => array_map(fn ($it) => $this->mapGuiaLine($it), $d['details'] ?? $d['items'] ?? []),
+        ]];
+    }
+
+    /** Guía de remisión transportista (31). */
+    private function mapDespatchCarrier(array $d): array
+    {
+        $env = $d['envio'] ?? $d['traslado'] ?? $d;
+        $trans = $d['transportista'] ?? $d['company'] ?? [];
+        $rem = $d['remitente'] ?? [];
+        $cli = $d['destinatario'] ?? $d['client'] ?? [];
+        $part = $env['puntoPartida'] ?? [];
+        $lleg = $env['puntoLlegada'] ?? [];
+        $veh = $env['vehiculoPrincipal'] ?? [];
+        $cond = $env['conductorPrincipal'] ?? [];
+
+        return ['document' => [
+            'id' => $this->serieNum($d),
+            'date_of_issue' => $d['fechaEmision'] ?? null,
+            'time_of_issue' => $d['horaEmision'] ?? '00:00:00',
+            'document_type_id' => '31',
+            'signature_uri' => 'SIGN', 'signature_note' => 'SIGN',
+            'carrier_number' => (string) ($trans['ruc'] ?? $trans['numDoc'] ?? ''),
+            'carrier_name' => (string) ($trans['razonSocial'] ?? $trans['rznSocial'] ?? ''),
+            'carrier_mtc_number' => $trans['nroMtc'] ?? $trans['registroMtc'] ?? null,
+            'sender_identity_document_type_id' => (string) ($rem['tipoDoc'] ?? '6'),
+            'sender_number' => (string) ($rem['numDoc'] ?? ''),
+            'sender_name' => (string) ($rem['rznSocial'] ?? $rem['razonSocial'] ?? ''),
+            'customer_identity_document_type_id' => (string) ($cli['tipoDoc'] ?? '6'),
+            'customer_number' => (string) ($cli['numDoc'] ?? ''),
+            'customer_name' => (string) ($cli['rznSocial'] ?? $cli['nombre'] ?? ''),
+            'weight_unit_type_id' => (string) ($env['unidadPeso'] ?? 'KGM'),
+            'total_weight' => (float) ($env['pesoTotal'] ?? 0),
+            'packages_number' => $env['bultos'] ?? $env['nroBultos'] ?? null,
+            'transport_mode_type_id' => (string) ($env['modalidadTraslado'] ?? '01'),
+            'date_of_shipping' => $env['fechaTraslado'] ?? null,
+            'main_plate_number' => (string) ($veh['placa'] ?? ''),
+            'main_vehicle_tuc' => (string) ($veh['tuc'] ?? ''),
+            'driver_identity_document_type_id' => (string) ($cond['tipoDoc'] ?? '1'),
+            'driver_number' => (string) ($cond['numDoc'] ?? ''),
+            'driver_first_name' => (string) ($cond['nombres'] ?? ''),
+            'driver_family_name' => (string) ($cond['apellidos'] ?? ''),
+            'driver_license_number' => (string) ($cond['licencia'] ?? ''),
+            'secondary_vehicles' => array_map(fn ($v) => [
+                'plate_number' => (string) ($v['placa'] ?? ''), 'tuc' => (string) ($v['tuc'] ?? ''),
+            ], $env['vehiculosSecundarios'] ?? []),
+            'secondary_drivers' => array_map(fn ($c) => [
+                'identity_document_type_id' => (string) ($c['tipoDoc'] ?? '1'), 'number' => (string) ($c['numDoc'] ?? ''),
+                'first_name' => (string) ($c['nombres'] ?? ''), 'family_name' => (string) ($c['apellidos'] ?? ''),
+                'license_number' => (string) ($c['licencia'] ?? ''),
+            ], $env['conductoresSecundarios'] ?? []),
+            'origin_location_id' => (string) ($part['ubigeo'] ?? ''),
+            'origin_address' => (string) ($part['direccion'] ?? ''),
+            'delivery_location_id' => (string) ($lleg['ubigeo'] ?? ''),
+            'delivery_address' => (string) ($lleg['direccion'] ?? ''),
+            'observations' => $d['observaciones'] ?? null,
+            'container_number' => $env['contenedor'] ?? null,
+            'port_code' => $env['puerto'] ?? null,
+            'items' => array_map(fn ($it) => $this->mapGuiaLine($it), $d['details'] ?? $d['items'] ?? []),
+        ]];
+    }
+
+    /** Resumen diario de boletas (RC). */
+    private function mapSummary(array $d): array
+    {
+        $company = $d['company'] ?? $d['emisor'] ?? [];
+        return ['document' => [
+            'identifier' => (string) ($d['correlativo'] ?? $d['identificador'] ?? ''),
+            'date_of_reference' => $d['fechaReferencia'] ?? null,
+            'date_of_issue' => $d['fechaEmision'] ?? null,
+            'signature_uri' => 'SIGN', 'signature_note' => 'SIGN',
+            'company_number' => (string) ($company['ruc'] ?? ''),
+            'company_name' => (string) ($company['razonSocial'] ?? ''),
+            'documents' => array_map(function ($r) {
+                $cli = $r['cliente'] ?? [];
+                $t = $r['totales'] ?? $r;
+                return [
+                    'document_type_id' => (string) ($r['tipoDoc'] ?? '03'),
+                    'id' => (string) ($r['id'] ?? trim(($r['serie'] ?? '') . '-' . ($r['correlativo'] ?? ''), '-')),
+                    'customer_number' => (string) ($cli['numDoc'] ?? ''),
+                    'customer_identity_document_type_id' => (string) ($cli['tipoDoc'] ?? '1'),
+                    'status_id' => (string) ($r['estado'] ?? '1'),
+                    'currency_type_id' => (string) ($r['moneda'] ?? 'PEN'),
+                    'total' => (float) ($t['total'] ?? 0),
+                    'total_taxed' => (float) ($t['gravado'] ?? 0),
+                    'total_exonerated' => (float) ($t['exonerado'] ?? 0),
+                    'total_unaffected' => (float) ($t['inafecto'] ?? 0),
+                    'total_exportation' => (float) ($t['exportacion'] ?? 0),
+                    'total_free' => (float) ($t['gratuito'] ?? 0),
+                    'total_charge' => (float) ($t['cargos'] ?? 0),
+                    'total_igv' => (float) ($t['igv'] ?? 0),
+                    'total_isc' => (float) ($t['isc'] ?? 0),
+                    'total_other_taxes' => (float) ($t['otrosTributos'] ?? 0),
+                    'total_plastic_bag_taxes' => (float) ($t['icbper'] ?? 0),
+                    'affected_document' => $r['documentoAfectado'] ?? null,
+                ];
+            }, $d['documentos'] ?? $d['documents'] ?? []),
+        ]];
+    }
+
+    /** Comunicación de baja (RA). */
+    private function mapVoided(array $d): array
+    {
+        $company = $d['company'] ?? $d['emisor'] ?? [];
+        return ['document' => [
+            'identifier' => (string) ($d['correlativo'] ?? $d['identificador'] ?? ''),
+            'date_of_reference' => $d['fechaReferencia'] ?? null,
+            'date_of_issue' => $d['fechaEmision'] ?? null,
+            'signature_uri' => 'SIGN', 'signature_note' => 'SIGN',
+            'company_number' => (string) ($company['ruc'] ?? ''),
+            'company_name' => (string) ($company['razonSocial'] ?? ''),
+            'documents' => array_map(fn ($r) => [
+                'document_type_id' => (string) ($r['tipoDoc'] ?? '01'),
+                'series' => (string) ($r['serie'] ?? ''),
+                'number' => (string) ($r['numero'] ?? $r['correlativo'] ?? ''),
+                'description' => (string) ($r['motivo'] ?? $r['descripcion'] ?? ''),
+            ], $d['documentos'] ?? $d['documents'] ?? []),
+        ]];
+    }
+
+    /** Comprobante de retención (20). */
+    private function mapRetentionDoc(array $d): array
+    {
+        $company = $d['company'] ?? $d['emisor'] ?? [];
+        $prov = $d['proveedor'] ?? [];
+        $reg = $d['regimen'] ?? $d;
+        return ['document' => [
+            'id' => $this->serieNum($d),
+            'date_of_issue' => $d['fechaEmision'] ?? null,
+            'time_of_issue' => $d['horaEmision'] ?? '00:00:00',
+            'signature_uri' => 'SIGN', 'signature_note' => 'SIGN',
+            'company_number' => (string) ($company['ruc'] ?? ''),
+            'company_name' => (string) ($company['razonSocial'] ?? ''),
+            'company_trade_name' => $company['nombreComercial'] ?? null,
+            'supplier_identity_document_type_id' => (string) ($prov['tipoDoc'] ?? '6'),
+            'supplier_number' => (string) ($prov['numDoc'] ?? ''),
+            'supplier_name' => (string) ($prov['rznSocial'] ?? $prov['razonSocial'] ?? ''),
+            'retention_type_id' => (string) ($reg['tipo'] ?? $reg['codRegimen'] ?? '01'),
+            'retention_percentage' => (float) ($reg['tasa'] ?? $reg['porcentaje'] ?? 3),
+            'total_retention' => (float) ($d['totalRetenido'] ?? 0),
+            'total_paid' => (float) ($d['totalPagado'] ?? 0),
+            'observations' => $d['observaciones'] ?? null,
+            'documents' => array_map(fn ($r) => [
+                'document_type_id' => (string) ($r['tipoDoc'] ?? '01'),
+                'id' => (string) ($r['id'] ?? ''),
+                'date_of_issue' => $r['fechaEmision'] ?? null,
+                'currency_type_id' => (string) ($r['moneda'] ?? 'PEN'),
+                'total' => (float) ($r['importeTotal'] ?? $r['total'] ?? 0),
+                'retention_amount' => (float) ($r['importeRetenido'] ?? 0),
+                'retention_date' => $r['fechaRetencion'] ?? null,
+                'net_total_paid' => (float) ($r['importeNetoPagado'] ?? 0),
+                'payments' => [], 'exchange_rate' => $r['tipoCambio'] ?? null,
+            ], $d['documentos'] ?? $d['documents'] ?? []),
+        ]];
+    }
+
+    /** Comprobante de percepción (40). */
+    private function mapPerceptionDoc(array $d): array
+    {
+        $company = $d['company'] ?? $d['emisor'] ?? [];
+        $cli = $d['cliente'] ?? $d['client'] ?? [];
+        $reg = $d['regimen'] ?? $d;
+        return ['document' => [
+            'id' => $this->serieNum($d),
+            'date_of_issue' => $d['fechaEmision'] ?? null,
+            'time_of_issue' => $d['horaEmision'] ?? '00:00:00',
+            'signature_uri' => 'SIGN', 'signature_note' => 'SIGN',
+            'company_number' => (string) ($company['ruc'] ?? ''),
+            'company_name' => (string) ($company['razonSocial'] ?? ''),
+            'company_trade_name' => $company['nombreComercial'] ?? null,
+            'customer_identity_document_type_id' => (string) ($cli['tipoDoc'] ?? '6'),
+            'customer_number' => (string) ($cli['numDoc'] ?? ''),
+            'customer_name' => (string) ($cli['rznSocial'] ?? $cli['nombre'] ?? ''),
+            'perception_type_id' => (string) ($reg['tipo'] ?? $reg['codRegimen'] ?? '01'),
+            'perception_percentage' => (float) ($reg['tasa'] ?? $reg['porcentaje'] ?? 2),
+            'total_perception' => (float) ($d['totalPercibido'] ?? 0),
+            'total_cashed' => (float) ($d['totalCobrado'] ?? 0),
+            'observations' => $d['observaciones'] ?? null,
+            'documents' => array_map(fn ($r) => [
+                'document_type_id' => (string) ($r['tipoDoc'] ?? '01'),
+                'id' => (string) ($r['id'] ?? ''),
+                'date_of_issue' => $r['fechaEmision'] ?? null,
+                'currency_type_id' => (string) ($r['moneda'] ?? 'PEN'),
+                'total' => (float) ($r['importeTotal'] ?? $r['total'] ?? 0),
+                'perception_amount' => (float) ($r['importePercibido'] ?? 0),
+                'perception_date' => $r['fechaPercepcion'] ?? null,
+                'net_total_cashed' => (float) ($r['importeNetoCobrado'] ?? 0),
+                'payments' => [], 'exchange_rate' => $r['tipoCambio'] ?? null,
+            ], $d['documentos'] ?? $d['documents'] ?? []),
+        ]];
+    }
+
+    /** serie-correlativo desde campos español. */
+    private function serieNum(array $d): string
+    {
+        return trim(((string) ($d['serie'] ?? '')) . '-' . ((string) ($d['correlativo'] ?? $d['numero'] ?? '')), '-');
+    }
+
+    /** Línea de guía (solo cantidad/descripción/unidad). */
+    private function mapGuiaLine(array $it): array
+    {
+        return [
+            'quantity' => (float) ($it['cantidad'] ?? 1),
+            'unit_type_id' => (string) ($it['unidad'] ?? 'NIU'),
+            'name_parts' => is_array($it['descripcion'] ?? null) ? $it['descripcion'] : [(string) ($it['descripcion'] ?? '')],
+            'internal_id' => $it['codProducto'] ?? $it['codigo'] ?? null,
+            'item_code' => $it['codProductoSunat'] ?? null,
         ];
     }
 

@@ -1,0 +1,59 @@
+{
+    "type": "31",
+    "description": "ES: guía transportista",
+    "expect": "ok",
+    "payload": {
+        "tipoDoc": "31",
+        "serie": "V001",
+        "correlativo": "1",
+        "fechaEmision": "2026-07-15",
+        "horaEmision": "10:30:00",
+        "transportista": {
+            "ruc": "20512345678",
+            "razonSocial": "TRANSPORTES RAPIDOS SAC",
+            "nroMtc": "MTC0012026"
+        },
+        "remitente": {
+            "tipoDoc": "6",
+            "numDoc": "10417844398",
+            "rznSocial": "CLINICA QUIROSYS SAC"
+        },
+        "destinatario": {
+            "tipoDoc": "6",
+            "numDoc": "20601234567",
+            "rznSocial": "CLIENTE DESTINO SAC"
+        },
+        "envio": {
+            "pesoTotal": 25,
+            "bultos": 5,
+            "modalidadTraslado": "01",
+            "fechaTraslado": "2026-07-16",
+            "vehiculoPrincipal": {
+                "placa": "XYZ987",
+                "tuc": "0123456789"
+            },
+            "conductorPrincipal": {
+                "tipoDoc": "1",
+                "numDoc": "44556677",
+                "nombres": "JUAN",
+                "apellidos": "PEREZ",
+                "licencia": "Q44556677"
+            },
+            "puntoPartida": {
+                "ubigeo": "150101",
+                "direccion": "AV. ORIGEN 123"
+            },
+            "puntoLlegada": {
+                "ubigeo": "150140",
+                "direccion": "JR. DESTINO 456"
+            }
+        },
+        "details": [
+            {
+                "cantidad": 5,
+                "descripcion": "Carga de prueba",
+                "unidad": "NIU"
+            }
+        ]
+    }
+}

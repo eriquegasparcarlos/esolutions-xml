@@ -47,21 +47,28 @@ gemelo español + completar el mapper hasta que el test pase.
 
 ## Checklist de cobertura del mapper
 
-Marca un tipo cuando su gemelo español pase XSD + reglas.
+Un tipo se marca cuando su gemelo español pasa XSD + reglas (`tests/fixtures/payloads-es/`).
 
-- [ ] **01 Factura** — falta: anticipos, cargos, percepción a nivel comprobante
-- [ ] **03 Boleta** — depende de 01
-- [ ] **07 Nota de crédito** — doc afectado + tipos de nota (cat. 09)
-- [ ] **08 Nota de débito** — doc afectado + tipos de nota (cat. 10)
-- [ ] **09 Guía remitente** — `motivoTraslado`, `pesoTotal`, `modalidadTraslado`,
-      `conductor{}`, `transportista{}`, `puntoPartida{}`, `puntoLlegada{}`,
-      `destinatario{}`, establecimientos anexos, M1L, traslado total DAM
-- [ ] **31 Guía transportista** — transportista emisor, remitente, vehículos
-      principal+secundarios (placa/TUC), conductores principal+secundarios
-- [ ] **RC Resumen diario** — `fechaReferencia`, `documentos[]` con estado y totales
-- [ ] **RA Comunicación de baja** — `documentos[]` con serie/número/motivo
-- [ ] **20 Retención** — `proveedor{}`, `tasa`, `documentos[]` (importe, retención)
-- [ ] **40 Percepción** — `cliente{}`, `tasa`, `documentos[]` (importe, percepción)
+- [x] **01 Factura** — incl. anticipos, cargos, percepción, detracción
+- [x] **03 Boleta**
+- [x] **07 Nota de crédito** — doc afectado + tipo de nota (cat. 09)
+- [x] **08 Nota de débito** — doc afectado + tipo de nota (cat. 10)
+- [x] **09 Guía remitente** — `envio{ motivoTraslado, pesoTotal, modalidadTraslado,
+      fechaTraslado, puntoPartida, puntoLlegada, placa, conductor{}, transportista{},
+      vehiculoM1L, trasladoTotalDam }`, `destinatario{}`
+- [x] **31 Guía transportista** — `transportista{}` (emisor), `remitente{}`,
+      `envio{ vehiculoPrincipal{placa,tuc}, vehiculosSecundarios[], conductorPrincipal{},
+      conductoresSecundarios[], bultos }`
+- [x] **RC Resumen diario** — `fechaReferencia`, `documentos[{ tipoDoc, id, cliente{},
+      estado, moneda, totales{} }]`
+- [x] **RA Comunicación de baja** — `documentos[{ tipoDoc, serie, numero, motivo }]`
+- [x] **20 Retención** — `proveedor{}`, `regimen{tipo,tasa}`, `totalRetenido`,
+      `totalPagado`, `documentos[{ importeTotal, importeRetenido, … }]`
+- [x] **40 Percepción** — `cliente{}`, `regimen{tipo,tasa}`, `totalPercibido`,
+      `totalCobrado`, `documentos[{ importeTotal, importePercibido, … }]`
+
+**Todos los tipos cubiertos** (mapper + gemelo español verificado). Para ampliar
+un tipo con más variantes de campo, agrega otro gemelo español y corre `composer test`.
 
 ## Guía para agregar/completar un tipo
 

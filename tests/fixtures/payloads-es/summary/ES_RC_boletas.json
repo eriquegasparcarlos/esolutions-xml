@@ -1,0 +1,33 @@
+{
+    "type": "RC",
+    "description": "ES: resumen diario de boletas",
+    "expect": "ok",
+    "payload": {
+        "tipoDoc": "RC",
+        "correlativo": "RC-20260714-1",
+        "fechaReferencia": "2026-07-14",
+        "fechaEmision": "2026-07-15",
+        "company": {
+            "ruc": "10417844398",
+            "razonSocial": "CLINICA QUIROSYS SAC",
+            "nombreComercial": "QUIROSYS"
+        },
+        "documentos": [
+            {
+                "tipoDoc": "03",
+                "id": "B001-50",
+                "cliente": {
+                    "tipoDoc": "1",
+                    "numDoc": "12345678"
+                },
+                "estado": "1",
+                "moneda": "PEN",
+                "totales": {
+                    "total": 118,
+                    "gravado": 100,
+                    "igv": 18
+                }
+            }
+        ]
+    }
+}

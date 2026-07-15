@@ -1,0 +1,53 @@
+{
+    "type": "09",
+    "description": "ES: guía remitente venta privado",
+    "expect": "ok",
+    "payload": {
+        "tipoDoc": "09",
+        "serie": "T001",
+        "correlativo": "50",
+        "fechaEmision": "2026-07-15",
+        "horaEmision": "10:30:00",
+        "company": {
+            "ruc": "10417844398",
+            "razonSocial": "CLINICA QUIROSYS SAC",
+            "nombreComercial": "QUIROSYS"
+        },
+        "destinatario": {
+            "tipoDoc": "6",
+            "numDoc": "20601234567",
+            "rznSocial": "CLIENTE DESTINO SAC"
+        },
+        "envio": {
+            "motivoTraslado": "01",
+            "descripcionMotivo": "VENTA",
+            "pesoTotal": 15.5,
+            "unidadPeso": "KGM",
+            "modalidadTraslado": "02",
+            "fechaTraslado": "2026-07-16",
+            "puntoPartida": {
+                "ubigeo": "150101",
+                "direccion": "AV. ORIGEN 123"
+            },
+            "puntoLlegada": {
+                "ubigeo": "150140",
+                "direccion": "JR. DESTINO 456"
+            },
+            "placa": "ABC123",
+            "conductor": {
+                "tipoDoc": "1",
+                "numDoc": "44556677",
+                "nombres": "JUAN",
+                "apellidos": "PEREZ",
+                "licencia": "Q44556677"
+            }
+        },
+        "details": [
+            {
+                "cantidad": 3,
+                "descripcion": "Producto de prueba",
+                "unidad": "NIU"
+            }
+        ]
+    }
+}

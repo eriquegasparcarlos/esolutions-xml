@@ -1,0 +1,24 @@
+{
+    "type": "RA",
+    "description": "ES: comunicación de baja",
+    "expect": "ok",
+    "payload": {
+        "tipoDoc": "RA",
+        "correlativo": "RA-20260715-1",
+        "fechaReferencia": "2026-07-14",
+        "fechaEmision": "2026-07-15",
+        "company": {
+            "ruc": "10417844398",
+            "razonSocial": "CLINICA QUIROSYS SAC",
+            "nombreComercial": "QUIROSYS"
+        },
+        "documentos": [
+            {
+                "tipoDoc": "01",
+                "serie": "F001",
+                "numero": "99",
+                "motivo": "Error en los datos del comprobante"
+            }
+        ]
+    }
+}

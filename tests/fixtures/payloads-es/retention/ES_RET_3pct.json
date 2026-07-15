@@ -1,0 +1,40 @@
+{
+    "type": "20",
+    "description": "ES: comprobante de retención 3%",
+    "expect": "ok",
+    "payload": {
+        "tipoDoc": "20",
+        "serie": "R001",
+        "correlativo": "1",
+        "fechaEmision": "2026-07-15",
+        "horaEmision": "10:00:00",
+        "company": {
+            "ruc": "10417844398",
+            "razonSocial": "CLINICA QUIROSYS SAC",
+            "nombreComercial": "QUIROSYS"
+        },
+        "proveedor": {
+            "tipoDoc": "6",
+            "numDoc": "20601234567",
+            "rznSocial": "PROVEEDOR SAC"
+        },
+        "regimen": {
+            "tipo": "01",
+            "tasa": 3
+        },
+        "totalRetenido": 30,
+        "totalPagado": 970,
+        "documentos": [
+            {
+                "tipoDoc": "01",
+                "id": "F001-100",
+                "fechaEmision": "2026-07-10",
+                "moneda": "PEN",
+                "importeTotal": 1000,
+                "importeRetenido": 30,
+                "fechaRetencion": "2026-07-15",
+                "importeNetoPagado": 970
+            }
+        ]
+    }
+}
