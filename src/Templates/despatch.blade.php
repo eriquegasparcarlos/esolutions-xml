@@ -153,6 +153,21 @@
                         <cbc:ID>{{ $document['driver_license_number'] }}</cbc:ID>
                     </cac:IdentityDocumentReference>
                 </cac:DriverPerson>
+                {{-- Conductores secundarios --}}
+                @foreach($document['secondary_drivers'] ?? [] as $drv)
+                    <cac:DriverPerson>
+                        <cbc:ID schemeURI="urn:pe:gob:sunat:cpe:see:gem:catalogos:catalogo06"
+                                schemeAgencyName="PE:SUNAT"
+                                schemeName="Documento de Identidad"
+                                schemeID="{{ $drv['identity_document_type_id'] }}">{{ $drv['number'] }}</cbc:ID>
+                        <cbc:FirstName><![CDATA[{{ $drv['first_name'] }}]]></cbc:FirstName>
+                        <cbc:FamilyName><![CDATA[{{ $drv['family_name'] }}]]></cbc:FamilyName>
+                        <cbc:JobTitle>Secundario</cbc:JobTitle>
+                        <cac:IdentityDocumentReference>
+                            <cbc:ID>{{ $drv['license_number'] }}</cbc:ID>
+                        </cac:IdentityDocumentReference>
+                    </cac:DriverPerson>
+                @endforeach
             @endif
             @if($document['transport_mode_type_id'] === '01')
                 {{-- Transporte público: fecha de entrega de bienes al transportista --}}
@@ -195,6 +210,12 @@
             <cac:TransportHandlingUnit>
                 <cac:TransportEquipment>
                     <cbc:ID>{{ $document['plate_number'] }}</cbc:ID>
+                    {{-- Vehículos secundarios --}}
+                    @foreach($document['secondary_vehicles'] ?? [] as $veh)
+                        <cac:AttachedTransportEquipment>
+                            <cbc:ID>{{ $veh['plate_number'] }}</cbc:ID>
+                        </cac:AttachedTransportEquipment>
+                    @endforeach
                 </cac:TransportEquipment>
             </cac:TransportHandlingUnit>
         @endif
