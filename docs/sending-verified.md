@@ -15,6 +15,32 @@ gre-test), con el certificado demo estándar (RUC **10417844398**, usuario
 | Retención (20) | SOAP sendBill | ✅ **aceptado** (CDR) | requiere `documents[].payments` (número de pago) — sin él, error 2733 |
 | Percepción (40) | SOAP sendBill | ✅ **aceptado** (CDR) | requiere `documents[].payments` (número de cobro) — sin él, error 2697 |
 
+## Variantes de guía remitente (09) enviadas en vivo
+
+| Variante | Motivo | Resultado |
+|---|---|---|
+| venta privado | 01 | ✅ aceptado |
+| venta público (transportista) | 01 | ✅ aceptado |
+| compra | 02 | ✅ aceptado |
+| traslado entre establecimientos | 04 | ✅ aceptado (destinatario = emisor) |
+| itinerante | 18 | ✅ aceptado |
+| vehículo M1/L | 01 | ✅ aceptado (sin conductor/vehículo) |
+| **2 conductores + 2 vehículos** | 01 | ✅ aceptado |
+| importación | 08 | ⚠️ requiere DAM completa (código 50 cat. 61 + formato de número + nº bultos) |
+| exportación | 09 | ⚠️ requiere DAM completa (ídem) |
+
+Hallazgos que solo el envío en vivo destapó (corregidos en template/fixtures):
+- **2554**: para traslado entre establecimientos (04) el destinatario debe ser el
+  propio emisor.
+- **3455**: con vehículo M1/L NO se declara conductor/vehículo — el template ahora
+  los omite cuando `is_transport_category_m1l`.
+- La guía remitente ahora soporta **múltiples conductores y vehículos**
+  (`secondary_drivers` / `secondary_vehicles`).
+- **Importación/exportación (08/09)** exigen una **DAM/DS** (catálogo 61 código 50/52)
+  con `IssuerParty` (RUC) y número de bultos/contenedor. El template ya emite la
+  referencia aduanera (`customs_declaration`); falta afinar el formato del número
+  DAM y los bultos para lograr la aceptación (escenario de comercio exterior).
+
 ## Hallazgos incorporados a los fixtures
 
 Estos casos pasaban XSD + reglas cliente pero SUNAT los rechazaba; se corrigieron

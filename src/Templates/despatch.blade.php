@@ -22,6 +22,21 @@
     @if($document['observations'])
         <cbc:Note><![CDATA[{{ $document['observations'] }}]]></cbc:Note>
     @endif
+    @if($document['customs_declaration'] ?? null)
+        {{-- Documento aduanero (DAM 50 / DS 52) — importación (08) / exportación (09) --}}
+        <cac:AdditionalDocumentReference>
+            <cbc:ID>{{ $document['customs_declaration']['number'] }}</cbc:ID>
+            <cbc:DocumentTypeCode listAgencyName="PE:SUNAT"
+                                  listName="Documento relacionado al transporte"
+                                  listURI="urn:pe:gob:sunat:cpe:see:gem:catalogos:catalogo61">{{ $document['customs_declaration']['type_id'] ?? '50' }}</cbc:DocumentTypeCode>
+            <cbc:DocumentType>{{ $document['customs_declaration']['type_name'] ?? 'Declaracion Aduanera de Mercancias' }}</cbc:DocumentType>
+            <cac:IssuerParty>
+                <cac:PartyIdentification>
+                    <cbc:ID schemeID="6">{{ $document['customs_declaration']['issuer_ruc'] ?? $document['company_number'] }}</cbc:ID>
+                </cac:PartyIdentification>
+            </cac:IssuerParty>
+        </cac:AdditionalDocumentReference>
+    @endif
     <cac:Signature>
         <cbc:ID>{{ $document['signature_uri'] }}</cbc:ID>
         <cbc:Note>{{ $document['signature_note'] }}</cbc:Note>
@@ -139,8 +154,8 @@
                         @endif
                     </cac:PartyLegalEntity>
                 </cac:CarrierParty>
-            @else
-                {{-- Transporte privado: conductor principal --}}
+            @elseif(!($document['is_transport_category_m1l'] ?? false))
+                {{-- Transporte privado: conductor principal (no aplica en vehículo M1/L) --}}
                 <cac:DriverPerson>
                     <cbc:ID schemeURI="urn:pe:gob:sunat:cpe:see:gem:catalogos:catalogo06"
                             schemeAgencyName="PE:SUNAT"
@@ -206,7 +221,7 @@
                 </cac:DespatchAddress>
             </cac:Despatch>
         </cac:Delivery>
-        @if($document['transport_mode_type_id'] === '02' && $document['plate_number'])
+        @if($document['transport_mode_type_id'] === '02' && $document['plate_number'] && !($document['is_transport_category_m1l'] ?? false))
             <cac:TransportHandlingUnit>
                 <cac:TransportEquipment>
                     <cbc:ID>{{ $document['plate_number'] }}</cbc:ID>
