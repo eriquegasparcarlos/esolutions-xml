@@ -70,6 +70,23 @@ return [
 
     /*
     |--------------------------------------------------------------------------
+    | Validación de reglas cliente SUNAT (SFS) — capa pre-envío
+    |--------------------------------------------------------------------------
+    |
+    | expressions: incluir reglas de reconciliación aritmética (isTrueExpresion).
+    |   Frágiles de replicar (sumas/redondeos) → por defecto off; las clave
+    |   (3294/3305) se cubren con reglas propias en el generador.
+    | sunat_suppress: códigos suprimidos por ser el XSLT cliente más estricto
+    |   que el servidor para estructuras que SUNAT sí acepta.
+    |
+    */
+    'validation' => [
+        'expressions' => false,
+        'sunat_suppress' => ['3033', '3035'],
+    ],
+
+    /*
+    |--------------------------------------------------------------------------
     | Envío SUNAT / OSE
     |--------------------------------------------------------------------------
     |
