@@ -80,6 +80,9 @@ class SunatRulesValidator
 
         $errors = $engine->run($xml, $ruleset);
 
+        // Reglas propias (reconciliaciones server-side que el XSLT cliente no trae).
+        $errors = array_merge($errors, (new OwnRules($this->errors))->check($xml, $documentTypeId));
+
         // Filtra códigos suprimidos (discrepancias cliente-vs-servidor conocidas).
         if ($this->suppress) {
             $errors = array_values(array_filter(
