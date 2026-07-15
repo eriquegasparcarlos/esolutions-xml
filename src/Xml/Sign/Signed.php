@@ -24,7 +24,10 @@ class Signed
     public function __construct(?string $defaultCertificateFile = null, ?string $defaultCertificatePassword = null)
     {
         $this->signer = new SignedXml();
-        $this->defaultCertificateFile = $defaultCertificateFile ?: app_path('ESolutions/Xml/Sign/Resources/certificate.pem');
+        // app_path() resuelve contra la app consumidora, no contra este paquete —
+        // el .pem demo vive junto a esta clase (src/Xml/Sign/Resources/certificate.pem),
+        // así que el fallback debe ser relativo a __DIR__, no a app_path().
+        $this->defaultCertificateFile = $defaultCertificateFile ?: __DIR__ . '/Resources/certificate.pem';
         $this->defaultCertificatePassword = $defaultCertificatePassword;
     }
 
