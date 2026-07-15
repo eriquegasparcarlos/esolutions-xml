@@ -1,6 +1,6 @@
 {
     "type": "RC",
-    "description": "Resumen diario >= 2026-08-01 con gratuitas desagregadas (#26, InstructionID 06-09)",
+    "description": "Resumen diario >= 2026-08-01: gratuitas desagregadas (#26) + IGV gratuitas (#28)",
     "expect": "ok",
     "payload": {
         "document": {
@@ -33,7 +33,8 @@
                     "affected_document": null,
                     "customer_name": "JUAN PEREZ LOPEZ",
                     "igv_percent": 18,
-                    "total_free_taxed": 50
+                    "total_free_taxed": 50,
+                    "total_igv_free": 9
                 }
             ]
         }

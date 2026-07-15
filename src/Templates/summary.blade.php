@@ -139,6 +139,22 @@
                 </cac:TaxCategory>
             </cac:TaxSubtotal>
         </cac:TaxTotal>
+        @if(($document['date_of_issue'] ?? '') >= config('esolutions_xml.rule_dates.summary_2026', '2026-08-01') && floatval($row['total_igv_free'] ?? 0) > 0)
+        {{-- #28 (vigencia 2026-08-01): IGV de operaciones gratuitas --}}
+        <cac:TaxTotal>
+            <cbc:TaxAmount currencyID="{{ $row['currency_type_id'] }}">{{ $row['total_igv_free'] }}</cbc:TaxAmount>
+            <cac:TaxSubtotal>
+                <cbc:TaxAmount currencyID="{{ $row['currency_type_id'] }}">{{ $row['total_igv_free'] }}</cbc:TaxAmount>
+                <cac:TaxCategory>
+                    <cac:TaxScheme>
+                        <cbc:ID>9996</cbc:ID>
+                        <cbc:Name>GRA</cbc:Name>
+                        <cbc:TaxTypeCode>FRE</cbc:TaxTypeCode>
+                    </cac:TaxScheme>
+                </cac:TaxCategory>
+            </cac:TaxSubtotal>
+        </cac:TaxTotal>
+        @endif
         @if(floatval($row['total_isc']) > 0)
         <cac:TaxTotal>
             <cbc:TaxAmount currencyID="{{ $row['currency_type_id'] }}">{{ $row['total_isc'] }}</cbc:TaxAmount>

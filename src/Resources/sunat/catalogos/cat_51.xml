@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <!DOCTYPE l>
 <l>
-<c id="0101" factura = "1" boleta="1">Venta interna</c>
+<c id="0101" factura = "1" boleta="1">Venta interna no sujeta a Detracción, Retención o Percepción</c>
 <c id="0112" factura = "1" boleta="0">Venta Interna - Sustenta Gastos Deducibles Persona Natural</c>
 <c id="0113" factura = "0" boleta="1">Venta Interna - NRUS</c>
 <c id="0200" factura = "1" boleta="1">Exportación de Bienes</c>
