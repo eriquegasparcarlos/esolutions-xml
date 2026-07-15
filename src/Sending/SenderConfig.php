@@ -17,6 +17,8 @@ final class SenderConfig
         public readonly string $password = '',
         public readonly ?string $endpoint = null,         // override total (URL de OSE/PSE); null => endpoints SUNAT por defecto
         public readonly ?string $documentTypeId = null,   // '20'/'40'/'RR' usan el endpoint de retenciones
+        public readonly ?string $greClientId = null,      // GRE REST (guías 09/31): client_id OAuth2 emitido en SOL
+        public readonly ?string $greClientSecret = null,  // GRE REST: client_secret OAuth2
     ) {
         if (!in_array($this->environment, ['demo', 'production'], true)) {
             throw new \InvalidArgumentException("environment debe ser 'demo' o 'production', se recibió '{$this->environment}'.");
@@ -25,7 +27,8 @@ final class SenderConfig
 
     /**
      * @param array{provider?: string, environment?: string, username?: string,
-     *               password?: string, endpoint?: string|null, document_type_id?: string|null} $config
+     *               password?: string, endpoint?: string|null, document_type_id?: string|null,
+     *               gre_client_id?: string|null, gre_client_secret?: string|null} $config
      */
     public static function fromArray(array $config): self
     {
@@ -36,6 +39,8 @@ final class SenderConfig
             (string) ($config['password'] ?? ''),
             $config['endpoint'] ?? null,
             $config['document_type_id'] ?? null,
+            $config['gre_client_id'] ?? null,
+            $config['gre_client_secret'] ?? null,
         );
     }
 
@@ -61,6 +66,8 @@ final class SenderConfig
             $this->password,
             $this->endpoint,
             $documentTypeId,
+            $this->greClientId,
+            $this->greClientSecret,
         );
     }
 }

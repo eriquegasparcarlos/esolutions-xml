@@ -23,6 +23,7 @@ class SunatRulesValidator
         '07' => 'nota_credito',
         '08' => 'nota_debito',
         '09' => 'guia_remitente',
+        '31' => 'guia_transportista',
         '20' => 'retencion',
         '40' => 'percepcion',
         // Resúmenes/bajas se resuelven por localName del XML (ver resolveByRoot).

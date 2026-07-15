@@ -150,6 +150,12 @@
                     </cac:IdentityDocumentReference>
                 </cac:DriverPerson>
             @endif
+            @if($document['transport_mode_type_id'] === '01')
+                {{-- Transporte público: fecha de entrega de bienes al transportista --}}
+                <cac:LoadingTransportEvent>
+                    <cbc:OccurrenceDate>{{ $document['date_of_delivery'] ?? $document['date_of_shipping'] }}</cbc:OccurrenceDate>
+                </cac:LoadingTransportEvent>
+            @endif
         </cac:ShipmentStage>
         <cac:Delivery>
             {{-- Punto de llegada --}}
