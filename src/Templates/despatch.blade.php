@@ -112,6 +112,10 @@
         @if($document['is_transport_category_m1l'])
             <cbc:SpecialInstructions>SUNAT_Envio_IndicadorTrasladoVehiculoM1L</cbc:SpecialInstructions>
         @endif
+        @if($document['is_total_dam_transfer'] ?? false)
+            {{-- Exportación: traslado total de la DAM/DS --}}
+            <cbc:SpecialInstructions>SUNAT_Envio_IndicadorTrasladoTotalDAMoDS</cbc:SpecialInstructions>
+        @endif
         <cac:ShipmentStage>
             <cbc:TransportModeCode listURI="urn:pe:gob:sunat:cpe:see:gem:catalogos:catalogo18"
                                    listName="Modalidad de traslado"

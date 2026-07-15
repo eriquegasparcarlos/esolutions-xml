@@ -42,15 +42,15 @@ automáticamente. Por cada fixture verifica:
 - `expect: "xsd"` → solo se exige **XSD** (reservado para tipos que aún no tengan
   reglas fiables). Hoy **todos** los fixtures son `ok`.
 
-## Cobertura actual (26 fixtures)
+## Cobertura actual (35 fixtures)
 
 | Tipo | Casos | expect |
 |---|---|---|
-| Factura (01) | gravada, descuento global, detracción, crédito, exonerada, inafecta, gratuita, exportación, ICBPER, ISC, multilínea | ok |
+| Factura (01) | gravada, descuento global, detracción, crédito, exonerada, inafecta, gratuita, exportación, ICBPER, ISC, multilínea, **anticipos** | ok |
 | Boleta (03) | gravada con DNI, exonerada | ok |
-| Nota de crédito (07) | anulación, descuento | ok |
-| Nota de débito (08) | intereses | ok |
-| Guía remitente (09) | venta privado, venta público, traslado entre establecimientos, M1/L multilínea | ok |
+| Nota de crédito (07) | anulación (01), descuento (02), corrección (03), devolución (06) | ok |
+| Nota de débito (08) | intereses (01), aumento de valor (02), penalidad (03) | ok |
+| Guía remitente (09) | venta privado/público, traslado entre establecimientos, M1/L multilínea, compra (02), importación (08), exportación (09, traslado total DAM), itinerante (18) | ok |
 | Guía transportista (31) | un vehículo, multi-vehículo/multi-conductor | ok |
 | Resumen diario (RC) | boletas | ok |
 | Comunicación de baja (RA) | baja de factura | ok |
