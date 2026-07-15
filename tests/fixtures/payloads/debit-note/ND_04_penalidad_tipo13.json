@@ -1,7 +1,7 @@
 {
     "type": "08",
     "description": "Nota de débito tipo 13 (Penalidades), inafecta, emitida >= 2026-08-01 (#23)",
-    "expect": "xsd",
+    "expect": "ok",
     "payload": {
         "document": {
             "id": "FD01-13",

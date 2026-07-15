@@ -1,7 +1,7 @@
 {
     "type": "RC",
     "description": "Resumen diario >= 2026-08-01 con gratuitas desagregadas (#26, InstructionID 06-09)",
-    "expect": "xsd",
+    "expect": "ok",
     "payload": {
         "document": {
             "identifier": "RC-20260801-2",
