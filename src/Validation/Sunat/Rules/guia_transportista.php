@@ -6,6 +6,10 @@ return array (
   'source' => 'ValidaExprRegGreTransportista-2.0.1.xsl',
   'globals' => 
   array (
+    'numeroRuc' => 'substring($nombreArchivoEnviado, 1, 11)',
+    'tipoComprobante' => 'substring($nombreArchivoEnviado, 13, 2)',
+    'numeroSerie' => 'substring($nombreArchivoEnviado, 16, 4)',
+    'numeroComprobante' => 'substring($nombreArchivoEnviado, 21, string-length($nombreArchivoEnviado) - 24)',
   ),
   'rules' => 
   array (

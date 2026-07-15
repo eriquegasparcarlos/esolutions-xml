@@ -1,0 +1,105 @@
+<?php
+
+/**
+ * Genera facturas/boletas de ejemplo cubriendo distintas estructuras y las
+ * corre por el motor de reglas SUNAT para detectar falsos positivos.
+ */
+tenancy()->initialize(\App\Models\Tenant::find('garcia'));
+
+use ESolutions\Xml\Contracts\XmlDocumentGeneratorContract;
+use ESolutions\Xml\Validation\Sunat\RuleEngine;
+use Modules\Sale\Models\Sale;
+use Modules\Sale\Services\SaleXmlPayloadBuilder;
+
+$gen = app(XmlDocumentGeneratorContract::class);
+$dir = 'C:/Users/Krlos/AppData/Local/Temp/claude/F--laragon-www-intipos13/99c0fdff-68e8-4478-827b-5435e92e3e6b/scratchpad/fixtures';
+@mkdir($dir, 0777, true);
+
+// Base: payloads reales conocidos-válidos
+$facBase = (new SaleXmlPayloadBuilder())->build(Sale::find(39)); // F001-2 gravada RUC
+$bolBase = (new SaleXmlPayloadBuilder())->build(Sale::find(38)); // B001-31 gravada DNI
+
+$rulesFac = require 'F:/laragon/www/e-solutions-xml/src/Validation/Sunat/Rules/factura.php';
+$rulesBol = require 'F:/laragon/www/e-solutions-xml/src/Validation/Sunat/Rules/boleta.php';
+
+// helper: deep clone + set
+function mut(array $p, callable $mutate): array { $mutate($p); return $p; }
+
+// ─── Matriz de variantes ───────────────────────────────────────────────
+$variants = [];
+
+// 1. Factura gravada simple (base)
+$variants['FAC-01 gravada simple (RUC, contado)'] = ['01', $facBase, $rulesFac];
+
+// 2. Factura con descuento global
+$variants['FAC-02 con descuento global'] = ['01', mut($facBase, function (&$p) {
+    $p['document']['discounts'] = [[
+        'discount_type_id' => '02', 'factor' => 0.1, 'amount' => 50.85, 'base' => 508.47,
+    ]];
+    $p['document']['total_discount_no_base'] = 50.85;
+}), $rulesFac];
+
+// 3. Factura con detracción (op 1001)
+$variants['FAC-03 con detracción'] = ['01', mut($facBase, function (&$p) {
+    $p['document']['operation_type_id'] = '1001';
+    $p['document']['detraction'] = [
+        'payment_method_type_id' => '001',
+        'bank_account' => '00-099-025344',
+        'detraction_type_id' => '037', // Demás servicios gravados
+        'percentage' => 12,
+        'amount_pen' => 72.0,
+    ];
+    $p['document']['legends'][] = ['code' => '2006', 'value' => 'Operación sujeta a detracción'];
+}), $rulesFac];
+
+// 4. Factura con retención
+$variants['FAC-04 con retención'] = ['01', mut($facBase, function (&$p) {
+    $p['document']['retention'] = [
+        'code' => '62', 'percentage' => 3, 'amount' => 18.0, 'base' => 600.0,
+    ];
+}), $rulesFac];
+
+// 5. Factura a crédito (cuotas)
+$variants['FAC-05 a crédito (cuotas)'] = ['01', mut($facBase, function (&$p) {
+    $p['document']['payment_condition_id'] = '02';
+    $p['document']['fee_total'] = 600.0;
+    $p['document']['fee'] = [
+        ['currency_type_id' => 'PEN', 'amount' => 300.0, 'date_of_due' => '2026-08-15'],
+        ['currency_type_id' => 'PEN', 'amount' => 300.0, 'date_of_due' => '2026-09-15'],
+    ];
+}), $rulesFac];
+
+// 6. Boleta con DNI (base)
+$variants['BOL-01 con DNI'] = ['03', $bolBase, $rulesBol];
+
+// 7. Boleta a consumidor final (sin doc, número 0)
+$variants['BOL-02 consumidor final'] = ['03', mut($bolBase, function (&$p) {
+    $p['document']['customer_identity_document_type_id'] = '0';
+    $p['document']['customer_number'] = '00000000';
+    $p['document']['customer_name'] = 'CLIENTES VARIOS';
+}), $rulesBol];
+
+// ─── Ejecutar ──────────────────────────────────────────────────────────
+foreach ($variants as $label => [$tipo, $payload, $rules]) {
+    $res = $gen->generate($tipo, $payload);
+    $xsdOk = $res->isOk();
+    $file = $dir . '/' . preg_replace('/[^A-Z0-9]+/i', '_', $label) . '.xml';
+    if ($res->xml) file_put_contents($file, $res->xml);
+
+    $emits = [];
+    if ($res->xml) {
+        $eng = new RuleEngine();
+        foreach ($eng->run($res->xml, $rules) as $e) {
+            $emits[$e->path] = ($emits[$e->code] ?? 0) + 1;
+        }
+    }
+
+    $xsdMsg = $xsdOk ? 'XSD OK' : ('XSD FALLA: ' . ($res->validation->firstMessage() ?? ''));
+    printf("%-38s | %-10s | reglas: %d emisiones", $label, $xsdMsg, array_sum($emits));
+    if ($emits) {
+        echo ' -> ';
+        foreach ($emits as $c => $n) echo $c . " x" . $n . " ";
+    }
+    echo "\n";
+}
+echo "\nXMLs en: $dir\n";

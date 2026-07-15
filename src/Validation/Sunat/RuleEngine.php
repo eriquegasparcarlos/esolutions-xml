@@ -39,10 +39,19 @@ class RuleEngine
 
     public array $stats = ['evaluated' => 0, 'skipped' => 0, 'by_skip' => []];
 
-    public function __construct(?ErrorCatalog $errors = null, ?SunatCatalog $catalogs = null)
+    /**
+     * Correr también las reglas de reconciliación (isTrueExpresion aritméticas).
+     * Son potentes pero frágiles de replicar (dependen de sumas/redondeos y de
+     * que TODAS las variables resuelvan a número), así que por defecto se omiten
+     * y las reconciliaciones clave se cubren con reglas propias (3294/3305).
+     */
+    private bool $expressions;
+
+    public function __construct(?ErrorCatalog $errors = null, ?SunatCatalog $catalogs = null, bool $expressions = false)
     {
         $this->errors = $errors ?? new ErrorCatalog();
         $this->catalogs = $catalogs ?? new SunatCatalog();
+        $this->expressions = $expressions;
     }
 
     /**
@@ -68,8 +77,8 @@ class RuleEngine
             $this->xp->registerNamespace('doc', $rootNs);
         }
 
-        // Variables globales conocidas (resueltas contra la raíz).
-        $this->resolveGlobals($dom);
+        // Variables del XSLT, resueltas contra la raíz.
+        $this->resolveGlobals($dom, $ruleset['globals'] ?? []);
 
         $errors = [];
         foreach ($ruleset['rules'] as $rule) {
@@ -80,16 +89,43 @@ class RuleEngine
         return $errors;
     }
 
-    private function resolveGlobals(DOMDocument $dom): void
+    /**
+     * Resuelve las variables del XSLT ($monedaComprobante, $cbcCustomizationID,
+     * $SumatoriaIGV, …) contra la raíz. Como se referencian entre sí, se itera:
+     * en cada pasada se resuelven las que ya tienen todas sus dependencias.
+     *
+     * @param array<string,?string> $defs  name => expresión XPath (o null)
+     */
+    private function resolveGlobals(DOMDocument $dom, array $defs): void
     {
-        // Definiciones tomadas del template raíz de los ValidaExprReg.
         $this->vars = [];
-        $get = function (string $x) {
-            $r = @$this->xp->evaluate("string($x)");
-            return is_string($r) ? $r : '';
-        };
-        $this->vars['monedaComprobante'] = $get('/*/cbc:DocumentCurrencyCode');
-        $this->vars['tipoOperacion'] = $get('/*/cbc:InvoiceTypeCode/@listID');
+        $root = $dom->documentElement;
+
+        for ($pass = 0; $pass < 12 && count($this->vars) < count($defs); $pass++) {
+            $progress = false;
+            foreach ($defs as $name => $sel) {
+                if (array_key_exists($name, $this->vars)) {
+                    continue;
+                }
+                if ($sel === null || $sel === '') {
+                    $this->vars[$name] = '';
+                    $progress = true;
+                    continue;
+                }
+                // Sustituye variables ya resueltas; si aún referencia alguna
+                // no resuelta, se pospone a la siguiente pasada.
+                $expr = $this->substituteVars($sel);
+                if (preg_match('/\$[a-zA-Z_]/', $expr)) {
+                    continue;
+                }
+                $val = @$this->xp->evaluate("string($expr)", $root);
+                $this->vars[$name] = is_string($val) ? $val : '';
+                $progress = true;
+            }
+            if (!$progress) {
+                break; // dependencias circulares o irresolubles
+            }
+        }
     }
 
     /**
@@ -209,6 +245,12 @@ class RuleEngine
             case 'isTrueExpresion':
             case 'isTrueExpresionIfExist':
             case 'isTrueExpresionEmptyNode':
+                // Reglas de reconciliación: opt-in (ver $expressions).
+                if (!$this->expressions) {
+                    $this->stats['skipped']++;
+                    $this->stats['by_skip']['isTrueExpresion(reconciliacion)'] = ($this->stats['by_skip']['isTrueExpresion(reconciliacion)'] ?? 0) + 1;
+                    return null;
+                }
                 if ($prim === 'isTrueExpresionIfExist' && !$this->exists($xpathParam('node'), $ctx)) {
                     return null;
                 }

@@ -6,6 +6,15 @@ return array (
   'source' => 'ValidaExprRegOtrosVoided-1.0.1.xsl',
   'globals' => 
   array (
+    'fileName' => '$nombreArchivoEnviado',
+    'rucFilename' => 'substring($fileName,1,11)',
+    'cbcID' => 'cbc:ID',
+    'issueDate' => 'cbc:IssueDate',
+    'fechaFilename' => 'substring($fileName,16,8)',
+    'fechaEmisionDDMMYYYY' => 'concat(substring(./cbc:ReferenceDate,9,2),"-",substring(./cbc:ReferenceDate,6,2),"-",substring(./cbc:ReferenceDate,1,4))',
+    'fechaRangos' => './cbc:ReferenceDate',
+    'currentdate' => 'date:date()',
+    'fechaEmisionComDDMMYYYY' => 'concat(substring(./cbc:IssueDate,9,2),"-",substring(./cbc:IssueDate,6,2),"-",substring(./cbc:IssueDate,1,4))',
   ),
   'rules' => 
   array (

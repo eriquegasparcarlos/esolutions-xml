@@ -6,6 +6,18 @@ return array (
   'source' => 'ValidaExprRegGreRemitente-2.0.1.xsl',
   'globals' => 
   array (
+    'numeroRuc' => 'substring($nombreArchivoEnviado, 1, 11)',
+    'tipoComprobante' => 'substring($nombreArchivoEnviado, 13, 2)',
+    'numeroSerie' => 'substring($nombreArchivoEnviado, 16, 4)',
+    'numeroComprobante' => 'substring($nombreArchivoEnviado, 21, string-length($nombreArchivoEnviado) - 24)',
+    'tipoDocumentoCita' => '(cac:AdditionalDocumentReference[cbc:DocumentTypeCode[text() = \'92\']])',
+    'motivoTraslado' => 'cac:Shipment/cbc:HandlingCode',
+    'tipdocDestinatario' => 'cac:DeliveryCustomerParty/cac:Party/cac:PartyIdentification/cbc:ID/@schemeID',
+    'numdocDestinatario' => 'cac:DeliveryCustomerParty/cac:Party/cac:PartyIdentification/cbc:ID',
+    'numdocRemitente' => 'cac:DespatchSupplierParty/cac:Party/cac:PartyIdentification/cbc:ID',
+    'modalidadTraslado' => 'cac:Shipment/cac:ShipmentStage/cbc:TransportModeCode',
+    'indicadorTraslado' => 'cac:Shipment/cbc:SpecialInstructions',
+    'condicionTrasladoDAM_DS' => '($motivoTraslado = \'08\' or $motivoTraslado = \'19\')              and count(cac:AdditionalDocumentReference[cbc:DocumentTypeCode[text() = \'50\' or text() = \'52\']])  > 0              and count(cac:Shipment/cbc:SpecialInstructions[text() = \'SUNAT_Envio_IndicadorTrasladoTotalDAMoDS\']) = 0',
   ),
   'rules' => 
   array (

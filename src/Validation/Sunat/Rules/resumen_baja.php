@@ -6,6 +6,9 @@ return array (
   'source' => 'ValidaExprRegSummaryVoided-1.0.1.xsl',
   'globals' => 
   array (
+    'numeroRuc' => 'substring($nombreArchivoEnviado, 1, 11)',
+    'idFilename' => 'substring($nombreArchivoEnviado, 13, string-length($nombreArchivoEnviado) - 16)',
+    'fechaEnvioFile' => 'substring($nombreArchivoEnviado, 16, 8)',
   ),
   'rules' => 
   array (

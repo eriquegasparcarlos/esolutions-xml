@@ -49,15 +49,24 @@ libxml_clear_errors();
 $xp = new DOMXPath($dom);
 $xp->registerNamespace('xsl', XSL_NS);
 
-// ── Variables globales (top-level xsl:variable) ───────────────────────────
+// ── Variables globales ────────────────────────────────────────────────────
+// Están a nivel top-level Y como hijas directas del template raíz (match="/*"),
+// donde el XSLT define $monedaComprobante, $tipoOperacion, $SumatoriaIGV, etc.
 $globals = [];
-foreach ($xp->query('/xsl:stylesheet/xsl:variable | /xsl:transform/xsl:variable') as $v) {
-    /** @var DOMElement $v */
-    $name = $v->getAttribute('name');
-    $select = $v->getAttribute('select');
-    if ($name !== '') {
-        $globals[$name] = $select !== '' ? $select : null;
+$collectVars = function ($nodeList) use (&$globals) {
+    foreach ($nodeList as $v) {
+        /** @var DOMElement $v */
+        $name = $v->getAttribute('name');
+        $select = $v->getAttribute('select');
+        if ($name !== '' && !isset($globals[$name])) {
+            $globals[$name] = $select !== '' ? $select : null;
+        }
     }
+};
+$collectVars($xp->query('/xsl:stylesheet/xsl:variable | /xsl:transform/xsl:variable'));
+// Template raíz: el que matchea "/" o "/*"
+foreach ($xp->query('//xsl:template[@match="/*" or @match="/"]') as $rootTpl) {
+    $collectVars($xp->query('xsl:variable', $rootTpl));
 }
 
 // ── Recorrido de reglas ───────────────────────────────────────────────────
