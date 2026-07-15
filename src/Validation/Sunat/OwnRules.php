@@ -25,6 +25,13 @@ class OwnRules
         'cac' => 'urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2',
     ];
 
+    /**
+     * Fechas de vigencia de reglas nuevas de SUNAT (ver docs/sunat-changes-2026-08.md).
+     * Cada regla se aplica solo a documentos con fecha de emisión >= su vigencia
+     * (SUNAT valida por fecha de emisión, no por fecha de envío).
+     */
+    private const EFFECTIVE_PRODUCT_CODE = '2026-08-01'; // #12 ERR-3496
+
     public function __construct(?ErrorCatalog $errors = null)
     {
         $this->errors = $errors ?? new ErrorCatalog();
@@ -57,8 +64,47 @@ class OwnRules
         if ($hasTotals) {
             $this->checkTaxSum($errors);            // 3294
             $this->checkTaxInclusiveAmount($errors); // 3305
+            $this->checkProductCodeMandatory($errors); // 3496 (date-gated 2026-08-01)
         }
         return $errors;
+    }
+
+    /**
+     * #12 (ERR-3496, vigencia 2026-08-01): el Código de producto SUNAT
+     * (cac:CommodityClassification/cbc:ItemClassificationCode) es OBLIGATORIO en
+     * cada línea de FAC/BOL/NC/ND. Antes de la vigencia era observación (OBS).
+     * Solo se exige a documentos emitidos en/después de la fecha de vigencia.
+     */
+    private function checkProductCodeMandatory(array &$errors): void
+    {
+        if (!$this->effectiveFrom(self::EFFECTIVE_PRODUCT_CODE)) {
+            return;
+        }
+        $lines = $this->xp->query('//cac:InvoiceLine | //cac:CreditNoteLine | //cac:DebitNoteLine');
+        if ($lines === false) {
+            return;
+        }
+        foreach ($lines as $line) {
+            $code = $this->xp->evaluate('string(cac:Item/cac:CommodityClassification/cbc:ItemClassificationCode)', $line);
+            if (trim((string) $code) === '') {
+                $errors[] = $this->err('3496', 'Debe consignar el Código de producto SUNAT en el detalle (obligatorio desde 2026-08-01).');
+                return; // basta una línea sin código
+            }
+        }
+    }
+
+    /** Fecha de emisión del documento (YYYY-MM-DD), o null. */
+    private function issueDate(): ?string
+    {
+        $d = trim((string) $this->xp->evaluate('string((//cbc:IssueDate)[1])'));
+        return $d !== '' ? substr($d, 0, 10) : null;
+    }
+
+    /** ¿El documento se emitió en/después de $date (vigencia de una regla)? */
+    private function effectiveFrom(string $date): bool
+    {
+        $issue = $this->issueDate();
+        return $issue !== null && $issue >= $date; // ISO YYYY-MM-DD compara lexicográficamente
     }
 
     /**
@@ -103,9 +149,9 @@ class OwnRules
         return null;
     }
 
-    private function err(string $code): ValidationError
+    private function err(string $code, ?string $message = null): ValidationError
     {
-        $msg = $this->errors->message($code) ?? ('Regla SUNAT ' . $code);
+        $msg = $message ?? $this->errors->message($code) ?? ('Regla SUNAT ' . $code);
         return new ValidationError($msg, 'SUNAT_OWN', $code);
     }
 }
