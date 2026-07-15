@@ -2,11 +2,15 @@
 
 namespace ESolutions\Xml;
 
+use ESolutions\Xml\Contracts\ErrorCodeCatalogInterface;
 use ESolutions\Xml\Contracts\PayloadValidatorInterface;
 use ESolutions\Xml\Contracts\XmlDocumentGeneratorContract;
+use ESolutions\Xml\Contracts\ZipCompressorInterface;
 use ESolutions\Xml\Generator\XmlDocumentGenerator;
 use ESolutions\Xml\Payload\PayloadValidator;
 use ESolutions\Xml\Rendering\XmlTemplateRenderer;
+use ESolutions\Xml\Sending\Catalog\FileErrorCodeCatalog;
+use ESolutions\Xml\Sending\Zip\ZipFly;
 use ESolutions\Xml\Sign\Signed;
 use ESolutions\Xml\Validation\Rules\BusinessRulesValidator;
 use ESolutions\Xml\Validation\Rules\SeriesFormatRule;
@@ -63,6 +67,13 @@ class XmlServiceProvider extends ServiceProvider
         // Contrato de payload
         // ------------------------
         $this->app->singleton(PayloadValidatorInterface::class, fn () => new PayloadValidator());
+
+        // ------------------------
+        // Envío: catálogo de códigos SUNAT y compresor ZIP.
+        // El consumidor puede re-bindear (p.ej. decorador Redis del catálogo).
+        // ------------------------
+        $this->app->singleton(ErrorCodeCatalogInterface::class, fn () => new FileErrorCodeCatalog());
+        $this->app->bind(ZipCompressorInterface::class, fn () => new ZipFly());
 
         // ------------------------
         // Generator (Validar payload + Render + Format + Sign + Validate)

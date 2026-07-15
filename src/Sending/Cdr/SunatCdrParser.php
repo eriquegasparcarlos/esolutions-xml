@@ -5,11 +5,19 @@ namespace ESolutions\Xml\Sending\Cdr;
 use ESolutions\Xml\Sending\Zip\ZipExtractor;
 use ESolutions\Xml\Support\XmlHelper;
 use ESolutions\Xml\Contracts\CdrResponseParserInterface;
+use ESolutions\Xml\Contracts\ErrorCodeCatalogInterface;
+use ESolutions\Xml\Sending\Catalog\FileErrorCodeCatalog;
 use DOMXPath;
-use Illuminate\Support\Facades\Redis;
 
 class SunatCdrParser implements CdrResponseParserInterface
 {
+    protected ErrorCodeCatalogInterface $catalog;
+
+    public function __construct(?ErrorCodeCatalogInterface $catalog = null)
+    {
+        $this->catalog = $catalog ?? new FileErrorCodeCatalog();
+    }
+
     /**
      * Juzga el código SUNAT y devuelve:
      * - sunat_success: true/false/null (veredicto)
@@ -94,7 +102,7 @@ class SunatCdrParser implements CdrResponseParserInterface
 
                 $respCode = XmlHelper::getNodeValue($xpCdr, '//cbc:ResponseCode') ?? 'UNKNOWN';
                 $rawMsg = XmlHelper::getNodeValue($xpCdr, '//cbc:Description') ?? 'Sin descripción.';
-                $desc = Redis::hget('sunat:codes', $respCode) ?: $rawMsg;
+                $desc = $this->catalog->describe($respCode) ?: $rawMsg;
                 $notes = XmlHelper::getNodeValues($xpCdr, '//cbc:Note');
 
                 $judge = $this->judgeCode($respCode, false);
@@ -120,7 +128,7 @@ class SunatCdrParser implements CdrResponseParserInterface
                 if ($faultCode && preg_match('/(\d{3,4})$/', $faultCode, $m)) {
                     $numeric = $m[1];
                 }
-                $desc = $numeric ? (Redis::hget('sunat:codes', $numeric) ?: $faultStr) : ($faultStr ?: $faultCode);
+                $desc = $numeric ? ($this->catalog->describe($numeric) ?: $faultStr) : ($faultStr ?: $faultCode);
 
                 $judge = $this->judgeCode($numeric ?? $faultCode, false);
 
@@ -196,7 +204,7 @@ class SunatCdrParser implements CdrResponseParserInterface
             if ($faultCode && preg_match('/(\d{3,4})$/', $faultCode, $m)) {
                 $codeNumeric = $m[1];
             }
-            $desc = $codeNumeric ? (Redis::hget('sunat:codes', $codeNumeric) ?: $faultStr) : ($faultStr ?: $faultCode);
+            $desc = $codeNumeric ? ($this->catalog->describe($codeNumeric) ?: $faultStr) : ($faultStr ?: $faultCode);
             $judge = $this->judgeCode($codeNumeric ?? $faultCode, false);
 
             $res = $this->baseResponse();
@@ -218,6 +226,109 @@ class SunatCdrParser implements CdrResponseParserInterface
             $res['message']      = 'Error al procesar respuesta de sendSummary: ' . $e->getMessage();
             $res['code']         = 'SUMMARY_PARSE_ERROR';
             $res['errors']       = [$e->getMessage()];
+            return $res;
+        }
+    }
+
+    /**
+     * Parsea la respuesta de getStatusCdr (billConsultService): consulta el
+     * CDR de un comprobante ya enviado, por RUC/tipo/serie/número.
+     * Si viene content (ZIP b64 con el CDR), el veredicto sale del
+     * cbc:ResponseCode del CDR (0 / >=4000 / 2000-3999); si no, se usa
+     * statusCode + statusMessage del servicio.
+     */
+    public function parseStatusCdr(array $result): array
+    {
+        $raw = $result['raw'] ?? '';
+        if (empty($raw)) {
+            $res = $this->baseResponse();
+            $res['success'] = false;
+            $res['connection'] = false;
+            $res['message'] = 'No se recibió respuesta válida de SUNAT.';
+            $res['errors'] = ['No se recibió respuesta SOAP'];
+            return $res;
+        }
+
+        try {
+            $dom = XmlHelper::loadDom($raw);
+            $xpath = new DOMXPath($dom);
+
+            // Fault primero
+            $faultCode = XmlHelper::getNodeValue($xpath, "//*[local-name()='faultcode']");
+            $faultStr = XmlHelper::getNodeValue($xpath, "//*[local-name()='faultstring']");
+            if ($faultCode || $faultStr) {
+                $numeric = null;
+                if ($faultCode && preg_match('/(\d{3,4})$/', $faultCode, $m)) {
+                    $numeric = $m[1];
+                }
+                $desc = $numeric ? ($this->catalog->describe($numeric) ?: $faultStr) : ($faultStr ?: $faultCode);
+                $judge = $this->judgeCode($numeric ?? $faultCode, false);
+
+                $res = $this->baseResponse();
+                $res['success'] = true;
+                $res['connection'] = true;
+                $res['sunat_success'] = $judge['sunat_success'];
+                $res['state_label'] = $judge['state_label'];
+                $res['message'] = $desc ?? 'Error en getStatusCdr.';
+                $res['code'] = $judge['normalized_code'];
+                $res['errors'] = array_filter([$faultCode, $faultStr]);
+                return $res;
+            }
+
+            $statusCode = XmlHelper::getNodeValue($xpath, "//*[local-name()='statusCode']");
+            $statusMessage = XmlHelper::getNodeValue($xpath, "//*[local-name()='statusMessage']");
+            $content = XmlHelper::getNodeValue($xpath, "//*[local-name()='content']");
+
+            // Con CDR: el veredicto real es el ResponseCode del ApplicationResponse
+            if ($content && base64_decode($content, true)) {
+                $cdrZip = base64_decode($content);
+                $xmlCdr = (new ZipExtractor())->extractXmlFromZip($cdrZip);
+
+                $domCdr = XmlHelper::loadDom($xmlCdr);
+                $xpCdr = new DOMXPath($domCdr);
+                $xpCdr->registerNamespace('cbc', 'urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2');
+
+                $respCode = XmlHelper::getNodeValue($xpCdr, '//cbc:ResponseCode') ?? 'UNKNOWN';
+                $rawMsg = XmlHelper::getNodeValue($xpCdr, '//cbc:Description') ?? 'Sin descripción.';
+                $desc = $this->catalog->describe($respCode) ?: $rawMsg;
+                $notes = XmlHelper::getNodeValues($xpCdr, '//cbc:Note');
+
+                $judge = $this->judgeCode($respCode, false);
+
+                $res = $this->baseResponse();
+                $res['success'] = true;
+                $res['connection'] = true;
+                $res['sunat_success'] = $judge['sunat_success'];
+                $res['state_label'] = $judge['state_label'];
+                $res['message'] = $desc;
+                $res['code'] = $judge['normalized_code'];
+                $res['cdr'] = $xmlCdr;
+                $res['notes'] = $notes ?: null;
+                return $res;
+            }
+
+            // Sin CDR: solo statusCode/statusMessage del servicio de consulta
+            $desc = $statusMessage ?: ($statusCode !== null ? ($this->catalog->describe($statusCode) ?: "Estado {$statusCode}.") : 'Respuesta sin estado.');
+            $judge = $this->judgeCode($statusCode, false);
+
+            $res = $this->baseResponse();
+            $res['success'] = true;
+            $res['connection'] = true;
+            $res['sunat_success'] = $judge['sunat_success'];
+            $res['state_label'] = $judge['state_label'];
+            $res['message'] = $desc;
+            $res['code'] = $judge['normalized_code'];
+            return $res;
+
+        } catch (\Throwable $e) {
+            $res = $this->baseResponse();
+            $res['success'] = true;
+            $res['connection'] = true;
+            $res['sunat_success'] = null;
+            $res['state_label'] = 'indeterminado';
+            $res['message'] = 'Error al procesar respuesta de getStatusCdr: ' . $e->getMessage();
+            $res['code'] = 'STATUSCDR_PARSE_ERROR';
+            $res['errors'] = [$e->getMessage()];
             return $res;
         }
     }
@@ -248,7 +359,7 @@ class SunatCdrParser implements CdrResponseParserInterface
                 if ($faultCode && preg_match('/(\d{3,4})$/', $faultCode, $m)) {
                     $numeric = $m[1];
                 }
-                $desc = $numeric ? (Redis::hget('sunat:codes', $numeric) ?: $faultStr) : ($faultStr ?: $faultCode);
+                $desc = $numeric ? ($this->catalog->describe($numeric) ?: $faultStr) : ($faultStr ?: $faultCode);
                 $judge = $this->judgeCode($numeric ?? $faultCode, true);
 
                 $res = $this->baseResponse();
@@ -280,7 +391,7 @@ class SunatCdrParser implements CdrResponseParserInterface
 
                         $respCode = XmlHelper::getNodeValue($xpCdr, '//cbc:ResponseCode') ?? 'UNKNOWN';
                         $rawMsg = XmlHelper::getNodeValue($xpCdr, '//cbc:Description') ?? 'Sin descripción.';
-                        $desc = Redis::hget('sunat:codes', $respCode) ?: $rawMsg;
+                        $desc = $this->catalog->describe($respCode) ?: $rawMsg;
                         $notes = XmlHelper::getNodeValues($xpCdr, '//cbc:Note');
 
                         $judge = $this->judgeCode($respCode, false);
@@ -336,7 +447,7 @@ class SunatCdrParser implements CdrResponseParserInterface
 
                         $respCode = XmlHelper::getNodeValue($xpCdr, '//cbc:ResponseCode') ?? 'UNKNOWN';
                         $rawMsg = XmlHelper::getNodeValue($xpCdr, '//cbc:Description') ?? 'Sin descripción.';
-                        $desc = Redis::hget('sunat:codes', $respCode) ?: $rawMsg;
+                        $desc = $this->catalog->describe($respCode) ?: $rawMsg;
                         $notes = XmlHelper::getNodeValues($xpCdr, '//cbc:Note');
 
                         // Aunque el CDR pueda traer >=4000 (observación), el statusCode=99 indica rechazo del envío:
@@ -353,8 +464,8 @@ class SunatCdrParser implements CdrResponseParserInterface
                         return $res;
                     }
 
-                    // 99 sin CDR → usa content como mensaje (o mapea por Redis si aplica)
-                    $desc = $content ?: (Redis::hget('sunat:codes', '99') ?: 'Envío con error (99).');
+                    // 99 sin CDR → usa content como mensaje (o mapea por catálogo si aplica)
+                    $desc = $content ?: ($this->catalog->describe('99') ?: 'Envío con error (99).');
 
                     $res = $this->baseResponse();
                     $res['success'] = true;
@@ -368,7 +479,7 @@ class SunatCdrParser implements CdrResponseParserInterface
                 }
 
                 // 2.d) Otros códigos → error/indeterminado; usar content como mensaje si viene
-                $desc = $content ?: (Redis::hget('sunat:codes', $statusCode) ?: 'Error de estado en SUNAT.');
+                $desc = $content ?: ($this->catalog->describe($statusCode) ?: 'Error de estado en SUNAT.');
                 $judge = $this->judgeCode($statusCode, true);
 
                 $res = $this->baseResponse();

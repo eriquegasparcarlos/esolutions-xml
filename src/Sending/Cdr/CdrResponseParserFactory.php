@@ -2,24 +2,26 @@
 
 namespace ESolutions\Xml\Sending\Cdr;
 
-use ESolutions\Xml\Sending\Cdr\NubefactCdrParser;
-use ESolutions\Xml\Sending\Cdr\SunatCdrParser;
+use ESolutions\Xml\Contracts\CdrResponseParserInterface;
+use ESolutions\Xml\Contracts\ErrorCodeCatalogInterface;
 
 class CdrResponseParserFactory
 {
     /**
      * Devuelve el parser adecuado según el proveedor.
+     *
      * @param string $provider 'sunat', 'nubefact', etc.
-     * @return CdrResponseParserInterface
+     * @param ErrorCodeCatalogInterface|null $catalog Traductor de códigos SUNAT
+     *        (null => FileErrorCodeCatalog empaquetado)
      */
-    public static function make(string $provider): CdrResponseParserInterface
+    public static function make(string $provider, ?ErrorCodeCatalogInterface $catalog = null): CdrResponseParserInterface
     {
         switch (strtolower($provider)) {
             case 'nubefact':
-                return new NubefactCdrParser();
+                return new NubefactCdrParser($catalog);
             case 'sunat':
             default:
-                return new SunatCdrParser();
+                return new SunatCdrParser($catalog);
         }
     }
 }

@@ -2,150 +2,144 @@
 
 namespace ESolutions\Xml\Sending;
 
+use ESolutions\Xml\Contracts\ErrorCodeCatalogInterface;
+use ESolutions\Xml\Contracts\ZipCompressorInterface;
+use ESolutions\Xml\Results\Sending\BaseResult;
+use ESolutions\Xml\Results\Sending\BillResult;
+use ESolutions\Xml\Results\Sending\StatusResult;
+use ESolutions\Xml\Results\Sending\SummaryResult;
+use ESolutions\Xml\Sending\Endpoints\NubefactEndpoints;
+use ESolutions\Xml\Sending\Endpoints\SunatEndpoints;
+use ESolutions\Xml\Sending\Resolver\XmlTypeResolver;
 use ESolutions\Xml\Sending\Soap\SoapSunatClient;
 use ESolutions\Xml\Sending\Soap\SunatResponseBuilder;
-use ESolutions\Xml\Sending\Endpoints\SunatEndpoints;
-use ESolutions\Xml\Sending\Endpoints\NubefactEndpoints;
-use App\Models\User;
+use ESolutions\Xml\Sending\Zip\ZipFly;
 
+/**
+ * Orquestador de envío a SUNAT/OSE. Independiente del proyecto consumidor:
+ * toda la configuración entra por SenderConfig.
+ *
+ *   $sender = new DocumentSender(SenderConfig::fromConfig());
+ *   $result = $sender->send($filename, $signedXml);   // resuelve sendBill vs sendSummary solo
+ *   if ($result->isAccepted()) { ... $result->getCdrXml() ... }
+ */
 class DocumentSender
 {
-    protected string $provider;
-    protected string $username;
-    protected string $password;
-    protected string $environment;
-    protected User $company;
-    protected string $documentTypeId;
+    protected SenderConfig $config;
+    protected ZipCompressorInterface $zip;
+    protected ?ErrorCodeCatalogInterface $catalog;
+    protected XmlTypeResolver $typeResolver;
 
-    /**
-     * @param string $provider 'sunat' | 'nubefact' | etc.
-     * @param string $username
-     * @param string $password
-     * @param string $environment 'demo' | 'production'
-     * @param User $company
-     * @param string $documentTypeId
-     */
-    public function __construct(string $provider, string $username, string $password,
-                                string $environment, User $company, string $documentTypeId)
-    {
-        $provider = strtolower($provider);
-        $environment = strtolower($environment);
-
-        if (!in_array($environment, ['demo', 'production'])) {
-            throw new \InvalidArgumentException('El parámetro $environment solo puede ser demo o production.');
-        }
-
-        $this->provider = $provider;
-        $this->username = $username;
-        $this->password = $password;
-        $this->environment = $environment;
-        $this->company = $company;
-        $this->documentTypeId = $documentTypeId;
+    public function __construct(
+        SenderConfig $config,
+        ?ZipCompressorInterface $zip = null,
+        ?ErrorCodeCatalogInterface $catalog = null
+    ) {
+        $this->config = $config;
+        $this->zip = $zip ?? new ZipFly();
+        $this->catalog = $catalog;
+        $this->typeResolver = new XmlTypeResolver();
     }
 
     /**
-     * Enviar un documento (Factura, Boleta, Nota) vía sendBill.
-     */
-    public function sendBill(array $params): array
-    {
-        $endpoint = $this->getEndpoint('sendBill');
-        $client = new SoapSunatClient($endpoint, $this->username, $this->password);
-
-        $startTime = microtime(true);
-        $result = $client->send('sendBill', $params);
-        $elapsed = microtime(true) - $startTime;
-        $result['provider'] = $this->provider;
-        $response = SunatResponseBuilder::fromSendBill($result);
-        $response['time'] = $elapsed;
-
-        return $response;
-    }
-
-    /**
-     * Enviar un Resumen o Baja vía sendSummary.
-     */
-    public function sendSummary(array $params): array
-    {
-        $endpoint = $this->getEndpoint('sendSummary');
-        $client = new SoapSunatClient($endpoint, $this->username, $this->password);
-
-        $startTime = microtime(true);
-        $result = $client->send('sendSummary', $params);
-        $elapsed = microtime(true) - $startTime;
-        $result['provider'] = $this->provider;
-        $response = SunatResponseBuilder::fromSendSummary($result);
-        $response['time'] = $elapsed;
-
-        return $response;
-    }
-
-    /**
-     * Consultar el estado de un ticket (getStatus).
-     */
-    public function getStatus(array $params): array
-    {
-        $endpoint = $this->getEndpoint('getStatus');
-        $client = new SoapSunatClient($endpoint, $this->username, $this->password);
-
-        $startTime = microtime(true);
-        $result = $client->send('getStatus', $params);
-        $elapsed = microtime(true) - $startTime;
-        $result['provider'] = $this->provider;
-        $response = SunatResponseBuilder::fromGetStatus($result);
-        $response['time'] = $elapsed;
-
-        return $response;
-    }
-
-    /**
-     * Obtiene el endpoint según proveedor, ambiente y tipo de operación.
+     * Fachada: decide la operación SOAP inspeccionando el XML firmado.
+     * Comprobantes (Invoice/Note/Despatch/Retention/Perception) => sendBill;
+     * SummaryDocuments/VoidedDocuments => sendSummary.
      *
-     * @param string $operation
-     * @return string
+     * @param string $filename Sin extensión (RUC-TIPO-SERIE-NUMERO)
+     */
+    public function send(string $filename, string $signedXml): BaseResult
+    {
+        $operation = $this->typeResolver->resolveOperation($signedXml);
+
+        return $operation === XmlTypeResolver::OPERATION_SUMMARY
+            ? $this->sendSummary($filename, $signedXml)
+            : $this->sendBill($filename, $signedXml);
+    }
+
+    /**
+     * Envío síncrono (sendBill): la respuesta trae el CDR.
+     *
+     * @param string $filename Sin extensión
+     */
+    public function sendBill(string $filename, string $signedXml): BillResult
+    {
+        $result = $this->callSoap('sendBill', $this->billParams($filename, $signedXml));
+
+        return BillResult::fromArray(SunatResponseBuilder::fromSendBill($result, $this->catalog) + ['time' => $result['time']]);
+    }
+
+    /**
+     * Envío asíncrono (sendSummary): la respuesta trae un ticket a consultar
+     * luego con getStatus().
+     *
+     * @param string $filename Sin extensión (RUC-RC-YYYYMMDD-###)
+     */
+    public function sendSummary(string $filename, string $signedXml): SummaryResult
+    {
+        $result = $this->callSoap('sendSummary', $this->billParams($filename, $signedXml));
+
+        return SummaryResult::fromArray(SunatResponseBuilder::fromSendSummary($result, $this->catalog) + ['time' => $result['time']]);
+    }
+
+    /**
+     * Consulta el estado de un ticket de sendSummary.
+     * Código 98 => aún en proceso ($result->isInProcess()).
+     */
+    public function getStatus(string $ticket): StatusResult
+    {
+        $result = $this->callSoap('getStatus', ['ticket' => $ticket]);
+
+        return StatusResult::fromArray(SunatResponseBuilder::fromGetStatus($result, $this->catalog) + ['time' => $result['time']]);
+    }
+
+    // ---------------------------------------------------------------
+
+    protected function billParams(string $filename, string $signedXml): array
+    {
+        return [
+            'fileName' => $filename . '.zip',
+            'contentFile' => $this->zip->compress($filename . '.xml', $signedXml),
+        ];
+    }
+
+    protected function callSoap(string $method, array $params): array
+    {
+        $endpoint = $this->getEndpoint($method);
+        $client = new SoapSunatClient($endpoint, $this->config->username, $this->config->password);
+
+        $startTime = microtime(true);
+        $result = $client->send($method, $params);
+        $result['time'] = microtime(true) - $startTime;
+        $result['provider'] = $this->config->provider;
+
+        return $result;
+    }
+
+    /**
+     * Resuelve el endpoint según proveedor, ambiente y tipo de documento.
+     * Un endpoint explícito en SenderConfig (OSE/PSE) manda sobre todo.
      */
     protected function getEndpoint(string $operation): string
     {
-        if ($this->provider === 'sunat') {
-            switch ($operation) {
-                case 'sendBill':
-                case 'sendSummary':
-                case 'getStatus':
-                    $isRetention = in_array($this->documentTypeId, ['20', '40', 'RR'], true);
-                    if ($isRetention) {
-                        return $this->environment === 'production'
-                            ? SunatEndpoints::RETENCION_PRODUCCION
-                            : SunatEndpoints::RETENCION_BETA;
-                    }
+        if ($this->config->endpoint) {
+            return $this->config->endpoint;
+        }
 
-                    return $this->environment === 'production'
-                        ? SunatEndpoints::FE_PRODUCTION
-                        : SunatEndpoints::FE_BETA;
-//                    if(in_array($this->documentTypeId, ['20', '40'])) {
-//                        return $this->environment === 'production'
-//                            ? SunatEndpoints::RETENCION_PRODUCCION
-//                            : SunatEndpoints::RETENCION_BETA;
-//                    } else {
-//                        return $this->environment === 'production'
-//                            ? SunatEndpoints::FE_PRODUCTION
-//                            : SunatEndpoints::FE_BETA;
-//                    }
-                case 'getStatusCdr':
-                    return SunatEndpoints::FE_CONSULTA_CDR;
-            }
+        if ($this->config->provider === 'nubefact') {
+            return $this->config->isDemo() ? NubefactEndpoints::BETA : NubefactEndpoints::PRODUCTION;
         }
-        if ($this->provider === 'nubefact') {
-            if ($this->environment === 'production') {
-                if (empty(trim((string)$this->company->ose_url))) {
-                    return NubefactEndpoints::PRODUCTION;
-                }
-                return $this->company->ose_url;
-            } else {
-                if (empty(trim((string)$this->company->ose_url_dev))) {
-                    return NubefactEndpoints::BETA;
-                }
-                return $this->company->ose_url_dev;
-            }
+
+        // SUNAT directo
+        $isRetention = in_array((string) $this->config->documentTypeId, ['20', '40', 'RR'], true);
+        if ($isRetention) {
+            return $this->config->isDemo()
+                ? SunatEndpoints::RETENCION_BETA
+                : SunatEndpoints::RETENCION_PRODUCCION;
         }
-        throw new \Exception("No se pudo resolver endpoint para operación [$operation] y proveedor [{$this->provider}]");
+
+        return $this->config->isDemo()
+            ? SunatEndpoints::FE_BETA
+            : SunatEndpoints::FE_PRODUCTION;
     }
 }

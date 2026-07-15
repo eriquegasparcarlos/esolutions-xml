@@ -3,10 +3,11 @@
 namespace ESolutions\Xml\Sending\Cdr;
 
 use ESolutions\Xml\Contracts\CdrResponseParserInterface;
+use ESolutions\Xml\Contracts\ErrorCodeCatalogInterface;
+use ESolutions\Xml\Sending\Catalog\FileErrorCodeCatalog;
 use ESolutions\Xml\Sending\Zip\ZipExtractor;
 use ESolutions\Xml\Support\XmlHelper;
 use DOMXPath;
-use Illuminate\Support\Facades\Redis;
 
 /**
  * Parser específico para respuestas CDR de Nubefact OSE.
@@ -15,6 +16,13 @@ use Illuminate\Support\Facades\Redis;
  */
 class NubefactCdrParser implements CdrResponseParserInterface
 {
+    protected ErrorCodeCatalogInterface $catalog;
+
+    public function __construct(?ErrorCodeCatalogInterface $catalog = null)
+    {
+        $this->catalog = $catalog ?? new FileErrorCodeCatalog();
+    }
+
     /**
      * Juzga el código de respuesta y devuelve:
      * - sunat_success: true/false/null
@@ -99,7 +107,7 @@ class NubefactCdrParser implements CdrResponseParserInterface
 
                 $respCode = XmlHelper::getNodeValue($xpCdr, '//cbc:ResponseCode') ?? 'UNKNOWN';
                 $rawMsg   = XmlHelper::getNodeValue($xpCdr, '//cbc:Description') ?? 'Sin descripción.';
-                $desc     = Redis::hget('sunat:codes', $respCode) ?: $rawMsg;
+                $desc     = $this->catalog->describe($respCode) ?: $rawMsg;
                 $notes    = XmlHelper::getNodeValues($xpCdr, '//cbc:Note');
 
                 $judge = $this->judgeCode($respCode, false);
@@ -130,7 +138,7 @@ class NubefactCdrParser implements CdrResponseParserInterface
                     $numeric = $m[1];
                 }
 
-                $desc  = $numeric ? (Redis::hget('sunat:codes', $numeric) ?: ($detailMsg ?: $faultStr)) : ($detailMsg ?: $faultStr ?: $faultCode);
+                $desc  = $numeric ? ($this->catalog->describe($numeric) ?: ($detailMsg ?: $faultStr)) : ($detailMsg ?: $faultStr ?: $faultCode);
                 $judge = $this->judgeCode($numeric ?? $faultCode ?? $faultStr, false);
 
                 $res = $this->baseResponse();
@@ -210,7 +218,7 @@ class NubefactCdrParser implements CdrResponseParserInterface
                 $numeric = $m[1];
             }
 
-            $desc  = $numeric ? (Redis::hget('sunat:codes', $numeric) ?: ($detailMsg ?: $faultStr)) : ($detailMsg ?: $faultStr ?: $faultCode);
+            $desc  = $numeric ? ($this->catalog->describe($numeric) ?: ($detailMsg ?: $faultStr)) : ($detailMsg ?: $faultStr ?: $faultCode);
             $judge = $this->judgeCode($numeric ?? $faultCode ?? $faultStr, false);
 
             $res = $this->baseResponse();
@@ -267,7 +275,7 @@ class NubefactCdrParser implements CdrResponseParserInterface
                 } elseif ($faultStr && preg_match('/(\d{3,4})$/', $faultStr, $m)) {
                     $numeric = $m[1];
                 }
-                $desc  = $numeric ? (Redis::hget('sunat:codes', $numeric) ?: $faultStr) : ($faultStr ?: $faultCode);
+                $desc  = $numeric ? ($this->catalog->describe($numeric) ?: $faultStr) : ($faultStr ?: $faultCode);
                 $judge = $this->judgeCode($numeric ?? $faultCode ?? $faultStr, true);
 
                 $res = $this->baseResponse();
@@ -298,7 +306,7 @@ class NubefactCdrParser implements CdrResponseParserInterface
 
                         $respCode = XmlHelper::getNodeValue($xpCdr, '//cbc:ResponseCode') ?? 'UNKNOWN';
                         $rawMsg   = XmlHelper::getNodeValue($xpCdr, '//cbc:Description') ?? 'Sin descripción.';
-                        $desc     = Redis::hget('sunat:codes', $respCode) ?: $rawMsg;
+                        $desc     = $this->catalog->describe($respCode) ?: $rawMsg;
                         $notes    = XmlHelper::getNodeValues($xpCdr, '//cbc:Note');
 
                         $judge = $this->judgeCode($respCode, false);
@@ -351,7 +359,7 @@ class NubefactCdrParser implements CdrResponseParserInterface
 
                         $respCode = XmlHelper::getNodeValue($xpCdr, '//cbc:ResponseCode') ?? 'UNKNOWN';
                         $rawMsg   = XmlHelper::getNodeValue($xpCdr, '//cbc:Description') ?? 'Sin descripción.';
-                        $desc     = Redis::hget('sunat:codes', $respCode) ?: $rawMsg;
+                        $desc     = $this->catalog->describe($respCode) ?: $rawMsg;
                         $notes    = XmlHelper::getNodeValues($xpCdr, '//cbc:Note');
 
                         $res = $this->baseResponse();
@@ -366,7 +374,7 @@ class NubefactCdrParser implements CdrResponseParserInterface
                         return $res;
                     }
 
-                    $desc = $content ?: (Redis::hget('sunat:codes', '99') ?: 'Envío con error (99).');
+                    $desc = $content ?: ($this->catalog->describe('99') ?: 'Envío con error (99).');
 
                     $res = $this->baseResponse();
                     $res['success']        = true;
@@ -380,7 +388,7 @@ class NubefactCdrParser implements CdrResponseParserInterface
                 }
 
                 // Otros códigos
-                $desc  = $content ?: (Redis::hget('sunat:codes', $statusCode) ?: 'Error de estado en SUNAT/OSE.');
+                $desc  = $content ?: ($this->catalog->describe($statusCode) ?: 'Error de estado en SUNAT/OSE.');
                 $judge = $this->judgeCode($statusCode, true);
 
                 $res = $this->baseResponse();

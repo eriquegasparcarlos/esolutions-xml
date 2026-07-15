@@ -2,6 +2,7 @@
 
 namespace ESolutions\Xml\Sending\Soap;
 
+use ESolutions\Xml\Contracts\ErrorCodeCatalogInterface;
 use ESolutions\Xml\Sending\Cdr\CdrResponseParserFactory;
 
 /**
@@ -9,26 +10,26 @@ use ESolutions\Xml\Sending\Cdr\CdrResponseParserFactory;
  */
 class SunatResponseBuilder
 {
-    public static function fromSendBill(array $result): array
+    public static function fromSendBill(array $result, ?ErrorCodeCatalogInterface $catalog = null): array
     {
         $provider = $result['provider'] ?? 'sunat';
-        $parser = CdrResponseParserFactory::make($provider);
+        $parser = CdrResponseParserFactory::make($provider, $catalog);
 
         return $parser->parseBill($result);
     }
 
-    public static function fromSendSummary(array $result): array
+    public static function fromSendSummary(array $result, ?ErrorCodeCatalogInterface $catalog = null): array
     {
         $provider = $result['provider'] ?? 'sunat';
-        $parser = CdrResponseParserFactory::make($provider);
+        $parser = CdrResponseParserFactory::make($provider, $catalog);
 
         return $parser->parseSummary($result);
     }
 
-    public static function fromGetStatus(array $result): array
+    public static function fromGetStatus(array $result, ?ErrorCodeCatalogInterface $catalog = null): array
     {
         $provider = $result['provider'] ?? 'sunat';
-        $parser = CdrResponseParserFactory::make($provider);
+        $parser = CdrResponseParserFactory::make($provider, $catalog);
 
         return $parser->parseGetStatus($result);
     }
