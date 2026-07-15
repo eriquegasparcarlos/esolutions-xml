@@ -1,6 +1,7 @@
 {
-    "name": "esolutions/sunat",
-    "description": "Integracion SUNAT/OSE y generacion de XML UBL para comprobantes electronicos",
+    "name": "esolutions/xml",
+    "version": "1.0.0",
+    "description": "Generacion, firma, validacion y envio SUNAT/OSE de XML UBL para comprobantes electronicos",
     "type": "library",
     "license": "proprietary",
     "authors": [
@@ -11,8 +12,7 @@
     ],
     "require": {
         "php": "^8.2",
-        "laravel/framework": "^11.0|^12.0",
-        "esolutions/core": "^1.0"
+        "laravel/framework": "^11.0|^12.0|^13.0"
     },
     "autoload": {
         "psr-4": {
