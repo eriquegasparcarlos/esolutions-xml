@@ -33,7 +33,14 @@
                 "importeTotal": 1000,
                 "importePercibido": 20,
                 "fechaPercepcion": "2026-07-15",
-                "importeNetoCobrado": 1020
+                "importeNetoCobrado": 1020,
+                "pagos": [
+                    {
+                        "moneda": "PEN",
+                        "monto": 1020,
+                        "fecha": "2026-07-15"
+                    }
+                ]
             }
         ]
     }

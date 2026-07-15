@@ -434,7 +434,8 @@ class EsPayloadMapper
                 'retention_amount' => (float) ($r['importeRetenido'] ?? 0),
                 'retention_date' => $r['fechaRetencion'] ?? null,
                 'net_total_paid' => (float) ($r['importeNetoPagado'] ?? 0),
-                'payments' => [], 'exchange_rate' => $r['tipoCambio'] ?? null,
+                'payments' => $this->mapPayments($r['pagos'] ?? []),
+                'exchange_rate' => $r['tipoCambio'] ?? null,
             ], $d['documentos'] ?? $d['documents'] ?? []),
         ]];
     }
@@ -470,9 +471,20 @@ class EsPayloadMapper
                 'perception_amount' => (float) ($r['importePercibido'] ?? 0),
                 'perception_date' => $r['fechaPercepcion'] ?? null,
                 'net_total_cashed' => (float) ($r['importeNetoCobrado'] ?? 0),
-                'payments' => [], 'exchange_rate' => $r['tipoCambio'] ?? null,
+                'payments' => $this->mapPayments($r['pagos'] ?? []),
+                'exchange_rate' => $r['tipoCambio'] ?? null,
             ], $d['documentos'] ?? $d['documents'] ?? []),
         ]];
+    }
+
+    /** pagos español → payments interno (número de pago/cobro en retención/percepción). */
+    private function mapPayments(array $ps): array
+    {
+        return array_map(fn ($p) => [
+            'currency_type_id' => (string) ($p['moneda'] ?? 'PEN'),
+            'total' => (float) ($p['monto'] ?? 0),
+            'date_of_payment' => $p['fecha'] ?? $p['fechaPago'] ?? null,
+        ], $ps);
     }
 
     /** serie-correlativo desde campos español. */

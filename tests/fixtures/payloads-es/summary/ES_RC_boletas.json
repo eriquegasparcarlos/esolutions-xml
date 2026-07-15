@@ -4,7 +4,7 @@
     "expect": "ok",
     "payload": {
         "tipoDoc": "RC",
-        "correlativo": "RC-20260714-1",
+        "correlativo": "RC-20260715-1",
         "fechaReferencia": "2026-07-14",
         "fechaEmision": "2026-07-15",
         "company": {

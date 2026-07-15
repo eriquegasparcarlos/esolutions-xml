@@ -30,7 +30,13 @@
                     "perception_amount": 20,
                     "perception_date": "2026-07-15",
                     "net_total_cashed": 1020,
-                    "payments": [],
+                    "payments": [
+                        {
+                            "currency_type_id": "PEN",
+                            "total": 1020,
+                            "date_of_payment": "2026-07-15"
+                        }
+                    ],
                     "exchange_rate": null
                 }
             ]

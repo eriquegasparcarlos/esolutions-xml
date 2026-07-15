@@ -33,7 +33,14 @@
                 "importeTotal": 1000,
                 "importeRetenido": 30,
                 "fechaRetencion": "2026-07-15",
-                "importeNetoPagado": 970
+                "importeNetoPagado": 970,
+                "pagos": [
+                    {
+                        "moneda": "PEN",
+                        "monto": 970,
+                        "fecha": "2026-07-15"
+                    }
+                ]
             }
         ]
     }
