@@ -101,13 +101,15 @@ class EsPayloadMapper
                 fn ($l) => ['code' => (string) ($l['code'] ?? $l['codigo']), 'value' => (string) ($l['value'] ?? $l['valor'])],
                 $d['legends'] ?? $d['leyendas'] ?? []
             ),
-            'guides' => [], 'related' => [], 'prepayments' => [], 'charges' => [],
+            'guides' => [], 'related' => [],
+            'prepayments' => $this->mapPrepayments($d['anticipos'] ?? []),
+            'charges' => $this->mapCharges($d['cargos'] ?? []),
             'discounts' => $this->mapDiscounts($d['descuentos'] ?? []),
             'fee' => $this->mapFee($d['cuotas'] ?? [], $moneda),
             'fee_total' => (float) array_sum(array_map(fn ($c) => (float) ($c['monto'] ?? 0), $d['cuotas'] ?? [])),
             'detraction' => $this->mapDetraction($d['detraccion'] ?? null),
             'retention' => $this->mapRetention($d['retencion'] ?? null),
-            'perception' => null,
+            'perception' => $this->mapPerception($d['percepcion'] ?? null),
 
             'total_taxes' => $totalTaxes,
             'total_isc' => (float) $totalIsc,
@@ -126,8 +128,8 @@ class EsPayloadMapper
             'total_plastic_bag_taxes' => (float) $totalIcbper,
             'total_value' => (float) $totalValue,
             'total_discount_no_base' => (float) ($totales['descuentos'] ?? 0),
-            'total_charge' => (float) ($totales['cargos'] ?? 0),
-            'total_prepayment' => (float) ($totales['anticipos'] ?? 0),
+            'total_charge' => (float) ($totales['cargos'] ?? array_sum(array_map(fn ($c) => (float) ($c['monto'] ?? 0), $d['cargos'] ?? []))),
+            'total_prepayment' => (float) ($totales['anticipos'] ?? array_sum(array_map(fn ($a) => (float) ($a['montoBase'] ?? $a['base'] ?? 0), $d['anticipos'] ?? []))),
             'total_payable' => (float) ($totales['total'] ?? $totales['mtoImpVenta'] ?? round($totalValue + $totalTaxes, 2)),
 
             'items' => $lines,
@@ -180,6 +182,39 @@ class EsPayloadMapper
             'internal_id' => $it['codProducto'] ?? $it['codigo'] ?? null,
             'item_code' => $it['codProductoSunat'] ?? null,
             'accommodation_attributes' => [], 'attributes' => [],
+        ];
+    }
+
+    /** anticipos español → prepayments interno (AdditionalDocumentReference cat. 12). */
+    private function mapPrepayments(array $as): array
+    {
+        return array_map(fn ($a) => [
+            'number' => (string) ($a['nroDocumento'] ?? $a['numero'] ?? trim(($a['serie'] ?? '') . '-' . ($a['correlativo'] ?? ''), '-')),
+            'document_type_id' => (string) ($a['tipoDoc'] ?? $a['tipoDocumento'] ?? '02'),
+            'total' => (float) ($a['monto'] ?? $a['total'] ?? 0),
+        ], $as);
+    }
+
+    /** cargos español → charges interno. */
+    private function mapCharges(array $cs): array
+    {
+        return array_map(fn ($x) => [
+            'charge_type_id' => (string) ($x['codTipo'] ?? $x['tipo'] ?? '50'),
+            'factor' => (float) ($x['factor'] ?? 0),
+            'amount' => (float) ($x['monto'] ?? 0),
+            'base' => (float) ($x['montoBase'] ?? $x['base'] ?? 0),
+        ], $cs);
+    }
+
+    /** percepción a nivel comprobante español → perception interno. */
+    private function mapPerception(?array $p): ?array
+    {
+        if (!$p) return null;
+        return [
+            'code' => (string) ($p['codTipo'] ?? $p['codigo'] ?? '51'),
+            'percentage' => (float) ($p['porcentaje'] ?? 0),
+            'amount' => (float) ($p['monto'] ?? 0),
+            'base' => (float) ($p['montoBase'] ?? $p['base'] ?? 0),
         ];
     }
 

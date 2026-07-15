@@ -1,0 +1,53 @@
+{
+    "type": "03",
+    "description": "ES: boleta gravada con DNI",
+    "expect": "ok",
+    "payload": {
+        "tipoDoc": "03",
+        "serie": "B001",
+        "correlativo": "201",
+        "fechaEmision": "2026-07-15",
+        "horaEmision": "10:30:00",
+        "tipoMoneda": "PEN",
+        "formaPago": "Contado",
+        "tipoOperacion": "0101",
+        "company": {
+            "ruc": "10417844398",
+            "razonSocial": "CLINICA QUIROSYS SAC",
+            "nombreComercial": "QUIROSYS",
+            "address": {
+                "ubigeo": "150101",
+                "departamento": "LIMA",
+                "provincia": "LIMA",
+                "distrito": "LIMA",
+                "direccion": "AV. LIMA 123",
+                "codLocal": "0000"
+            }
+        },
+        "client": {
+            "tipoDoc": "1",
+            "numDoc": "12345678",
+            "rznSocial": "JUAN PEREZ",
+            "address": {
+                "ubigeo": "150101",
+                "direccion": "AV. DNI 789"
+            }
+        },
+        "details": [
+            {
+                "descripcion": "Consulta",
+                "cantidad": 1,
+                "unidad": "NIU",
+                "mtoValorUnitario": 100,
+                "tipAfeIgv": "10",
+                "porcentajeIgv": 18
+            }
+        ],
+        "leyendas": [
+            {
+                "code": "1000",
+                "value": "SON CIENTO DIECIOCHO CON 00/100 SOLES"
+            }
+        ]
+    }
+}

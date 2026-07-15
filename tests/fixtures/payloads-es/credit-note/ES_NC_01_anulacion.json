@@ -1,0 +1,60 @@
+{
+    "type": "07",
+    "description": "ES: nota de crédito por anulación",
+    "expect": "ok",
+    "payload": {
+        "tipoDoc": "07",
+        "serie": "FC01",
+        "correlativo": "1",
+        "fechaEmision": "2026-07-15",
+        "horaEmision": "10:30:00",
+        "tipoMoneda": "PEN",
+        "formaPago": "Contado",
+        "tipoOperacion": "0101",
+        "company": {
+            "ruc": "10417844398",
+            "razonSocial": "CLINICA QUIROSYS SAC",
+            "nombreComercial": "QUIROSYS",
+            "address": {
+                "ubigeo": "150101",
+                "departamento": "LIMA",
+                "provincia": "LIMA",
+                "distrito": "LIMA",
+                "direccion": "AV. LIMA 123",
+                "codLocal": "0000"
+            }
+        },
+        "client": {
+            "tipoDoc": "6",
+            "numDoc": "20601234567",
+            "rznSocial": "CLIENTE SAC",
+            "address": {
+                "ubigeo": "150101",
+                "direccion": "AV. CLIENTE 456"
+            }
+        },
+        "details": [
+            {
+                "descripcion": "Servicio",
+                "cantidad": 1,
+                "unidad": "NIU",
+                "mtoValorUnitario": 100,
+                "tipAfeIgv": "10",
+                "porcentajeIgv": 18
+            }
+        ],
+        "documentoAfectado": {
+            "id": "F001-201",
+            "tipoDoc": "01",
+            "fechaEmision": "2026-07-14"
+        },
+        "codMotivo": "01",
+        "desMotivo": "Anulacion de la operacion",
+        "leyendas": [
+            {
+                "code": "1000",
+                "value": "SON CIENTO DIECIOCHO CON 00/100 SOLES"
+            }
+        ]
+    }
+}
