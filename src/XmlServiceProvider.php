@@ -2,8 +2,10 @@
 
 namespace ESolutions\Xml;
 
+use ESolutions\Xml\Contracts\PayloadValidatorInterface;
 use ESolutions\Xml\Contracts\XmlDocumentGeneratorContract;
 use ESolutions\Xml\Generator\XmlDocumentGenerator;
+use ESolutions\Xml\Payload\PayloadValidator;
 use ESolutions\Xml\Rendering\XmlTemplateRenderer;
 use ESolutions\Xml\Sign\Signed;
 use ESolutions\Xml\Validation\Rules\BusinessRulesValidator;
@@ -58,13 +60,19 @@ class XmlServiceProvider extends ServiceProvider
         ));
 
         // ------------------------
-        // Generator (Render + Format + Sign + Validate)
+        // Contrato de payload
+        // ------------------------
+        $this->app->singleton(PayloadValidatorInterface::class, fn () => new PayloadValidator());
+
+        // ------------------------
+        // Generator (Validar payload + Render + Format + Sign + Validate)
         // ------------------------
         $this->app->singleton(XmlDocumentGeneratorContract::class, function ($app) {
             return new XmlDocumentGenerator(
                 $app->make(XmlTemplateRenderer::class),
                 $app->make(XmlValidationPipeline::class),
-                $app->make(Signed::class)
+                $app->make(Signed::class),
+                $app->make(PayloadValidatorInterface::class)
             );
         });
 

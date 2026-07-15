@@ -43,6 +43,14 @@ class GenerationResult
         $this->signatureMeta = $signatureMeta;
     }
 
+    /**
+     * Resultado fallido sin XML (p.ej. payload inválido antes del render).
+     */
+    public static function failed(string $type, ValidationResult $validation, array $doc = []): self
+    {
+        return new self($type, $doc, '', $validation);
+    }
+
     public function isOk(): bool
     {
         return (bool) $this->validation->ok;
