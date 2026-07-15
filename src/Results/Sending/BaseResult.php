@@ -57,6 +57,33 @@ class BaseResult
         return in_array($this->stateLabel(), ['en_proceso', 'pendiente'], true);
     }
 
+    /**
+     * Origen del error, derivado de las 3 banderas (success/connection/sunat_success).
+     * Permite al consumidor decidir qué hacer sin combinar las banderas a mano:
+     *   - 'conexion' → no se pudo comunicar con SUNAT/OSE (conviene REINTENTAR).
+     *   - 'sunat'    → SUNAT/OSE respondió y RECHAZÓ/observó el documento
+     *                  (corregir el comprobante; reintentar igual no ayuda).
+     *   - 'sistema'  → hubo comunicación pero un fallo LOCAL (parseo del CDR o
+     *                  estructura) — revisar el paquete/datos.
+     *   - null       → sin error (aceptado, observado o en proceso).
+     */
+    public function errorSource(): ?string
+    {
+        if ($this->isAccepted() || $this->isPending()) {
+            return null;
+        }
+        if (!$this->hasConnection()) {
+            return 'conexion';
+        }
+        if ($this->isRejected() || $this->sunatSuccess() === false) {
+            return 'sunat';
+        }
+        if (!$this->isSuccess()) {
+            return 'sistema';
+        }
+        return null;
+    }
+
     public function getCode(): ?string
     {
         $code = $this->data['code'] ?? null;

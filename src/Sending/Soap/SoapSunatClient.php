@@ -109,6 +109,7 @@ class SoapSunatClient
 
             return [
                 'success' => true, // Solo false si no hay comunicación (catch Throwable)
+                'connection' => true, // hubo comunicación con SUNAT/OSE
                 'sunat_success' => null, // El builder/reader analizará la respuesta
                 'message' => 'Respuesta recibida correctamente.',
                 'code' => null,
@@ -120,11 +121,15 @@ class SoapSunatClient
             ];
         } catch (SoapFault $fault) {
             $rawResponse = isset($client) ? $client->__getLastResponse() : null;
+            // Un SoapFault puede ser (a) de CONEXIÓN (no se llegó al WS) o (b) del
+            // servidor/negocio (el WS respondió con Fault). Se distingue por el mensaje.
+            $isConnError = self::isConnectionFault($fault);
             return [
-                'success' => true, // SIEMPRE true: hubo respuesta del WS, sea rechazo, advertencia, etc
-                'sunat_success' => null, // El parser/builder lo determinará
-                'message' => 'Error SOAP: ' . $fault->getMessage(),
-                'code' => $fault->faultcode ?? 'SOAP_ERROR',
+                'success' => !$isConnError,     // conexión rota => no hubo respuesta útil
+                'connection' => !$isConnError,  // origen del error: conexión vs SUNAT/sistema
+                'sunat_success' => null,        // el parser/builder lo determinará
+                'message' => ($isConnError ? 'Error de conexión: ' : 'Error SOAP: ') . $fault->getMessage(),
+                'code' => $isConnError ? 'CONNECTION_ERROR' : ($fault->faultcode ?? 'SOAP_ERROR'),
                 'ticket' => null,
                 'cdr' => null,
                 'errors' => [$fault->getMessage()],
@@ -134,6 +139,7 @@ class SoapSunatClient
         } catch (Throwable $e) {
             return [
                 'success' => false, // No hubo comunicación
+                'connection' => false,
                 'sunat_success' => null,
                 'message' => 'Error de conexión: ' . $e->getMessage(),
                 'code' => 'CONNECTION_ERROR',
@@ -147,5 +153,26 @@ class SoapSunatClient
             // 4) Restaurar el timeout global
             ini_set('default_socket_timeout', (string)$prevSocketTimeout);
         }
+    }
+
+    /**
+     * ¿El SoapFault se debe a falta de comunicación (transporte) y no a una
+     * respuesta del WS de SUNAT/OSE? Distingue el error de CONEXIÓN del de negocio.
+     */
+    private static function isConnectionFault(SoapFault $fault): bool
+    {
+        $m = strtolower($fault->getMessage());
+        foreach ([
+            'could not connect', 'connection timed out', 'failed to connect',
+            'error fetching http headers', 'connection refused',
+            'name or service not known', 'could not resolve host',
+            'operation timed out', 'ssl',
+        ] as $needle) {
+            if (str_contains($m, $needle)) {
+                return true;
+            }
+        }
+        // faultcode "HTTP" => error de transporte, no de negocio SUNAT.
+        return isset($fault->faultcode) && stripos((string) $fault->faultcode, 'HTTP') !== false;
     }
 }
