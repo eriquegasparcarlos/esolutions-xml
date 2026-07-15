@@ -62,6 +62,8 @@ El payload es un array con una sola clave raíz `document`. **Req** = requerida 
 
 ## Totales (todos Req, float)
 
+**`total_taxes`** debe ser la **suma de todos los subtotales de tributo** (IGV + ISC + OTROS + ICBPER) — es el `cbc:TaxAmount` global del `<cac:TaxTotal>`. Si no cuadra con los subtotales, SUNAT rechaza con código 3294. El `<cbc:TaxInclusiveAmount>` (precio de venta) se deriva en la plantilla como `total_value + total_taxes + total_prepayment`.
+
 `total_taxes`, `total_isc`, `total_base_isc`, `total_taxed`, `total_igv`,
 `total_unaffected_init`, `total_prepayment_unaffected`, `total_exonerated_init`,
 `total_prepayment_exonerated`, `total_free`, `total_igv_free`, `total_exportation_init`,

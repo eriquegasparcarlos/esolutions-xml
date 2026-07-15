@@ -379,6 +379,8 @@
     {{-- Monetary totals --}}
     <cac:LegalMonetaryTotal>
         <cbc:LineExtensionAmount currencyID="{{ $document['currency_type_id'] }}">{{ $document['total_value'] }}</cbc:LineExtensionAmount>
+        {{-- Total precio de venta (SUNAT lo exige: cod. 3305) = valor de venta + tributos + anticipos --}}
+        <cbc:TaxInclusiveAmount currencyID="{{ $document['currency_type_id'] }}">{{ funcNumberFormatXml($document['total_value'] + $document['total_taxes'] + $document['total_prepayment']) }}</cbc:TaxInclusiveAmount>
         @if(floatval($document['total_discount_no_base']) > 0)
             <cbc:AllowanceTotalAmount currencyID="{{ $document['currency_type_id'] }}">{{ $document['total_discount_no_base'] }}</cbc:AllowanceTotalAmount>
         @endif
