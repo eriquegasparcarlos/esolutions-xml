@@ -89,6 +89,23 @@ return [
 
     /*
     |--------------------------------------------------------------------------
+    | Fechas de vigencia de reglas nuevas de SUNAT (date-gating)
+    |--------------------------------------------------------------------------
+    |
+    | Cada regla/campo nuevo se aplica solo a documentos con fecha de emisión >=
+    | su vigencia (SUNAT valida por fecha de emisión). Configurables por si SUNAT
+    | posterga una vigencia: se cambia la fecha aquí, sin re-desplegar el paquete.
+    | Ver docs/sunat-changes-2026-08.md.
+    |
+    */
+    'rule_dates' => [
+        'product_code'  => env('SUNAT_RULE_PRODUCT_CODE', '2026-08-01'),  // #12 ERR-3496
+        'nd13_inafecta' => env('SUNAT_RULE_ND13', '2026-08-01'),          // #23 ERR-3507
+        'summary_2026'  => env('SUNAT_RULE_SUMMARY_2026', '2026-08-01'),  // #26/#27/#29 resumen diario
+    ],
+
+    /*
+    |--------------------------------------------------------------------------
     | Envío SUNAT / OSE
     |--------------------------------------------------------------------------
     |

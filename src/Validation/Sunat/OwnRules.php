@@ -30,10 +30,13 @@ class OwnRules
      * Cada regla se aplica solo a documentos con fecha de emisión >= su vigencia
      * (SUNAT valida por fecha de emisión, no por fecha de envío).
      */
-    private const EFFECTIVE_PRODUCT_CODE = '2026-08-01'; // #12 ERR-3496
-    private const EFFECTIVE_ND13_INAFECTA = '2026-08-01'; // #23 ERR-3507
-
     private string $rootName = '';
+
+    /** Fecha de vigencia de una regla (config, con fallback). Ver docs/sunat-changes-2026-08.md. */
+    private function ruleDate(string $key, string $default = '2026-08-01'): string
+    {
+        return (string) (function_exists('config') ? config("esolutions_xml.rule_dates.$key", $default) : $default);
+    }
 
     public function __construct(?ErrorCatalog $errors = null)
     {
@@ -80,7 +83,7 @@ class OwnRules
      */
     private function checkDebitNote13Inafecta(array &$errors): void
     {
-        if ($this->rootName !== 'DebitNote' || !$this->effectiveFrom(self::EFFECTIVE_ND13_INAFECTA)) {
+        if ($this->rootName !== 'DebitNote' || !$this->effectiveFrom($this->ruleDate('nd13_inafecta'))) {
             return;
         }
         $noteType = trim((string) $this->xp->evaluate('string(//cac:DiscrepancyResponse/cbc:ResponseCode)'));
@@ -108,7 +111,7 @@ class OwnRules
      */
     private function checkProductCodeMandatory(array &$errors): void
     {
-        if (!$this->effectiveFrom(self::EFFECTIVE_PRODUCT_CODE)) {
+        if (!$this->effectiveFrom($this->ruleDate('product_code'))) {
             return;
         }
         $lines = $this->xp->query('//cac:InvoiceLine | //cac:CreditNoteLine | //cac:DebitNoteLine');
