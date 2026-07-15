@@ -97,11 +97,24 @@
             <cbc:InstructionID>04</cbc:InstructionID>
         </sac:BillingPayment>
         @endif
-        @if(floatval($row['total_free']) > 0)
-        <sac:BillingPayment>
-            <cbc:PaidAmount currencyID="{{ $row['currency_type_id'] }}">{{ $row['total_free'] }}</cbc:PaidAmount>
-            <cbc:InstructionID>05</cbc:InstructionID>
-        </sac:BillingPayment>
+        @if(($document['date_of_issue'] ?? '') >= '2026-08-01')
+            {{-- #26 (vigencia 2026-08-01): gratuitas desagregadas 06 gravadas, 07
+                 exoneradas, 08 inafectas, 09 exportación (reemplaza el 05) --}}
+            @foreach(['total_free_taxed' => '06', 'total_free_exonerated' => '07', 'total_free_unaffected' => '08', 'total_free_exportation' => '09'] as $freeKey => $instr)
+                @if(floatval($row[$freeKey] ?? 0) > 0)
+                <sac:BillingPayment>
+                    <cbc:PaidAmount currencyID="{{ $row['currency_type_id'] }}">{{ $row[$freeKey] }}</cbc:PaidAmount>
+                    <cbc:InstructionID>{{ $instr }}</cbc:InstructionID>
+                </sac:BillingPayment>
+                @endif
+            @endforeach
+        @else
+            @if(floatval($row['total_free']) > 0)
+            <sac:BillingPayment>
+                <cbc:PaidAmount currencyID="{{ $row['currency_type_id'] }}">{{ $row['total_free'] }}</cbc:PaidAmount>
+                <cbc:InstructionID>05</cbc:InstructionID>
+            </sac:BillingPayment>
+            @endif
         @endif
         @if(floatval($row['total_charge']) > 0)
         <cac:AllowanceCharge>
