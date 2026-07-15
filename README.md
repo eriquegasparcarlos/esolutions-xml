@@ -1,160 +1,114 @@
 # esolutions/xml
 
-Generación, firma, validación y envío SUNAT/OSE de comprobantes electrónicos peruanos (XML UBL 2.1) para proyectos Laravel.
+Generación, firma, validación y envío SUNAT/OSE de comprobantes electrónicos peruanos (XML UBL) para proyectos Laravel. **Independiente del proyecto consumidor**: la entrada es un array payload documentado y la configuración entra por objetos propios — sin dependencias a modelos Eloquent externos.
 
-Cubre las dos mitades del mismo flujo de facturación electrónica:
+## Tipos de documento soportados
 
-- **`Xml/`** — arma el XML UBL a partir de un payload, lo firma (XMLDSig) y lo valida (XSD + reglas de negocio).
-- **`SunatOSEIntegration/`** — envía ese XML a SUNAT (o a un OSE como Nubefact) por SOAP y parsea la respuesta (CDR).
+| Documento | Código | Plantilla | UBL | Envío |
+|---|---|---|---|---|
+| Factura / Boleta | 01 / 03 | `invoice` | 2.1 | `sendBill` (síncrono, CDR inmediato) |
+| Nota de crédito | 07 | `credit-note` | 2.1 | `sendBill` |
+| Nota de débito | 08 | `debit-note` | 2.1 | `sendBill` |
+| Guía de remisión | 09 | `despatch` | 2.1 | REST GRE 2022 (stub, v2.1) |
+| Retención | 20 | `retention` | 2.0 | `sendBill` (endpoint propio) |
+| Percepción | 40 | `perception` | 2.0 | `sendBill` (endpoint propio) |
+| Resumen diario | RC | `summary` | 2.0 | `sendSummary` → ticket → `getStatus` |
+| Comunicación de baja | RA | `voided` | 2.0 | `sendSummary` → ticket → `getStatus` |
 
 ## Instalación
-
-Este paquete no está en Packagist — se consume como repositorio `path` o `vcs` de Composer.
-
-```json
-{
-    "repositories": [
-        { "type": "vcs", "url": "https://github.com/eriquegasparcarlos/esolutions-xml" }
-    ],
-    "require": {
-        "esolutions/xml": "^1.0"
-    }
-}
-```
-
-O, si trabajás con una copia local del repo (desarrollo activo):
-
-```json
-{
-    "repositories": [
-        { "type": "path", "url": "../esolutions-xml" }
-    ]
-}
-```
 
 ```bash
 composer require esolutions/xml
 ```
 
-Requiere PHP `^8.2` y Laravel `^11.0|^12.0|^13.0`. La firma XMLDSig depende de [`robrichards/xmlseclibs`](https://github.com/robrichards/xmlseclibs) (`^3.0`), que tu proyecto debe requerir aparte.
+Disponible en [Packagist](https://packagist.org/packages/esolutions/xml). Requiere PHP `^8.2`, Laravel `^11|^12|^13` y las extensiones `dom`, `libxml`, `openssl`, `soap`, `zip`. El provider se registra por auto-discovery; la config es publicable:
 
-## Registrar el Service Provider
-
-El paquete no se auto-descubre todavía (sin `extra.laravel.providers` en su `composer.json`). Registralo manualmente:
-
-```php
-// bootstrap/providers.php (Laravel 11+)
-return [
-    // ...
-    App\ESolutions\Xml\XmlServiceProvider::class,
-];
+```bash
+php artisan vendor:publish --tag=esolutions-xml-config
 ```
 
-El provider necesita `config/esolutions_xml.php` en tu app (hace `mergeConfigFrom` sobre esa ruta). Como mínimo:
+## Generar un XML (render + firma + validación XSD y reglas)
 
 ```php
-// config/esolutions_xml.php
-return [
-    'signing' => [
-        'default_certificate_file' => null,     // null => usa el .pem demo incluido
-        'default_certificate_password' => null, // requerido si usás .pfx/.p12
-        'signature_uri' => 'SIGN',
-        'signature_note' => 'SIGN',
-    ],
-    'views' => [
-        'invoice' => 'esxml::invoice',
-        'credit_note' => 'esxml::credit-note',
-        'debit_note' => 'esxml::debit-note',
-    ],
-];
+use ESolutions\Xml\Contracts\XmlDocumentGeneratorContract;
+
+$generator = app(XmlDocumentGeneratorContract::class);
+$result = $generator->generate('01', $payload);   // acepta 01/03/07/08/09/20/40/RC/RA o alias (invoice, credit-note...)
+
+if ($result->isOk()) {
+    $signedXml = $result->xml;
+    $hash = $result->getHash();       // DigestValue para el PDF/QR
+} else {
+    $errores = $result->validation->errors;   // [PAYLOAD] / [XSD] / reglas de negocio
+}
 ```
 
-## Uso rápido
+El **payload** es un array plano documentado por tipo en [`docs/payloads/`](docs/payloads/). Antes del render se valida contra `src/Payload/Schemas/{tipo}.php`: si faltan claves, `isOk()` es `false` con errores `[PAYLOAD]` claros (nunca un "Undefined array key" dentro de la plantilla). El mapeo desde tus modelos hacia el payload vive en **tu** proyecto (patrón anti-corruption; ver `SaleXmlPayloadBuilder` de intipos13 como referencia).
+
+## Enviar a SUNAT / OSE
 
 ```php
-/** @var \App\ESolutions\Xml\Contracts\XmlDocumentGeneratorContract $generator */
-$generator = app(\App\ESolutions\Xml\Contracts\XmlDocumentGeneratorContract::class);
+use ESolutions\Xml\Sending\{DocumentSender, SenderConfig, FilenameBuilder};
 
-$result = $generator->generate(
-    'invoice',      // invoice | credit_note | debit_note
-    $payload,       // array — ver estructura completa en src/Xml/README.md
-    null,           // ruta a certificado (.pem/.pfx/.p12); null = demo
-    null,           // password del certificado (requerido en .pfx/.p12)
-);
-
-$xml = $result->getXml();
-$isValid = $result->getValidation()->isOk();
-$errors = $result->getValidation()->getErrors();
-```
-
-El flujo interno: **Render** (Blade → XML) → **Formateo** → **Firma** (`ds:Signature` dentro de `ext:ExtensionContent`) → **Validación** (XSD + reglas de negocio) sobre el XML ya firmado. Documentación completa del payload en [`src/Xml/README.md`](src/Xml/README.md).
-
-## Envío a SUNAT / OSE
-
-```php
-$sender = new \App\ESolutions\SunatOSEIntegration\DocumentSender(
-    provider: 'sunat',       // 'sunat' | 'nubefact'
-    username: $solUser,
-    password: $solPassword,
-    environment: 'demo',    // 'demo' | 'production'
-    company: $company,       // instancia de App\Models\User (ver nota abajo)
-    documentTypeId: '01',
-);
-
-$response = $sender->sendBill([
-    'filename' => 'F001-123',
-    'content' => base64_encode($xmlFirmado),
+$config = SenderConfig::fromArray([
+    'provider' => 'sunat',            // 'sunat' | 'nubefact'
+    'environment' => 'demo',          // 'demo' (beta) | 'production'
+    'username' => '20123456789MODDATOS',
+    'password' => 'moddatos',
+    'endpoint' => null,               // URL OSE/PSE propia (override total)
 ]);
-// $response: ['success' => bool, 'cdr' => ..., 'code' => ..., 'description' => ...]
 
-$sender->sendSummary($params);   // resúmenes diarios / comunicación de baja
-$sender->getStatus($params);     // consulta de ticket (resúmenes async)
+$sender = new DocumentSender($config);
+$filename = FilenameBuilder::forDocument('20123456789', '01', 'F001', 123);
+
+// Fachada: resuelve sendBill vs sendSummary inspeccionando el XML firmado
+$result = $sender->send($filename, $signedXml);
+
+if ($result->isAccepted()) {          // aceptado u observado (código 0 / >=4000)
+    $cdrXml = $result->getCdrXml();   // ApplicationResponse ya extraído del ZIP
+    $notas = $result->getNotes();
+} elseif ($result->isRejected()) {    // 2000-3999
+    $motivo = $result->getMessage();  // traducido por el catálogo local de códigos
+}
 ```
 
-`DocumentSender` resuelve el endpoint SOAP correcto según `provider` + `environment` + `documentTypeId` (detecta retenciones/percepciones automáticamente para SUNAT).
+- **Resúmenes/bajas** (asíncrono): `sendSummary()` retorna `SummaryResult` con `getTicket()`; luego `getStatus($ticket)` retorna `StatusResult` (`isInProcess()` = código 98, reintentar).
+- **Reconsulta de CDR** (caso 1033 "ya fue enviado"): `ConsultCdrService::getStatusCdr($ruc, $tipo, $serie, $numero)`.
+- Todos los results envuelven el mismo array uniforme (`toArray()`): `success` (técnico), `connection`, `sunat_success` (veredicto), `state_label` (`aceptado|observado|rechazado|en_proceso|indeterminado`).
+- Los códigos SUNAT se traducen con `FileErrorCodeCatalog` (1474 códigos empaquetados); puedes re-bindear `ErrorCodeCatalogInterface` para usar tu propio catálogo (p.ej. Redis).
 
-## Qué builders/templates están listos
+## Firma
 
-| Tipo de documento | Builder | Template Blade | Estado |
-|---|---|---|---|
-| Factura / Boleta | `InvoicePayloadBuilder` | `invoice.blade.php` | ✅ Completo |
-| Nota de crédito | `CreditNotePayloadBuilder` | `credit-note.blade.php` | ✅ Completo |
-| Nota de débito | `DebitNotePayloadBuilder` | `debit-note.blade.php` | ✅ Completo |
-| Resumen diario | `SummaryPayloadBuilder` | — | ⚠️ Builder existe, falta template |
-| Comunicación de baja | `VoidedPayloadBuilder` | — | ⚠️ Builder existe, falta template |
-| Guía de remisión | — | — | ❌ No implementado |
+XMLDSig enveloped (RSA-SHA1 + C14N, requisito SUNAT) insertada en el `<ext:ExtensionContent/>` vacío del template. Certificado por config:
 
-Los builders `*PayloadBuilder` (`src/Xml/Builders/Document/`) están escritos contra un modelo `Modules\Document\Models\Document` con relaciones (`company`, `customer`, `invoice`, `currencyType`, etc.) — **verificá que tu propio modelo `Document` las tenga**, o escribí tu propio builder que arme el mismo array de payload (no depende de ningún Eloquent model en particular, es solo un array).
+```php
+'signing' => [
+    'default_certificate_file' => env('SUNAT_CERTIFICATE_FILE'),      // .pem (cert+key) o .pfx/.p12
+    'default_certificate_password' => env('SUNAT_CERTIFICATE_PASSWORD'),
+],
+```
 
-`SaleToSunatPayloadBuilder` (`src/Xml/Builders/`) es un builder de referencia alternativo, pensado para un `Document` con esas mismas relaciones — úsalo de guía si tu esquema no calza 1:1, en vez de copiarlo literal.
-
-## Limitaciones conocidas
-
-- Los parsers de CDR (`SunatCdrParser`, `NubefactCdrParser`) llaman a `LogHelper::store(...)` — esa clase **no existe** en ningún paquete `esolutions/*` publicado todavía. Si vas a usar el envío SOAP, o quitás esas llamadas o implementás `App\ESolutions\Helpers\LogHelper::store()` en tu app antes de invocar `DocumentSender`.
-- `DocumentSender` tipa el parámetro `$company` como `App\Models\User` — probablemente debería ser tu modelo de compañía/tenant, no `User`. Ajustalo si tu dominio no calza.
-- Certificados en `src/*/Resources/*.pem` son los de **demo/homologación de SUNAT** (incluyen clave privada) — solo válidos para el ambiente `beta`, nunca para producción.
+Sin certificado configurado se usa el **demo de SUNAT beta** empaquetado (solo válido en homologación). Los `.pfx/.p12` se convierten a PEM al vuelo (`openssl_pkcs12_read`).
 
 ## Estructura
 
 ```
 src/
-├── Xml/
-│   ├── Builders/          # arman el payload array desde un Document (o el modelo que uses)
-│   ├── Contracts/         # XmlDocumentGeneratorContract
-│   ├── Rendering/         # Blade → XML string
-│   ├── Sign/               # firma XMLDSig (XMLSecLibs)
-│   ├── Templates/          # invoice.blade.php, credit-note.blade.php, debit-note.blade.php
-│   ├── Validation/         # XSD (XsdValidator) + reglas de negocio
-│   ├── Resources/xsd/      # esquemas UBL 2.1 completos (SUNAT + estándar OASIS)
-│   └── XmlServiceProvider.php
-└── SunatOSEIntegration/
-    ├── DocumentSender.php   # orquesta sendBill / sendSummary / getStatus
-    ├── Soap/                # cliente SOAP + WS-Security
-    ├── Endpoints/           # URLs SUNAT y Nubefact (beta/producción)
-    ├── Parsers/             # interpretan la respuesta SOAP + extraen CDR
-    └── Resources/            # certificados demo + WSDL
+├─ Contracts/     # XmlDocumentGeneratorContract, PayloadValidatorInterface, ErrorCodeCatalogInterface, ZipCompressorInterface, CdrResponseParserInterface
+├─ Generator/     # XmlDocumentGenerator (valida payload → render → format → sign → valida XML)
+├─ Payload/       # PayloadValidator + Schemas/{tipo}.php
+├─ Rendering/     # XmlTemplateRenderer (Blade, namespace esxml::)
+├─ Templates/     # 8 plantillas UBL en convención $document
+├─ Sign/          # Signed, SignedXml (xmlseclibs), Certificate/, Hash/
+├─ Validation/    # XSD (XsdValidator + SchemaResolver) + Rules (SeriesFormatRule...)
+├─ Results/       # GenerationResult, ValidationResult + Sending/ (BillResult, SummaryResult, StatusResult)
+├─ Sending/       # DocumentSender, SenderConfig, FilenameBuilder, Soap/, Cdr/, Zip/ (ZipFly en memoria), Catalog/, Services/ (Ticket, ConsultCdr), Gre/ (stub REST)
+├─ Support/       # DocTypeNormalizer, FunctionTribute, UblTextSanitizer, XmlFormatter...
+└─ Resources/     # wsdl/, xsd/2.0 y 2.1, certs demo, data/CodeErrors.xml
 ```
 
-## Licencia
+## Limitaciones conocidas
 
-Propietario — Carlos Erique Gaspar.
+- El envío de **guías de remisión** por API REST (GRE 2022) es un stub — llega en v2.1; el canal SOAP de guías está deprecado por SUNAT.
+- Los certificados `.pem` empaquetados son los **demo públicos de SUNAT beta** — nunca usarlos en producción.
+- No hay cola/reintentos automáticos: el sender nunca lanza excepciones de conexión (retorna `success=false, connection=false`) y el consumidor decide el reintento.
