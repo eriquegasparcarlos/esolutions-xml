@@ -8,6 +8,13 @@ class SeriesFormatRule
 {
     public function validate(array $doc, string $type): array
     {
+        // La regla de serie solo aplica a comprobantes con serie F###/B###.
+        // Resúmenes, bajas, guías, retenciones y percepciones tienen otra
+        // nomenclatura (RC-/RA-/T###/R###/P###) y no se validan aquí.
+        if (!in_array($type, ['invoice', 'boleta', 'credit_note', 'debit_note'], true)) {
+            return [];
+        }
+
         $errors = [];
 
         $series = $this->extractSeries($doc);
