@@ -51,6 +51,14 @@
         <cac:AccountingCustomerParty>
             <cbc:CustomerAssignedAccountID>{{ $row['customer_number'] }}</cbc:CustomerAssignedAccountID>
             <cbc:AdditionalAccountID>{{ $row['customer_identity_document_type_id'] }}</cbc:AdditionalAccountID>
+            @if(($document['date_of_issue'] ?? '') >= '2026-08-01' && !empty($row['customer_name']))
+                {{-- #29 (vigencia 2026-08-01): apellidos/nombres o razón social del adquirente --}}
+                <cac:Party>
+                    <cac:PartyLegalEntity>
+                        <cbc:RegistrationName><![CDATA[{{ $row['customer_name'] }}]]></cbc:RegistrationName>
+                    </cac:PartyLegalEntity>
+                </cac:Party>
+            @endif
         </cac:AccountingCustomerParty>
         @if(in_array($row['document_type_id'], ['07', '08']) && !empty($row['affected_document']))
         <cac:BillingReference>
@@ -106,6 +114,10 @@
             <cac:TaxSubtotal>
                 <cbc:TaxAmount currencyID="{{ $row['currency_type_id'] }}">{{ $row['total_igv'] }}</cbc:TaxAmount>
                 <cac:TaxCategory>
+                    @if(($document['date_of_issue'] ?? '') >= '2026-08-01')
+                        {{-- #27 (vigencia 2026-08-01): Tasa del IGV --}}
+                        <cbc:Percent>{{ $row['igv_percent'] ?? 18 }}</cbc:Percent>
+                    @endif
                     <cac:TaxScheme>
                         <cbc:ID>1000</cbc:ID>
                         <cbc:Name>IGV</cbc:Name>

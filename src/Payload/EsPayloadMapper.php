@@ -364,6 +364,8 @@ class EsPayloadMapper
                     'id' => (string) ($r['id'] ?? trim(($r['serie'] ?? '') . '-' . ($r['correlativo'] ?? ''), '-')),
                     'customer_number' => (string) ($cli['numDoc'] ?? ''),
                     'customer_identity_document_type_id' => (string) ($cli['tipoDoc'] ?? '1'),
+                    'customer_name' => $cli['rznSocial'] ?? $cli['nombre'] ?? null, // #29 (>= 2026-08-01)
+                    'igv_percent' => $r['tasaIgv'] ?? ($r['totales']['tasaIgv'] ?? null), // #27 (>= 2026-08-01)
                     'status_id' => (string) ($r['estado'] ?? '1'),
                     'currency_type_id' => (string) ($r['moneda'] ?? 'PEN'),
                     'total' => (float) ($t['total'] ?? 0),
