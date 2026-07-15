@@ -46,10 +46,8 @@ class PayloadFixturesTest extends TestCase
         );
 
         // 2) Reglas SUNAT cliente (determinista): 0 hallazgos.
-        //    expect='xsd' => solo XSD. Retención/percepción (UBL 2.0 con namespace
-        //    SUNAT propio) tienen un gap conocido en el motor de reglas cliente:
-        //    el XML es válido (pasa XSD) pero el evaluador de reglas da falsos
-        //    positivos. Se validan por XSD hasta cerrar ese gap.
+        //    expect='xsd' => solo XSD (para casos cuyo tipo aún no tiene reglas
+        //    fiables). Hoy todos los fixtures son 'ok' (XSD + reglas).
         if (($fixture['expect'] ?? 'ok') === 'ok') {
             $rules = (new SunatRulesValidator())->validate($res->xml, $fixture['type']);
             $found = array_map(fn ($e) => "[{$e->path}] {$e->message}", $rules->errors);

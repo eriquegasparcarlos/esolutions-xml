@@ -1,7 +1,7 @@
 {
     "type": "40",
     "description": "Comprobante de percepción 2%",
-    "expect": "xsd",
+    "expect": "ok",
     "payload": {
         "document": {
             "id": "P001-1",

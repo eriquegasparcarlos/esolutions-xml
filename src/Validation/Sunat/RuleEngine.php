@@ -26,7 +26,8 @@ class RuleEngine
     private ErrorCatalog $errors;
     private SunatCatalog $catalogs;
     /** @var array<string,string> nombre => valor resuelto */
-    private array $vars = [];
+    private array $vars = [];   // variables-VALOR: se sustituyen como literal string
+    private array $paths = [];  // variables-RUTA: se sustituyen como location path (textual)
 
     /** Namespaces UBL/SUNAT */
     private const NS = [
@@ -99,12 +100,31 @@ class RuleEngine
     private function resolveGlobals(DOMDocument $dom, array $defs): void
     {
         $this->vars = [];
+        $this->paths = [];
         $root = $dom->documentElement;
 
-        for ($pass = 0; $pass < 12 && count($this->vars) < count($defs); $pass++) {
+        // Clasifica una definición como VALOR (se evalúa) o RUTA (fragmento de
+        // location path que compone otras rutas). SUNAT define variables-ruta que
+        // se referencian entre sí (p.ej. $cacAgentPartyIdentificationID =
+        // $cacAgentParty/cac:PartyIdentification/cbc:ID); esas deben sustituirse
+        // como RUTA, no como su valor, o al componerlas el XPath se rompe.
+        $isValue = static function (string $sel): bool {
+            $s = ltrim($sel);
+            if (str_contains($s, '$nombreArchivoEnviado')) {
+                return true; // depende del nombre de archivo (dato externo, no es un nodo)
+            }
+            if (preg_match('/^[\'"0-9]/', $s)) {
+                return true; // literal string o numérico
+            }
+            // Función XPath que devuelve un valor (no un node-set).
+            return (bool) preg_match('/^(substring|substring-before|substring-after|concat|current-date|current-dateTime|number|count|sum|string|string-length|translate|normalize-space|boolean|not|true|false|round|floor|ceiling)\s*\(/', $s);
+        };
+
+        $total = count($defs);
+        for ($pass = 0; $pass < 15 && (count($this->vars) + count($this->paths)) < $total; $pass++) {
             $progress = false;
             foreach ($defs as $name => $sel) {
-                if (array_key_exists($name, $this->vars)) {
+                if (array_key_exists($name, $this->vars) || array_key_exists($name, $this->paths)) {
                     continue;
                 }
                 if ($sel === null || $sel === '') {
@@ -112,15 +132,25 @@ class RuleEngine
                     $progress = true;
                     continue;
                 }
-                // Sustituye variables ya resueltas; si aún referencia alguna
-                // no resuelta, se pospone a la siguiente pasada.
-                $expr = $this->substituteVars($sel);
-                if (preg_match('/\$[a-zA-Z_]/', $expr)) {
-                    continue;
+
+                if ($isValue($sel)) {
+                    // Variable-valor: sustituye lo ya resuelto y evalúa a string.
+                    $expr = $this->substituteVars($sel);
+                    if (preg_match('/\$[a-zA-Z_]/', $expr)) {
+                        continue; // aún referencia algo no resuelto
+                    }
+                    $val = @$this->xp->evaluate("string($expr)", $root);
+                    $this->vars[$name] = is_string($val) ? $val : '';
+                    $progress = true;
+                } else {
+                    // Variable-ruta: compón sustituyendo rutas ya resueltas (textual).
+                    $expr = $this->substitutePaths($sel);
+                    if (preg_match('/\$[a-zA-Z_]/', $expr)) {
+                        continue; // aún referencia una ruta no resuelta
+                    }
+                    $this->paths[$name] = $expr;
+                    $progress = true;
                 }
-                $val = @$this->xp->evaluate("string($expr)", $root);
-                $this->vars[$name] = is_string($val) ? $val : '';
-                $progress = true;
             }
             if (!$progress) {
                 break; // dependencias circulares o irresolubles
@@ -136,6 +166,18 @@ class RuleEngine
         $prim = $rule['primitive'];
         $params = $rule['params'] ?? [];
         $out = [];
+
+        // Si un parámetro XPath referencia una variable que no se pudo resolver
+        // (típicamente una variable LOCAL del XSLT que el extractor no capturó),
+        // la regla no es evaluable de forma fiable: se omite para no emitir un
+        // falso positivo ("no existe" cuando el dato sí está).
+        foreach (['node', 'test', 'expr'] as $pk) {
+            if (isset($params[$pk]) && $this->hasUnresolvedVar((string) $params[$pk])) {
+                $this->stats['skipped']++;
+                $this->stats['by_skip']['unresolved_var'] = ($this->stats['by_skip']['unresolved_var'] ?? 0) + 1;
+                return [];
+            }
+        }
 
         // Nodos de contexto donde aplica la regla (por el @match del template).
         $contexts = $this->contextNodes($rule['context'] ?? null);
@@ -299,10 +341,27 @@ class RuleEngine
         return '/^' . $head . '[0-9]{1,' . $intDigits . '}(\.[0-9]{1,' . $decimals . '})?$/';
     }
 
+    /** ¿El XPath aún referencia una variable sin resolver tras sustituir? */
+    private function hasUnresolvedVar(string $xpath): bool
+    {
+        return (bool) preg_match('/\$[a-zA-Z_]\w*/', $this->substituteVars($xpath));
+    }
+
+    /** Sustituye SOLO las variables-ruta, insertándolas como location path (sin comillas). */
+    private function substitutePaths(string $xpath): string
+    {
+        foreach ($this->paths as $name => $path) {
+            $xpath = preg_replace('/\$' . preg_quote($name, '/') . '\b/', $path, $xpath);
+        }
+        return $xpath;
+    }
+
     private function substituteVars(string $xpath): string
     {
+        // 1) Variables-ruta como path (para que $x/cac:Y siga siendo un XPath válido).
+        $xpath = $this->substitutePaths($xpath);
+        // 2) Variables-valor como literal string (comparaciones de igualdad).
         foreach ($this->vars as $name => $val) {
-            // Reemplaza $name por su literal string (comparaciones de igualdad).
             $xpath = preg_replace('/\$' . preg_quote($name, '/') . '\b/', "'" . addslashes($val) . "'", $xpath);
         }
         return $xpath;

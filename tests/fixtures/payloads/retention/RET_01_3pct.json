@@ -1,7 +1,7 @@
 {
     "type": "20",
     "description": "Comprobante de retención 3%",
-    "expect": "xsd",
+    "expect": "ok",
     "payload": {
         "document": {
             "id": "R001-1",

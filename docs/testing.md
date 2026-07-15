@@ -39,10 +39,8 @@ automáticamente. Por cada fixture verifica:
 ## `expect`: nivel de verificación
 
 - `expect: "ok"` (por defecto) → el fixture debe pasar **XSD + reglas SUNAT**.
-- `expect: "xsd"` → solo se exige **XSD**. Se usa para retención (20) y percepción
-  (40): son UBL 2.0 con namespace SUNAT propio y el evaluador de reglas cliente
-  tiene un gap conocido (falsos positivos) con ese namespace; el XML generado es
-  válido (pasa XSD). Cerrar ese gap del motor es un pendiente separado.
+- `expect: "xsd"` → solo se exige **XSD** (reservado para tipos que aún no tengan
+  reglas fiables). Hoy **todos** los fixtures son `ok`.
 
 ## Cobertura actual (26 fixtures)
 
@@ -56,5 +54,5 @@ automáticamente. Por cada fixture verifica:
 | Guía transportista (31) | un vehículo, multi-vehículo/multi-conductor | ok |
 | Resumen diario (RC) | boletas | ok |
 | Comunicación de baja (RA) | baja de factura | ok |
-| Retención (20) | tasa 3% | xsd |
-| Percepción (40) | tasa 2% | xsd |
+| Retención (20) | tasa 3% | ok |
+| Percepción (40) | tasa 2% | ok |
