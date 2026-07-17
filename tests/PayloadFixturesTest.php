@@ -13,6 +13,18 @@ use PHPUnit\Framework\Attributes\DataProvider;
  *
  * Los fixtures son los MISMOS JSON que sirven de ejemplo de payload por caso.
  * Agregar un caso nuevo = agregar un .json; el test lo recoge solo.
+ *
+ * La clave 'expect' del fixture define qué se espera:
+ *
+ *   'ok'            XSD + reglas SUNAT sin hallazgos (por defecto).
+ *   'xsd'           solo XSD (tipos cuyas reglas aún no son fiables).
+ *   'payload_error' generate() debe fallar antes de emitir XML; 'expect_message'
+ *                   (opcional) es un texto que el error debe contener.
+ *   'rules_error'   genera XML válido pero las reglas SUNAT deben rechazarlo;
+ *                   'expect_codes' lista los códigos que deben aparecer.
+ *
+ * Los dos últimos fijan los rechazos conocidos: sin ellos, un caso negativo
+ * "deja de fallar" en silencio y nadie se entera.
  */
 class PayloadFixturesTest extends TestCase
 {
@@ -37,6 +49,23 @@ class PayloadFixturesTest extends TestCase
         /** @var XmlDocumentGeneratorContract $gen */
         $gen = $this->app->make(XmlDocumentGeneratorContract::class);
         $res = $gen->generate($fixture['type'], $fixture['payload']);
+        $expect = $fixture['expect'] ?? 'ok';
+
+        // Casos negativos: el payload no debe llegar siquiera a producir XML.
+        if ($expect === 'payload_error') {
+            $this->assertFalse(
+                $res->isOk(),
+                "'{$fixture['type']}' debía fallar en la validación de payload y generó XML"
+            );
+            if (isset($fixture['expect_message'])) {
+                $this->assertStringContainsString(
+                    $fixture['expect_message'],
+                    (string) $res->validation?->firstMessage(),
+                    "El error de '{$fixture['type']}' no menciona lo esperado"
+                );
+            }
+            return;
+        }
 
         // 1) XSD (siempre)
         $this->assertNotEmpty($res->xml, "No se generó XML para {$fixture['type']}");
@@ -45,10 +74,23 @@ class PayloadFixturesTest extends TestCase
             "XSD falla ({$fixture['type']}): " . ($res->validation?->firstMessage() ?? '')
         );
 
+        // Casos negativos: XML bien formado que SUNAT igual rechaza.
+        if ($expect === 'rules_error') {
+            $rules = (new SunatRulesValidator())->validate($res->xml, $fixture['type']);
+            $codes = array_map(fn ($e) => $e->path, $rules->errors);
+            $detail = implode(' | ', array_map(fn ($e) => "[{$e->path}] {$e->message}", $rules->errors));
+
+            $this->assertNotSame([], $rules->errors, "'{$fixture['type']}' debía ser rechazado por las reglas y pasó");
+            foreach ($fixture['expect_codes'] ?? [] as $code) {
+                $this->assertContains($code, $codes, "Falta el código {$code} en '{$fixture['type']}' — obtenido: {$detail}");
+            }
+            return;
+        }
+
         // 2) Reglas SUNAT cliente (determinista): 0 hallazgos.
         //    expect='xsd' => solo XSD (para casos cuyo tipo aún no tiene reglas
-        //    fiables). Hoy todos los fixtures son 'ok' (XSD + reglas).
-        if (($fixture['expect'] ?? 'ok') === 'ok') {
+        //    fiables).
+        if ($expect === 'ok') {
             $rules = (new SunatRulesValidator())->validate($res->xml, $fixture['type']);
             $found = array_map(fn ($e) => "[{$e->path}] {$e->message}", $rules->errors);
             $this->assertSame([], $found, "Reglas SUNAT ({$fixture['type']}): " . implode(' | ', $found));
