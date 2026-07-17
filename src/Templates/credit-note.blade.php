@@ -149,13 +149,13 @@
         </cac:Party>
     </cac:AccountingCustomerParty>
 
-    {{-- Payment terms --}}
-    @if($document['payment_condition_id'] === '01')
-        <cac:PaymentTerms>
-            <cbc:ID>FormaPago</cbc:ID>
-            <cbc:PaymentMeansID>Contado</cbc:PaymentMeansID>
-        </cac:PaymentTerms>
-    @else
+    {{-- Forma de pago: en una nota de crédito SUNAT solo admite cac:PaymentTerms
+         para informar las cuotas del tipo 13 (ajuste de montos/fechas de pago) a
+         crédito. Emitirlo con "Contado" —como en una factura— hace que la nota
+         sea rechazada con 3246 ("el tipo de transaccion o el identificador de la
+         cuota no cumple con el formato esperado"), verificado contra SUNAT beta
+         y contra el OSE de Nubefact. --}}
+    @if($document['note_type_id'] === '13' && $document['payment_condition_id'] !== '01')
         <cac:PaymentTerms>
             <cbc:ID>FormaPago</cbc:ID>
             <cbc:PaymentMeansID>Credito</cbc:PaymentMeansID>
