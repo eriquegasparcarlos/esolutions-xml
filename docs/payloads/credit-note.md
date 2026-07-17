@@ -13,7 +13,7 @@ Plantilla: `src/Templates/credit-note.blade.php` · Esquema: `src/Payload/Schema
 | `affected_document.document_type_id` | `'01'` \| `'03'` | 01 | `cbc:DocumentTypeCode` |
 | `affected_document.date_of_issue` | string `Y-m-d` (informativo) | — | — |
 | `note_type_id` | string | **09** (tipo de NC: 01 anulación, 07 devolución, 13 ajuste de plazos...) | `cac:DiscrepancyResponse/cbc:ResponseCode` |
-| `note_description` | string \| null (Pres) | — | `cbc:Description` |
+| `note_description` | string no vacío, 2 a 500 caracteres | Sustento de la nota: SUNAT responde 2136 si falta y 2135 si no cumple la estructura. Si el emisor no captura un motivo libre, usar el nombre del tipo del catálogo 09 | `cbc:Description` |
 
 ## Claves que NO aplican (la plantilla no las emite)
 

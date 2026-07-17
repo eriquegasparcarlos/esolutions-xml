@@ -30,7 +30,7 @@
         <cbc:ResponseCode listAgencyName="PE:SUNAT"
                           listName="Tipo de nota de credito"
                           listURI="urn:pe:gob:sunat:cpe:see:gem:catalogos:catalogo09">{{ $document['note_type_id'] }}</cbc:ResponseCode>
-        <cbc:Description><![CDATA[{{ $document['note_description'] ?: '-' }}]]></cbc:Description>
+        <cbc:Description><![CDATA[{{ $document['note_description'] }}]]></cbc:Description>
     </cac:DiscrepancyResponse>
     @if($document['purchase_order'])
         <cac:OrderReference>

@@ -88,8 +88,13 @@ return [
         'document.items.*.name_parts',
     ],
 
-    'present' => [
+    // SUNAT (2135/2136) exige cac:DiscrepancyResponse/cbc:Description con un
+    // sustento de al menos 2 caracteres: no admite null ni cadena vacía.
+    'non_empty' => [
         'document.note_description',
+    ],
+
+    'present' => [
         'document.purchase_order',
         'document.company_trade_name',
         'document.fee_total',

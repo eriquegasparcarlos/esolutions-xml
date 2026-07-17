@@ -11,14 +11,20 @@ use ESolutions\Xml\Results\ValidationResult;
  * de documento definido en Payload/Schemas/{tipo}.php.
  *
  * Cada esquema retorna:
- *   'required' => claves en dot-notation que deben existir y no ser null
- *   'present'  => claves que deben existir (null permitido — la plantilla
- *                 las lee con acceso directo, p.ej. @if($document['x']))
+ *   'required'  => claves en dot-notation que deben existir y no ser null
+ *   'present'   => claves que deben existir (null permitido — la plantilla
+ *                  las lee con acceso directo, p.ej. @if($document['x']))
+ *   'non_empty' => claves que además no pueden ser cadena vacía o solo
+ *                  espacios (SUNAT rechaza el nodo resultante)
  *
  * Soporta comodín '*' para arrays de items: 'document.items.*.quantity'.
  */
 class PayloadValidator implements PayloadValidatorInterface
 {
+    protected const MODE_REQUIRED = 'required';
+    protected const MODE_PRESENT = 'present';
+    protected const MODE_NON_EMPTY = 'non_empty';
+
     public function validate(string $normalizedType, array $payload): ValidationResult
     {
         $schema = $this->loadSchema($normalizedType);
@@ -31,37 +37,36 @@ class PayloadValidator implements PayloadValidatorInterface
         $errors = [];
         $seen = [];
 
-        foreach ($schema['required'] ?? [] as $path) {
-            foreach ($this->missingPaths($payload, explode('.', $path), '', false) as $missing) {
-                // Varias reglas wildcard comparten padre ('items.*.x', 'items.*.y'):
-                // si falta el padre, se reporta una sola vez.
-                if (isset($seen[$missing])) {
-                    continue;
+        foreach ([self::MODE_REQUIRED, self::MODE_PRESENT, self::MODE_NON_EMPTY] as $mode) {
+            foreach ($schema[$mode] ?? [] as $path) {
+                foreach ($this->invalidPaths($payload, explode('.', $path), '', $mode) as $invalid) {
+                    // Varias reglas wildcard comparten padre ('items.*.x', 'items.*.y'):
+                    // si falta el padre, se reporta una sola vez.
+                    if (isset($seen[$invalid])) {
+                        continue;
+                    }
+                    $seen[$invalid] = true;
+                    $errors[] = new ValidationError(
+                        $this->message($mode, $invalid, $normalizedType),
+                        'PAYLOAD',
+                        $invalid
+                    );
                 }
-                $seen[$missing] = true;
-                $errors[] = new ValidationError(
-                    "Falta la clave requerida '{$missing}' en el payload de '{$normalizedType}' (ver docs/payloads/{$normalizedType}.md).",
-                    'PAYLOAD',
-                    $missing
-                );
-            }
-        }
-
-        foreach ($schema['present'] ?? [] as $path) {
-            foreach ($this->missingPaths($payload, explode('.', $path), '', true) as $missing) {
-                if (isset($seen[$missing])) {
-                    continue;
-                }
-                $seen[$missing] = true;
-                $errors[] = new ValidationError(
-                    "La clave '{$missing}' debe existir en el payload de '{$normalizedType}' aunque sea null (ver docs/payloads/{$normalizedType}.md).",
-                    'PAYLOAD',
-                    $missing
-                );
             }
         }
 
         return $errors ? ValidationResult::fail($errors) : ValidationResult::ok();
+    }
+
+    protected function message(string $mode, string $path, string $normalizedType): string
+    {
+        $docs = "(ver docs/payloads/{$normalizedType}.md)";
+
+        return match ($mode) {
+            self::MODE_PRESENT => "La clave '{$path}' debe existir en el payload de '{$normalizedType}' aunque sea null {$docs}.",
+            self::MODE_NON_EMPTY => "La clave '{$path}' del payload de '{$normalizedType}' es obligatoria y no puede estar vacía {$docs}.",
+            default => "Falta la clave requerida '{$path}' en el payload de '{$normalizedType}' {$docs}.",
+        };
     }
 
     protected function loadSchema(string $normalizedType): ?array
@@ -72,12 +77,13 @@ class PayloadValidator implements PayloadValidatorInterface
     }
 
     /**
-     * Devuelve las rutas concretas que faltan (con índices expandidos para '*').
+     * Devuelve las rutas concretas que incumplen el modo (con índices
+     * expandidos para '*').
      *
      * @param array<int, string> $segments
      * @return array<int, string>
      */
-    protected function missingPaths(mixed $data, array $segments, string $prefix, bool $allowNull): array
+    protected function invalidPaths(mixed $data, array $segments, string $prefix, string $mode): array
     {
         if ($segments === []) {
             return [];
@@ -89,14 +95,14 @@ class PayloadValidator implements PayloadValidatorInterface
             if (!is_array($data)) {
                 return [$this->joinPath($prefix, '*')];
             }
-            $missing = [];
+            $invalid = [];
             foreach ($data as $index => $item) {
-                $missing = array_merge(
-                    $missing,
-                    $this->missingPaths($item, $segments, $this->joinPath($prefix, (string) $index), $allowNull)
+                $invalid = array_merge(
+                    $invalid,
+                    $this->invalidPaths($item, $segments, $this->joinPath($prefix, (string) $index), $mode)
                 );
             }
-            return $missing;
+            return $invalid;
         }
 
         $path = $this->joinPath($prefix, $segment);
@@ -106,10 +112,21 @@ class PayloadValidator implements PayloadValidatorInterface
         }
 
         if ($segments === []) {
-            return (!$allowNull && $data[$segment] === null) ? [$path] : [];
+            return $this->leafFails($data[$segment], $mode) ? [$path] : [];
         }
 
-        return $this->missingPaths($data[$segment], $segments, $path, $allowNull);
+        return $this->invalidPaths($data[$segment], $segments, $path, $mode);
+    }
+
+    protected function leafFails(mixed $value, string $mode): bool
+    {
+        return match ($mode) {
+            self::MODE_PRESENT => false,
+            self::MODE_NON_EMPTY => $value === null
+                || (is_string($value) && trim($value) === '')
+                || $value === [],
+            default => $value === null,
+        };
     }
 
     protected function joinPath(string $prefix, string $segment): string

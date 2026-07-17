@@ -1,5 +1,37 @@
 # Changelog
 
+## v2.2.0 — 2026-07-16
+
+### Fix — notas de crédito/débito rechazadas por SUNAT (2135)
+
+`cac:DiscrepancyResponse/cbc:Description` se emitía con un `-` cuando el payload
+traía `note_description` en null. La regla oficial (`ValidaExprRegNC-2.0.1.xsl`,
+regexp `^(?!\s*$)[^\s].{1,499}$`) exige entre **2 y 500** caracteres, así que ese
+guion de un solo carácter producía un rechazo 2135 — y el paquete lo generaba en
+silencio, sin avisar al consumidor.
+
+- Las plantillas `credit-note` y `debit-note` ya no aplican ese fallback.
+- `document.note_description` pasa de `present` a `non_empty` en los esquemas de
+  `credit_note` y `debit_note`: la generación falla temprano con un mensaje claro
+  en vez de producir un XML que SUNAT rechaza.
+
+**Migración:** si tu consumidor podía enviar `note_description` en null o vacío,
+dale un valor — lo natural es el nombre del tipo de nota del catálogo 09/10
+(p. ej. "Anulación de la operación"). Si no, `generate()` devolverá
+`GenerationResult::failed()` en lugar de un XML inválido.
+
+### PayloadValidator — nueva sección `non_empty`
+
+Los esquemas aceptan una tercera sección además de `required` y `present`:
+
+| Sección | Exige |
+|---|---|
+| `present` | que la clave exista (null permitido) |
+| `required` | que exista y no sea null |
+| `non_empty` | que exista y no sea null, cadena vacía/solo espacios, ni array vacío |
+
+Compatible hacia atrás: un esquema sin `non_empty` se comporta igual que antes.
+
 ## v2.0.0 — 2026-07-15
 
 Reestructuración completa del paquete como librería independiente de cualquier proyecto consumidor. Inspirada en Greenter (capas modelo/xml/ws), el Facturalo legacy (envío/CDR probado en producción) y el flujo PSE de xml.apiperu.dev.
