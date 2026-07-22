@@ -34,6 +34,9 @@ return [
         'debit_note' => 'debit-note',
         'summary' => 'summary',
         'voided' => 'voided',
+        // La reversión (RR) usa el mismo XML VoidedDocuments que el RA; solo
+        // cambian el prefijo del identifier y los tipos de doc en las líneas.
+        'reversion' => 'voided',
         'despatch' => 'despatch',
         'despatch_carrier' => 'despatch-carrier',
         'retention' => 'retention',
@@ -68,6 +71,7 @@ return [
         'despatch_carrier' => '2.1/maindoc/UBL-DespatchAdvice-2.1.xsd',
         'summary' => '2.0/maindoc/UBL-SummaryDocuments-2.0.xsd',
         'voided' => '2.0/maindoc/UBL-VoidedDocuments-2.0.xsd',
+        'reversion' => '2.0/maindoc/UBL-VoidedDocuments-2.0.xsd',
         'retention' => '2.0/maindoc/UBL-Retention-2.0.xsd',
         'perception' => '2.0/maindoc/UBL-Perception-2.0.xsd',
     ],

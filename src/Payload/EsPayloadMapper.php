@@ -39,6 +39,9 @@ class EsPayloadMapper
             '31' => $this->mapDespatchCarrier($d),
             'rc' => $this->mapSummary($d),
             'ra' => $this->mapVoided($d),
+            // Reversión: baja de retenciones/percepciones. Mismo XML que RA,
+            // solo cambia el default del tipo de doc por línea.
+            'rr' => $this->mapVoided($d, '20'),
             '20' => $this->mapRetentionDoc($d),
             '40' => $this->mapPerceptionDoc($d),
             default => $this->mapInvoiceFamily($d),
@@ -488,7 +491,7 @@ class EsPayloadMapper
     }
 
     /** Comunicación de baja (RA). */
-    private function mapVoided(array $d): array
+    private function mapVoided(array $d, string $defaultLineDocType = '01'): array
     {
         $company = $d['company'] ?? $d['emisor'] ?? [];
         return ['document' => [
@@ -499,7 +502,7 @@ class EsPayloadMapper
             'company_number' => (string) ($company['ruc'] ?? ''),
             'company_name' => (string) ($company['razonSocial'] ?? ''),
             'documents' => array_map(fn ($r) => [
-                'document_type_id' => (string) ($r['tipoDoc'] ?? '01'),
+                'document_type_id' => (string) ($r['tipoDoc'] ?? $defaultLineDocType),
                 'series' => (string) ($r['serie'] ?? ''),
                 'number' => (string) ($r['numero'] ?? $r['correlativo'] ?? ''),
                 'description' => (string) ($r['motivo'] ?? $r['descripcion'] ?? ''),

@@ -58,7 +58,11 @@ class DocTypeNormalizer
             'resumen' => 'summary',
             'voided' => 'voided',
             'baja' => 'voided',
+            // RR: comunicación de baja de retenciones/percepciones. qpospe la
+            // llama voided_retention; SUNAT "reversión".
             'reversion' => 'reversion',
+            'voided_retention' => 'reversion',
+            'baja_retencion' => 'reversion',
             'retention' => 'retention',
             'retencion' => 'retention',
             'perception' => 'perception',

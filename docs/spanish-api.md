@@ -62,6 +62,8 @@ Un tipo se marca cuando su gemelo español pasa XSD + reglas (`tests/fixtures/pa
 - [x] **RC Resumen diario** — `fechaReferencia`, `documentos[{ tipoDoc, id, cliente{},
       estado, moneda, totales{} }]`
 - [x] **RA Comunicación de baja** — `documentos[{ tipoDoc, serie, numero, motivo }]`
+- [x] **RR Reversión** (baja de retenciones/percepciones) — mismo payload que RA;
+      `tipoDoc` de línea defaultea `20` (correlativo `RR-YYYYMMDD-#`)
 - [x] **20 Retención** — `proveedor{}`, `regimen{tipo,tasa}`, `totalRetenido`,
       `totalPagado`, `documentos[{ importeTotal, importeRetenido, … }]`
 - [x] **40 Percepción** — `cliente{}`, `regimen{tipo,tasa}`, `totalPercibido`,

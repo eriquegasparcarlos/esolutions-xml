@@ -16,8 +16,9 @@ Generación, firma, validación y envío SUNAT/OSE de comprobantes electrónicos
 | Percepción | 40 | `perception` | 2.0 | `sendBill` (endpoint propio) |
 | Resumen diario | RC | `summary` | 2.0 | `sendSummary` → ticket → `getStatus` |
 | Comunicación de baja | RA | `voided` | 2.0 | `sendSummary` → ticket → `getStatus` |
+| Reversión (baja de retención/percepción) | RR | `voided` (mismo XML) | 2.0 | `sendSummary` → ticket → `getStatus` (endpoint retenciones) |
 
-**Envíos verificados en homologación** (SUNAT beta / Nubefact): factura/boleta, guía remitente (todas las variantes de motivo + múltiples conductores/vehículos), guía transportista (pipeline), exportación con DAM, resumen, baja, retención y percepción — todos aceptados con CDR. Ver [`docs/sending-verified.md`](docs/sending-verified.md).
+**Envíos verificados en homologación** (SUNAT beta / Nubefact): factura/boleta, guía remitente (todas las variantes de motivo + múltiples conductores/vehículos), guía transportista (pipeline), exportación con DAM, resumen, baja, retención, percepción y reversión — todos aceptados con CDR. Ver [`docs/sending-verified.md`](docs/sending-verified.md).
 
 ## Dos entradas: contrato interno o API español
 

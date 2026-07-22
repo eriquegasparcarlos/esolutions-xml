@@ -27,12 +27,17 @@ class SunatRulesValidator
         '31' => 'guia_transportista',
         '20' => 'retencion',
         '40' => 'percepcion',
-        // Resúmenes/bajas se resuelven por localName del XML (ver resolveByRoot).
+        'RA' => 'baja',
+        'RR' => 'reversion',
+        // Resúmenes/bajas también se resuelven por localName (ver resolveRuleFile).
     ];
 
     /** localName de la raíz UBL → archivo de reglas (para resúmenes/bajas) */
     private const ROOT_MAP = [
         'SummaryDocuments' => 'resumen',
+        // VoidedDocuments es ambiguo: RA (baja de facturas/notas, SummaryVoided)
+        // y RR (reversión de retenciones/percepciones, OtrosVoided) comparten
+        // root — se discrimina por el prefijo del cbc:ID en resolveRuleFile.
         'VoidedDocuments' => 'baja',
         'Invoice' => 'factura',
         'SelfBilledInvoice' => 'liquidacion',
@@ -104,6 +109,11 @@ class SunatRulesValidator
         if ($name === null) {
             $root = $this->rootLocalName($xml);
             $name = $root !== null ? (self::ROOT_MAP[$root] ?? null) : null;
+
+            // RA vs RR comparten root VoidedDocuments; el cbc:ID decide.
+            if ($root === 'VoidedDocuments' && preg_match('/<cbc:ID>\s*RR-/', $xml)) {
+                $name = 'reversion';
+            }
         }
 
         return $name ? __DIR__ . '/Rules/' . $name . '.php' : null;

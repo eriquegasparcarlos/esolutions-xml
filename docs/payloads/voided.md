@@ -28,3 +28,18 @@ con `status_id = '3'`**, no con RA.
 | `description` | motivo de la baja (Pres) | `sac:VoidReasonDescription` |
 
 Referencia de mapeo: `Modules/Voided/app/Services/VoidedXmlPayloadBuilder.php` en intipos13.
+
+## Reversión (RR): baja de retenciones/percepciones
+
+`generate('RR', $payload)` (alias `'reversion'`, `'voided_retention'`) usa el
+**mismo XML y payload** — solo cambian:
+
+- `identifier`: `RR-YYYYMMDD-###` (correlativo propio, independiente del RA).
+- `documents[].document_type_id`: `'20'` (retención, serie `R###`) o `'40'`
+  (percepción, serie `P###`). Meter un 01/07/08 es rechazo 2308 — y viceversa,
+  un RA con docs 20/40 también.
+- **Envío al endpoint de retenciones** (`ol-ti-itemision-otroscpe-gem`):
+  `SenderConfig` con `document_type_id: 'RR'` lo selecciona solo. Mismo flujo
+  `sendSummary()` → ticket → `getStatus()`.
+
+Verificado en beta: `RR-20260722-1` aceptada (ResponseCode 0, CDR).

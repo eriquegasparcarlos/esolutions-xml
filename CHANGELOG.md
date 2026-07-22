@@ -1,5 +1,51 @@
 # Changelog
 
+## v2.5.0 — 2026-07-22
+
+### Nuevo — Reversión RR (baja de retenciones/percepciones)
+
+Tipo **RR** (comunicación de baja de comprobantes de retención 20 y percepción
+40), **aceptado en SUNAT beta** (`RR-20260722-1`, CDR ResponseCode 0). Es el
+equivalente del RA para "otros CPE":
+
+- **Mismo XML** `VoidedDocuments` que el RA (reutiliza `voided.blade.php` y el
+  XSD `UBL-VoidedDocuments-2.0`); difieren el prefijo del identifier
+  (`RR-YYYYMMDD-###`) y los tipos de documento admitidos en las líneas (20/40,
+  series `R###`/`P###`).
+- **Endpoint distinto**: se envía al servicio de retenciones
+  (`ol-ti-itemision-otroscpe-gem`), no al FE estándar — `SenderConfig` con
+  `document_type_id: 'RR'` lo resuelve solo. Mismo mecanismo
+  `sendSummary` → ticket → `getStatus`.
+- Tipo normalizado `reversion` (alias `RR`, `voided_retention`,
+  `baja_retencion`), esquema de payload propio y API español
+  (`generateFromEs('RR', …)` — las líneas defaultean `tipoDoc` 20).
+- Fixtures interno + español + negativos (2308 doc inválido, 2673 identifier
+  mal formado) verificados por mutación.
+
+### Fix — Las bajas RA se validaban con las reglas del RR
+
+`baja.php` había sido generado desde `ValidaExprRegOtrosVoided` (reglas del RR:
+identifier `RR-`, docs 20/40), y TODO `VoidedDocuments` caía ahí; las reglas
+reales del RA (`ValidaExprRegSummaryVoided`, ya extraídas en `resumen_baja.php`)
+no estaban cableadas en ningún sitio. Ahora:
+
+- `baja.php` = reglas RA (SummaryVoided) · `reversion.php` = reglas RR
+  (OtrosVoided).
+- `SunatRulesValidator` discrimina: por `documentTypeId` (`'RA'`/`'RR'`) o, si
+  no se pasa, por el prefijo del `cbc:ID` del XML (`VoidedRulesRoutingTest`).
+- Un RA con docs de retención (20) ahora se rechaza localmente (2308), y
+  viceversa.
+
+### Motor de reglas
+
+- Nueva primitiva **`rejectCall`** (estilo XSLT viejo del SFS: `xsl:if`
+  envolvente + `call-template rejectCall`, usado por OtrosVoided y otros 1.x).
+  Antes esas reglas se saltaban en silencio.
+- Soporte de **`regexp:match` (EXSLT)** dentro de las condiciones: se resuelve
+  en PHP (escaneo balanceado de argumentos, delimitador `~` para respetar los
+  `\/` ya escapados del XSLT) y se reinyecta como `true()`/`false()` antes de
+  evaluar el XPath restante.
+
 ## v2.4.0 — 2026-07-22
 
 ### Nuevo — Liquidación de compra (04)

@@ -13,6 +13,7 @@ gre-test), con el certificado demo estándar (RUC **10417844398**, usuario
 | Guía transportista (31) | GRE REST | ✅ send+ticket+parse | rechazo 2560: el RUC de prueba no está autorizado como transportista (dato del homologador, no del paquete) |
 | Resumen diario (RC) | SOAP ticket | ✅ **aceptado** (CDR) | el `cbc:ID` del RC debe usar la fecha de generación y coincidir con el nombre de archivo |
 | Comunicación de baja (RA) | SOAP ticket | ✅ **aceptado** (CDR) | — |
+| Reversión (RR, baja de retención) | SOAP ticket (endpoint retenciones) | ✅ **aceptado** (CDR, `RR-20260722-1`) | mismo XML que RA; `SenderConfig document_type_id: RR` |
 | Retención (20) | SOAP sendBill | ✅ **aceptado** (CDR) | requiere `documents[].payments` (número de pago) — sin él, error 2733 |
 | Percepción (40) | SOAP sendBill | ✅ **aceptado** (CDR) | requiere `documents[].payments` (número de cobro) — sin él, error 2697 |
 

@@ -219,12 +219,76 @@ class RuleEngine
     {
         foreach ($conditions as $test) {
             $test = $this->substituteVars($test);
+            // DOMXPath (XPath 1.0) no conoce las extensiones EXSLT que usan
+            // los XSLT viejos del SFS (OtrosVoided): se resuelven en PHP y se
+            // reinyectan como true()/false() antes de evaluar el resto.
+            $test = $this->resolveExsltRegexp($test, $ctx);
             $val = @$this->xp->evaluate("boolean($test)", $ctx);
             if ($val !== true) {
                 return false;
             }
         }
         return true;
+    }
+
+    /**
+     * Reemplaza cada llamada regexp:match(EXPR, "RE") por true()/false(),
+     * evaluando EXPR como string XPath en el contexto y RE con preg_match
+     * (EXSLT es case-sensitive; no se añade /i). El escaneo respeta comillas
+     * y paréntesis anidados (EXPR puede ser concat(...), substring(...), …).
+     */
+    private function resolveExsltRegexp(string $test, \DOMNode $ctx): string
+    {
+        while (($start = strpos($test, 'regexp:match(')) !== false) {
+            $i = $start + strlen('regexp:match(');
+            $depth = 1;
+            $quote = null;
+            $args = [];
+            $arg = '';
+            $len = strlen($test);
+            for (; $i < $len && $depth > 0; $i++) {
+                $ch = $test[$i];
+                if ($quote !== null) {
+                    $arg .= $ch;
+                    if ($ch === $quote) {
+                        $quote = null;
+                    }
+                    continue;
+                }
+                if ($ch === '"' || $ch === "'") {
+                    $quote = $ch;
+                    $arg .= $ch;
+                } elseif ($ch === '(') {
+                    $depth++;
+                    $arg .= $ch;
+                } elseif ($ch === ')') {
+                    $depth--;
+                    if ($depth > 0) {
+                        $arg .= $ch;
+                    }
+                } elseif ($ch === ',' && $depth === 1) {
+                    $args[] = $arg;
+                    $arg = '';
+                } else {
+                    $arg .= $ch;
+                }
+            }
+            $args[] = $arg;
+
+            if ($depth !== 0 || count($args) < 2) {
+                return $test; // llamada malformada: se deja tal cual (evaluará a false)
+            }
+
+            $value = (string) @$this->xp->evaluate('string(' . trim($args[0]) . ')', $ctx);
+            $regex = trim(trim($args[1]), "'\"");
+            // Delimitador ~: las regex del XSLT ya traen '/' escapado como \/
+            // (válido en PCRE con cualquier delimitador); re-escaparlo lo rompería.
+            $matched = @preg_match('~' . str_replace('~', '\~', $regex) . '~', $value) === 1;
+
+            $test = substr($test, 0, $start) . ($matched ? 'true()' : 'false()') . substr($test, $i);
+        }
+
+        return $test;
     }
 
     private function applyPrimitive(string $prim, array $params, \DOMNode $ctx): ?ValidationError
@@ -235,6 +299,12 @@ class RuleEngine
         $isError = ($params['isError'] ?? 'true()') !== 'false()';
 
         switch ($prim) {
+            // Estilo XSLT viejo (OtrosVoided/Retención 1.x): xsl:if envolvente
+            // + call-template rejectCall. Las conditions SON la condición de
+            // rechazo y ya pasaron en conditionsPass — aquí solo se emite.
+            case 'rejectCall':
+                return $this->err($lit('errorCode'), $isError, $params);
+
             case 'existElement':
                 if ($this->stringOf($xpathParam('node'), $ctx) === '') {
                     return $this->err($lit('errorCodeNotExist'), $isError, $params);

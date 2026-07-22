@@ -1,0 +1,22 @@
+{
+    "type": "RR",
+    "description": "ES: reversión (baja de retención)",
+    "expect": "ok",
+    "payload": {
+        "tipoDoc": "RR",
+        "correlativo": "RR-20260722-1",
+        "fechaReferencia": "2026-07-21",
+        "fechaEmision": "2026-07-22",
+        "company": {
+            "ruc": "10417844398",
+            "razonSocial": "CLINICA QUIROSYS SAC"
+        },
+        "documentos": [
+            {
+                "serie": "R001",
+                "numero": "5",
+                "motivo": "Error en los datos de la retención"
+            }
+        ]
+    }
+}
