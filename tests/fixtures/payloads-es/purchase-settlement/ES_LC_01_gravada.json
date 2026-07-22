@@ -1,0 +1,63 @@
+{
+    "type": "04",
+    "description": "ES: liquidacion de compra gravada (proveedor con DNI)",
+    "expect": "ok",
+    "payload": {
+        "tipoDoc": "04",
+        "serie": "L001",
+        "correlativo": "1",
+        "fechaEmision": "2026-07-22",
+        "horaEmision": "10:15:00",
+        "tipoMoneda": "PEN",
+        "formaPago": "Contado",
+        "tipoOperacion": "0501",
+        "company": {
+            "ruc": "10417844398",
+            "razonSocial": "ERIQUE GASPAR CARLOS ALFREDO",
+            "nombreComercial": "ACOPIO ANDINO",
+            "address": {
+                "ubigeo": "150101",
+                "codLocal": "0000",
+                "departamento": "LIMA",
+                "provincia": "LIMA",
+                "distrito": "LIMA",
+                "direccion": "AV. PRINCIPAL NRO. 123"
+            }
+        },
+        "proveedor": {
+            "tipoDoc": "1",
+            "numDoc": "41784439",
+            "razonSocial": "JUAN PEREZ AGRICULTOR",
+            "domicilio": {
+                "ubigeo": "150101",
+                "tipoDomicilio": "01",
+                "departamento": "LIMA",
+                "provincia": "LIMA",
+                "distrito": "LIMA",
+                "direccion": "CASERIO LOS OLIVOS S/N"
+            }
+        },
+        "operacion": {
+            "tipoLugar": "01",
+            "ubigeo": "150101",
+            "departamento": "LIMA",
+            "provincia": "LIMA",
+            "distrito": "LIMA",
+            "direccion": "FUNDO SANTA ROSA"
+        },
+        "details": [
+            {
+                "descripcion": "Papa amarilla",
+                "cantidad": 10,
+                "unidad": "KGM",
+                "mtoValorUnitario": 20.00,
+                "tipAfeIgv": "10",
+                "porcentajeIgv": 18,
+                "codProductoSunat": "50192601"
+            }
+        ],
+        "leyendas": [
+            { "code": "1000", "value": "DOSCIENTOS TREINTA Y SEIS CON 00/100 SOLES" }
+        ]
+    }
+}

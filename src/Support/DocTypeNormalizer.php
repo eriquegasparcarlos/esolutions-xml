@@ -20,6 +20,7 @@ class DocTypeNormalizer
         $codes = [
             '01' => 'invoice',
             '03' => 'invoice',   // boleta usa la misma plantilla/XSD que factura
+            '04' => 'purchase_settlement', // liquidación de compra (SelfBilledInvoice)
             '07' => 'credit_note',
             '08' => 'debit_note',
             '09' => 'despatch',
@@ -41,6 +42,10 @@ class DocTypeNormalizer
             'factura' => 'invoice',
             'boleta' => 'invoice',
             'invoice' => 'invoice',
+            'liquidacion' => 'purchase_settlement',
+            'liquidacion_compra' => 'purchase_settlement',
+            'purchase_settlement' => 'purchase_settlement',
+            'self_billed_invoice' => 'purchase_settlement',
             'credit_note' => 'credit_note',
             'debit_note' => 'debit_note',
             'despatch' => 'despatch',

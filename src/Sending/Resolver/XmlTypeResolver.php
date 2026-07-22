@@ -15,6 +15,7 @@ class XmlTypeResolver
     /** localName raíz => operación SOAP */
     private const MAP = [
         'Invoice' => self::OPERATION_BILL,
+        'SelfBilledInvoice' => self::OPERATION_BILL, // liquidación de compra (04)
         'CreditNote' => self::OPERATION_BILL,
         'DebitNote' => self::OPERATION_BILL,
         'DespatchAdvice' => self::OPERATION_BILL,

@@ -29,6 +29,7 @@ return [
     */
     'views' => [
         'invoice' => 'invoice',
+        'purchase_settlement' => 'purchase-settlement',
         'credit_note' => 'credit-note',
         'debit_note' => 'debit-note',
         'summary' => 'summary',
@@ -60,6 +61,7 @@ return [
     */
     'schemas' => [
         'invoice' => '2.1/maindoc/UBL-Invoice-2.1.xsd',
+        'purchase_settlement' => '2.1/maindoc/UBL-SelfBilledInvoice-2.1.xsd',
         'credit_note' => '2.1/maindoc/UBL-CreditNote-2.1.xsd',
         'debit_note' => '2.1/maindoc/UBL-DebitNote-2.1.xsd',
         'despatch' => '2.1/maindoc/UBL-DespatchAdvice-2.1.xsd',

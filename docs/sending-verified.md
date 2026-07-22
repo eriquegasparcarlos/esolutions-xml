@@ -8,6 +8,7 @@ gre-test), con el certificado demo estándar (RUC **10417844398**, usuario
 | Tipo | Canal | Resultado | Nota |
 |---|---|---|---|
 | Factura / Boleta (01/03) | SOAP sendBill | ✅ aceptado | F001-2 aceptada (SUNAT beta + Nubefact OSE) |
+| Liquidación de compra (04) | SOAP sendBill | ✅ **aceptado** (CDR) | L001-2/3 aceptada. Serie **`L`** + `operation_type_id` **`0501`**; `AddressTypeCode` del proveedor del **catálogo 60** (`01`, no `0000`); UNSPSC real de cat. 25. Queda una nota **4312 INFO** (no rechaza) |
 | Guía remitente (09) | GRE REST | ✅ **aceptado** (CDR) | ticket → status aceptado |
 | Guía transportista (31) | GRE REST | ✅ send+ticket+parse | rechazo 2560: el RUC de prueba no está autorizado como transportista (dato del homologador, no del paquete) |
 | Resumen diario (RC) | SOAP ticket | ✅ **aceptado** (CDR) | el `cbc:ID` del RC debe usar la fecha de generación y coincidir con el nombre de archivo |

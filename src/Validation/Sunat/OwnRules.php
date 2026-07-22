@@ -63,8 +63,10 @@ class OwnRules
         }
 
         $this->rootName = $dom->documentElement->localName;
-        // Solo comprobantes con LegalMonetaryTotal (factura/boleta/NC/ND).
-        $hasTotals = in_array($this->rootName, ['Invoice', 'CreditNote', 'DebitNote'], true);
+        // Solo comprobantes con LegalMonetaryTotal (factura/boleta/NC/ND) y la
+        // liquidación de compra (SelfBilledInvoice), que comparte la misma
+        // estructura TaxTotal/LegalMonetaryTotal/InvoiceLine.
+        $hasTotals = in_array($this->rootName, ['Invoice', 'CreditNote', 'DebitNote', 'SelfBilledInvoice'], true);
 
         $errors = [];
         if ($hasTotals) {

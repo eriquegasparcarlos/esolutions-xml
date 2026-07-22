@@ -7,6 +7,7 @@ Generación, firma, validación y envío SUNAT/OSE de comprobantes electrónicos
 | Documento | Código | Plantilla | UBL | Envío |
 |---|---|---|---|---|
 | Factura / Boleta | 01 / 03 | `invoice` | 2.1 | `sendBill` (síncrono, CDR inmediato) |
+| Liquidación de compra | 04 | `purchase-settlement` | 2.1 (SelfBilledInvoice) | `sendBill` |
 | Nota de crédito | 07 | `credit-note` | 2.1 | `sendBill` |
 | Nota de débito | 08 | `debit-note` | 2.1 | `sendBill` |
 | Guía de remisión — remitente | 09 | `despatch` | 2.1 | **REST GRE 2022** (`GreRestClient`) |

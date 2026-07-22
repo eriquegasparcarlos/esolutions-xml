@@ -20,6 +20,7 @@ class SunatRulesValidator
     private const MAP = [
         '01' => 'factura',
         '03' => 'boleta',
+        '04' => 'liquidacion',
         '07' => 'nota_credito',
         '08' => 'nota_debito',
         '09' => 'guia_remitente',
@@ -34,6 +35,7 @@ class SunatRulesValidator
         'SummaryDocuments' => 'resumen',
         'VoidedDocuments' => 'baja',
         'Invoice' => 'factura',
+        'SelfBilledInvoice' => 'liquidacion',
         'CreditNote' => 'nota_credito',
         'DebitNote' => 'nota_debito',
         'DespatchAdvice' => 'guia_remitente',

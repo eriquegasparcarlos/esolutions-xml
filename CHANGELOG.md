@@ -1,5 +1,46 @@
 # Changelog
 
+## v2.4.0 — 2026-07-22
+
+### Nuevo — Liquidación de compra (04)
+
+Se agrega el tipo **04 (liquidación de compra)**, aceptado en homologación SUNAT
+beta (CDR aceptada, `L001-2/3`). La empresa (con RUC) compra a un proveedor sin
+RUC (persona natural: DNI u otro doc del catálogo 06) y emite el comprobante.
+
+Es un **UBL `SelfBilledInvoice`** (auto-facturación), no un `Invoice`:
+
+- Plantilla nueva `purchase-settlement.blade.php` (XSD `UBL-SelfBilledInvoice-2.1`).
+- **Partes invertidas**: `cac:AccountingCustomerParty` = la empresa emisora;
+  `cac:AccountingSupplierParty` = el proveedor. El XSD ordena Customer **antes**
+  que Supplier.
+- **`cac:DeliveryTerms`** con el lugar de la operación (dónde se adquirieron los
+  bienes).
+- Envío por `sendBill` (el resolver reconoce la raíz `SelfBilledInvoice`).
+- Nuevo tipo normalizado `purchase_settlement` (alias `04`, `liquidacion`,
+  `liquidacion_compra`, `self_billed_invoice`), esquema de payload propio,
+  cobertura en la API español (`generateFromEs('04', …)`), y fixtures interno +
+  español.
+
+**Hallazgos que solo el envío en vivo destapó** (incorporados al fixture):
+
+| Código | Causa | Corrección |
+|---|---|---|
+| **0151** (nombre ZIP incorrecto) | serie `E001` + `tipoOperacion 0101` | serie **`L001`** + **`operation_type_id 0501`** ("Compra interna", cat. 51 `liquidacion=1`) |
+| **2457** (tipo de domicilio del vendedor) | `AddressTypeCode` del proveedor = `0000` (código de establecimiento del emisor, no del vendedor) | usar un valor del **catálogo 60** (p. ej. `01`) — `0000` es solo para el emisor |
+| **2456** (falta tipo de domicilio) | omitir el `AddressTypeCode` del proveedor | es **obligatorio**: emitir `01` |
+| **4332/4337** (UNSPSC) | código de producto genérico / inexistente | usar un UNSPSC real de catálogo 25 a nivel de clase (p. ej. `50192601`) |
+
+Queda una observación **4312 nivel INFO** (no rechaza): SUNAT emite una nota
+informativa sobre el `PayableAmount` en el LC gravado; el comprobante se acepta.
+
+### Reglas
+
+- `OwnRules` (3294/3305, código de producto) ahora también aplica a
+  `SelfBilledInvoice` (comparte TaxTotal/LegalMonetaryTotal/InvoiceLine).
+- `SunatRulesValidator`: `04` → `liquidacion` (ruleset propio, vacío por ahora —
+  SUNAT no publica XSL de LC; se poblará desde rechazos reales).
+
 ## v2.2.0 — 2026-07-16
 
 ### Fix — notas de crédito/débito rechazadas por SUNAT (2135)

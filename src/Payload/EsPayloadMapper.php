@@ -34,6 +34,7 @@ class EsPayloadMapper
         $tipoDoc = strtolower((string) ($d['tipoDoc'] ?? $d['tipoDocumento'] ?? $d['tipo_documento'] ?? '01'));
 
         return match ($tipoDoc) {
+            '04' => $this->mapPurchaseSettlement($d),
             '09' => $this->mapDespatch($d),
             '31' => $this->mapDespatchCarrier($d),
             'rc' => $this->mapSummary($d),
@@ -42,6 +43,107 @@ class EsPayloadMapper
             '40' => $this->mapPerceptionDoc($d),
             default => $this->mapInvoiceFamily($d),
         };
+    }
+
+    /**
+     * Liquidación de compra (04, SelfBilledInvoice). La empresa (emisor, con
+     * RUC) compra a un proveedor sin RUC. Español → contrato interno.
+     */
+    private function mapPurchaseSettlement(array $d): array
+    {
+        $moneda = $d['tipoMoneda'] ?? $d['moneda'] ?? 'PEN';
+        $company = $d['company'] ?? $d['emisor'] ?? [];
+        $supplier = $d['supplier'] ?? $d['proveedor'] ?? $d['vendedor'] ?? [];
+        $cAddr = $company['address'] ?? $company['establecimiento'] ?? [];
+        $sAddr = $supplier['address'] ?? $supplier['domicilio'] ?? [];
+        $op = $d['operacion'] ?? $d['lugarOperacion'] ?? $d['operation'] ?? [];
+        $items = $d['details'] ?? $d['items'] ?? [];
+
+        $lines = array_map(fn ($it) => $this->mapLine($it, $moneda), $items);
+        $totales = $d['totales'] ?? [];
+        $sum = fn (string $k) => array_sum(array_map(fn ($l) => $l[$k], $lines));
+        $sumAfect = fn (array $a) => array_sum(array_map(
+            fn ($l) => in_array($l['affectation_igv_type_id'], $a, true) ? $l['total_value'] : 0,
+            $lines
+        ));
+
+        $serie = $d['serie'] ?? '';
+        $numero = $d['correlativo'] ?? $d['numero'] ?? '';
+
+        $totalIgv = $totales['igv'] ?? $totales['mtoIGV'] ?? $sum('total_igv');
+        $totalValue = $totales['valorVenta'] ?? $sum('total_value');
+        $totalTaxed = $totales['gravado'] ?? $sumAfect(['10']);
+        $totalExonerated = $totales['exonerado'] ?? $sumAfect(['20']);
+        $totalUnaffected = $totales['inafecto'] ?? $sumAfect(['30']);
+        $total = $totales['total'] ?? round($totalValue + $totalIgv, 2);
+
+        return ['document' => [
+            'id' => trim("$serie-$numero", '-'),
+            'date_of_issue' => $d['fechaEmision'] ?? $d['fecha_emision'] ?? null,
+            'time_of_issue' => $d['horaEmision'] ?? $d['hora_emision'] ?? '00:00:00',
+            'operation_type_id' => (string) ($d['tipoOperacion'] ?? '0501'),
+            'document_type_id' => '04',
+            'currency_type_id' => $moneda,
+            'payment_condition_id' => (strtolower((string) ($d['formaPago'] ?? 'contado')) === 'credito') ? '02' : '01',
+            'signature_uri' => 'SIGN',
+            'signature_note' => 'SIGN',
+
+            // Emisor (comprador con RUC) → AccountingCustomerParty
+            'company_identity_document_type_id' => '6',
+            'company_number' => (string) ($company['ruc'] ?? ''),
+            'company_name' => (string) ($company['razonSocial'] ?? $company['razon_social'] ?? ''),
+            'company_trade_name' => $company['nombreComercial'] ?? null,
+            'establishment' => [
+                'location_id' => (string) ($cAddr['ubigeo'] ?? $cAddr['location_id'] ?? ''),
+                'code' => (string) ($cAddr['codLocal'] ?? $cAddr['codigo'] ?? $cAddr['code'] ?? '0000'),
+                'urbanization' => $cAddr['urbanizacion'] ?? null,
+                'province' => (string) ($cAddr['provincia'] ?? ''),
+                'department' => (string) ($cAddr['departamento'] ?? ''),
+                'district' => (string) ($cAddr['distrito'] ?? ''),
+                'address' => (string) ($cAddr['direccion'] ?? $cAddr['address'] ?? ''),
+                'country_id' => (string) ($cAddr['codPais'] ?? 'PE'),
+            ],
+
+            // Proveedor (vendedor sin RUC) → AccountingSupplierParty
+            'supplier_identity_document_type_id' => (string) ($supplier['tipoDoc'] ?? $supplier['tipoDocumento'] ?? '1'),
+            'supplier_number' => (string) ($supplier['numDoc'] ?? $supplier['numero'] ?? ''),
+            'supplier_name' => (string) ($supplier['razonSocial'] ?? $supplier['nombre'] ?? ''),
+            'supplier_address' => [
+                'location_id' => (string) ($sAddr['ubigeo'] ?? ''),
+                'address_type_code' => (string) ($sAddr['tipoDomicilio'] ?? '01'),
+                'province' => (string) ($sAddr['provincia'] ?? ''),
+                'department' => (string) ($sAddr['departamento'] ?? ''),
+                'district' => (string) ($sAddr['distrito'] ?? ''),
+                'address' => (string) ($sAddr['direccion'] ?? ''),
+                'country_id' => (string) ($sAddr['codPais'] ?? 'PE'),
+            ],
+
+            // Lugar de la operación → cac:DeliveryTerms
+            'operation' => empty($op) ? null : [
+                'location_type_code' => (string) ($op['tipoLugar'] ?? '01'),
+                'location_id' => (string) ($op['ubigeo'] ?? ''),
+                'province' => (string) ($op['provincia'] ?? ''),
+                'department' => (string) ($op['departamento'] ?? ''),
+                'district' => (string) ($op['distrito'] ?? ''),
+                'address' => (string) ($op['direccion'] ?? ''),
+                'country_id' => (string) ($op['codPais'] ?? 'PE'),
+            ],
+
+            'legends' => array_map(
+                fn ($l) => ['code' => (string) ($l['code'] ?? $l['codigo']), 'value' => (string) ($l['value'] ?? $l['valor'])],
+                $d['legends'] ?? $d['leyendas'] ?? []
+            ),
+
+            'total_taxes' => round($totalIgv, 2),
+            'total_taxed' => round($totalTaxed, 2),
+            'total_igv' => round($totalIgv, 2),
+            'total_exonerated' => round($totalExonerated, 2),
+            'total_unaffected' => round($totalUnaffected, 2),
+            'total_value' => round($totalValue, 2),
+            'total_payable' => round($total, 2),
+
+            'items' => $lines,
+        ]];
     }
 
     /** Factura/boleta (01/03) y notas (07/08). */
