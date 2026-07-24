@@ -1,5 +1,23 @@
 # Changelog
 
+## v2.6.0 — 2026-07-24
+
+### Nuevo — Clasificación de resultado accionable (`reachedSunat` / `recommendedAction`)
+
+`BaseResult` (y por herencia `BillResult`/`SummaryResult`/`StatusResult`) expone
+dos accessors derivados de `errorSource()`, para que el consumidor no reconstruya
+la lógica de clasificación en cada proyecto:
+
+- **`reachedSunat(): bool`** — responde la pregunta clave del emisor: ¿el
+  comprobante llegó a SUNAT/OSE? `false` solo en error de conexión (puede
+  reintentar tal cual); `true` en aceptado/observado/en proceso/rechazado por
+  SUNAT/parseo local.
+- **`recommendedAction(): ?string`** — acción sugerida: `'retry'` (conexión),
+  `'fix'` (SUNAT rechazó), `'review'` (fallo local de parseo), `null` (sin error).
+
+Cubierto por `ResultClassificationTest` (5 casos: aceptado, rechazado, sin
+conexión, error de sistema, en proceso).
+
 ## v2.5.0 — 2026-07-22
 
 ### Nuevo — Reversión RR (baja de retenciones/percepciones)

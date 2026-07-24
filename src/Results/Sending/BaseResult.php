@@ -84,6 +84,37 @@ class BaseResult
         return null;
     }
 
+    /**
+     * ¿El comprobante llegó a SUNAT/OSE? Responde la pregunta clave del emisor:
+     * si NO llegó (error de conexión) puede reintentar tal cual; si SÍ llegó,
+     * el veredicto (aceptado/rechazado) ya es de SUNAT.
+     *
+     *   - false → error de conexión: no fue recibido.
+     *   - true  → aceptado, observado, en proceso, rechazado por SUNAT, o fallo
+     *             de parseo local (hubo comunicación).
+     */
+    public function reachedSunat(): bool
+    {
+        return $this->errorSource() !== 'conexion';
+    }
+
+    /**
+     * Acción recomendada para el consumidor, derivada del origen del error:
+     *   - 'retry'  → reintentar el envío (error de conexión).
+     *   - 'fix'    → corregir el comprobante (SUNAT lo rechazó).
+     *   - 'review' → revisar (hubo comunicación pero falló el parseo local).
+     *   - null     → sin acción (aceptado / observado / en proceso).
+     */
+    public function recommendedAction(): ?string
+    {
+        return match ($this->errorSource()) {
+            'conexion' => 'retry',
+            'sunat'    => 'fix',
+            'sistema'  => 'review',
+            default    => null,
+        };
+    }
+
     public function getCode(): ?string
     {
         $code = $this->data['code'] ?? null;
