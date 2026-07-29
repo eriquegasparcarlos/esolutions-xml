@@ -33,7 +33,7 @@ class OwnRules
     private string $rootName = '';
 
     /** Fecha de vigencia de una regla (config, con fallback). Ver docs/sunat-changes-2026-08.md. */
-    private function ruleDate(string $key, string $default = '2026-08-01'): string
+    private function ruleDate(string $key, string $default = '2027-01-01'): string
     {
         return (string) (function_exists('config') ? config("esolutions_xml.rule_dates.$key", $default) : $default);
     }
@@ -72,14 +72,14 @@ class OwnRules
         if ($hasTotals) {
             $this->checkTaxSum($errors);            // 3294
             $this->checkTaxInclusiveAmount($errors); // 3305
-            $this->checkProductCodeMandatory($errors); // 3496 (date-gated 2026-08-01)
-            $this->checkDebitNote13Inafecta($errors);  // 3507 (date-gated 2026-08-01)
+            $this->checkProductCodeMandatory($errors); // 3496 (date-gated 2027-01-01)
+            $this->checkDebitNote13Inafecta($errors);  // 3507 (date-gated 2027-01-01)
         }
         return $errors;
     }
 
     /**
-     * #23 (ERR-3507, vigencia 2026-08-01): la nota de débito tipo "13"
+     * #23 (ERR-3507, vigencia 2027-01-01): la nota de débito tipo "13"
      * (Penalidades) solo se emite por operaciones INAFECTAS. Cada ítem debe tener
      * afectación al IGV en el rango inafecto (catálogo 07: 30-36).
      */
@@ -106,7 +106,7 @@ class OwnRules
     }
 
     /**
-     * #12 (ERR-3496, vigencia 2026-08-01): el Código de producto SUNAT
+     * #12 (ERR-3496, vigencia 2027-01-01): el Código de producto SUNAT
      * (cac:CommodityClassification/cbc:ItemClassificationCode) es OBLIGATORIO en
      * cada línea de FAC/BOL/NC/ND. Antes de la vigencia era observación (OBS).
      * Solo se exige a documentos emitidos en/después de la fecha de vigencia.
@@ -123,7 +123,7 @@ class OwnRules
         foreach ($lines as $line) {
             $code = $this->xp->evaluate('string(cac:Item/cac:CommodityClassification/cbc:ItemClassificationCode)', $line);
             if (trim((string) $code) === '') {
-                $errors[] = $this->err('3496', 'Debe consignar el Código de producto SUNAT en el detalle (obligatorio desde 2026-08-01).');
+                $errors[] = $this->err('3496', 'Debe consignar el Código de producto SUNAT en el detalle (obligatorio desde 2027-01-01).');
                 return; // basta una línea sin código
             }
         }

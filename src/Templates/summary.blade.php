@@ -51,8 +51,8 @@
         <cac:AccountingCustomerParty>
             <cbc:CustomerAssignedAccountID>{{ $row['customer_number'] }}</cbc:CustomerAssignedAccountID>
             <cbc:AdditionalAccountID>{{ $row['customer_identity_document_type_id'] }}</cbc:AdditionalAccountID>
-            @if(($document['date_of_issue'] ?? '') >= config('esolutions_xml.rule_dates.summary_2026', '2026-08-01') && !empty($row['customer_name']))
-                {{-- #29 (vigencia 2026-08-01): apellidos/nombres o razón social del adquirente --}}
+            @if(($document['date_of_issue'] ?? '') >= config('esolutions_xml.rule_dates.summary_2026', '2027-01-01') && !empty($row['customer_name']))
+                {{-- #29 (vigencia 2027-01-01): apellidos/nombres o razón social del adquirente --}}
                 <cac:Party>
                     <cac:PartyLegalEntity>
                         <cbc:RegistrationName><![CDATA[{{ $row['customer_name'] }}]]></cbc:RegistrationName>
@@ -97,8 +97,8 @@
             <cbc:InstructionID>04</cbc:InstructionID>
         </sac:BillingPayment>
         @endif
-        @if(($document['date_of_issue'] ?? '') >= config('esolutions_xml.rule_dates.summary_2026', '2026-08-01'))
-            {{-- #26 (vigencia 2026-08-01): gratuitas desagregadas 06 gravadas, 07
+        @if(($document['date_of_issue'] ?? '') >= config('esolutions_xml.rule_dates.summary_2026', '2027-01-01'))
+            {{-- #26 (vigencia 2027-01-01): gratuitas desagregadas 06 gravadas, 07
                  exoneradas, 08 inafectas, 09 exportación (reemplaza el 05) --}}
             @foreach(['total_free_taxed' => '06', 'total_free_exonerated' => '07', 'total_free_unaffected' => '08', 'total_free_exportation' => '09'] as $freeKey => $instr)
                 @if(floatval($row[$freeKey] ?? 0) > 0)
@@ -127,8 +127,8 @@
             <cac:TaxSubtotal>
                 <cbc:TaxAmount currencyID="{{ $row['currency_type_id'] }}">{{ $row['total_igv'] }}</cbc:TaxAmount>
                 <cac:TaxCategory>
-                    @if(($document['date_of_issue'] ?? '') >= config('esolutions_xml.rule_dates.summary_2026', '2026-08-01'))
-                        {{-- #27 (vigencia 2026-08-01): Tasa del IGV --}}
+                    @if(($document['date_of_issue'] ?? '') >= config('esolutions_xml.rule_dates.summary_2026', '2027-01-01'))
+                        {{-- #27 (vigencia 2027-01-01): Tasa del IGV --}}
                         <cbc:Percent>{{ $row['igv_percent'] ?? 18 }}</cbc:Percent>
                     @endif
                     <cac:TaxScheme>
@@ -139,8 +139,8 @@
                 </cac:TaxCategory>
             </cac:TaxSubtotal>
         </cac:TaxTotal>
-        @if(($document['date_of_issue'] ?? '') >= config('esolutions_xml.rule_dates.summary_2026', '2026-08-01') && floatval($row['total_igv_free'] ?? 0) > 0)
-        {{-- #28 (vigencia 2026-08-01): IGV de operaciones gratuitas --}}
+        @if(($document['date_of_issue'] ?? '') >= config('esolutions_xml.rule_dates.summary_2026', '2027-01-01') && floatval($row['total_igv_free'] ?? 0) > 0)
+        {{-- #28 (vigencia 2027-01-01): IGV de operaciones gratuitas --}}
         <cac:TaxTotal>
             <cbc:TaxAmount currencyID="{{ $row['currency_type_id'] }}">{{ $row['total_igv_free'] }}</cbc:TaxAmount>
             <cac:TaxSubtotal>

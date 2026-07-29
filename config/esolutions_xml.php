@@ -103,11 +103,17 @@ return [
     | posterga una vigencia: se cambia la fecha aquí, sin re-desplegar el paquete.
     | Ver docs/sunat-changes-2026-08.md.
     |
+    | POSTERGACIÓN: el Excel "Reglas de validación" del 24.07.2026 (Control de
+    | Cambios, línea 562) postergó del 01/08/2026 al 01/01/2027 la vigencia de
+    | las líneas 516-545 — que incluyen ERR-3496 (código producto, 527/530),
+    | ERR-3507 (ND 13, 538) y todo el resumen diario 2.0 (gratuitas/tasa IGV/
+    | adquirente, 541-545). Por eso las tres fechas quedan en 2027-01-01.
+    |
     */
     'rule_dates' => [
-        'product_code'  => env('SUNAT_RULE_PRODUCT_CODE', '2026-08-01'),  // #12 ERR-3496
-        'nd13_inafecta' => env('SUNAT_RULE_ND13', '2026-08-01'),          // #23 ERR-3507
-        'summary_2026'  => env('SUNAT_RULE_SUMMARY_2026', '2026-08-01'),  // #26/#27/#29 resumen diario
+        'product_code'  => env('SUNAT_RULE_PRODUCT_CODE', '2027-01-01'),  // #12 ERR-3496 (postergado 24.07.2026)
+        'nd13_inafecta' => env('SUNAT_RULE_ND13', '2027-01-01'),          // #23 ERR-3507 (postergado 24.07.2026)
+        'summary_2026'  => env('SUNAT_RULE_SUMMARY_2026', '2027-01-01'),  // #26/#27/#29 resumen diario (postergado 24.07.2026)
     ],
 
     /*

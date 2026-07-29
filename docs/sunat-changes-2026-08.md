@@ -1,7 +1,17 @@
-# Cambios SUNAT con vigencia 2026-08-01
+# Cambios SUNAT con vigencia 2026-08-01 → **postergada a 2027-01-01**
+
+> ⚠️ **POSTERGACIÓN (Excel del 24.07.2026, Control de Cambios línea 562):** SUNAT
+> postergó del **01/08/2026 al 01/01/2027** la vigencia de las líneas 516-545,
+> que incluyen **TODOS** los cambios que este paquete había fechado al 2026-08-01:
+> `ERR-3496` código de producto obligatorio (líneas 527/530), `ERR-3507` ND tipo
+> 13 solo inafectas (538) y todo el **resumen diario 2.0** (gratuitas desagregadas,
+> tasa IGV, IGV gratuitas, adquirente — 541-545). Por eso `config('esolutions_xml.rule_dates.*')`
+> quedó en **2027-01-01**. Un documento emitido entre ago-2026 y dic-2026 sigue
+> usando las reglas VIEJAS; si SUNAT vuelve a mover la fecha, se ajusta en el config.
 
 Fuente: "Reglas de validación" de SUNAT (publicado **2026-04-24**, hoja *Control de
-Cambios*). **33 cambios** entran en vigencia el **2026-08-01**.
+Cambios*). Los cambios listados abajo estaban previstos para el **2026-08-01** y
+ahora aplican desde el **2027-01-01** (ver postergación arriba).
 
 ## ⚠️ Principio: SUNAT valida por FECHA DE EMISIÓN del documento
 

@@ -1,5 +1,29 @@
 # Changelog
 
+## v2.6.1 — 2026-07-28
+
+### Fix — Postergación de vigencia SUNAT (2026-08-01 → 2027-01-01)
+
+El Excel oficial "Reglas de validación" del **24.07.2026** (Control de Cambios,
+línea 562) postergó del **01/08/2026 al 01/01/2027** la vigencia de las líneas
+516-545, que incluyen los tres bloques que el paquete tenía date-gated al
+2026-08-01:
+
+- `ERR-3496` — código de producto SUNAT obligatorio (FAC/BOL/NC/ND y LC).
+- `ERR-3507` — nota de débito tipo 13 solo por operaciones inafectas.
+- Resumen diario 2.0 — gratuitas desagregadas (06-09), tasa del IGV, IGV de
+  gratuitas y apellidos/razón social del adquirente.
+
+`config('esolutions_xml.rule_dates.{product_code,nd13_inafecta,summary_2026}')`
+pasa de `2026-08-01` a **`2027-01-01`** (y los defaults inline de
+`summary.blade.php` / `OwnRules.php`). Así los documentos emitidos entre
+ago-2026 y dic-2026 siguen usando las reglas VIEJAS, como exige SUNAT. Si SUNAT
+vuelve a mover la fecha, se ajusta en el config sin re-desplegar.
+
+No hay cambios de estructura ni de código nuevos requeridos por ese Excel que
+afecten a los tipos que el paquete emite (los demás cambios son sobre
+documentos 25/28/56, DAE, OSE-CDR — fuera de alcance).
+
 ## v2.6.0 — 2026-07-24
 
 ### Nuevo — Clasificación de resultado accionable (`reachedSunat` / `recommendedAction`)
