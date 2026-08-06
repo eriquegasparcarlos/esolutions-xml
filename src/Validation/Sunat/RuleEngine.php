@@ -29,6 +29,10 @@ class RuleEngine
     private array $vars = [];   // variables-VALOR: se sustituyen como literal string
     private array $paths = [];  // variables-RUTA: se sustituyen como location path (textual)
 
+    /** @var array<string,true> variables cuyo valor NO es confiable (def NULL o
+     *  derivadas de una NULL): las reglas que las usan se omiten. */
+    private array $unreliableVars = [];
+
     /** Namespaces UBL/SUNAT */
     private const NS = [
         'cbc' => 'urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2',
@@ -101,6 +105,7 @@ class RuleEngine
     {
         $this->vars = [];
         $this->paths = [];
+        $this->unreliableVars = [];
         $root = $dom->documentElement;
 
         // Clasifica una definición como VALOR (se evalúa) o RUTA (fragmento de
@@ -128,7 +133,12 @@ class RuleEngine
                     continue;
                 }
                 if ($sel === null || $sel === '') {
+                    // Variable sin definición extraíble (el XSLT la computa con
+                    // lógica que el extractor no capturó): resuelve a '' pero se
+                    // marca NO CONFIABLE — las reglas que dependan de ella se
+                    // omiten (no se puede evaluar sin falsos positivos).
                     $this->vars[$name] = '';
+                    $this->unreliableVars[$name] = true;
                     $progress = true;
                     continue;
                 }
@@ -139,8 +149,14 @@ class RuleEngine
                     if (preg_match('/\$[a-zA-Z_]/', $expr)) {
                         continue; // aún referencia algo no resuelto
                     }
+                    // Si su definición depende de una variable no confiable, el
+                    // valor computado tampoco lo es (se propaga la incertidumbre).
+                    $dependsUnreliable = $this->referencesUnreliableVar($sel);
                     $val = @$this->xp->evaluate("string($expr)", $root);
                     $this->vars[$name] = is_string($val) ? $val : '';
+                    if ($dependsUnreliable) {
+                        $this->unreliableVars[$name] = true;
+                    }
                     $progress = true;
                 } else {
                     // Variable-ruta: compón sustituyendo rutas ya resueltas (textual).
@@ -171,8 +187,21 @@ class RuleEngine
         // (típicamente una variable LOCAL del XSLT que el extractor no capturó),
         // la regla no es evaluable de forma fiable: se omite para no emitir un
         // falso positivo ("no existe" cuando el dato sí está).
-        foreach (['node', 'test', 'expr'] as $pk) {
-            if (isset($params[$pk]) && $this->hasUnresolvedVar((string) $params[$pk])) {
+        foreach (['node', 'test', 'expr', 'expresion'] as $pk) {
+            if (isset($params[$pk]) && (
+                $this->hasUnresolvedVar((string) $params[$pk])
+                || $this->referencesUnreliableVar((string) $params[$pk])
+            )) {
+                $this->stats['skipped']++;
+                $this->stats['by_skip']['unresolved_var'] = ($this->stats['by_skip']['unresolved_var'] ?? 0) + 1;
+                return [];
+            }
+        }
+
+        // Una condición (xsl:if envolvente) que dependa de una variable no
+        // confiable no se puede evaluar sin arriesgar un falso positivo: se omite.
+        foreach (($rule['conditions'] ?? []) as $cond) {
+            if ($this->referencesUnreliableVar((string) $cond)) {
                 $this->stats['skipped']++;
                 $this->stats['by_skip']['unresolved_var'] = ($this->stats['by_skip']['unresolved_var'] ?? 0) + 1;
                 return [];
@@ -415,6 +444,20 @@ class RuleEngine
     private function hasUnresolvedVar(string $xpath): bool
     {
         return (bool) preg_match('/\$[a-zA-Z_]\w*/', $this->substituteVars($xpath));
+    }
+
+    /** ¿El XPath (sin sustituir) referencia alguna variable NO confiable? */
+    private function referencesUnreliableVar(string $xpath): bool
+    {
+        if ($this->unreliableVars === [] || ! preg_match_all('/\$([a-zA-Z_]\w*)/', $xpath, $m)) {
+            return false;
+        }
+        foreach ($m[1] as $name) {
+            if (isset($this->unreliableVars[$name])) {
+                return true;
+            }
+        }
+        return false;
     }
 
     /** Sustituye SOLO las variables-ruta, insertándolas como location path (sin comillas). */

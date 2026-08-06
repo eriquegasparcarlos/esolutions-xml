@@ -70,12 +70,36 @@ class OwnRules
 
         $errors = [];
         if ($hasTotals) {
+            $this->checkLineExtensionSum($errors);   // 3084
             $this->checkTaxSum($errors);            // 3294
             $this->checkTaxInclusiveAmount($errors); // 3305
             $this->checkProductCodeMandatory($errors); // 3496 (date-gated 2027-01-01)
             $this->checkDebitNote13Inafecta($errors);  // 3507 (date-gated 2027-01-01)
         }
         return $errors;
+    }
+
+    /**
+     * 3084: el total del valor de venta (cac:LegalMonetaryTotal/cbc:LineExtensionAmount)
+     * debe ser igual a la SUMA de los cbc:LineExtensionAmount de cada línea. Los
+     * descuentos/cargos GLOBALES no afectan este total (van en AllowanceCharge /
+     * AllowanceTotalAmount), por eso la identidad es firme y no da falsos positivos.
+     */
+    private function checkLineExtensionSum(array &$errors): void
+    {
+        // Sin cabecera de totales o sin líneas: nada que reconciliar.
+        $hasDocTotal = $this->xp->query('//cac:LegalMonetaryTotal/cbc:LineExtensionAmount | //cac:RequestedMonetaryTotal/cbc:LineExtensionAmount');
+        $hasLines = $this->xp->query('//cac:InvoiceLine/cbc:LineExtensionAmount | //cac:CreditNoteLine/cbc:LineExtensionAmount | //cac:DebitNoteLine/cbc:LineExtensionAmount');
+        if (!$hasDocTotal || $hasDocTotal->length === 0 || !$hasLines || $hasLines->length === 0) {
+            return;
+        }
+
+        $docTotal = (float) @$this->xp->evaluate('number((//cac:LegalMonetaryTotal/cbc:LineExtensionAmount | //cac:RequestedMonetaryTotal/cbc:LineExtensionAmount)[1])');
+        $lineSum = (float) @$this->xp->evaluate('sum(//cac:InvoiceLine/cbc:LineExtensionAmount | //cac:CreditNoteLine/cbc:LineExtensionAmount | //cac:DebitNoteLine/cbc:LineExtensionAmount)');
+
+        if (abs($docTotal - $lineSum) > 0.01) {
+            $errors[] = $this->err('3084');
+        }
     }
 
     /**

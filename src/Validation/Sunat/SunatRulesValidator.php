@@ -51,9 +51,11 @@ class SunatRulesValidator
     /**
      * Códigos suprimidos por defecto: reglas del XSLT cliente que son MÁS
      * estrictas que el servidor SUNAT para estructuras que SUNAT sí acepta.
-     *   3033/3035: la regla de detracción se aplica a la PaymentTerms de
-     *   "FormaPago" (Contado/Crédito) porque el XSLT no distingue por cbc:ID;
-     *   SUNAT server acepta esa estructura (verificado: B001-31 aceptada).
+     *   3033/3035/3128: la regla de detracción se aplica a la PaymentTerms de
+     *   "FormaPago" (Contado/Crédito) porque el XSLT extraído perdió el predicado
+     *   [cbc:ID='Detraccion'] y matchea cualquier cac:PaymentTerms/cbc:PaymentMeansID;
+     *   SUNAT server acepta esa estructura (verificado: B001-31 aceptada). 3128
+     *   disparaba en TODO comprobante con FormaPago (falso positivo).
      * Se puede sobreescribir con config('esolutions_xml.validation.sunat_suppress').
      *
      * @var array<int,string>
@@ -68,7 +70,7 @@ class SunatRulesValidator
         $this->errors ??= new ErrorCatalog();
         $this->catalogs ??= new SunatCatalog();
         $this->suppress = $suppress
-            ?? (array) (function_exists('config') ? config('esolutions_xml.validation.sunat_suppress', ['3033', '3035']) : ['3033', '3035']);
+            ?? (array) (function_exists('config') ? config('esolutions_xml.validation.sunat_suppress', ['3033', '3035', '3128']) : ['3033', '3035', '3128']);
     }
 
     /**

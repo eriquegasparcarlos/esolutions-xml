@@ -90,7 +90,7 @@ return [
     */
     'validation' => [
         'expressions' => false,
-        'sunat_suppress' => ['3033', '3035'],
+        'sunat_suppress' => ['3033', '3035', '3128'],
 
         /*
         | Gate de reglas SUNAT ANTES de firmar (opt-in). Si está activo, se corre

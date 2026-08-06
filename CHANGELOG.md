@@ -1,5 +1,31 @@
 # Changelog
 
+## v2.7.1 — 2026-08-06
+
+### Fix — Reglas de reconciliación: eliminar falsos positivos + detectar descuadre de totales
+
+Las reglas de reconciliación (`expressions`) sobre-disparaban: marcaban 4290
+(cálculo IGV), 4310 (sumatoria valor de venta) y 3128 (detracción) en **cualquier
+comprobante, incluso uno válido** generado por el paquete. Causas y fixes:
+
+- **Variables-indicador NULL** (`indicadorError18/10`, `indicadorPrecioVentaError18/10`,
+  `validacionIndicadores`): el extractor no pudo derivarlas del XSLT del SFS, así
+  que resolvían a `''`/`'true'` degenerado y las reglas que las usan disparaban mal.
+  Ahora `RuleEngine` marca esas variables como **no confiables** (y propaga a las
+  que dependen de ellas) y **omite** las reglas cuya `expresion`/`conditions` las
+  referencien — en vez de emitir un falso positivo.
+- **3128** (detracción): la `expresion` extraída perdió el predicado
+  `[cbc:ID='Detraccion']` y matcheaba cualquier `cac:PaymentTerms/cbc:PaymentMeansID`
+  (FormaPago normal). Se agrega a `sunat_suppress` por defecto (junto a 3033/3035).
+
+### Nuevo — Reconciliación propia del total del valor de venta (3084)
+
+`OwnRules` ahora verifica en PHP (confiable, siempre corre) que
+`cac:LegalMonetaryTotal/cbc:LineExtensionAmount` = **suma** de los
+`cbc:LineExtensionAmount` de cada línea (tolerancia 0.01). Los descuentos/cargos
+globales no afectan este total, así que la identidad es firme. Emite **3084** si
+no cuadra — atrapa descuadres de totales antes de enviar a SUNAT.
+
 ## v2.7.0 — 2026-08-06
 
 ### Nuevo — Gate de reglas SUNAT ANTES de firmar (opt-in)
