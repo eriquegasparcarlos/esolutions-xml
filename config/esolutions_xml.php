@@ -91,6 +91,24 @@ return [
     'validation' => [
         'expressions' => false,
         'sunat_suppress' => ['3033', '3035'],
+
+        /*
+        | Gate de reglas SUNAT ANTES de firmar (opt-in). Si está activo, se corre
+        | SunatRulesValidator sobre el XML sin firmar y, si hay errores, NO se
+        | firma: se devuelve un GenerationResult fallido con el detalle (errores +
+        | observaciones) para solventar. Las OBSERVACIONES (códigos >= 4000)
+        | bloquean o pasan según block_on_observations; si pasan, van como
+        | `warnings` en el resultado. Por defecto off (no cambia el flujo actual).
+        */
+        'pre_sign' => [
+            'enabled' => env('SUNAT_PRE_SIGN_VALIDATION', false),
+            'block_on_observations' => env('SUNAT_PRE_SIGN_BLOCK_OBS', true),
+            // Reglas de reconciliación aritmética (totales/IGV). HOY sobre-disparan
+            // (marcan hasta comprobantes válidos), así que off por defecto: el gate
+            // usa solo reglas deterministas (catálogos/regex/estructura), confiables.
+            // Actívalo si esas reglas se corrigen. Ver docs/sunat-changes / OwnRules.
+            'expressions' => env('SUNAT_PRE_SIGN_EXPRESSIONS', false),
+        ],
     ],
 
     /*

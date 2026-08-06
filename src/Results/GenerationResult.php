@@ -25,6 +25,15 @@ class GenerationResult
     /** @var array|null  Ej: ['digest_value' => '...', 'signature_value' => '...'] */
     public $signatureMeta;
 
+    /**
+     * Observaciones SUNAT (códigos >= 4000) que NO bloquearon la generación
+     * cuando el gate pre-firma corre con block_on_observations=false. El
+     * comprobante se firmó igual, pero conviene mostrarlas/solventarlas.
+     *
+     * @var \ESolutions\Xml\Results\ValidationError[]
+     */
+    public $warnings = [];
+
     public function __construct(
         string $type,
         array $doc,

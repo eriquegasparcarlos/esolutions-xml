@@ -1,5 +1,35 @@
 # Changelog
 
+## v2.7.0 — 2026-08-06
+
+### Nuevo — Gate de reglas SUNAT ANTES de firmar (opt-in)
+
+`generateFromEs()`/`generate()` pueden validar las reglas SUNAT (SFS) **sobre el
+XML sin firmar** y, si hay errores, **NO firmar**: devuelven un `GenerationResult`
+fallido (`isOk() === false`) con el detalle (`validation->errors`) para solventar,
+evitando firmar/enviar comprobantes que SUNAT rechazaría.
+
+- Opt-in por config (por defecto **off**, no cambia el flujo actual):
+  ```php
+  'validation' => [
+      'pre_sign' => [
+          'enabled' => env('SUNAT_PRE_SIGN_VALIDATION', false),
+          'block_on_observations' => env('SUNAT_PRE_SIGN_BLOCK_OBS', true),
+          'expressions' => env('SUNAT_PRE_SIGN_EXPRESSIONS', false),
+      ],
+  ],
+  ```
+- **ERRORES** (código `SUNAT`, < 4000) siempre bloquean. **OBSERVACIONES**
+  (`SUNAT_OBS`, >= 4000) bloquean o pasan según `block_on_observations`; si pasan,
+  se devuelven en `GenerationResult::$warnings`.
+- Lógica extraída a `ESolutions\Xml\Validation\PreSignGate` (testeable).
+
+**Limitación conocida:** las reglas de **reconciliación aritmética** (`expressions`,
+totales/IGV — códigos 4290/4310 y afines) **sobre-disparan hoy** (marcan incluso
+comprobantes válidos), así que el gate corre por defecto solo las reglas
+**deterministas** (catálogos/regex/estructura/campos requeridos), que son
+confiables. Activar `pre_sign.expressions` queda pendiente de corregir esas reglas.
+
 ## v2.6.1 — 2026-07-28
 
 ### Fix — Postergación de vigencia SUNAT (2026-08-01 → 2027-01-01)

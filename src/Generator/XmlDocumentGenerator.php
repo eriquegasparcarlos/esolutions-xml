@@ -6,9 +6,11 @@ use ESolutions\Xml\Contracts\PayloadValidatorInterface;
 use ESolutions\Xml\Contracts\XmlDocumentGeneratorContract;
 use ESolutions\Xml\Rendering\XmlTemplateRenderer;
 use ESolutions\Xml\Results\GenerationResult;
+use ESolutions\Xml\Results\ValidationResult;
 use ESolutions\Xml\Sign\Signed;
 use ESolutions\Xml\Support\DocTypeNormalizer;
 use ESolutions\Xml\Support\XmlFormatter;
+use ESolutions\Xml\Validation\PreSignGate;
 use ESolutions\Xml\Validation\XmlValidationPipeline;
 
 class XmlDocumentGenerator implements XmlDocumentGeneratorContract
@@ -94,6 +96,28 @@ class XmlDocumentGenerator implements XmlDocumentGeneratorContract
         // Guardamos el unsigned para debugging/compare
         $unsigned = $xml;
 
+        // 2a) Gate de reglas SUNAT (SFS) ANTES de firmar — opt-in por config.
+        //     Evita firmar/enviar comprobantes con errores; las OBSERVACIONES
+        //     bloquean o pasan según config. En ambos casos se devuelve el
+        //     detalle (errores + observaciones) para solventar.
+        $warnings = [];
+        $gate = new PreSignGate();
+        if ($gate->enabled()) {
+            $decision = $gate->check($unsigned, $payload['document']['document_type_id'] ?? null);
+
+            if ($decision['blocked']) {
+                // NO se firma: se devuelve el porqué (errores + observaciones bloqueantes).
+                $doc = (isset($payload['document']) && is_array($payload['document'])) ? $payload['document'] : $payload;
+                $failed = GenerationResult::failed($normalizedType, ValidationResult::fail($decision['errors']), $doc);
+                $failed->unsignedXml = $unsigned;
+
+                return $failed;
+            }
+
+            // Pasa: se firma, pero las observaciones se reportan como advertencia.
+            $warnings = $decision['warnings'];
+        }
+
         // 3) Firmado — metadata para actualizar cac:Signature (cbc:ID, cbc:Note, cbc:URI)
         $signatureMeta = [
             'signatureId' => $payload['document']['signature_note'] ?? config('esolutions_xml.signing.signature_note'),
@@ -116,7 +140,7 @@ class XmlDocumentGenerator implements XmlDocumentGeneratorContract
 
         $doc = (isset($payload['document']) && is_array($payload['document'])) ? $payload['document'] : $payload;
 
-        return new GenerationResult(
+        $result = new GenerationResult(
             $normalizedType,
             $doc,
             $xml,
@@ -125,5 +149,8 @@ class XmlDocumentGenerator implements XmlDocumentGeneratorContract
             $this->signer->getLastCertificateInfo(),
             $this->signer->getLastSignatureMeta()
         );
+        $result->warnings = $warnings;
+
+        return $result;
     }
 }
